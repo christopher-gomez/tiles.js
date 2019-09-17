@@ -1,0 +1,25 @@
+{
+  "name": "threejs-tilemap",
+  "version": "1.0.0",
+  "description": "A small, 3D tilemap JavaScript engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christophgomez/threejs-tilemap.git"
+  },
+  "author": "Christopher Gomez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/christophgomez/threejs-tilemap/issues"
+  },
+  "homepage": "https://github.com/christophgomez/threejs-tilemap#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  }
+}
