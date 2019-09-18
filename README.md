@@ -1,4 +1,6 @@
 # threejs-tilemap
+![alt text](https://raw.githubusercontent.com/christophgomez/threejs-tilemap/master/map.png)
+
 A small tile-map JavaScript engine created with Three.js.
 
 ## Acknowledgments
