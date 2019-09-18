@@ -2,8 +2,11 @@
   "name": "threejs-tilemap",
   "version": "1.0.0",
   "description": "A small, 3D tilemap JavaScript engine",
+  "private": true,
   "main": "dist/index.js",
   "scripts": {
+    "startSandbox": "react-scripts start",
+    "buildSandbox": "react-scripts build",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,7 +24,10 @@
     "@babel/core": "^7.6.0",
     "babel-loader": "^8.0.6",
     "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1"
   },
   "dependencies": {
     "three": "^0.108.0",
