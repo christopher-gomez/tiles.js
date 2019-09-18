@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/christophgomez/threejs-tilemap/issues"
   },
-  "homepage": "https://github.com/christophgomez/threejs-tilemap#readme",
+  "homepage": "https://christophgomez.github.io/threejs-tilemap/",
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "babel-loader": "^8.0.6",
