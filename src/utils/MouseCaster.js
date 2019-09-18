@@ -109,8 +109,6 @@ class MouseCaster {
 
     this.down = evt.which === 1;
     this.rightDown = evt.which === 3;
-    console.log('on document mouse down');
-    console.log('dispatching signal');
 
     this.signal.dispatch('down', this.pickedObject);
   }
