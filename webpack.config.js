@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
-  entry: './lib/tm.js',
+  entry: './src/lib/tm.js',
   output: {
     path: path.resolve('build'),
     filename: 'index.js',

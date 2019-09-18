@@ -23,7 +23,7 @@
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "babel-loader": "^8.0.6",
-    "webpack": "^4.40.2",
+    "webpack": "4.39.1",
     "webpack-cli": "^3.3.9",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -32,5 +32,17 @@
   "dependencies": {
     "three": "^0.108.0",
     "three-orbitcontrols": "^2.108.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
