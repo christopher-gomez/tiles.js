@@ -1,6 +1,0 @@
-node_modules/
-public/
-build/
-map.png
-src/*
-!src/lib
