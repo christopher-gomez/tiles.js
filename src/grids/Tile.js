@@ -25,7 +25,7 @@ export default class Tile {
     this.material = settings.material;
     if (!this.material) {
       this.material = new THREE.MeshPhongMaterial({
-        color: TM.Tools.randomizeRGB('30, 30, 30', 13)
+        color: TM.Tools.randomizeRGB('0, 105, 148', 13)
       });
     }
 

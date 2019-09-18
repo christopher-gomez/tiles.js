@@ -245,16 +245,6 @@ export default class HexGrid {
     return tiles;
   }
 
-  generateTilePoly(material) {
-    if (!material) {
-      material = new THREE.MeshBasicMaterial({ color: 0x24b4ff });
-    }
-    var mesh = new THREE.Mesh(this.cellShapeGeo, material);
-    this._vec3.set(1, 0, 0);
-    mesh.rotateOnAxis(this._vec3, TM.PI / 2);
-    return mesh;
-  }
-
   // create a flat, hexagon-shaped grid
   generate(config) {
     config = config || {};
