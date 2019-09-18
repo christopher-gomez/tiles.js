@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+body {
+  overflow: hidden;
+}
+#view {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

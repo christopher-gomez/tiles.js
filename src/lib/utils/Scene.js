@@ -33,7 +33,7 @@ export default class Scene {
 
     sceneSettings = TM.Tools.merge(sceneSettings, sceneConfig);
     if (typeof controlConfig !== 'boolean') {
-      controlSettings = vg.Tools.merge(controlSettings, controlConfig);
+      controlSettings = TM.Tools.merge(controlSettings, controlConfig);
     }
 
     this.renderer = new THREE.WebGLRenderer({

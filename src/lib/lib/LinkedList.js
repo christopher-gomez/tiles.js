@@ -28,7 +28,6 @@ class Node {
     this.prev = null;
     this.free = true;
   }
-
 }
 
 export default class LinkedList {
@@ -61,7 +60,7 @@ export default class LinkedList {
     Use add() to add an object to the list, not this.
    */
   addNode(obj) {
-    var node = new LinkedListNode();
+    var node = new Node();
     if (!obj.uniqueID) {
       try {
         obj.uniqueID = LinkedList.generateID();
