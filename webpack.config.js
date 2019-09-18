@@ -4,7 +4,7 @@ module.exports = {
   mode: 'production',
   entry: './lib/tm.js',
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve('build'),
     filename: 'index.js',
     libraryTarget: 'commonjs2',
   },
