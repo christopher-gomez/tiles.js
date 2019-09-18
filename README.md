@@ -5,7 +5,8 @@ A small tile-map JavaScript engine created with Three.js.
 
 Work In Progress. Currently working towards release as an NPM package.
 
-Keep an eye on it's progress and updates by checking the sandbox every now and then.
+Keep an eye on it's progress and updates by checking the [sandbox](https://christophgomez.github.io/threejs-tilemap/
+) every now and then.
 
 (Maybe I should make the sandbox an editor)
 
