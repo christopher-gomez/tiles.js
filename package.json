@@ -22,14 +22,21 @@
   "homepage": "https://christophgomez.github.io/threejs-tilemap/",
   "devDependencies": {
     "@babel/core": "^7.6.0",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
     "babel-loader": "^8.0.6",
-    "webpack": "4.39.1",
-    "webpack-cli": "^3.3.9",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.6.3",
+    "webpack": "4.39.1",
+    "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "prng-parkmiller-js": "^0.1.1",
+    "simplex-noise": "^2.4.0",
     "three": "^0.108.0",
     "three-orbitcontrols": "^2.108.1"
   },

@@ -15,7 +15,7 @@ class App extends React.Component {
     });
 
     this.gridSpace.generate({
-      size: 45 // size of the board
+      size: 15 // size of the board
     });
 
     this.mouse = new TM.MouseCaster(this.scene.container, this.scene.camera);
@@ -23,20 +23,21 @@ class App extends React.Component {
 
     // this will generate extruded hexagonal tiles
     this.board.generateTilemap({
-      tileScale: 0.96 // you might have to scale the tile so the extruded geometry fits the cell size perfectly
+      tileScale: .965 // you might have to scale the tile so the extruded geometry fits the cell size perfectly
     });
-    //this.board.generateOverlay(10);
+    this.board.generateTerrain();
+    //this.board.generateOverlay(45);
 
     this.scene.add(this.board.group);
     this.scene.focusOn(this.board.group);
 
     this.mouse.signal.add(function (evt, tile) {
       if (evt === TM.MouseCaster.CLICK) {
-        tile.toggle();
+        //tile.toggle();
         // or we can use the mouse's raw coordinates to access the cell directly, just for fun:
-        //var cell = this.board.grid.pixelToCell(this.mouse.position);
-        //var t = this.board.getTileAtCell(cell);
-        //if (t) t.toggle();
+        var cell = this.board.grid.pixelToCell(this.mouse.position);
+        var t = this.board.getTileAtCell(cell);
+        if (t) t.toggle();
       }
     }, this);
 

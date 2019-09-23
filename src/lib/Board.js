@@ -115,7 +115,7 @@ export default class Board {
   generateOverlay(size) {
     var mat = new THREE.LineBasicMaterial({
       color: 0x000000,
-      opacity: 0.3
+      opacity: 0.9
     });
 
     if (this.overlay) {
@@ -141,6 +141,41 @@ export default class Board {
     }
 
     this.group.add(this.tileGroup);
+  }
+
+  generateTerrain() {
+    // reset terrain eventually
+
+    if (this.grid.type === TM.HEX) {
+      var size = this.grid.size;
+      var x, y, z;
+      let i = 0;
+      for (x = -size; x < size + 1; x++) {
+        for (y = -size; y < size + 1; y++) {
+          z = -x - y;
+          if (Math.abs(x) <= size && Math.abs(y) <= size && Math.abs(z) <= size) {
+            var nx = x / this.grid._cellWidth - 0.5, ny = z / this.grid._cellLength - 0.5;
+            var e = (1.00 * TM.Tools.noise1(1 * nx, 1 * ny)
+              + 0.50 * TM.Tools.noise1(2 * nx, 2 * ny)
+              + 0.25 * TM.Tools.noise1(4 * nx, 4 * ny)
+              + 0.13 * TM.Tools.noise1(8 * nx, 8 * ny)
+              + 0.06 * TM.Tools.noise1(16 * nx, 16 * ny)
+              + 0.03 * TM.Tools.noise1(32 * nx, 32 * ny));
+            e /= (1.00 + 0.50 + 0.25 + 0.13 + 0.06 + 0.03);
+            e = Math.pow(e, 5.00);
+            var m = (1.00 * TM.Tools.noise2(1 * nx, 1 * ny)
+              + 0.75 * TM.Tools.noise2(2 * nx, 2 * ny)
+              + 0.33 * TM.Tools.noise2(4 * nx, 4 * ny)
+              + 0.33 * TM.Tools.noise2(8 * nx, 8 * ny)
+              + 0.33 * TM.Tools.noise2(16 * nx, 16 * ny)
+              + 0.50 * TM.Tools.noise2(32 * nx, 32 * ny));
+            m /= (1.00 + 0.75 + 0.33 + 0.33 + 0.33 + 0.50);
+            this.tiles[i].setTerrain(e, m);
+            i++;
+          }
+        }
+      }
+    }
   }
 
   reset() {

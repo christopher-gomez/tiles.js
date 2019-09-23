@@ -49,7 +49,7 @@ export default class HexGrid {
     this.cellShape.lineTo(verts[0].x, verts[0].y);
     this.cellShape.autoClose = true;
 
-    this.cellGeo = new THREE.Geometry();
+    this.cellGeo = new THREE.BufferGeometry();
     this.cellGeo.vertices = verts;
     this.cellGeo.verticesNeedUpdate = true;
 
@@ -210,7 +210,7 @@ export default class HexGrid {
       cellSize: this.cellSize,
       material: null,
       extrudeSettings: {
-        amount: 1,
+        amount: 10,
         bevelEnabled: true,
         bevelSegments: 1,
         steps: 1,
@@ -254,6 +254,7 @@ export default class HexGrid {
       for (y = -this.size; y < this.size + 1; y++) {
         z = -x - y;
         if (Math.abs(x) <= this.size && Math.abs(y) <= this.size && Math.abs(z) <= this.size) {
+          console.log(x+","+y+","+z);
           c = new TM.Cell(x, y, z);
           this.add(c);
         }
@@ -276,6 +277,7 @@ export default class HexGrid {
         }
       }
     }
+    overlayObj.position.y = .5;
   }
 
   add(cell) {
