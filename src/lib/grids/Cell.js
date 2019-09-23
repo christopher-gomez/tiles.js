@@ -1,5 +1,6 @@
 import TM from '../tm';
 
+// Coordinate data for a cell
 export default class Cell {
   constructor(q, r, s, h) {
     this.q = q || 0; // x grid coordinate (using different letters so that it won't be confused with pixel/world coordinates)

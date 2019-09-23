@@ -1,5 +1,22 @@
+import PM_PRNG from 'prng-parkmiller-js';
+import SimplexNoise from 'simplex-noise';
+
+var rng1 = PM_PRNG.create(1000000);
+var rng2 = PM_PRNG.create("hello");
+var gen1 = new SimplexNoise(rng1.nextDouble.bind(rng1));
+var gen2 = new SimplexNoise(rng2.nextDouble.bind(rng2));
+
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "0x" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
 
 export const Tools = {
+
   clamp: function (val, min, max) {
     return Math.max(min, Math.min(max, val));
   },
@@ -18,6 +35,10 @@ export const Tools = {
     }
     return Math.random() * (max - min) + min;
   },
+
+  noise1: function (nx, ny) { return gen1.noise2D(nx, ny) / 2 + 0.5; },
+  noise2: function (nx, ny) { return gen2.noise2D(nx, ny) / 2 + 0.5; },
+
 
   // from min to (and including) max
   randomInt: function (min, max) {
@@ -148,14 +169,17 @@ export const Tools = {
 
   randomizeRGB: function (base, range) {
     var rgb = base.split(',');
+    var obj = {};
     var color = 'rgb(';
     var i, c;
+    var rgb_ = [];
     range = this.randomInt(range);
     for (i = 0; i < 3; i++) {
       c = parseInt(rgb[i]) + range;
       if (c < 0) c = 0;
       else if (c > 255) c = 255;
       color += c + ',';
+      rgb_.push(c);
     }
     color = color.substring(0, color.length - 1);
     color += ')';
