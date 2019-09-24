@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import TM from './lib/tm.js';
+import TM from './lib/tm.ts';
 
 class App extends React.Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class App extends React.Component {
     });
 
     this.gridSpace.generate({
-      size: 15 // size of the board
+      size: 75 // size of the board
     });
 
     this.mouse = new TM.MouseCaster(this.scene.container, this.scene.camera);
@@ -33,11 +33,11 @@ class App extends React.Component {
 
     this.mouse.signal.add(function (evt, tile) {
       if (evt === TM.MouseCaster.CLICK) {
-        //tile.toggle();
+        tile.toggle();
         // or we can use the mouse's raw coordinates to access the cell directly, just for fun:
-        var cell = this.board.grid.pixelToCell(this.mouse.position);
-        var t = this.board.getTileAtCell(cell);
-        if (t) t.toggle();
+        //const cell = this.board.grid.pixelToCell(this.mouse.position);
+        //const t = this.board.getTileAtCell(cell);
+        //if (t) t.toggle();
       }
     }, this);
 
