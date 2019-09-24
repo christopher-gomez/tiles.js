@@ -11,7 +11,7 @@ class App extends React.Component {
 
     // this constructs the cells in grid coordinate space
     this.gridSpace = new TM.HexGrid({
-      cellSize: 15 // size of individual cells
+      cellSize: 5 // size of individual cells
     });
 
     this.gridSpace.generate({

@@ -9,9 +9,10 @@ import {
   ExtrudeGeometry,
   Group,
   Material,
-  Line
+  Line,
 } from 'three';
-import { Grid, GridSettings, ExtrudeSettings, GenerateSettings, GridJSONData } from '../utils/Interfaces';
+import Grid from './Grid';
+import { GridSettings, ExtrudeSettings, TilemapSettings, GridJSONData } from '../utils/Interfaces';
 import Cell from './Cell';
 import Tile from './Tile';
 
@@ -33,8 +34,8 @@ export default class HexGrid implements Grid {
   public cellGeo: BufferGeometry;
   public cellShapeGeo: ShapeGeometry;
 
-  private _cellWidth: number;
-  private _cellLength: number;
+  public _cellWidth: number;
+  public _cellLength: number;
   private _hashDelimeter: string;
   private _directions: Cell[];
   private _diagonals: Cell[];
@@ -228,8 +229,8 @@ export default class HexGrid implements Grid {
     return tile;
   }
 
-  generateTiles(config?: GenerateSettings): Tile[] {
-    config = config || {} as GenerateSettings;
+  generateTiles(config?: TilemapSettings): Tile[] {
+    config = config || {} as TilemapSettings;
     const tiles = [];
     let settings = {
       tileScale: 0.95,
@@ -243,8 +244,8 @@ export default class HexGrid implements Grid {
         bevelSize: 0.5,
         bevelThickness: 0.5
       } as ExtrudeSettings
-    } as GenerateSettings;
-    settings = TM.Tools.merge(settings, config) as GenerateSettings;
+    } as TilemapSettings;
+    settings = TM.Tools.merge(settings, config) as TilemapSettings;
 
 		/*if (!settings.material) {
 			settings.material = new THREE.MeshPhongMaterial({

@@ -12,11 +12,11 @@ export default class Cell {
   public userData: {};
   public walkable: boolean;
 
-  private _calcCost: number;
-  private _priority: number;
-  private _visited: boolean;
-  private _parent: Cell;
-  private uniqueID: string;
+  public _calcCost: number;
+  public _priority: number;
+  public _visited: boolean;
+  public _parent: Cell;
+  public uniqueID: string;
   
   constructor(q?: number, r?: number, s?: number, h?: number) {
     this.q = q || 0; // x grid coordinate (using different letters so that it won't be confused with pixel/world coordinates)

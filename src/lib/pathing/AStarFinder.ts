@@ -1,30 +1,39 @@
-import TM from '../tm';
+import PathUtil from './PathUtil';
+import { PathfinderSettings } from '../utils/Interfaces';
+import LinkedList from '../lib/LinkedList';
+import Tools from '../utils/Tools';
+import Cell from '../grids/Cell';
+import Grid from '../grids/Grid';
 /*
 	A* path-finder based upon http://www.redblobgames.com/pathfinding/a-star/introduction.html
 	@author Corey Birnbaum https://github.com/vonWolfehaus/
  */
 // 'utils/Tools', 'lib/LinkedList'
 export default class AStarFinder {
-  constructor(finderConfig) {
-    finderConfig = finderConfig || {};
+  public allowDiagonal: boolean;
+  public heuristicFilter: Function;
+  public list: LinkedList;
 
-    var settings = {
+  constructor(finderConfig: PathfinderSettings) {
+    finderConfig = finderConfig || {} as PathfinderSettings;
+
+    let settings = {
       allowDiagonal: false,
-      heuristicFilter: null
-    };
-    settings = TM.Tools.merge(settings, finderConfig);
+      heuristicFilter: null as Function
+    } as PathfinderSettings;
+    settings = Tools.merge(settings, finderConfig);
 
     this.allowDiagonal = settings.allowDiagonal;
     this.heuristicFilter = settings.heuristicFilter;
 
-    this.list = new TM.LinkedList();
+    this.list = new LinkedList();
   }
   /*
 		Find and return the path.
 		@return Array<Cell> The path, including both start and end positions. Null if it failed.
 	 */
-  findPath(startNode, endNode, heuristic, grid) {
-    var current, costSoFar, neighbors, n, i, l;
+  findPath(startNode: Cell, endNode: Cell, heuristic: Function, grid: Grid): Cell[][] {
+    let current, costSoFar, neighbors, n, i, l;
     heuristic = heuristic || this.heuristicFilter;
     // clear old values from previous finding
     grid.clearPath();
@@ -39,12 +48,12 @@ export default class AStarFinder {
       this.list.sort(this.compare);
 
       // pop the position of current which has the minimum `_calcCost` value.
-      current = this.list.shift();
+      current = this.list.shift().obj;
       current._visited = true;
 
       // if reached the end position, construct the path and return it
       if (current === endNode) {
-        return TM.PathUtil.backtrace(endNode);
+        return PathUtil.backtrace(endNode);
       }
 
       // cycle through each neighbor of the current current
@@ -70,7 +79,7 @@ export default class AStarFinder {
 
           // check neighbor if it's the end current as well--often cuts steps by a significant amount
           if (n === endNode) {
-            return TM.PathUtil.backtrace(endNode);
+            return PathUtil.backtrace(endNode);
           }
           // console.log(n);
           this.list.add(n);
@@ -82,7 +91,7 @@ export default class AStarFinder {
     return null;
   }
 
-  compare(nodeA, nodeB) {
+  compare(nodeA: Cell, nodeB: Cell): number {
     return nodeA._priority - nodeB._priority;
   }
 }

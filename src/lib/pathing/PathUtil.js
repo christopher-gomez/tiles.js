@@ -1,12 +1,16 @@
+/* eslint-disable */
+
 /*
 	@source https://github.com/qiao/PathFinding.js/
 */
-export default class PathUtil {
+import Cell from '../grids/Cell';
+
+class PathUtil {
   /**
 	 * Backtrace according to the parent records and return the path.
 	 * (including both start and end nodes)
-	 * @param {Node} node End node
-	 * @return {Array.<Array.<number>>} the path
+	 * @param {Cell} node End node
+	 * @return {Array.<Array.<Cell>>} the path
 	 */
   backtrace(node) {
     var path = [node];
@@ -20,8 +24,8 @@ export default class PathUtil {
   /**
    * Backtrace from start and end node, and return the path.
    * (including both start and end nodes)
-   * @param {Node}
-   * @param {Node}
+   * @param {Cell}
+   * @param {Cell}
    */
   biBacktrace(nodeA, nodeB) {
     var pathA = this.backtrace(nodeA),
@@ -239,3 +243,4 @@ export default class PathUtil {
     return compressed;
   }
 }
+export default new PathUtil();
