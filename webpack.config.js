@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
-  entry: './src/lib/tm.js',
+  entry: './src/lib/tm.ts',
   // Enable sourcemaps for debugging webpack's output.
   devtool: "source-map",
 
@@ -15,7 +15,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.(ts|js)x?$/,
         exclude: /(node_modules)/,
         use: 'babel-loader',
       },

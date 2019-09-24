@@ -1,8 +1,24 @@
 import TM from '../tm';
+import Tile from './Tile';
 
 // Coordinate data for a cell
 export default class Cell {
-  constructor(q, r, s, h) {
+
+  public q: number;
+  public r: number;
+  public s: number;
+  public h: number;
+  public tile: Tile;
+  public userData: {};
+  public walkable: boolean;
+
+  private _calcCost: number;
+  private _priority: number;
+  private _visited: boolean;
+  private _parent: Cell;
+  private uniqueID: string;
+  
+  constructor(q?: number, r?: number, s?: number, h?: number) {
     this.q = q || 0; // x grid coordinate (using different letters so that it won't be confused with pixel/world coordinates)
     this.r = r || 0; // y grid coordinate
     this.s = s || 0; // z grid coordinate
@@ -18,14 +34,15 @@ export default class Cell {
     this._parent = null;
     this.uniqueID = TM.LinkedList.generateID();
   }
-  set(q, r, s) {
+  
+  set(q: number, r: number, s: number): Cell {
     this.q = q;
     this.r = r;
     this.s = s;
     return this;
   }
 
-  copy(cell) {
+  copy(cell: Cell): Cell {
     this.q = cell.q;
     this.r = cell.r;
     this.s = cell.s;
@@ -36,14 +53,21 @@ export default class Cell {
     return this;
   }
 
-  add(cell) {
+  add(cell: Cell): Cell {
     this.q += cell.q;
     this.r += cell.r;
     this.s += cell.s;
     return this;
   }
 
-  equals(cell) {
+  equals(cell: Cell): boolean {
     return this.q === cell.q && this.r === cell.r && this.s === cell.s;
+  }
+
+  resetPath(): void {
+    this._calcCost = 0;
+    this._priority = 0;
+    this._parent = null;
+    this._visited = false;
   }
 }

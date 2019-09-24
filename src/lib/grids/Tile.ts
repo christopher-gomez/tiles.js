@@ -1,17 +1,39 @@
 import TM from '../tm';
-import * as THREE from 'three';
+import { Geometry, MeshPhongMaterial, Mesh, Vector3, Euler } from 'three';
+import Cell from './Cell';
+import { TileSettings } from '../utils/Interfaces';
 
 // Visual representation of a cell
 export default class Tile {
+
+  public cell: Cell;
+  public uniqueID: string;
+  public geometry: Geometry;
+  public material: MeshPhongMaterial;
+  public objectType: string;
+  public entity: any;
+  public userData: {
+    terrain?: string;
+    elevation?: number;
+    moisture?: number;
+  };
+  public selected: boolean;
+  public highlight: number;
+  public mesh: Mesh;
+  public position: Vector3;
+  public rotation: Euler;
+
+  private _emissive: number;
+
   
-  constructor(config) {
-    config = config || {};
-    var settings = {
-      cell: null, // required TM.Cell
-      geometry: null, // required threejs geometry (hex or square?)
-      material: null // not required but it would improve performance significantly
+  constructor(config?: TileSettings) {
+    config = config || {} as TileSettings;
+    let settings: TileSettings = {
+      cell: null,
+      geometry: null,
+      material: null,
     };
-    settings = TM.Tools.merge(settings, config);
+    settings = TM.Tools.merge(settings, config) as TileSettings;
 
     if (!settings.cell || !settings.geometry) {
       throw new Error('Missing TM.Tile configuration');
@@ -26,7 +48,7 @@ export default class Tile {
     this.geometry = settings.geometry;
     this.material = settings.material;
     if (!this.material) {
-      this.material = new THREE.MeshPhongMaterial({
+      this.material = new MeshPhongMaterial({
         color: TM.Tools.randomizeRGB('0, 105, 148', 13)
       });
     }
@@ -36,9 +58,9 @@ export default class Tile {
     this.userData = {};
 
     this.selected = false;
-    this.highlight = '0x0084cc';
+    this.highlight = 0x0084cc;
 
-    this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh = new Mesh(this.geometry, this.material);
     this.mesh.userData.structure = this;
 
     // create references so we can control orientation through this (Tile), instead of drilling down
@@ -56,7 +78,7 @@ export default class Tile {
       this._emissive = null;
     }
   }
-  select() {
+  select(): Tile {
     if (this.material.emissive) {
       this.material.emissive.setHex(this.highlight);
     }
@@ -67,7 +89,7 @@ export default class Tile {
     return this;
   }
 
-  deselect() {
+  deselect(): Tile {
     if (this._emissive !== null && this.material.emissive) {
       this.material.emissive.setHex(this._emissive);
     }
@@ -75,7 +97,7 @@ export default class Tile {
     return this;
   }
 
-  toggle() {
+  toggle(): Tile {
     if (this.selected) {
       this.deselect();
     }
@@ -85,7 +107,7 @@ export default class Tile {
     return this;
   }
 
-  dispose() {
+  dispose(): void {
     if (this.cell && this.cell.tile) this.cell.tile = null;
     this.cell = null;
     this.position = null;
@@ -100,7 +122,7 @@ export default class Tile {
     this._emissive = null;
   }
   
-  setTerrain(e, m) {
+  setTerrain(e: number, m: number): void {
     
     this.userData.elevation = e;
     this.userData.moisture = m;
@@ -111,7 +133,7 @@ export default class Tile {
     }
     if (e < 0.12) {
       this.userData.terrain = 'BEACH';
-      this.material.color.set(TM.Tools.randomizeRGB('212,192,155', 13));
+      this.material.color.set(TM.Tools.randomizeRGB('194,178,128', 13));
       return;
     }
 
