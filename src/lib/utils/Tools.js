@@ -1,13 +1,15 @@
+/* eslint-disable */
+
 import PM_PRNG from 'prng-parkmiller-js';
 import SimplexNoise from 'simplex-noise';
 
-var rng1 = PM_PRNG.create(1000000);
-var rng2 = PM_PRNG.create("hello");
-var gen1 = new SimplexNoise(rng1.nextDouble.bind(rng1));
-var gen2 = new SimplexNoise(rng2.nextDouble.bind(rng2));
+const rng1 = PM_PRNG.create('3sdad2ds3819fdez');
+const rng2 = PM_PRNG.create(3129481234);
+const gen1 = new SimplexNoise(rng1.nextDouble.bind(rng1));
+const gen2 = new SimplexNoise(rng2.nextDouble.bind(rng2));
 
 function componentToHex(c) {
-  var hex = c.toString(16);
+  const hex = c.toString(16);
   return hex.length == 1 ? "0" + hex : hex;
 }
 
@@ -88,8 +90,8 @@ export const Tools = {
 
   // https://github.com/KyleAMathews/deepmerge/blob/master/index.js
   merge: function (target, src) {
-    var self = this, array = Array.isArray(src);
-    var dst = array && [] || {};
+    const self = this, array = Array.isArray(src);
+    let dst = array && [] || {};
     if (array) {
       target = target || [];
       dst = dst.concat(target);
@@ -149,13 +151,13 @@ export const Tools = {
     if (idxBegin >= (idxEnd - 1) || bit < 0) {
       return;
     }
-    var idx = idxBegin;
-    var idxOnes = idxEnd;
-    var mask = 0x1 << bit;
+    let idx = idxBegin;
+    let idxOnes = idxEnd;
+    const mask = 0x1 << bit;
     while (idx < idxOnes) {
       if (arr[idx] & mask) {
         --idxOnes;
-        var tmp = arr[idx];
+        const tmp = arr[idx];
         arr[idx] = arr[idxOnes];
         arr[idxOnes] = tmp;
       }
@@ -168,11 +170,10 @@ export const Tools = {
   },
 
   randomizeRGB: function (base, range) {
-    var rgb = base.split(',');
-    var obj = {};
-    var color = 'rgb(';
-    var i, c;
-    var rgb_ = [];
+    const rgb = base.split(',');
+    let color = 'rgb(';
+    let i, c;
+    const rgb_ = [];
     range = this.randomInt(range);
     for (i = 0; i < 3; i++) {
       c = parseInt(rgb[i]) + range;
@@ -187,12 +188,12 @@ export const Tools = {
   },
 
   getJSON: function (config) {
-    var xhr = new XMLHttpRequest();
-    var cache = typeof config.cache === 'undefined' ? false : config.cache;
-    var uri = cache ? config.url : config.url + '?t=' + Math.floor(Math.random() * 10000) + Date.now();
+    const xhr = new XMLHttpRequest();
+    const cache = typeof config.cache === 'undefined' ? false : config.cache;
+    const uri = cache ? config.url : config.url + '?t=' + Math.floor(Math.random() * 10000) + Date.now();
     xhr.onreadystatechange = function () {
       if (this.status === 200) {
-        var json = null;
+        let json = null;
         try {
           json = JSON.parse(this.responseText);
         }

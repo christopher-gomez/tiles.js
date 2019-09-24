@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 	A high-speed doubly-linked list of objects. Note that for speed reasons (using a dictionary lookup of
 	cached nodes) there can only be a single instance of an object in the list at the same time. Adding the same
@@ -60,7 +61,7 @@ export default class LinkedList {
     Use add() to add an object to the list, not this.
    */
   addNode(obj) {
-    var node = new Node();
+    const node = new Node();
     if (!obj.uniqueID) {
       try {
         obj.uniqueID = LinkedList.generateID();
@@ -89,7 +90,7 @@ export default class LinkedList {
     @param obj The object to add
    */
   add(obj) {
-    var node = this.objToNodeMap[obj.uniqueID];
+    let node = this.objToNodeMap[obj.uniqueID];
 
     if (!node) {
       node = this.addNode(obj);
@@ -140,21 +141,21 @@ export default class LinkedList {
    */
   moveUp(obj) {
     this.dump('before move up');
-    var c = this.getNode(obj);
-    if (!c) throw "Oops, trying to move an object that isn't in the list";
+    const c = this.getNode(obj);
+    if (!c) throw Error("Oops, trying to move an object that isn't in the list");
     if (!c.prev) return; // already first, ignore
 
     // This operation makes C swap places with B:
     // A <-> B <-> C <-> D
     // A <-> C <-> B <-> D
 
-    var b = c.prev;
-    var a = b.prev;
+    const b = c.prev;
+    const a = b.prev;
 
     // fix last
     if (c == this.last) this.last = b;
 
-    var oldCNext = c.next;
+    const oldCNext = c.next;
 
     if (a) a.next = c;
     c.next = b;
@@ -172,7 +173,7 @@ export default class LinkedList {
     @param obj
    */
   moveDown(obj) {
-    var b = this.getNode(obj);
+    const b = this.getNode(obj);
     if (!b) throw "Oops, trying to move an object that isn't in the list";
     if (!b.next) return; // already last, ignore
 
@@ -180,7 +181,7 @@ export default class LinkedList {
     // A <-> B <-> C <-> D
     // A <-> C <-> B <-> D
 
-    var c = b.next;
+    const c = b.next;
     this.moveUp(c.obj);
 
     // check to see if we are now last
@@ -191,8 +192,8 @@ export default class LinkedList {
     Take everything off the list and put it in an array, sort it, then put it back.
    */
   sort(compare) {
-    var sortArray = this.sortArray;
-    var i, l, node = this.first;
+    const sortArray = this.sortArray;
+    let i, l, node = this.first;
     sortArray.length = 0;
 
     while (node) {
@@ -216,7 +217,7 @@ export default class LinkedList {
     @returns boolean true if the item was removed, false if the item was not on the list
    */
   remove(obj) {
-    var node = this.getNode(obj);
+    const node = this.getNode(obj);
     if (!node || node.free) {
       return false; // ignore this error (trying to remove something not there)
     }
@@ -242,7 +243,7 @@ export default class LinkedList {
 
   // remove the head and return it's object
   shift() {
-    var node = this.first;
+    const node = this.first;
     if (this.length === 0) return null;
     // if (node == null || node.free == true) return null;
 
@@ -268,7 +269,7 @@ export default class LinkedList {
 
   // remove the tail and return it's object
   pop() {
-    var node = this.last;
+    const node = this.last;
     if (this.length === 0) return null;
 
     // pull this object out and tie up the ends
@@ -295,7 +296,7 @@ export default class LinkedList {
    * Add the passed list to this list, leaving it untouched.
    */
   concat(list) {
-    var node = list.first;
+    let node = list.first;
     while (node) {
       this.add(node.obj);
       node = node.next;
@@ -306,7 +307,7 @@ export default class LinkedList {
    * Clears the list out
    */
   clear() {
-    var next = this.first;
+    let next = this.first;
 
     while (next) {
       next.free = true;
@@ -318,7 +319,7 @@ export default class LinkedList {
   }
 
   dispose() {
-    var next = this.first;
+    let next = this.first;
 
     while (next) {
       next.obj = null;
@@ -334,7 +335,7 @@ export default class LinkedList {
    */
   dump(msg) {
     console.log('====================' + msg + '=====================');
-    var a = this.first;
+    let a = this.first;
     while (a) {
       console.log("{" + a.obj.toString() + "} previous=" + (a.prev ? a.prev.obj : "NULL"));
       a = a.next();

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 class SignalBinding {
   constructor(signal, listener, isOnce, listenerContext, priority) {
     /**

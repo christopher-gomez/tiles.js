@@ -43,7 +43,7 @@
     "prng-parkmiller-js": "^0.1.1",
     "simplex-noise": "^2.4.0",
     "three": "^0.108.0",
-    "three-orbitcontrols": "^2.108.1"
+    "three-orbitcontrols-ts": "^0.1.2"
   },
   "browserslist": {
     "production": [
