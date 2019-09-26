@@ -5,7 +5,6 @@ body {
   overflow: hidden;
 }
 #view {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: block;
+  z-index: 0;
 }

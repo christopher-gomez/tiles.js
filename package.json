@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "A small, 3D tilemap JavaScript engine",
   "private": true,
-  "main": "build/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "startSandbox": "react-scripts start",
     "buildSandbox": "react-scripts build",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run buildSandbox",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -30,7 +32,9 @@
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-loader": "^8.0.6",
+    "dat.gui": "^0.7.6",
     "eslint": "^6.4.0",
+    "gh-pages": "^2.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",
@@ -40,10 +44,10 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "@types/dat.gui": "^0.7.4",
     "prng-parkmiller-js": "^0.1.1",
     "simplex-noise": "^2.4.0",
-    "three": "^0.108.0",
-    "three-orbitcontrols-ts": "^0.1.2"
+    "three": "^0.108.0"
   },
   "browserslist": {
     "production": [
