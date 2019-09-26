@@ -7,7 +7,7 @@ import {
   Geometry,
   MeshPhongMaterial,
   ExtrudeGeometry,
-  Group,
+  Object3D,
   Material,
   Line,
 } from 'three';
@@ -45,7 +45,7 @@ export default class HexGrid implements Grid {
   private _geoCache: Geometry[];
   private _matCache: MeshPhongMaterial[];
 
-  static TWO_THIRDS = 2 / 3;
+  public static get TWO_THIRDS(): number { return 2 / 3};
 
   constructor(config?: GridSettings) {
     config = config || {} as GridSettings;
@@ -216,7 +216,7 @@ export default class HexGrid implements Grid {
 			this._matCache[c.matConfig.mat_cache_id] = mat;
 		}*/
 
-    const tile = new TM.Tile({
+    const tile = new Tile({
       //size: this.cellSize,
       scale: scale,
       cell: cell,
@@ -288,7 +288,7 @@ export default class HexGrid implements Grid {
     }
   }
 
-  generateOverlay(size: number, overlayObj: Group, overlayMat: Material): void {
+  generateOverlay(size: number, overlayObj: Object3D, overlayMat: Material): void {
     let x, y, z;
     const geo = this.cellShape.createPointsGeometry(6);
     for (x = -size; x < size + 1; x++) {

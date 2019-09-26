@@ -1,8 +1,7 @@
 import TM from '../tm';
-import { OrbitControls } from 'three-orbitcontrols-ts'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { SceneSettings, CameraControlSettings } from './Interfaces';
-import { WebGLRenderer, DirectionalLight, Scene as TScene, AmbientLight, Camera, OrthographicCamera, PerspectiveCamera, Mesh } from 'three';
-import Tile from '../grids/Tile';
+import { WebGLRenderer, DirectionalLight, Scene as TScene, AmbientLight, Camera, OrthographicCamera, PerspectiveCamera, Mesh, Object3D, Vector2, MOUSE } from 'three';
 /*
 	Sets up and manages a THREEjs container, camera, and light, making it easy to get going.
 	Also provides camera control.
@@ -20,44 +19,60 @@ export default class Scene {
   public camera: Camera;
   public controlled: boolean;
   public controls: OrbitControls;
+  public settings: SceneSettings;
 
-  constructor(sceneConfig?: SceneSettings, controlConfig?: CameraControlSettings) {
+  // Edge Scrolling margins
+  private w1: number;
+  private w2: number;
+  private h1: number;
+  private h2: number;
+  private hotEdges: boolean;
+
+  constructor(sceneConfig?: SceneSettings) {
     sceneConfig = sceneConfig || {} as SceneSettings;
     let sceneSettings = {
       element: document.body,
       alpha: true,
       antialias: true,
-      clearColor: '#fff',
+      clearColor: '#000000',
       sortObjects: false,
       fog: null,
       light: new DirectionalLight(0xffffff),
       lightPosition: null,
       cameraType: 'PerspectiveCamera',
       cameraPosition: null, // {x, y, z}
-      orthoZoom: 4
+      orthoZoom: 4,
+      sceneMarginSize: 20,
+      cameraControlSettings: {
+        controlled: true,
+        minDistance: 25,
+        maxDistance: 1250,
+        zoomSpeed: 3,
+        hotEdges: true
+      } as CameraControlSettings,
     } as SceneSettings;
 
-    let controlSettings = {
-      minDistance: 100,
-      maxDistance: 1000,
-      zoomSpeed: 2,
-      noZoom: false
-    } as CameraControlSettings;
+    if (sceneConfig.cameraControlSettings !== undefined){
+      sceneSettings.cameraControlSettings = TM.Tools.merge(sceneSettings.cameraControlSettings, sceneConfig.cameraControlSettings) as CameraControlSettings;
+    }
 
     sceneSettings = TM.Tools.merge(sceneSettings, sceneConfig) as SceneSettings;
-    if (controlConfig !== undefined) {
-      controlSettings = TM.Tools.merge(controlSettings, controlConfig) as CameraControlSettings;
-    }
+    this.settings = sceneSettings;
 
     this.renderer = new WebGLRenderer({
       alpha: sceneSettings.alpha,
       antialias: sceneSettings.antialias
     });
-    this.renderer.setClearColor(sceneSettings.clearColor, 0);
+    this.renderer.setClearColor(sceneSettings.clearColor, 1);
     this.renderer.sortObjects = sceneSettings.sortObjects;
 
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+
+    this.w1 = sceneSettings.sceneMarginSize / window.innerWidth;
+    this.h1 = sceneSettings.sceneMarginSize / window.innerHeight;
+    this.w2 = 1 - sceneSettings.sceneMarginSize / window.innerWidth;
+    this.h2 = 1 - sceneSettings.sceneMarginSize / window.innerHeight;
 
     this.orthoZoom = sceneSettings.orthoZoom;
 
@@ -80,13 +95,9 @@ export default class Scene {
       this.camera = new PerspectiveCamera(50, this.width / this.height, 1, 5000);
     }
 
-    this.controlled = !!controlConfig;
+    this.controlled = sceneSettings.cameraControlSettings.controlled;
     if (this.controlled) {
-      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.minDistance = controlSettings.minDistance;
-      this.controls.maxDistance = controlSettings.maxDistance;
-      this.controls.zoomSpeed = controlSettings.zoomSpeed;
-      this.controls.noZoom = controlSettings.noZoom;
+      this._initControls();
     }
 
     if (sceneSettings.cameraPosition) {
@@ -111,9 +122,39 @@ export default class Scene {
       }
       (self.camera as PerspectiveCamera).updateProjectionMatrix();
       self.renderer.setSize(self.width, self.height);
-    }.bind(this), false);
+    }, false);
+
+    window.addEventListener('mousemove', (evt) => {
+      self.checkEdge(new Vector2(evt.clientX, evt.clientY));
+    }, false)
 
     this.attachTo(sceneSettings.element);
+  }
+
+  toggleControls(): void {
+    if (this.controlled) {
+      this.controlled = false;
+      this.controls.dispose();
+      delete this.controls;
+    } else {
+      this._initControls();
+    }
+  }
+
+  updateControls(settings: CameraControlSettings): void {
+    if (this.controlled) {
+      this.controls.minDistance = settings.minDistance || this.controls.minDistance;
+      this.controls.maxDistance = settings.maxDistance || this.controls.maxDistance;
+      this.controls.zoomSpeed = settings.zoomSpeed || this.controls.zoomSpeed;
+      this.hotEdges = settings.hotEdges || this.hotEdges;
+      //this.controls.enableDamping = true;
+      //this.controls.enableRotate = false;
+      this.controls.screenSpacePanning = false;
+      this.controls.minPolarAngle = Math.PI / 6;
+      this.controls.maxPolarAngle = Math.PI / 3;
+      this.controls.maxAzimuthAngle = 0;
+      this.controls.minAzimuthAngle = 0;
+    }
   }
 
   attachTo(element: HTMLElement): void {
@@ -132,8 +173,65 @@ export default class Scene {
     this.container.remove(mesh);
   }
 
+  private _panning = false;
+  private _panningLeft = false;
+  private _panningRight = false;
+  private _panningUp = false;
+  private _panningDown = false;
+
+  checkEdge(position: Vector2): void {
+    const x = (position.x / window.innerWidth), y = position.y / window.innerHeight;
+    if ((x > this.w2 || x < this.w1) || (y > this.h2 || y < this.h1)) {
+      this._panning = true;
+      if (x > this.w2) {
+        this._panningRight = true;
+      }
+      if (x < this.w1) {
+        this._panningLeft = true;
+      }
+      if (y > this.h2) {
+        this._panningDown = true;
+      }
+      if (y < this.h1) {
+        this._panningUp = true;
+      }
+    } else {
+      this._panning = false;
+      this._panningRight = false;
+      this._panningLeft = false;
+      this._panningDown = false;
+      this._panningUp = false;
+    }
+   
+    
+  }
+
+  private pan(left: boolean, right: boolean, top: boolean, bottom: boolean): void {
+    if (left && top) {
+      this.controls.pan(15, 15);
+    } else if (left && bottom) {
+      this.controls.pan(15, -15);
+    } else if (right && top) {
+      this.controls.pan(-15, 15);
+    } else if (right && bottom) {
+      this.controls.pan(-15, -15);
+    } else if (right) {
+      this.controls.pan(-15, 0);
+    } else if(left){
+      this.controls.pan(15, 0);
+    } else if (top) {
+      this.controls.pan(0, 15);
+    } else {
+      this.controls.pan(0, -15);
+    }
+    this.controls.update();
+  }
+
   render(): void {
     if (this.controlled) this.controls.update();
+    if (this.controlled && this.hotEdges && this._panning) {
+      this.pan(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
+    }
     this.renderer.render(this.container, this.camera);
   }
 
@@ -151,7 +249,24 @@ export default class Scene {
     (this.camera as OrthographicCamera).updateProjectionMatrix();
   }
 
-  focusOn(obj: Tile): void {
+  focusOn(obj: Object3D): void {
     this.camera.lookAt(obj.position);
+  }
+
+  private _initControls(): void {
+    this.controlled = true;
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.minDistance = this.settings.cameraControlSettings.minDistance;
+    this.controls.maxDistance = this.settings.cameraControlSettings.maxDistance;
+    this.controls.zoomSpeed = this.settings.cameraControlSettings.zoomSpeed;
+    this.hotEdges = this.settings.cameraControlSettings.hotEdges;
+    //this.controls.enableDamping = true;
+    //this.controls.enableRotate = false;
+    this.controls.screenSpacePanning = false;
+    this.controls.minPolarAngle = Math.PI / 6;
+    this.controls.maxPolarAngle = Math.PI / 3;
+    this.controls.maxAzimuthAngle = 0;
+    this.controls.minAzimuthAngle = 0;
+    this.controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
   }
 }

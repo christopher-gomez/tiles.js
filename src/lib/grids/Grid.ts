@@ -1,6 +1,6 @@
 import Cell from "./Cell";
 import { ExtrudeSettings, TilemapSettings } from "../utils/Interfaces";
-import { Shape, BufferGeometry, ShapeGeometry, Vector3, Group, Material } from "three";
+import { Shape, BufferGeometry, ShapeGeometry, Vector3, Object3D, Material } from "three";
 import Tile from "./Tile";
 
 export default interface Grid {
@@ -21,7 +21,7 @@ export default interface Grid {
   cellToHash(cell: Cell): string;
   pixelToCell(pos: Vector3): Cell;
   dispose(): void;
-  generateOverlay(size: number, overlayObj: Group, overlayMat: Material): void;
+  generateOverlay(size: number, overlayObj: Object3D, overlayMat: Material): void;
   generateTiles(tilemapSettings: TilemapSettings): Tile[];
   clearPath(): void;
   getNeighbors(cell: Cell, diagonals: boolean, heuristic: Function): Cell[];

@@ -135,6 +135,7 @@ class MouseCaster {
     evt.preventDefault();
     this.screenPosition.x = (evt.clientX / window.innerWidth) * 2 - 1;
     this.screenPosition.y = -(evt.clientY / window.innerHeight) * 2 + 1;
+    this.signal.dispatch('move', evt);
   }
 
   _onMouseWheel(evt) {
@@ -168,5 +169,6 @@ MouseCaster.DOWN = 'down';
 MouseCaster.UP = 'up';
 MouseCaster.CLICK = 'click'; // only fires if the user clicked down and up while on the same object
 MouseCaster.WHEEL = 'wheel';
+MouseCaster.MOVE = 'move';
 
 export default MouseCaster;

@@ -35,24 +35,27 @@ export interface PathfinderSettings {
 }
 
 export interface SceneSettings {
-  element: HTMLElement;
-  alpha: boolean;
-  antialias: boolean;
-  clearColor: string;
-  sortObjects: boolean;
-  fog: Fog;
-  light: Light;
-  lightPosition: Vector3;
-  cameraType: string;
-  cameraPosition: Vector3; // {x, y, z}
-  orthoZoom: number;
+  element?: HTMLElement;
+  alpha?: boolean;
+  antialias?: boolean;
+  clearColor?: string;
+  sortObjects?: boolean;
+  fog?: Fog;
+  light?: Light;
+  lightPosition?: Vector3;
+  cameraType?: string;
+  cameraPosition?: Vector3; // {x, y, z}
+  orthoZoom?: number;
+  sceneMarginSize?: number;
+  cameraControlSettings?: CameraControlSettings;
 }
 
 export interface CameraControlSettings {
-  minDistance: number;
-  maxDistance: number;
-  zoomSpeed: number;
-  noZoom: boolean;
+  controlled?: boolean;
+  minDistance?: number;
+  maxDistance?: number;
+  zoomSpeed?: number;
+  hotEdges?: boolean;
 }
 
 export interface GridJSONData {

@@ -1,7 +1,7 @@
 import TM from './tm';
 import Tile from './grids/Tile';
 import Grid from './grids/Grid';
-import { Group, Vector3, LineBasicMaterial } from 'three';
+import { Object3D, Vector3, LineBasicMaterial } from 'three';
 import HexGrid from './grids/HexGrid';
 import AStarFinder from './pathing/AStarFinder';
 import Cell from './grids/Cell';
@@ -9,10 +9,10 @@ import { TilemapSettings, PathfinderSettings } from './utils/Interfaces';
 
 export default class Board {
   public tiles: Tile[];
-  public tileGroup: Group;
-  public group: Group;
+  public tileGroup: Object3D;
+  public group: Object3D;
   public grid: Grid;
-  public overlay: Group;
+  public overlay: Object3D;
   public finder: AStarFinder;
 
   constructor(grid: Grid, finderConfig?: PathfinderSettings) {
@@ -21,7 +21,7 @@ export default class Board {
     this.tiles = [] as Tile[];
     this.tileGroup = null; // only for tiles
 
-    this.group = new Group(); // can hold all entities, also holds tileGroup, never trashed
+    this.group = new Object3D(); // can hold all entities, also holds tileGroup, never trashed
 
     this.grid = null;
     this.overlay = null;
@@ -122,7 +122,7 @@ export default class Board {
     }
     this.grid = newGrid;
     this.tiles = [];
-    this.tileGroup = new Group();
+    this.tileGroup = new Object3D();
     this.group.add(this.tileGroup);
   }
 
@@ -136,7 +136,7 @@ export default class Board {
       this.group.remove(this.overlay);
     }
 
-    this.overlay = new Group();
+    this.overlay = new Object3D();
 
     this.grid.generateOverlay(size, this.overlay, mat);
 
@@ -149,7 +149,7 @@ export default class Board {
     const tiles = this.grid.generateTiles(config);
     this.tiles = tiles;
 
-    this.tileGroup = new Group();
+    this.tileGroup = new Object3D();
     for (let i = 0; i < tiles.length; i++) {
       this.tileGroup.add(tiles[i].mesh);
     }
