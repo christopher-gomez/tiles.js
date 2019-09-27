@@ -1,10 +1,98 @@
 .App {
   text-align: center;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 body {
   overflow: hidden;
 }
+.switch-wrapper {
+  position: relative;
+}
+ 
+.switch-wrapper > div {
+  position: absolute;
+}
 #view {
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 0;
+}
+#gui {
+  position: fixed !important;
+  right: 0;
+  top: 0;
+  z-index: 100 !important;
+}
+
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.26); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+}
+
+#overlay h1 {
+  margin-top: 10%;
+  font-size: 3em;
+  font-weight: 100;
+}
+
+#overlay {
+  color: white;
+}
+
+#overlay a {
+  text-decoration: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 15px 40px;
+  display: inline-block;
+  margin: 10px 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 200;
+  outline: none;
+  position: relative;
+  background: white;
+  color: black;
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+  border-radius: 40px;
+}
+
+#overlay a::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#overlay h3 {
+  font-size: 1.1em;
+  font-weight: 200;
+}
+
+hr {
+  border-color: white;
+  width: 30%;
+  margin-top: -20px;
 }

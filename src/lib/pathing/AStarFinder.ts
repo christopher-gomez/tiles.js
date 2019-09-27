@@ -3,7 +3,7 @@ import { PathfinderSettings } from '../utils/Interfaces';
 import LinkedList from '../lib/LinkedList';
 import Tools from '../utils/Tools';
 import Cell from '../grids/Cell';
-import Grid from '../grids/Grid';
+import { GridInterface } from '../grids/Grid';
 /*
 	A* path-finder based upon http://www.redblobgames.com/pathfinding/a-star/introduction.html
 	@author Corey Birnbaum https://github.com/vonWolfehaus/
@@ -32,7 +32,7 @@ export default class AStarFinder {
 		Find and return the path.
 		@return Array<Cell> The path, including both start and end positions. Null if it failed.
 	 */
-  findPath(startNode: Cell, endNode: Cell, heuristic: Function, grid: Grid): Cell[][] {
+  findPath(startNode: Cell, endNode: Cell, heuristic: Function, grid: GridInterface): Cell[][] {
     let current, costSoFar, neighbors, n, i, l;
     heuristic = heuristic || this.heuristicFilter;
     // clear old values from previous finding

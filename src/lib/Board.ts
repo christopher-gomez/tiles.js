@@ -1,6 +1,6 @@
 import TM from './tm';
 import Tile from './grids/Tile';
-import Grid from './grids/Grid';
+import { GridInterface } from './grids/Grid';
 import { Object3D, Vector3, LineBasicMaterial } from 'three';
 import HexGrid from './grids/HexGrid';
 import AStarFinder from './pathing/AStarFinder';
@@ -11,11 +11,11 @@ export default class Board {
   public tiles: Tile[];
   public tileGroup: Object3D;
   public group: Object3D;
-  public grid: Grid;
+  public grid: GridInterface;
   public overlay: Object3D;
   public finder: AStarFinder;
 
-  constructor(grid: Grid, finderConfig?: PathfinderSettings) {
+  constructor(grid: GridInterface, finderConfig?: PathfinderSettings) {
     if (!grid) throw new Error('You must pass in a grid system for the board to use.');
 
     this.tiles = [] as Tile[];
@@ -109,7 +109,7 @@ export default class Board {
     return this.finder.findPath(startTile.cell, endTile.cell, heuristic, this.grid);
   }
 
-  setGrid(newGrid: Grid): void {
+  setGrid(newGrid: GridInterface): void {
     this.group.remove(this.tileGroup);
     if (this.grid && newGrid !== this.grid) {
       this.removeAllTiles();
@@ -146,7 +146,7 @@ export default class Board {
   generateTilemap(config: TilemapSettings): void {
     this.reset();
 
-    const tiles = this.grid.generateTiles(config);
+    const tiles = this.grid.generateTilemap(config);
     this.tiles = tiles;
 
     this.tileGroup = new Object3D();
