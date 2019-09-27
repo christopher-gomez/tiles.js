@@ -12,7 +12,9 @@ export default class Splash extends React.Component {
       enableZoom: false,
       zoomSpeed: 3,
       hotEdges: false,
-      autoRotate: true
+      autoRotate: true,
+      maxAzimuthAngle: Math.PI / 6,
+      minAzimuthAngle: -Math.PI / 6
     }
   }
   componentDidMount() {
@@ -69,7 +71,9 @@ export default class Splash extends React.Component {
           <h1>Tiles.js</h1>
           <hr></hr>
           <h3>A small, 3D tilemap JavaScript Engine</h3>
-          <Link to='/sandbox' style={{ backgroundColor: 'rgb(147,217,69)' }}>Sandbox</Link>
+          <Link to='/sandbox' style={{ backgroundColor: 'rgb(147,217,69)', color:'black'}}>Sandbox</Link>
+          <br/>
+          <Link to='/docs'>API</Link>
           <br />
           <a href='https://github.com/christophgomez/threejs-tilemap' target="_blank" rel="noopener noreferrer">Github</a>
         </div>

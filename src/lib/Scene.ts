@@ -28,6 +28,8 @@ export default class Scene {
   private h2: number;
   private hotEdges: boolean;
 
+  private _azMaz: number;
+  private _azMin: number;
   constructor(sceneConfig?: SceneSettings) {
     sceneConfig = sceneConfig || {} as SceneSettings;
     let sceneSettings = {
@@ -54,8 +56,6 @@ export default class Scene {
         screenSpacePanning: false,
         minPolarAngle: Math.PI / 6,
         maxPolarAngle: Math.PI / 3,
-        maxAzimuthAngle: Infinity * Math.PI / 180,
-        minAzimuthAngle: -Infinity * Math.PI / 180,
       } as CameraControlSettings,
     } as SceneSettings;
 
@@ -249,10 +249,13 @@ export default class Scene {
         this.pan(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
       }
       const zoom = this.controls.target.distanceTo(this.controls.object.position);
-      if (zoom <= this.settings.cameraControlSettings.minDistance + 5) {
+      if (zoom <= this.settings.cameraControlSettings.minDistance + 25) {
         this.controls.maxPolarAngle = Math.PI / 3;
+        if (zoom <= this.settings.cameraControlSettings.minDistance + 25)
+          this.controls.minPolarAngle = Math.PI / 3; 
       } else {
         this.controls.maxPolarAngle = Math.PI / 4;
+        this.controls.minPolarAngle = Math.PI / 6;
       }
     }
     this.renderer.render(this.container, this.camera);
@@ -306,8 +309,12 @@ export default class Scene {
     this.controls.screenSpacePanning = this.settings.cameraControlSettings.screenSpacePanning;
     this.controls.minPolarAngle = this.settings.cameraControlSettings.minPolarAngle;
     this.controls.maxPolarAngle = this.settings.cameraControlSettings.maxPolarAngle;
-    //this.controls.maxAzimuthAngle = this.settings.cameraControlSettings.maxAzimuthAngle;
-    //this.controls.minAzimuthAngle = this.settings.cameraControlSettings.minAzimuthAngle;
+    this._azMaz = this.controls.maxAzimuthAngle;
+    this._azMin = this.controls.minAzimuthAngle;
+    if (this.settings.cameraControlSettings.maxAzimuthAngle)
+      this.controls.maxAzimuthAngle = this.settings.cameraControlSettings.maxAzimuthAngle;
+    if (this.settings.cameraControlSettings.minAzimuthAngle)
+      this.controls.minAzimuthAngle = this.settings.cameraControlSettings.minAzimuthAngle;
     this.controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
   }
 }

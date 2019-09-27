@@ -6,6 +6,7 @@ import { HashRouter as Router, Route } from "react-router-dom";
 import { AnimatedSwitch } from 'react-router-transition';
 import Splash from './Splash';
 import Sandbox from './Sandbox';
+import Docs from './Docs';
 
 class App extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
         >
           <Route path="/" exact component={Splash} />
           <Route path="/sandbox" component={Sandbox} />
+          <Route path='/docs' component={Docs}/>
         </AnimatedSwitch>
       </Router>
     )
