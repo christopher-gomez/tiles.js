@@ -18,6 +18,7 @@ export default class Sandbox extends React.Component {
       maxPolarAngle: Math.PI / 3,
       minAzimuthAngle: 0,
       maxAzimuthAngle: -Math.PI,    
+      horizontalRotation: false
     }
   }
   componentDidMount() {
@@ -39,6 +40,7 @@ export default class Sandbox extends React.Component {
         maxPolarAngle: cc.maxPolarAngle,
         maxAzimuthAngle: cc.maxAzimuthAngle,
         minAzimuthAngle: cc.minAzimuthAngle,
+        horizontalRotation: cc.horizontalRotation,
       }
     });
     this.mouse = new TM.MouseCaster(this.scene.container, this.scene.camera);
@@ -98,6 +100,12 @@ export default class Sandbox extends React.Component {
     });
     orbitControls.add(cc, 'autoRotate').name('Auto Rotate').onChange((val) => {
       this.scene.updateControls({ autoRotate: val });
+
+      if (val === true) {
+        cc.horizontalRotation = true;
+      } else {
+        cc.horizontalRotation = false;
+      }
     });
     orbitControls.add(cc, 'screenSpacePanning').name('Screen Space Panning').onChange((val) => {
       this.scene.updateControls({ screenSpacePanning: val });
@@ -118,6 +126,9 @@ export default class Sandbox extends React.Component {
       val = val * Math.PI / 180;
       this.scene.updateControls({ maxAzimuthAngle: val });
     });
+    orbitControls.add(cc, 'horizontalRotation').name('Hor. Rotation').onChange((val) => {
+      this.scene.toggleHorizontalRotation(val);
+    }).listen();
     const worldGUI = gui.addFolder('World');
     worldGUI.addFolder('Grid/Board');
     worldGUI.addFolder('Terrain');

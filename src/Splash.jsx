@@ -14,7 +14,8 @@ export default class Splash extends React.Component {
       hotEdges: false,
       autoRotate: true,
       maxAzimuthAngle: Math.PI / 6,
-      minAzimuthAngle: -Math.PI / 6
+      minAzimuthAngle: -Math.PI / 6,
+      horizontalRotation: true,
     }
   }
   componentDidMount() {
@@ -30,6 +31,9 @@ export default class Splash extends React.Component {
         zoomSpeed: this.params.cameraControl.zoomSpeed,
         hotEdges: this.params.cameraControl.hotEdges,
         autoRotate: this.params.cameraControl.autoRotate,
+        maxAzimuthAngle: this.params.cameraControl.maxAzimuthAngle,
+        minAzimuthAngle: this.params.cameraControl.minAzimuthAngle,
+        horizontalRotation: this.params.cameraControl.horizontalRotation
       }
     });
     // this constructs the cells in grid coordinate space
@@ -73,7 +77,7 @@ export default class Splash extends React.Component {
           <h3>A small, 3D tilemap JavaScript Engine</h3>
           <Link to='/sandbox' style={{ backgroundColor: 'rgb(147,217,69)', color:'black'}}>Sandbox</Link>
           <br/>
-          <Link to='/docs'>API</Link>
+          <Link to='/docs'>Docs</Link>
           <br />
           <a href='https://github.com/christophgomez/threejs-tilemap' target="_blank" rel="noopener noreferrer">Github</a>
         </div>

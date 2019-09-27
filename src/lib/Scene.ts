@@ -56,10 +56,13 @@ export default class Scene {
         screenSpacePanning: false,
         minPolarAngle: Math.PI / 6,
         maxPolarAngle: Math.PI / 3,
+        minAzimuthAngle: 0,
+        maxAzimuthAngle: -Math.PI,
+        horizontalRotation: false,
       } as CameraControlSettings,
     } as SceneSettings;
 
-    if (sceneConfig.cameraControlSettings !== undefined){
+    if (sceneConfig.cameraControlSettings !== undefined) {
       sceneSettings.cameraControlSettings = TM.Tools.merge(sceneSettings.cameraControlSettings, sceneConfig.cameraControlSettings) as CameraControlSettings;
     }
 
@@ -158,16 +161,26 @@ export default class Scene {
         this.hotEdges = this.settings.cameraControlSettings.hotEdges;
       }
       if (settings.autoRotate !== undefined) {
-        this.controls.autoRotate = settings.autoRotate;
+        if (settings.autoRotate) {
+          this.toggleHorizontalRotation(true);
+          this.controls.autoRotate = true;
+        } else {
+          this.toggleHorizontalRotation(false);
+          this.controls.autoRotate = false;
+        }
       } else {
         this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
       }
       this.controls.enableDamping = settings.enableDamping || this.settings.cameraControlSettings.enableDamping;
       this.controls.screenSpacePanning = settings.screenSpacePanning || this.settings.cameraControlSettings.screenSpacePanning;
-      this.controls.minPolarAngle = settings.minPolarAngle || this.settings.cameraControlSettings.minPolarAngle;
-      this.controls.maxPolarAngle = settings.maxPolarAngle || this.settings.cameraControlSettings.maxPolarAngle;
-      this.controls.maxAzimuthAngle = settings.maxPolarAngle || this.settings.cameraControlSettings.maxAzimuthAngle;
-      this.controls.minAzimuthAngle = settings.minAzimuthAngle || this.settings.cameraControlSettings.minAzimuthAngle;
+      if (settings.minPolarAngle)
+        this.controls.minPolarAngle = settings.minPolarAngle;
+      if(settings.maxPolarAngle)
+        this.controls.maxPolarAngle = settings.maxPolarAngle
+      if(settings.maxAzimuthAngle)
+        this.controls.maxAzimuthAngle = settings.maxAzimuthAngle;
+      if(settings.minAzimuthAngle)
+        this.controls.minAzimuthAngle = settings.minAzimuthAngle;
     }
   }
 
@@ -217,8 +230,8 @@ export default class Scene {
       this._panningDown = false;
       this._panningUp = false;
     }
-   
-    
+
+
   }
 
   private pan(left: boolean, right: boolean, top: boolean, bottom: boolean): void {
@@ -232,7 +245,7 @@ export default class Scene {
       this.controls.pan(-15, -15);
     } else if (right) {
       this.controls.pan(-15, 0);
-    } else if(left){
+    } else if (left) {
       this.controls.pan(15, 0);
     } else if (top) {
       this.controls.pan(0, 15);
@@ -251,8 +264,8 @@ export default class Scene {
       const zoom = this.controls.target.distanceTo(this.controls.object.position);
       if (zoom <= this.settings.cameraControlSettings.minDistance + 25) {
         this.controls.maxPolarAngle = Math.PI / 3;
-        if (zoom <= this.settings.cameraControlSettings.minDistance + 25)
-          this.controls.minPolarAngle = Math.PI / 3; 
+        /*if (zoom <= this.settings.cameraControlSettings.minDistance + 10)
+          this.controls.minPolarAngle = Math.PI / 3; */
       } else {
         this.controls.maxPolarAngle = Math.PI / 4;
         this.controls.minPolarAngle = Math.PI / 6;
@@ -293,8 +306,43 @@ export default class Scene {
       this.camera = new OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 1, 5000);
     }
     else {*/
-      this.camera = new PerspectiveCamera(50, this.width / this.height, 1, 5000);
+    this.camera = new PerspectiveCamera(50, this.width / this.height, 1, 5000);
     //}
+  }
+
+  toggleHorizontalRotation(bool: boolean): void {
+    if (bool) {
+      this.controls.dispose();
+      this.controlled = true;
+      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      this.controls.minDistance = this.settings.cameraControlSettings.minDistance;
+      this.controls.maxDistance = this.settings.cameraControlSettings.maxDistance;
+      this.controls.zoomSpeed = this.settings.cameraControlSettings.zoomSpeed;
+      this.hotEdges = this.settings.cameraControlSettings.hotEdges;
+      this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
+      this.controls.enableDamping = this.settings.cameraControlSettings.enableDamping;
+      this.controls.screenSpacePanning = this.settings.cameraControlSettings.screenSpacePanning;
+      this.controls.minPolarAngle = this.settings.cameraControlSettings.minPolarAngle;
+      this.controls.maxPolarAngle = this.settings.cameraControlSettings.maxPolarAngle;
+      this.controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
+    } else {
+      this.controls.dispose();
+      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      this.controls.minDistance = this.settings.cameraControlSettings.minDistance;
+      this.controls.maxDistance = this.settings.cameraControlSettings.maxDistance;
+      this.controls.zoomSpeed = this.settings.cameraControlSettings.zoomSpeed;
+      this.hotEdges = this.settings.cameraControlSettings.hotEdges;
+      this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
+      this.controls.enableDamping = this.settings.cameraControlSettings.enableDamping;
+      this.controls.screenSpacePanning = this.settings.cameraControlSettings.screenSpacePanning;
+      this.controls.minPolarAngle = this.settings.cameraControlSettings.minPolarAngle;
+      this.controls.maxPolarAngle = this.settings.cameraControlSettings.maxPolarAngle;
+      if (this.settings.cameraControlSettings.maxAzimuthAngle)
+        this.controls.maxAzimuthAngle = this.settings.cameraControlSettings.maxAzimuthAngle;
+      if (this.settings.cameraControlSettings.minAzimuthAngle)
+        this.controls.minAzimuthAngle = this.settings.cameraControlSettings.minAzimuthAngle;
+      this.controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
+    }
   }
 
   private _initControls(): void {
@@ -309,12 +357,12 @@ export default class Scene {
     this.controls.screenSpacePanning = this.settings.cameraControlSettings.screenSpacePanning;
     this.controls.minPolarAngle = this.settings.cameraControlSettings.minPolarAngle;
     this.controls.maxPolarAngle = this.settings.cameraControlSettings.maxPolarAngle;
-    this._azMaz = this.controls.maxAzimuthAngle;
-    this._azMin = this.controls.minAzimuthAngle;
-    if (this.settings.cameraControlSettings.maxAzimuthAngle)
-      this.controls.maxAzimuthAngle = this.settings.cameraControlSettings.maxAzimuthAngle;
-    if (this.settings.cameraControlSettings.minAzimuthAngle)
-      this.controls.minAzimuthAngle = this.settings.cameraControlSettings.minAzimuthAngle;
+    if (!this.settings.cameraControlSettings.horizontalRotation) {
+      if (this.settings.cameraControlSettings.maxAzimuthAngle)
+        this.controls.maxAzimuthAngle = this.settings.cameraControlSettings.maxAzimuthAngle;
+      if (this.settings.cameraControlSettings.minAzimuthAngle)
+        this.controls.minAzimuthAngle = this.settings.cameraControlSettings.minAzimuthAngle;
+    }
     this.controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
   }
 }
