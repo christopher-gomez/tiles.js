@@ -25,8 +25,9 @@ export interface TilemapSettings {
 }
 
 export interface GridSettings {
+  type?: string;
   cellSize?: number;
-  size?: number;
+  gridSize?: number;
 };
 
 export interface PathfinderSettings {
@@ -43,9 +44,9 @@ export interface SceneSettings {
   fog?: Fog;
   light?: Light;
   lightPosition?: Vector3;
-  cameraType?: string;
-  cameraPosition?: Vector3; // {x, y, z}
-  orthoZoom?: number;
+  //cameraType?: string;
+  cameraPosition?: Vector3; 
+  //orthoZoom?: number;
   sceneMarginSize?: number;
   cameraControlSettings?: CameraControlSettings;
 }
@@ -56,6 +57,7 @@ export interface CameraControlSettings {
   maxDistance?: number;
   zoomSpeed?: number;
   hotEdges?: boolean;
+  autoRotate?: boolean;
 }
 
 export interface GridJSONData {

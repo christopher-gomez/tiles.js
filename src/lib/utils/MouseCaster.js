@@ -96,7 +96,7 @@ class MouseCaster {
 
   _onDocumentMouseDown(evt) {
     evt = evt || window.event;
-    evt.preventDefault();
+    //evt.preventDefault();
     if (this._preventDefault) {
       this._preventDefault = false;
       return false;

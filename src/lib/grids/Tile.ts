@@ -7,21 +7,26 @@ import { TileSettings } from '../utils/Interfaces';
 export default class Tile {
 
   public cell: Cell;
-  public uniqueID: string;
+  
   public geometry: Geometry;
   public material: MeshPhongMaterial;
-  public objectType: string;
-  public entity: any;
+  public mesh: Mesh;
+
+  public selected: boolean;
+  public highlight: number;
+  
   public userData: {
     terrain?: string;
     elevation?: number;
     moisture?: number;
   };
-  public selected: boolean;
-  public highlight: number;
-  public mesh: Mesh;
+  public entity: any;
+  
   public position: Vector3;
   public rotation: Euler;
+
+  public uniqueID: string;
+  public objectType: string;
 
   private _emissive: number;
 

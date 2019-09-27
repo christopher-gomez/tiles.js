@@ -1,7 +1,7 @@
 import TM from '../tm';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from '../lib/OrbitControls';
 import { SceneSettings, CameraControlSettings } from './Interfaces';
-import { WebGLRenderer, DirectionalLight, Scene as TScene, AmbientLight, Camera, OrthographicCamera, PerspectiveCamera, Mesh, Object3D, Vector2, MOUSE } from 'three';
+import { WebGLRenderer, DirectionalLight, Scene as TScene, AmbientLight, Camera, PerspectiveCamera, Mesh, Object3D, Vector2, MOUSE } from 'three';
 /*
 	Sets up and manages a THREEjs container, camera, and light, making it easy to get going.
 	Also provides camera control.
@@ -14,7 +14,7 @@ export default class Scene {
   public width: number;
   public height: number;
   public renderer: WebGLRenderer;
-  public orthoZoom: number;
+  //public orthoZoom: number;
   public container: TScene;
   public camera: Camera;
   public controlled: boolean;
@@ -39,16 +39,17 @@ export default class Scene {
       fog: null,
       light: new DirectionalLight(0xffffff),
       lightPosition: null,
-      cameraType: 'PerspectiveCamera',
+      //cameraType: 'PerspectiveCamera',
       cameraPosition: null, // {x, y, z}
-      orthoZoom: 4,
+      //orthoZoom: 10,
       sceneMarginSize: 20,
       cameraControlSettings: {
         controlled: true,
         minDistance: 25,
         maxDistance: 1250,
         zoomSpeed: 3,
-        hotEdges: true
+        hotEdges: true,
+        autoRotate: false,
       } as CameraControlSettings,
     } as SceneSettings;
 
@@ -69,12 +70,7 @@ export default class Scene {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
 
-    this.w1 = sceneSettings.sceneMarginSize / window.innerWidth;
-    this.h1 = sceneSettings.sceneMarginSize / window.innerHeight;
-    this.w2 = 1 - sceneSettings.sceneMarginSize / window.innerWidth;
-    this.h2 = 1 - sceneSettings.sceneMarginSize / window.innerHeight;
-
-    this.orthoZoom = sceneSettings.orthoZoom;
+    this._initSceneSettings();
 
     this.container = new TScene();
     this.container.fog = sceneSettings.fog;
@@ -85,15 +81,6 @@ export default class Scene {
       sceneSettings.light.position.set(-1, 1, -1).normalize();
     }
     this.container.add(sceneSettings.light);
-
-    if (sceneSettings.cameraType === 'OrthographicCamera') {
-      const width = window.innerWidth / this.orthoZoom;
-      const height = window.innerHeight / this.orthoZoom;
-      this.camera = new OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 1, 5000);
-    }
-    else {
-      this.camera = new PerspectiveCamera(50, this.width / this.height, 1, 5000);
-    }
 
     this.controlled = sceneSettings.cameraControlSettings.controlled;
     if (this.controlled) {
@@ -106,29 +93,35 @@ export default class Scene {
 
     const self = this;
 
-    window.addEventListener('resize', function onWindowResize(): void {
-      self.width = window.innerWidth;
-      self.height = window.innerHeight;
-      if (self.camera.type === 'OrthographicCamera') {
-        const width = self.width / self.orthoZoom;
-        const height = self.height / self.orthoZoom;
-        (self.camera as OrthographicCamera).left = width / -2;
-        (self.camera as OrthographicCamera).right = width / 2;
-        (self.camera as OrthographicCamera).top = height / 2;
-        (self.camera as OrthographicCamera).bottom = height / -2;
-      }
-      else {
-        (self.camera as PerspectiveCamera).aspect = self.width / self.height;
-      }
-      (self.camera as PerspectiveCamera).updateProjectionMatrix();
-      self.renderer.setSize(self.width, self.height);
-    }, false);
+    window.addEventListener('resize', this.onWindowResize.bind(this), false);
 
-    window.addEventListener('mousemove', (evt) => {
-      self.checkEdge(new Vector2(evt.clientX, evt.clientY));
-    }, false)
+    window.addEventListener('mousemove', this.checkEdge.bind(this), false)
 
     this.attachTo(sceneSettings.element);
+  }
+
+  dispose(): void {
+    window.removeEventListener('mousemove', this.checkEdge, false);
+    window.removeEventListener('resize', this.onWindowResize, false);
+    this.controls.dispose();
+  }
+
+  onWindowResize(): void {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    /*if (self.camera.type === 'OrthographicCamera') {
+      const width = self.width / self.orthoZoom;
+      const height = self.height / self.orthoZoom;
+      (self.camera as OrthographicCamera).left = width / -2;
+      (self.camera as OrthographicCamera).right = width / 2;
+      (self.camera as OrthographicCamera).top = height / 2;
+      (self.camera as OrthographicCamera).bottom = height / -2;
+    }
+    else {*/
+    (this.camera as PerspectiveCamera).aspect = this.width / this.height;
+    //}
+    (this.camera as PerspectiveCamera).updateProjectionMatrix();
+    this.renderer.setSize(this.width, this.height);
   }
 
   toggleControls(): void {
@@ -141,19 +134,33 @@ export default class Scene {
     }
   }
 
+  updateSettings(settings: SceneSettings): void {
+    this.w1 = settings.sceneMarginSize / window.innerWidth | this.settings.sceneMarginSize / window.innerWidth;
+    this.h1 = settings.sceneMarginSize / window.innerHeight | this.settings.sceneMarginSize / window.innerHeight
+    this.w2 = 1 - settings.sceneMarginSize / window.innerWidth | 1 - this.settings.sceneMarginSize / window.innerWidth;
+    this.h2 = 1 - settings.sceneMarginSize / window.innerHeight | this.settings.sceneMarginSize / window.innerHeight;
+
+    this.updateControls(this.settings.cameraControlSettings);
+  }
+
   updateControls(settings: CameraControlSettings): void {
     if (this.controlled) {
       this.controls.minDistance = settings.minDistance || this.controls.minDistance;
       this.controls.maxDistance = settings.maxDistance || this.controls.maxDistance;
       this.controls.zoomSpeed = settings.zoomSpeed || this.controls.zoomSpeed;
       this.hotEdges = settings.hotEdges || this.hotEdges;
+      if (settings.autoRotate === true) {
+        this.controls.autoRotate = true;
+      } else {
+        this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
+      }
       //this.controls.enableDamping = true;
       //this.controls.enableRotate = false;
       this.controls.screenSpacePanning = false;
       this.controls.minPolarAngle = Math.PI / 6;
       this.controls.maxPolarAngle = Math.PI / 3;
-      this.controls.maxAzimuthAngle = 0;
-      this.controls.minAzimuthAngle = 0;
+      //this.controls.maxAzimuthAngle = 0;
+      //this.controls.minAzimuthAngle = 0;
     }
   }
 
@@ -179,7 +186,8 @@ export default class Scene {
   private _panningUp = false;
   private _panningDown = false;
 
-  checkEdge(position: Vector2): void {
+  checkEdge(event: MouseEvent): void {
+    const position = new Vector2(event.clientX, event.clientY);
     const x = (position.x / window.innerWidth), y = position.y / window.innerHeight;
     if ((x > this.w2 || x < this.w1) || (y > this.h2 || y < this.h1)) {
       this._panning = true;
@@ -235,7 +243,7 @@ export default class Scene {
     this.renderer.render(this.container, this.camera);
   }
 
-  updateOrthoZoom(): void {
+  /*updateOrthoZoom(): void {
     if (this.orthoZoom <= 0) {
       this.orthoZoom = 0;
       return;
@@ -247,10 +255,28 @@ export default class Scene {
     (this.camera as OrthographicCamera).top = height / 2;
     (this.camera as OrthographicCamera).bottom = height / -2;
     (this.camera as OrthographicCamera).updateProjectionMatrix();
-  }
+  }*/
 
   focusOn(obj: Object3D): void {
     this.camera.lookAt(obj.position);
+  }
+
+  private _initSceneSettings(): void {
+    this.w1 = this.settings.sceneMarginSize / window.innerWidth;
+    this.h1 = this.settings.sceneMarginSize / window.innerHeight;
+    this.w2 = 1 - this.settings.sceneMarginSize / window.innerWidth;
+    this.h2 = 1 - this.settings.sceneMarginSize / window.innerHeight;
+
+    //this.orthoZoom = this.settings.orthoZoom;
+
+    /*if (this.settings.cameraType === 'OrthographicCamera') {
+      const width = window.innerWidth / this.orthoZoom;
+      const height = window.innerHeight / this.orthoZoom;
+      this.camera = new OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 1, 5000);
+    }
+    else {*/
+      this.camera = new PerspectiveCamera(50, this.width / this.height, 1, 5000);
+    //}
   }
 
   private _initControls(): void {
@@ -260,13 +286,14 @@ export default class Scene {
     this.controls.maxDistance = this.settings.cameraControlSettings.maxDistance;
     this.controls.zoomSpeed = this.settings.cameraControlSettings.zoomSpeed;
     this.hotEdges = this.settings.cameraControlSettings.hotEdges;
+    this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
     //this.controls.enableDamping = true;
     //this.controls.enableRotate = false;
     this.controls.screenSpacePanning = false;
     this.controls.minPolarAngle = Math.PI / 6;
     this.controls.maxPolarAngle = Math.PI / 3;
-    this.controls.maxAzimuthAngle = 0;
-    this.controls.minAzimuthAngle = 0;
+    //this.controls.maxAzimuthAngle = 0;
+    //this.controls.minAzimuthAngle = 0;
     this.controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
   }
 }

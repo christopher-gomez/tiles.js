@@ -1,5 +1,7 @@
 import Cell from './grids/Cell';
 //export { default as Cell } from './grids/Cell';
+import Grid from './grids/Grid';
+// export { default as Grid } from './grids/Grid';
 import HexGrid from './grids/HexGrid';
 //export { default as HexGrid } from './grids/HexGrid';
 import SqrGrid from './grids/SqrGrid';
@@ -38,6 +40,7 @@ export const TM = {
   SQRT3: Math.sqrt(3), // used often in hex conversions
 
   Cell,
+  Grid,
   HexGrid,
   SqrGrid,
   Tile,
