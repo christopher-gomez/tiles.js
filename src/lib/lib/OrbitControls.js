@@ -459,7 +459,7 @@ const OrbitControls = function ( object, domElement ) {
 
 		if ( scope.object.isPerspectiveCamera ) {
 
-			scale *= dollyScale;
+			scale *= dollyScale;			
 
 		} else if ( scope.object.isOrthographicCamera ) {
 

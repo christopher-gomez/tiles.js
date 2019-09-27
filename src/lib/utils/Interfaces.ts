@@ -53,11 +53,17 @@ export interface SceneSettings {
 
 export interface CameraControlSettings {
   controlled?: boolean;
+  enableDamping?: boolean;
   minDistance?: number;
   maxDistance?: number;
   zoomSpeed?: number;
   hotEdges?: boolean;
   autoRotate?: boolean;
+  screenSpacePanning?: boolean;
+  minPolarAngle?: number;
+  maxPolarAngle?: number;
+  maxAzimuthAngle?: number;
+  minAzimuthAngle?: number;
 }
 
 export interface GridJSONData {

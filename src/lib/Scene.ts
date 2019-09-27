@@ -1,6 +1,6 @@
-import TM from '../tm';
-import { OrbitControls } from '../lib/OrbitControls';
-import { SceneSettings, CameraControlSettings } from './Interfaces';
+import TM from './tm';
+import { OrbitControls } from './lib/OrbitControls';
+import { SceneSettings, CameraControlSettings } from './utils/Interfaces';
 import { WebGLRenderer, DirectionalLight, Scene as TScene, AmbientLight, Camera, PerspectiveCamera, Mesh, Object3D, Vector2, MOUSE } from 'three';
 /*
 	Sets up and manages a THREEjs container, camera, and light, making it easy to get going.
@@ -45,11 +45,17 @@ export default class Scene {
       sceneMarginSize: 20,
       cameraControlSettings: {
         controlled: true,
+        enableDamping: false,
         minDistance: 25,
         maxDistance: 1250,
         zoomSpeed: 3,
         hotEdges: true,
         autoRotate: false,
+        screenSpacePanning: false,
+        minPolarAngle: Math.PI / 6,
+        maxPolarAngle: Math.PI / 3,
+        maxAzimuthAngle: Infinity * Math.PI / 180,
+        minAzimuthAngle: -Infinity * Math.PI / 180,
       } as CameraControlSettings,
     } as SceneSettings;
 
@@ -90,8 +96,6 @@ export default class Scene {
     if (sceneSettings.cameraPosition) {
       this.camera.position.copy(sceneSettings.cameraPosition);
     }
-
-    const self = this;
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
 
@@ -148,19 +152,22 @@ export default class Scene {
       this.controls.minDistance = settings.minDistance || this.controls.minDistance;
       this.controls.maxDistance = settings.maxDistance || this.controls.maxDistance;
       this.controls.zoomSpeed = settings.zoomSpeed || this.controls.zoomSpeed;
-      this.hotEdges = settings.hotEdges || this.hotEdges;
-      if (settings.autoRotate === true) {
-        this.controls.autoRotate = true;
+      if (settings.hotEdges !== undefined) {
+        this.hotEdges = settings.hotEdges;
+      } else {
+        this.hotEdges = this.settings.cameraControlSettings.hotEdges;
+      }
+      if (settings.autoRotate !== undefined) {
+        this.controls.autoRotate = settings.autoRotate;
       } else {
         this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
       }
-      //this.controls.enableDamping = true;
-      //this.controls.enableRotate = false;
-      this.controls.screenSpacePanning = false;
-      this.controls.minPolarAngle = Math.PI / 6;
-      this.controls.maxPolarAngle = Math.PI / 3;
-      //this.controls.maxAzimuthAngle = 0;
-      //this.controls.minAzimuthAngle = 0;
+      this.controls.enableDamping = settings.enableDamping || this.settings.cameraControlSettings.enableDamping;
+      this.controls.screenSpacePanning = settings.screenSpacePanning || this.settings.cameraControlSettings.screenSpacePanning;
+      this.controls.minPolarAngle = settings.minPolarAngle || this.settings.cameraControlSettings.minPolarAngle;
+      this.controls.maxPolarAngle = settings.maxPolarAngle || this.settings.cameraControlSettings.maxPolarAngle;
+      this.controls.maxAzimuthAngle = settings.maxPolarAngle || this.settings.cameraControlSettings.maxAzimuthAngle;
+      this.controls.minAzimuthAngle = settings.minAzimuthAngle || this.settings.cameraControlSettings.minAzimuthAngle;
     }
   }
 
@@ -236,9 +243,17 @@ export default class Scene {
   }
 
   render(): void {
-    if (this.controlled) this.controls.update();
-    if (this.controlled && this.hotEdges && this._panning) {
-      this.pan(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
+    if (this.controlled) {
+      this.controls.update();
+      if (this.hotEdges && this._panning) {
+        this.pan(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
+      }
+      const zoom = this.controls.target.distanceTo(this.controls.object.position);
+      if (zoom <= this.settings.cameraControlSettings.minDistance + 5) {
+        this.controls.maxPolarAngle = Math.PI / 3;
+      } else {
+        this.controls.maxPolarAngle = Math.PI / 4;
+      }
     }
     this.renderer.render(this.container, this.camera);
   }
@@ -287,13 +302,12 @@ export default class Scene {
     this.controls.zoomSpeed = this.settings.cameraControlSettings.zoomSpeed;
     this.hotEdges = this.settings.cameraControlSettings.hotEdges;
     this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
-    //this.controls.enableDamping = true;
-    //this.controls.enableRotate = false;
-    this.controls.screenSpacePanning = false;
-    this.controls.minPolarAngle = Math.PI / 6;
-    this.controls.maxPolarAngle = Math.PI / 3;
-    //this.controls.maxAzimuthAngle = 0;
-    //this.controls.minAzimuthAngle = 0;
+    this.controls.enableDamping = this.settings.cameraControlSettings.enableDamping;
+    this.controls.screenSpacePanning = this.settings.cameraControlSettings.screenSpacePanning;
+    this.controls.minPolarAngle = this.settings.cameraControlSettings.minPolarAngle;
+    this.controls.maxPolarAngle = this.settings.cameraControlSettings.maxPolarAngle;
+    //this.controls.maxAzimuthAngle = this.settings.cameraControlSettings.maxAzimuthAngle;
+    //this.controls.minAzimuthAngle = this.settings.cameraControlSettings.minAzimuthAngle;
     this.controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
   }
 }
