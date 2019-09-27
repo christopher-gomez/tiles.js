@@ -64,6 +64,8 @@ export interface CameraControlSettings {
   maxPolarAngle?: number;
   maxAzimuthAngle?: number;
   minAzimuthAngle?: number;
+  horizontalRotate?: boolean;
+  verticalRotate?: boolean;
 }
 
 export interface GridJSONData {

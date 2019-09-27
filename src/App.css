@@ -1,19 +1,12 @@
-.App {
-  text-align: center;
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-body {
-  overflow: hidden;
-}
+
 .switch-wrapper {
   position: relative;
 }
  
 .switch-wrapper > div {
   position: absolute;
+  height: 100vh;
+  width: 100vw;
 }
 #view {
   position: absolute;
@@ -87,12 +80,16 @@ body {
 }
 
 #overlay h3 {
-  font-size: 1.1em;
-  font-weight: 200;
+  font-size: 1.2em;
+  font-weight: 100;
 }
 
 hr {
   border-color: white;
   width: 30%;
   margin-top: -20px;
+}
+.docs {
+  height: 100%;
+  width: 100%;
 }

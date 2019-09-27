@@ -16,8 +16,8 @@ export default class Sandbox extends React.Component {
       screenSpacePanning: false,
       minPolarAngle: Math.PI / 6,
       maxPolarAngle: Math.PI / 3,
-      maxAzimuthAngle: Infinity,
-      minAzimuthAngle: -Infinity,
+      minAzimuthAngle: 0,
+      maxAzimuthAngle: -Math.PI,    
     }
   }
   componentDidMount() {
@@ -37,7 +37,7 @@ export default class Sandbox extends React.Component {
         screenSpacePanning: cc.screenSpacePanning,
         minPolarAngle: cc.minPolarAngle,
         maxPolarAngle: cc.maxPolarAngle,
-        maxAzimuthAngle: cc.maxPolarAngle,
+        maxAzimuthAngle: cc.maxAzimuthAngle,
         minAzimuthAngle: cc.minAzimuthAngle,
       }
     });

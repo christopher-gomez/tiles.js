@@ -105,7 +105,7 @@ export default class Board {
     return this.tiles[i];
   }
 
-  findPath(startTile: Tile, endTile: Tile, heuristic: Function): any {
+  findPath(startTile: Tile, endTile: Tile, heuristic: Function): Cell[][] {
     return this.finder.findPath(startTile.cell, endTile.cell, heuristic, this.grid);
   }
 
