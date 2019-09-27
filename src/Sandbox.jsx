@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import TM from './lib/tm.ts';
 import * as dat from 'dat.gui';
@@ -5,27 +6,39 @@ import * as dat from 'dat.gui';
 export default class Sandbox extends React.Component {
   params = {
     cameraControl: {
-      enabled: true,
-      maxDistance: 150,
+      controlled: true,
+      enableDamping: false,
       minDistance: 25,
-      enableZoom: true,
+      maxDistance: 150,
       zoomSpeed: 3,
       hotEdges: true,
-      autoRotate: false
+      autoRotate: false,
+      screenSpacePanning: false,
+      minPolarAngle: Math.PI / 6,
+      maxPolarAngle: Math.PI / 3,
+      maxAzimuthAngle: Infinity,
+      minAzimuthAngle: -Infinity,
     }
   }
   componentDidMount() {
+    const cc = this.params.cameraControl;
     this.scene = new TM.Scene({
       element: document.getElementById('view'),
       cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {
-        controlled: this.params.cameraControl.enabled,
-        maxDistance: this.params.cameraControl.maxDistance,
-        minDistance: this.params.cameraControl.minDistance,
-        enableZoom: this.params.cameraControl.enableZoom,
-        zoomSpeed: this.params.cameraControl.zoomSpeed,
-        hotEdges: this.params.cameraControl.hotEdges,
-        autoRotate: this.params.cameraControl.autoRotate,
+        controlled: cc.controlled,
+        enableDamping: cc.enableDamping,
+        maxDistance: cc.maxDistance,
+        minDistance: cc.minDistance,
+        enableZoom: cc.enableZoom,
+        zoomSpeed: cc.zoomSpeed,
+        hotEdges: cc.hotEdges,
+        autoRotate: cc.autoRotate,
+        screenSpacePanning: cc.screenSpacePanning,
+        minPolarAngle: cc.minPolarAngle,
+        maxPolarAngle: cc.maxPolarAngle,
+        maxAzimuthAngle: cc.maxPolarAngle,
+        minAzimuthAngle: cc.minAzimuthAngle,
       }
     });
     this.mouse = new TM.MouseCaster(this.scene.container, this.scene.camera);
@@ -65,24 +78,45 @@ export default class Sandbox extends React.Component {
     camGUI.add(this.scene.camera.position, 'y').step(10).listen();
     camGUI.add(this.scene.camera.position, 'z').step(10).listen();
     const orbitControls = camGUI.addFolder('Control');
-    orbitControls.add(this.params.cameraControl, 'enabled').name('Enabled').onChange(() => {
+    orbitControls.add(cc, 'controlled').name('Enabled').onChange(() => {
       this.scene.toggleControls();
     });
-    orbitControls.add(this.params.cameraControl, 'maxDistance', 0, 1000).step(10).name('Max Zoom Out').onChange((val) => {
+    orbitControls.add(cc, 'enableDamping').name('Damping').onChange((val) => {
+      this.scene.updateControls({ enableDamping: val });
+    });
+    orbitControls.add(cc, 'maxDistance', 0, 1000).step(10).name('Max Zoom Out').onChange((val) => {
       this.scene.updateControls({ maxDistance: val });
     });
-    orbitControls.add(this.params.cameraControl, 'minDistance', 0, 1000).step(10).name('Max Zoom In').onChange((val) => {
+    orbitControls.add(cc, 'minDistance', 0, 1000).step(10).name('Max Zoom In').onChange((val) => {
       this.scene.updateControls({ minDistance: val });
     });
-    orbitControls.add(this.params.cameraControl, 'zoomSpeed', 0, 20).step(1).name('Zoom Speed').onChange((val) => {
+    orbitControls.add(cc, 'zoomSpeed', 0, 20).step(1).name('Zoom Speed').onChange((val) => {
       this.scene.updateControls({ zoomSpeed: val });
     });
-    orbitControls.add(this.params.cameraControl, 'hotEdges').name('Edge Scroll').onChange((val) => {
+    orbitControls.add(cc, 'hotEdges').name('Edge Scroll').onChange((val) => {
       this.scene.updateControls({ hotEdges: val });
     });
-    orbitControls.add(this.params.cameraControl, 'autoRotate').name('Auto Rotate').onChange((val) => {
-      console.log(val);
+    orbitControls.add(cc, 'autoRotate').name('Auto Rotate').onChange((val) => {
       this.scene.updateControls({ autoRotate: val });
+    });
+    orbitControls.add(cc, 'screenSpacePanning').name('Screen Space Panning').onChange((val) => {
+      this.scene.updateControls({ screenSpacePanning: val });
+    });
+    orbitControls.add(cc, 'minPolarAngle', 0, 180).step(1).name('Min Polar Angle').onChange((val) => {
+      val = val * Math.PI / 180;
+      this.scene.updateControls({ minPolarAngle: val });
+    });
+    orbitControls.add(cc, 'maxPolarAngle', 0, 180).step(1).name('Max Polar Angle').onChange((val) => {
+      val = val * Math.PI / 180;
+      this.scene.updateControls({ minPolarAngle: val });
+    });
+    orbitControls.add(cc, 'minAzimuthAngle', -180, 180).step(1).name('Min Azimuth Angle').onChange((val) => {
+      val = val * Math.PI / 180;
+      this.scene.updateControls({ minAzimuthAngle: val });
+    });
+    orbitControls.add(cc, 'maxAzimuthAngle', -180, 180).step(1).name('Max Azimuth Angle').onChange((val) => {
+      val = val * Math.PI / 180;
+      this.scene.updateControls({ maxAzimuthAngle: val });
     });
     const worldGUI = gui.addFolder('World');
     worldGUI.addFolder('Grid/Board');

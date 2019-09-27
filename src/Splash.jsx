@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import TM from './lib/tm.ts';
 import { Link } from "react-router-dom";

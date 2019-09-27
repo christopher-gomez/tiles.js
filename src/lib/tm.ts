@@ -20,7 +20,7 @@ import Loader from './utils/Loader';
 //export { default as Loader } from './utils/Loader';
 import MouseCaster from './utils/MouseCaster';
 //export { default as MouseCaster } from './utils/MouseCaster';
-import Scene from './utils/Scene';
+import Scene from './Scene';
 //export { default as Scene } from './utils/Scene';
 import SelectionManager from './utils/SelectionManager';
 //export { default as SelectionManager } from './utils/SelectionManager';

@@ -1,6 +1,8 @@
+/* eslint-disable */
+
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import { AnimatedSwitch } from 'react-router-transition';
 import Splash from './Splash';
 import Sandbox from './Sandbox';
@@ -8,7 +10,7 @@ import Sandbox from './Sandbox';
 class App extends React.Component {
   render() {
     return (
-      <Router>
+      <Router basename='/'>
         <AnimatedSwitch
           atEnter={{ opacity: 0 }}
           atLeave={{ opacity: 0 }}
