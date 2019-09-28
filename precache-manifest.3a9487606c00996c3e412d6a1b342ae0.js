@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "96e7fd58a758a7f1be2dc7cafe2e2f93",
+    "revision": "65e1c3dd6f2eedcaf2206e547fb766bf",
     "url": "/threejs-tilemap/index.html"
   },
   {
-    "revision": "add8c61de293b487ee95",
+    "revision": "c2c9b56c423583256141",
     "url": "/threejs-tilemap/static/css/main.07594c89.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/threejs-tilemap/static/js/2.89f69746.chunk.js"
   },
   {
-    "revision": "add8c61de293b487ee95",
-    "url": "/threejs-tilemap/static/js/main.301a1459.chunk.js"
+    "revision": "c2c9b56c423583256141",
+    "url": "/threejs-tilemap/static/js/main.d7e7eb57.chunk.js"
   },
   {
     "revision": "883688e7302f589e2880",
