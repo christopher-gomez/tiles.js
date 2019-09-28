@@ -4,9 +4,9 @@ import React from 'react';
 import './App.css';
 import { HashRouter as Router, Route } from "react-router-dom";
 import { AnimatedSwitch } from 'react-router-transition';
-import Splash from './Splash';
-import Sandbox from './Sandbox';
-import Docs from './Docs';
+import Splash from './Components/Splash';
+import Sandbox from './Components/Sandbox';
+import Docs from './Components/Docs';
 
 class App extends React.Component {
   render() {

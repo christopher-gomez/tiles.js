@@ -54,6 +54,7 @@ export interface SceneSettings {
 export interface CameraControlSettings {
   controlled?: boolean;
   enableDamping?: boolean;
+  dampingFactor?: number;
   minDistance?: number;
   maxDistance?: number;
   zoomSpeed?: number;

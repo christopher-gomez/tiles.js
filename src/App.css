@@ -1,12 +1,13 @@
-
 .switch-wrapper {
   position: relative;
+  height: 100%;
+  width: 100%;
 }
- 
+
 .switch-wrapper > div {
   position: absolute;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 #view {
   position: absolute;
@@ -19,7 +20,8 @@
 #gui {
   position: fixed !important;
   right: 0;
-  top: 0;
+  bottom: 0;
+  margin-bottom: 2px;
   z-index: 100 !important;
 }
 
@@ -32,7 +34,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.26); /* Black background with opacity */
+  background-color: rgba(0, 0, 0, 0.15); /* Black background with opacity */
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
 }
 
@@ -92,4 +94,27 @@ hr {
 .docs {
   height: 100%;
   width: 100%;
+}
+
+.fullScreenToggle {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  background: none;
+  border: none;
+  margin: 10px;
+}
+
+.fullScreenToggle:focus {
+  outline: 0;
+}
+
+.fullScreenToggle:active {
+  outline: none;
+  border: none;
+}
+
+.fullScreenToggle:hover {
+  cursor: pointer;
 }
