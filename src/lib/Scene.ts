@@ -48,6 +48,7 @@ export default class Scene {
       cameraControlSettings: {
         controlled: true,
         enableDamping: false,
+        dampingFactor: .05,
         minDistance: 25,
         maxDistance: 1250,
         zoomSpeed: 3,
@@ -87,7 +88,8 @@ export default class Scene {
     this.container.add(new AmbientLight(0xdddddd));
 
     if (!sceneSettings.lightPosition) {
-      sceneSettings.light.position.set(-1, 1, -1).normalize();
+      sceneSettings.light.position.set(1, 1, 3).normalize();
+      sceneSettings.light.intensity = 1.2;
     }
     this.container.add(sceneSettings.light);
 
@@ -172,6 +174,7 @@ export default class Scene {
         this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
       }
       this.controls.enableDamping = settings.enableDamping || this.settings.cameraControlSettings.enableDamping;
+      this.controls.dampingFactor = settings.dampingFactor || this.settings.cameraControlSettings.dampingFactor;
       this.controls.screenSpacePanning = settings.screenSpacePanning || this.settings.cameraControlSettings.screenSpacePanning;
       if (settings.minPolarAngle)
         this.controls.minPolarAngle = settings.minPolarAngle;
@@ -354,6 +357,7 @@ export default class Scene {
     this.hotEdges = this.settings.cameraControlSettings.hotEdges;
     this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
     this.controls.enableDamping = this.settings.cameraControlSettings.enableDamping;
+    this.controls.dampingFactor = this.settings.cameraControlSettings.dampingFactor;
     this.controls.screenSpacePanning = this.settings.cameraControlSettings.screenSpacePanning;
     this.controls.minPolarAngle = this.settings.cameraControlSettings.minPolarAngle;
     this.controls.maxPolarAngle = this.settings.cameraControlSettings.maxPolarAngle;
