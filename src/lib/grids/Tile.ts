@@ -132,17 +132,28 @@ export default class Tile {
     this.userData.elevation = e;
     this.userData.moisture = m;
 
-    if (e < 0.1) {
+    if (e < 0.02) {
       this.userData.terrain = 'OCEAN';
       return;
     }
-    if (e < 0.12) {
+    if (e < 0.06) {
       this.userData.terrain = 'BEACH';
       this.material.color.set(TM.Tools.randomizeRGB('194,178,128', 13));
       return;
     }
+    if (e < .3) {
+      this.userData.terrain = 'PLAIN';
+      this.material.color.set(TM.Tools.randomizeRGB('70,118,58', 13));
+      return;
+    }
+    if (e < 1) {
+      this.userData.terrain = 'MOUNTAIN';
+      
+      this.material.color.set(TM.Tools.randomizeRGB('107,110,112', 13));
+      return;
+    };
 
-    if (e > 0.8) {
+    /*if (e > 0.6) {
       if (m < 0.1) {
         this.userData.terrain = 'SCORCHED';
         this.material.color.set(TM.Tools.randomizeRGB('171,95,58', 13));
@@ -163,7 +174,7 @@ export default class Tile {
       return;
     }
 
-    if (e > 0.6) {
+    /*if (e > 0.45) {
       if (m < 0.33) {
         this.userData.terrain = 'TEMPERATE_DESERT';
         this.material.color.set(TM.Tools.randomizeRGB('200,184,158', 13));
@@ -179,13 +190,13 @@ export default class Tile {
       return;
     }
 
-    if (e > 0.3) {
+    if (e > 0.35) {
       if (m < 0.16) {
         this.userData.terrain = 'TEMPERATE_DESERT';
         this.material.color.set(TM.Tools.randomizeRGB('200,184,158', 13));
         return;
       }
-      if (m < 0.50) {
+      if (m < 0.25) {
         this.userData.terrain = 'GRASSLAND';
         this.material.color.set(TM.Tools.randomizeRGB('147,217,69', 13));
         return;
@@ -208,6 +219,6 @@ export default class Tile {
     }
     this.userData.terrain = 'TROPICAL_RAIN_FOREST';
     this.material.color.set(TM.Tools.randomizeRGB('79,159,27', 13));
-    return;
+    return;*/
   }
 }

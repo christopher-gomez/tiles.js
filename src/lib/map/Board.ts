@@ -1,11 +1,11 @@
-import TM from './tm';
-import Tile from './grids/Tile';
-import { GridInterface } from './grids/Grid';
+import TM from '../tm';
+import Tile from '../grids/Tile';
+import { GridInterface } from '../grids/Grid';
 import { Object3D, Vector3, LineBasicMaterial } from 'three';
-import HexGrid from './grids/HexGrid';
-import AStarFinder from './pathing/AStarFinder';
-import Cell from './grids/Cell';
-import { TilemapSettings, PathfinderSettings } from './utils/Interfaces';
+import HexGrid from '../grids/HexGrid';
+import AStarFinder from '../pathing/AStarFinder';
+import Cell from '../grids/Cell';
+import { TilemapSettings, PathfinderSettings } from '../utils/Interfaces';
 
 export default class Board {
   public tiles: Tile[];

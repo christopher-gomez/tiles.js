@@ -20,13 +20,13 @@ import Loader from './utils/Loader';
 //export { default as Loader } from './utils/Loader';
 import MouseCaster from './utils/MouseCaster';
 //export { default as MouseCaster } from './utils/MouseCaster';
-import Scene from './Scene';
+import Scene from './map/Scene';
 //export { default as Scene } from './utils/Scene';
 import SelectionManager from './utils/SelectionManager';
 //export { default as SelectionManager } from './utils/SelectionManager';
 import Tools from './utils/Tools';
 //export { default as Tools } from './utils/Tools';
-import Board from './Board';
+import Board from './map/Board';
 // export { default as Board } from './Board';
 
 

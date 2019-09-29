@@ -1,6 +1,6 @@
-import TM from './tm';
-import { OrbitControls } from './lib/OrbitControls';
-import { SceneSettings, CameraControlSettings } from './utils/Interfaces';
+import TM from '../tm';
+import { OrbitControls } from '../lib/OrbitControls';
+import { SceneSettings, CameraControlSettings } from '../utils/Interfaces';
 import { WebGLRenderer, DirectionalLight, Scene as TScene, AmbientLight, Camera, PerspectiveCamera, Mesh, Object3D, Vector2, MOUSE } from 'three';
 /*
 	Sets up and manages a THREEjs container, camera, and light, making it easy to get going.
@@ -27,9 +27,12 @@ export default class Scene {
   private h1: number;
   private h2: number;
   private hotEdges: boolean;
+  private _panning = false;
+  private _panningLeft = false;
+  private _panningRight = false;
+  private _panningUp = false;
+  private _panningDown = false;
 
-  private _azMaz: number;
-  private _azMin: number;
   constructor(sceneConfig?: SceneSettings) {
     sceneConfig = sceneConfig || {} as SceneSettings;
     let sceneSettings = {
@@ -70,41 +73,12 @@ export default class Scene {
     sceneSettings = TM.Tools.merge(sceneSettings, sceneConfig) as SceneSettings;
     this.settings = sceneSettings;
 
-    this.renderer = new WebGLRenderer({
-      alpha: sceneSettings.alpha,
-      antialias: sceneSettings.antialias
-    });
-    this.renderer.setClearColor(sceneSettings.clearColor, 1);
-    this.renderer.sortObjects = sceneSettings.sortObjects;
-
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
-
     this._initSceneSettings();
+    this.camera.rotation.x = Math.PI / 4.5
 
-    this.container = new TScene();
-    this.container.fog = sceneSettings.fog;
-
-    this.container.add(new AmbientLight(0xdddddd));
-
-    if (!sceneSettings.lightPosition) {
-      sceneSettings.light.position.set(1, 1, 3).normalize();
-      sceneSettings.light.intensity = 1.2;
-    }
-    this.container.add(sceneSettings.light);
-
-    this.controlled = sceneSettings.cameraControlSettings.controlled;
-    if (this.controlled) {
+    if (this.settings.cameraControlSettings.controlled) {
       this._initControls();
     }
-
-    if (sceneSettings.cameraPosition) {
-      this.camera.position.copy(sceneSettings.cameraPosition);
-    }
-
-    window.addEventListener('resize', this.onWindowResize.bind(this), false);
-
-    window.addEventListener('mousemove', this.checkEdge.bind(this), false)
 
     this.attachTo(sceneSettings.element);
   }
@@ -154,28 +128,20 @@ export default class Scene {
 
   updateControls(settings: CameraControlSettings): void {
     if (this.controlled) {
+      this.settings.cameraControlSettings = TM.Tools.merge(this.settings.cameraControlSettings, settings) as CameraControlSettings;
       this.controls.minDistance = settings.minDistance || this.controls.minDistance;
       this.controls.maxDistance = settings.maxDistance || this.controls.maxDistance;
       this.controls.zoomSpeed = settings.zoomSpeed || this.controls.zoomSpeed;
-      if (settings.hotEdges !== undefined) {
-        this.hotEdges = settings.hotEdges;
-      } else {
-        this.hotEdges = this.settings.cameraControlSettings.hotEdges;
-      }
+      settings.hotEdges !== undefined ? this.hotEdges = settings.hotEdges : this.hotEdges = this.settings.cameraControlSettings.hotEdges;
       if (settings.autoRotate !== undefined) {
-        if (settings.autoRotate) {
-          this.toggleHorizontalRotation(true);
-          this.controls.autoRotate = true;
-        } else {
-          this.toggleHorizontalRotation(false);
-          this.controls.autoRotate = false;
-        }
+        this.toggleHorizontalRotation(settings.autoRotate);
+        this.controls.autoRotate = settings.autoRotate;
       } else {
         this.controls.autoRotate = this.settings.cameraControlSettings.autoRotate;
       }
-      this.controls.enableDamping = settings.enableDamping || this.settings.cameraControlSettings.enableDamping;
+      settings.enableDamping !== undefined ? this.controls.enableDamping = settings.enableDamping : this.controls.enableDamping = this.settings.cameraControlSettings.enableDamping;
       this.controls.dampingFactor = settings.dampingFactor || this.settings.cameraControlSettings.dampingFactor;
-      this.controls.screenSpacePanning = settings.screenSpacePanning || this.settings.cameraControlSettings.screenSpacePanning;
+      settings.screenSpacePanning !== undefined ? this.controls.screenSpacePanning = settings.screenSpacePanning : this.controls.screenSpacePanning = this.settings.cameraControlSettings.screenSpacePanning;
       if (settings.minPolarAngle)
         this.controls.minPolarAngle = settings.minPolarAngle;
       if(settings.maxPolarAngle)
@@ -202,12 +168,6 @@ export default class Scene {
   remove(mesh: Mesh): void {
     this.container.remove(mesh);
   }
-
-  private _panning = false;
-  private _panningLeft = false;
-  private _panningRight = false;
-  private _panningUp = false;
-  private _panningDown = false;
 
   checkEdge(event: MouseEvent): void {
     const position = new Vector2(event.clientX, event.clientY);
@@ -264,15 +224,15 @@ export default class Scene {
       if (this.hotEdges && this._panning) {
         this.pan(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
       }
-      const zoom = this.controls.target.distanceTo(this.controls.object.position);
+      /* const zoom = this.controls.target.distanceTo(this.controls.object.position);
       if (zoom <= this.settings.cameraControlSettings.minDistance + 25) {
         this.controls.maxPolarAngle = Math.PI / 3;
         /*if (zoom <= this.settings.cameraControlSettings.minDistance + 10)
-          this.controls.minPolarAngle = Math.PI / 3; */
+          this.controls.minPolarAngle = Math.PI / 3; 
       } else {
         this.controls.maxPolarAngle = Math.PI / 4;
         this.controls.minPolarAngle = Math.PI / 6;
-      }
+      } */
     }
     this.renderer.render(this.container, this.camera);
   }
@@ -296,10 +256,34 @@ export default class Scene {
   }
 
   private _initSceneSettings(): void {
+    this.renderer = new WebGLRenderer({
+      alpha: this.settings.alpha,
+      antialias: this.settings.antialias
+    });
+    this.renderer.setClearColor(this.settings.clearColor, 1);
+    this.renderer.sortObjects = this.settings.sortObjects;
+
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
     this.w1 = this.settings.sceneMarginSize / window.innerWidth;
     this.h1 = this.settings.sceneMarginSize / window.innerHeight;
     this.w2 = 1 - this.settings.sceneMarginSize / window.innerWidth;
     this.h2 = 1 - this.settings.sceneMarginSize / window.innerHeight;
+
+    this.container = new TScene();
+    this.container.fog = this.settings.fog;
+
+    this.container.add(new AmbientLight(0xdddddd));
+
+    if (!this.settings.lightPosition) {
+      this.settings.light.position.set(1, 1, 3).normalize();
+      this.settings.light.intensity = 1.2;
+    } else {
+      const p = this.settings.lightPosition;
+      this.settings.light.position.set(p.x, p.y, p.z).normalize();
+      this.settings.light.intensity = 1.2;
+    }
+    this.container.add(this.settings.light);
 
     //this.orthoZoom = this.settings.orthoZoom;
 
@@ -310,13 +294,18 @@ export default class Scene {
     }
     else {*/
     this.camera = new PerspectiveCamera(50, this.width / this.height, 1, 5000);
+    if (this.settings.cameraPosition) {
+      this.camera.position.copy(this.settings.cameraPosition);
+    }
+
+    window.addEventListener('resize', this.onWindowResize.bind(this), false);
+    window.addEventListener('mousemove', this.checkEdge.bind(this), false);
     //}
   }
 
   toggleHorizontalRotation(bool: boolean): void {
     if (bool) {
       this.controls.dispose();
-      this.controlled = true;
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
       this.controls.minDistance = this.settings.cameraControlSettings.minDistance;
       this.controls.maxDistance = this.settings.cameraControlSettings.maxDistance;
@@ -349,7 +338,7 @@ export default class Scene {
   }
 
   private _initControls(): void {
-    this.controlled = true;
+    this.controlled = this.settings.cameraControlSettings.controlled;
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.minDistance = this.settings.cameraControlSettings.minDistance;
     this.controls.maxDistance = this.settings.cameraControlSettings.maxDistance;
