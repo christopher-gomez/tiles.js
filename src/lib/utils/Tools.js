@@ -3,8 +3,8 @@
 import PM_PRNG from 'prng-parkmiller-js';
 import SimplexNoise from 'simplex-noise';
 
-const rng1 = PM_PRNG.create('3sdad2ds3819fdez');
-const rng2 = PM_PRNG.create(3129481234);
+const rng1 = PM_PRNG.create(Date.now() * Math.random() * 100);
+const rng2 = PM_PRNG.create(Date.now() * Math.random() * 100);
 const gen1 = new SimplexNoise(rng1.nextDouble.bind(rng1));
 const gen2 = new SimplexNoise(rng2.nextDouble.bind(rng2));
 
