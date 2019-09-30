@@ -74,7 +74,7 @@ export default class Splash extends React.Component {
         <div id='overlay'>
           <h1>Tiles.js</h1>
           <hr></hr>
-          <h3>A small, 3D tilemap JavaScript Engine</h3>
+          <h3>A 3D Tile Engine</h3>
           <Link to='/sandbox' style={{ backgroundColor: 'rgb(147,217,69)', color:'black'}}>Sandbox</Link>
           <br/>
           <Link to='/docs'>Docs</Link>
