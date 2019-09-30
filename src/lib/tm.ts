@@ -20,7 +20,7 @@ import Loader from './utils/Loader';
 //export { default as Loader } from './utils/Loader';
 import MouseCaster from './utils/MouseCaster';
 //export { default as MouseCaster } from './utils/MouseCaster';
-import Scene from './map/Scene';
+import View from './map/View';
 //export { default as Scene } from './utils/Scene';
 import SelectionManager from './utils/SelectionManager';
 //export { default as SelectionManager } from './utils/SelectionManager';
@@ -50,7 +50,7 @@ export const TM = {
   PathUtil,
   Loader,
   MouseCaster,
-  Scene,
+  View,
   SelectionManager,
   Tools,
   Board,

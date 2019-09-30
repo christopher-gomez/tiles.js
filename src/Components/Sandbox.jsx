@@ -30,7 +30,7 @@ export default class Sandbox extends React.Component {
   }
   componentDidMount() {
     const cc = this.params.cameraControl;
-    this.scene = new TM.Scene({
+    this.scene = new TM.View({
       element: document.querySelector('.App'),
       cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {
@@ -56,7 +56,7 @@ export default class Sandbox extends React.Component {
     // this constructs the cells in grid coordinate space
     this.gridSpace = new TM.Grid({
       cellSize: 20,
-      gridSize: 100
+      gridSize: 80
     });
     this.board = new TM.Board(this.gridSpace);
 

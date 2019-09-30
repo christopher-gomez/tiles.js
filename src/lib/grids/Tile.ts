@@ -20,6 +20,7 @@ export default class Tile {
     elevation?: number;
     moisture?: number;
   };
+
   public entity: any;
   
   public position: Vector3;

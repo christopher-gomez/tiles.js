@@ -20,7 +20,7 @@ export default class Splash extends React.Component {
   }
   componentDidMount() {
 
-    this.scene = new TM.Scene({
+    this.scene = new TM.View({
       element: document.getElementById('engine'),
       cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {
