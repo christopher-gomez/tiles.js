@@ -11,4 +11,4 @@ Keep an eye on it's progress and updates by checking the [sandbox](https://chris
 (Maybe I should make the sandbox an editor)
 
 ## Acknowledgments
-[Cory Birnbaum](https://github.com/vonWolfehaus) - He did most of the hard work a couple years ago. I just made a couple additions and converted it to ES6 syntax.
+[Cory Birnbaum](https://github.com/vonWolfehaus) - He did most of the hard work a couple years ago. Thank you for the grid system and utility functions. They have proved invaluable.
