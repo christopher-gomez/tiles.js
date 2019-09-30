@@ -105,7 +105,8 @@ export default class HexGrid implements GridInterface {
     this._cel = new Cell();
     this._geoCache = [];
     this._matCache = [];
-    this.generateGrid(config);
+    if(config)
+      this.generateGrid(config);
   }
   /*  ________________________________________________________________________
 		High-level functions that the Board interfaces with (all grids implement)
