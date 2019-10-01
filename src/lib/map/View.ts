@@ -1,9 +1,11 @@
-import TM from '../tm';
 import { SceneSettings, CameraControlSettings, ViewController } from '../utils/Interfaces';
-import { WebGLRenderer, DirectionalLight, Scene, AmbientLight, Camera, PerspectiveCamera, Mesh, Object3D, Vector2, Vector3 } from 'three';
+import { WebGLRenderer, DirectionalLight, Scene, AmbientLight, Camera, PerspectiveCamera, Mesh, Vector2, Vector3 } from 'three';
 import Tile from '../grids/Tile';
 import Cell from '../grids/Cell';
 import Controller from './Controller';
+import MouseCaster from '../utils/MouseCaster';
+import Tools from '../utils/Tools';
+import Board from './Board';
 
 /*
 	Sets up and manages a THREEjs container, camera, and light, making it easy to get going.
@@ -24,18 +26,53 @@ export default class View implements ViewController {
   public settings: SceneSettings;
   public controls: Controller;
 
+  private _selectedTile: Tile;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private _onAnimate:  (dtS: number) => void = (dtS: number): void => {};
+  private _onTileSelected: (tile: Tile) => void
+  private _onLoaded: () => void;
+  private _lastTimestamp = Date.now();
+  private _animationID: number;
+
   // Edge Scrolling margins
   private w1: number;
   private w2: number;
   private h1: number;
   private h2: number;
   public hotEdges: boolean;
+
+  private _mouseCaster: MouseCaster;
+
   // This code should be with the Controller code 
   private _panning = false;
   private _panningLeft = false;
   private _panningRight = false;
   private _panningUp = false;
   private _panningDown = false;
+
+  set onAnimate(callback: (dtS: number) => void) {
+    if (!callback) {
+      throw new Error("Invalid onRender callback")
+    }
+    this._onAnimate = callback;
+  }
+  set onTileSelected(callback: (tile: Tile) => void) {
+    this._onTileSelected = callback
+  }
+
+  set onLoaded(callback: () => void) {
+    this._onLoaded = callback
+  }
+  setOnAnimateCallback(callback: (dtS: number) => void): void {
+    this.onAnimate = callback
+  }
+  get selectedTile(): Tile {
+    return this._selectedTile
+  }
+
+  set mouseCaster(mouse: MouseCaster) {
+    this._mouseCaster = mouse;
+  }
 
   constructor(sceneConfig?: SceneSettings) {
     sceneConfig = sceneConfig || {} as SceneSettings;
@@ -71,10 +108,10 @@ export default class View implements ViewController {
     } as SceneSettings;
 
     if (sceneConfig.cameraControlSettings !== undefined) {
-      sceneSettings.cameraControlSettings = TM.Tools.merge(sceneSettings.cameraControlSettings, sceneConfig.cameraControlSettings) as CameraControlSettings;
+      sceneSettings.cameraControlSettings = Tools.merge(sceneSettings.cameraControlSettings, sceneConfig.cameraControlSettings) as CameraControlSettings;
     }
 
-    sceneSettings = TM.Tools.merge(sceneSettings, sceneConfig) as SceneSettings;
+    sceneSettings = Tools.merge(sceneSettings, sceneConfig) as SceneSettings;
     this.settings = sceneSettings;
 
     this._initSceneSettings();
@@ -84,12 +121,17 @@ export default class View implements ViewController {
     }
 
     this.attachTo(sceneSettings.element);
+    this.animate(0);
   }
 
   dispose(): void {
-    window.removeEventListener('mousemove', this.checkEdge, false);
     window.removeEventListener('resize', this.onWindowResize, false);
     this.controls.dispose();
+    window.cancelAnimationFrame(this._animationID);
+    delete this.container;
+    delete this.camera;
+    delete this.controls;
+    delete this._mouseCaster;
   }
 
   onWindowResize(): void {
@@ -112,24 +154,55 @@ export default class View implements ViewController {
     this.container.add(mesh);
   }
 
+  private board: Board;
+  addBoard(board: Board): void {
+    this.board = board;
+    this.container.add(board.group);
+  }
+
   remove(mesh: Mesh): void {
     this.container.remove(mesh);
   }
 
-  render(): void {
+  private animate(timestamp: number): void {
+    const dtS = (timestamp - this._lastTimestamp) / 1000.0;
+    this._lastTimestamp = timestamp;
+    if (this._mouseCaster) {
+      this._mouseCaster.update();
+    }
     if (this.controlled) {
       this.controls.update();
       if (this.hotEdges && this._panning) {
         this.panInDirection(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
       }
     }
+    this._onAnimate(dtS);
+    this.controls.update();
     this.renderer.render(this.container, this.camera);
+    this._animationID = requestAnimationFrame(this.animate.bind(this));
   }
 
-  focusOn(obj: Object3D): void {
+  focusOn(obj: any): void {
     this.camera.lookAt(obj.position);
   }
 
+  getViewCenter(): Vector3 {
+    const pos = this._mouseCaster.mouseToWorld({ x: window.innerWidth / 2, y: window.innerHeight / 2 }, this.camera);
+    return pos;
+  }
+
+  getCameraFocusPosition(pos: Vector3): Vector3 {
+    return this.getCameraFocusPositionWorld(pos)
+  }
+
+  getCameraFocusPositionWorld(pos: Vector3): Vector3 {
+    const currentPos = this.camera.position.clone()
+    const viewOffset = currentPos.sub(this.getViewCenter());
+
+    return pos.add(viewOffset)
+  }
+
+  // Need to finish
   updateSettings(settings: SceneSettings): void {
     this.w1 = settings.sceneMarginSize / window.innerWidth | this.settings.sceneMarginSize / window.innerWidth;
     this.h1 = settings.sceneMarginSize / window.innerHeight | this.settings.sceneMarginSize / window.innerHeight
@@ -159,8 +232,8 @@ export default class View implements ViewController {
     this.controls.panInDirection(left, right, top, bottom);
   }
 
-  panCameraTo(tile: Tile | Cell | Vector3): void {
-    this.controls.panCameraTo(tile);
+  panCameraTo(tile: Tile | Cell | Vector3, durationMs: number): void {
+    this.controls.panCameraTo(tile, durationMs);
   }
 
   private _initSceneSettings(): void {
@@ -198,10 +271,23 @@ export default class View implements ViewController {
       this.camera.position.copy(this.settings.cameraPosition);
     }
 
-    this.camera.rotation.x = Math.PI / 4.5
+    this._mouseCaster = new MouseCaster(this.container, this.camera);
+    const self = this;
+    this._mouseCaster.signal.add(function (evt: string, tile: Tile | MouseEvent) {
+      if (evt === MouseCaster.CLICK) {
+        //(tile as Tile).toggle();
+        self.controls.panCameraTo(tile as Tile, 1000);
+        // or we can use the mouse's raw coordinates to access the cell directly, just for fun:
+        const cell = self.board.grid.pixelToCell(self._mouseCaster.position);
+        const t = self.board.getTileAtCell(cell);
+        if (t) t.toggle();
+      }
+      if (evt === MouseCaster.MOVE) {
+        self.checkEdge(tile as MouseEvent);
+      }
+    }, this);
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
-    window.addEventListener('mousemove', this.checkEdge.bind(this), false);
   }
 
   private checkEdge(event: MouseEvent): void {

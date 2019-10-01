@@ -88,5 +88,5 @@ export interface ViewController {
   toggleControls(): void;
   toggleHorizontalRotation(bool: boolean): void;
   panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void;
-  panCameraTo(tile: Tile | Cell | Vector3): void;
+  panCameraTo(tile: Tile | Cell | Vector3, durationMs: number): void;
 }

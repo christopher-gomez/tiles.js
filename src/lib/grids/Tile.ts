@@ -89,8 +89,6 @@ export default class Tile {
       this.material.emissive.setHex(this.highlight);
     }
     this.selected = true;
-    console.log(this.userData.terrain)
-    console.log(this.userData.elevation);
     console.log(this.position);
     return this;
   }
