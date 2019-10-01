@@ -28,6 +28,7 @@ export default class Sandbox extends React.Component {
   state = {
     fullscreen: false
   }
+
   componentDidMount() {
     const cc = this.params.cameraControl;
     this.scene = new TM.View({
@@ -51,7 +52,6 @@ export default class Sandbox extends React.Component {
         horizontalRotation: cc.horizontalRotation
       }
     });
-    this.mouse = new TM.MouseCaster(this.scene.container, this.scene.camera);
 
     // this constructs the cells in grid coordinate space
     this.gridSpace = new TM.Grid({
@@ -66,40 +66,22 @@ export default class Sandbox extends React.Component {
     });
     this.board.generateTerrain();
     //this.board.generateOverlay(45);
-    this.board.group.rotation.y = Math.PI / 2;
-    this.scene.add(this.board.group);
+    this.scene.addBoard(this.board);
     this.scene.focusOn(this.board.group);
 
-    this.mouse.signal.add(function(evt, tile) {
-      if (evt === TM.MouseCaster.CLICK) {
-        //tile.toggle();
-        console.log(tile.position);
-        // or we can use the mouse's raw coordinates to access the cell directly, just for fun:
-        //const cell = this.board.grid.pixelToCell(this.mouse.position);
-        //const t = this.board.getTileAtCell(cell);
-        //if (t) t.toggle();
-      }
-    }, this);
-
     this.gui = new GUI(cc, this.scene);
+  }
 
-    this.update();
-  }
-  update() {
-    this.mouse.update();
-    this.scene.render();
-    this.animID = requestAnimationFrame(() => {
-      this.update();
-    });
-  }
   componentWillUnmount() {
     window.cancelAnimationFrame(this.animID);
     this.scene.dispose();
     this.gridSpace.dispose();
+    this.board.dispose();
     delete this.board;
     delete this.gridSpace;
     delete this.scene;
   }
+
   toggleFullscreen() {
     const elem = document.querySelector('.App');
 
@@ -117,6 +99,7 @@ export default class Sandbox extends React.Component {
       });
     }
   }
+
   render() {
     let toggle;
     if (!document.fullscreenElement) {

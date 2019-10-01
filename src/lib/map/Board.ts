@@ -15,6 +15,14 @@ export default class Board {
   public overlay: Object3D;
   public finder: AStarFinder;
 
+  dispose() {
+    delete this.tiles;
+    delete this.tileGroup;
+    delete this.group;
+    delete this.overlay;
+    delete this.finder;
+  }
+
   constructor(grid: GridInterface, finderConfig?: PathfinderSettings) {
     if (!grid) throw new Error('You must pass in a grid system for the board to use.');
 

@@ -49,21 +49,14 @@ export default class Splash extends React.Component {
     });
     this.board.generateTerrain();
     //this.board.generateOverlay(45);
-    this.board.group.rotation.y = (Math.PI / 2);
-    this.scene.add(this.board.group);
+    this.scene.addBoard(this.board);
     this.scene.focusOn(this.board.group);
-    this.update();
-  }
-  update() {
-    this.scene.render();
-    this.animID = requestAnimationFrame(() => {
-      this.update();
-    });
   }
   componentWillUnmount() {
     window.cancelAnimationFrame(this.animID);
     this.scene.dispose();
     this.gridSpace.dispose();
+    this.board.dispose();
     delete this.board;
     delete this.gridSpace;
     delete this.scene;

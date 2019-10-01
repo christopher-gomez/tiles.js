@@ -10,7 +10,8 @@ class Animation {
   /**
    * Progress of the animation between 0.0 (start) and 1.0 (end).
    */
-  private progress = 0.0
+  private progress = 0.0;
+
 
   /**
    * Simple animation helper
@@ -32,8 +33,7 @@ class Animation {
   }
 
   static easeInOutQuad = (t: number): number => {
-    if ((t /= 0.5) < 1) return 0.5 * t * t;
-    return -0.5 * ((--t) * (t - 2) - 1);
+    return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t
   }
 
   static easeLinear = (t: number): number => t
@@ -43,12 +43,6 @@ export default class Controller implements ViewController {
 
   private _controls: OrbitControls;
   private animations: Animation[] = [];
-
-  private _panning = false;
-  private _panningLeft = false;
-  private _panningRight = false;
-  private _panningUp = false;
-  private _panningDown = false;
 
   constructor(private _view: View, config?: CameraControlSettings) {
     if (!_view) {
@@ -87,12 +81,24 @@ export default class Controller implements ViewController {
     }
     this._controls.update();
   }
+  private addAnimation(animation: Animation): void {
+    this.animations.push(animation)
+  }
 
-  panCameraTo(tile: Tile | Cell | Vector3): void {
+  panCameraTo(tile: Tile | Cell | Vector3, durationMs: number): void {
     if (tile instanceof Vector3) {
 
     } else {
+      const from = this._controls.target.clone();
+      const to = (tile as Tile).position.clone();
 
+      this.addAnimation(new Animation(durationMs, (a): void => {
+        this._view.focusOn(tile);
+        this._controls.target = from.lerp(to, a);
+        this._controls.update();
+
+        //this._view.camera.position.copy(from.clone().lerp(to, a));
+      }));
     }
   }
 
@@ -187,6 +193,25 @@ export default class Controller implements ViewController {
         this._controls.minAzimuthAngle = config.minAzimuthAngle;
     }
     this._controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
+
+    const onAnimate = (dtS: number): void => {
+      const animations = this.animations
+
+      for (let i = 0; i < animations.length; i++) {
+        // advance the animation
+        const animation = animations[i]
+        const finished = animation.animate(dtS)
+
+        // if the animation is finished (returned true) remove it
+        if (finished) {
+          // remove the animation
+          animations[i] = animations[animations.length - 1]
+          animations[animations.length - 1] = animation
+          animations.pop()
+        }
+      }
+    }
+    this._view.setOnAnimateCallback(onAnimate.bind(this));
   }
 
 }
