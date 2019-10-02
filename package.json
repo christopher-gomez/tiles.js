@@ -1,7 +1,7 @@
 {
   "name": "threejs-tilemap",
   "version": "1.0.0",
-  "description": "A small, 3D tilemap JavaScript engine",
+  "description": "A 3D tilemap JavaScript engine",
   "private": true,
   "main": "public/electron.js",
   "scripts": {

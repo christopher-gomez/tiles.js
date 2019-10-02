@@ -89,7 +89,6 @@ export default class Tile {
       this.material.emissive.setHex(this.highlight);
     }
     this.selected = true;
-    console.log(this.position);
     return this;
   }
 

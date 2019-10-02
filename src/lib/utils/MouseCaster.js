@@ -46,12 +46,24 @@ class MouseCaster {
     this.element.addEventListener('mouseup', this._onDocumentMouseUp.bind(this), false);
     this.element.addEventListener('mousewheel', this._onMouseWheel.bind(this), false);
     this.element.addEventListener('DOMMouseScroll', this._onMouseWheel.bind(this), false); // firefox
+    this.element.addEventListener("touchstart", (e) => {
+      this._onDocumentMouseDown(e.touches[0]).bind(this)
+      e.preventDefault()
+    }, false)
+    this.element.addEventListener("touchmove", (e) => {
+      this._onDocumentMouseMove(e.touches[0]).bind(this)
+      e.preventDefault()
+    }, false)
+    this.element.addEventListener("touchend", (e) => this._onDocumentMouseUp(e.touches[0] || e.changedTouches[0]).bind(this), false)
   }
   dispose(ctx) {
     this.signal.removeAll(ctx);
     this.element.removeEventListener('mousemove', this._onDocumentMouseDown, false);
+    this.element.removeEventListener('touchmove', this._onDocumentMouseMove, false);
     this.element.removeEventListener('mousedown', this._onDocumentMouseDown, false);
+    this.element.removeEventListener('touchstart', this._onDocumentMouseDown, false);
     this.element.removeEventListener('mouseup', this._onDocumentMouseUp, false);
+    this.element.removeEventListener('touchend', this._onDocumentMouseUp, false);
     this.element.removeEventListener('mousewheel', this._onMouseWheel, false);
     this.element.removeEventListener('DOMMouseScroll', this._onMouseWheel, false); // firefox
   }
@@ -150,7 +162,7 @@ class MouseCaster {
     if (!this.active) {
       return;
     }
-    evt.preventDefault();
+    //evt.preventDefault();
     evt.stopPropagation();
 
     var delta = 0;
@@ -166,7 +178,6 @@ class MouseCaster {
     else {
       this.wheel--;
     }
-    console.log(this.wheel);
     this.signal.dispatch('wheel', this.wheel);
   }
   mouseToWorld(pos, camera) {
