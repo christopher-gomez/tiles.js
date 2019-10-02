@@ -116,10 +116,6 @@ export default class View implements ViewController {
 
     this._initSceneSettings();
 
-    if (this.settings.cameraControlSettings.controlled) {
-      this.initControls(this.settings.cameraControlSettings);
-    }
-
     this.attachTo(sceneSettings.element);
     this.animate(0);
   }
@@ -127,6 +123,7 @@ export default class View implements ViewController {
   dispose(): void {
     window.removeEventListener('resize', this.onWindowResize, false);
     this.controls.dispose();
+    this._mouseCaster.dispose(this);
     window.cancelAnimationFrame(this._animationID);
     delete this.container;
     delete this.camera;
@@ -171,7 +168,6 @@ export default class View implements ViewController {
       this._mouseCaster.update();
     }
     if (this.controlled) {
-      this.controls.update();
       if (this.hotEdges && this._panning) {
         this.panInDirection(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
       }
@@ -226,7 +222,6 @@ export default class View implements ViewController {
 
   initControls(config: CameraControlSettings): void {
     this.controls = new Controller(this, config);
-    
   }
 
   panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void {
@@ -272,23 +267,33 @@ export default class View implements ViewController {
       this.camera.position.copy(this.settings.cameraPosition);
     }
 
+    this.initControls(this.settings.cameraControlSettings);
+
+    this.initMouseCaster();
+
+    window.addEventListener('resize', this.onWindowResize.bind(this), false);
+  }
+
+  private initMouseCaster(): void {
     this._mouseCaster = new MouseCaster(this.container, this.camera);
     const self = this;
     this._mouseCaster.signal.add(function (evt: string, tile: Tile | MouseEvent) {
-      if (evt === MouseCaster.CLICK) {
-        //(tile as Tile).toggle();
-        self.controls.panCameraTo(tile as Tile, 5000);
-        // or we can use the mouse's raw coordinates to access the cell directly, just for fun:
-        const cell = self.board.grid.pixelToCell(self._mouseCaster.position);
-        const t = self.board.getTileAtCell(cell);
-        if (t) t.toggle();
-      }
-      if (evt === MouseCaster.MOVE) {
-        self.checkEdge(tile as MouseEvent);
+      if (self.controlled) {
+        if (evt === MouseCaster.CLICK) {
+          //(tile as Tile).toggle();
+          self.controls.panCameraTo(tile as Tile, 2500);
+          // or we can use the mouse's raw coordinates to access the cell directly, just for fun:
+          const cell = self.board.grid.pixelToCell(self._mouseCaster.position);
+          const t = self.board.getTileAtCell(cell);
+          if (t) t.toggle();
+        }
+        if (evt === MouseCaster.MOVE) {
+          self.checkEdge(tile as MouseEvent);
+        }
+
+        
       }
     }, this);
-
-    window.addEventListener('resize', this.onWindowResize.bind(this), false);
   }
 
   private checkEdge(event: MouseEvent): void {

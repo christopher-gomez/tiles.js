@@ -18,7 +18,7 @@ export default class Sandbox extends React.Component {
       hotEdges: true,
       autoRotate: false,
       screenSpacePanning: false,
-      minPolarAngle: Math.PI / 10,
+      minPolarAngle: Math.PI / 10, // Math.PI / 10
       maxPolarAngle: Math.PI / 4,
       minAzimuthAngle: 0,
       maxAzimuthAngle: -Math.PI,

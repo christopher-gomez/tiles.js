@@ -39,13 +39,21 @@ class MouseCaster {
     this._raycaster = new THREE.Raycaster();
     this._preventDefault = false;
 
-    element = element || document;
+    this.element = element || document;
 
-    element.addEventListener('mousemove', this._onDocumentMouseMove.bind(this), false);
-    element.addEventListener('mousedown', this._onDocumentMouseDown.bind(this), false);
-    element.addEventListener('mouseup', this._onDocumentMouseUp.bind(this), false);
-    element.addEventListener('mousewheel', this._onMouseWheel.bind(this), false);
-    element.addEventListener('DOMMouseScroll', this._onMouseWheel.bind(this), false); // firefox
+    this.element.addEventListener('mousemove', this._onDocumentMouseMove.bind(this), false);
+    this.element.addEventListener('mousedown', this._onDocumentMouseDown.bind(this), false);
+    this.element.addEventListener('mouseup', this._onDocumentMouseUp.bind(this), false);
+    this.element.addEventListener('mousewheel', this._onMouseWheel.bind(this), false);
+    this.element.addEventListener('DOMMouseScroll', this._onMouseWheel.bind(this), false); // firefox
+  }
+  dispose(ctx) {
+    this.signal.removeAll(ctx);
+    this.element.removeEventListener('mousemove', this._onDocumentMouseDown, false);
+    this.element.removeEventListener('mousedown', this._onDocumentMouseDown, false);
+    this.element.removeEventListener('mouseup', this._onDocumentMouseUp, false);
+    this.element.removeEventListener('mousewheel', this._onMouseWheel, false);
+    this.element.removeEventListener('DOMMouseScroll', this._onMouseWheel, false); // firefox
   }
   update() {
     if (!this.active) {
@@ -158,7 +166,7 @@ class MouseCaster {
     else {
       this.wheel--;
     }
-    // console.log(this.wheel);
+    console.log(this.wheel);
     this.signal.dispatch('wheel', this.wheel);
   }
   mouseToWorld(pos, camera) {

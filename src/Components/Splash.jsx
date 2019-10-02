@@ -6,40 +6,48 @@ import { Link } from "react-router-dom";
 export default class Splash extends React.Component {
   params = {
     cameraControl: {
-      enabled: true,
-      maxDistance: 150,
-      minDistance: 25,
-      enableZoom: false,
+      enableDamping: true,
+      controlled: false,
+      dampingFactor: 0.05,
+      minDistance: 250,
+      maxDistance: 400,
       zoomSpeed: 3,
-      hotEdges: false,
       autoRotate: true,
-      maxAzimuthAngle: Math.PI / 6,
-      minAzimuthAngle: -Math.PI / 6,
-      horizontalRotation: true,
+      screenSpacePanning: false,
+      minPolarAngle: Math.PI / 10, // Math.PI / 10
+      maxPolarAngle: Math.PI / 4,
+      minAzimuthAngle: 0,
+      maxAzimuthAngle: -Math.PI,
+      horizontalRotation: true
     }
   }
   componentDidMount() {
-
+    const cc = this.params.cameraControl;
     this.scene = new TM.View({
       element: document.getElementById('engine'),
       cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {
-        controlled: this.params.cameraControl.enabled,
-        maxDistance: this.params.cameraControl.maxDistance,
-        minDistance: this.params.cameraControl.minDistance,
-        enableZoom: this.params.cameraControl.enableZoom,
-        zoomSpeed: this.params.cameraControl.zoomSpeed,
-        hotEdges: this.params.cameraControl.hotEdges,
-        autoRotate: this.params.cameraControl.autoRotate,
-        maxAzimuthAngle: this.params.cameraControl.maxAzimuthAngle,
-        minAzimuthAngle: this.params.cameraControl.minAzimuthAngle,
-        horizontalRotation: this.params.cameraControl.horizontalRotation
+        controlled: cc.controlled,
+        enableDamping: cc.enableDamping,
+        dampingFactor: cc.dampingFactor,
+        maxDistance: cc.maxDistance,
+        minDistance: cc.minDistance,
+        enableZoom: cc.enableZoom,
+        zoomSpeed: cc.zoomSpeed,
+        hotEdges: cc.hotEdges,
+        autoRotate: cc.autoRotate,
+        screenSpacePanning: cc.screenSpacePanning,
+        minPolarAngle: cc.minPolarAngle,
+        maxPolarAngle: cc.maxPolarAngle,
+        maxAzimuthAngle: cc.maxAzimuthAngle,
+        minAzimuthAngle: cc.minAzimuthAngle,
+        horizontalRotation: cc.horizontalRotation
       }
     });
     // this constructs the cells in grid coordinate space
     this.gridSpace = new TM.Grid({
-      cellSize: 5,
-      gridSize: 75
+      cellSize: 15,
+      gridSize: 100
     });
     this.board = new TM.Board(this.gridSpace);
 

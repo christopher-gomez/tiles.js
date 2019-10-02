@@ -283,6 +283,7 @@ const OrbitControls = function ( object, domElement ) {
 		//scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
 
 	};
+	this.rotateUp = rotateUp;
 
 	//
 	// internals
@@ -964,7 +965,7 @@ const OrbitControls = function ( object, domElement ) {
 		if ( scope.enabled === false || scope.enableZoom === false || ( state !== STATE.NONE && state !== STATE.ROTATE ) ) return;
 
 		event.preventDefault();
-		event.stopPropagation();
+		//event.stopPropagation();
 
 		scope.dispatchEvent( startEvent );
 
@@ -1073,7 +1074,7 @@ const OrbitControls = function ( object, domElement ) {
 		if ( scope.enabled === false ) return;
 
 		event.preventDefault();
-		event.stopPropagation();
+	  // event.stopPropagation();
 
 		switch ( state ) {
 
