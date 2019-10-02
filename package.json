@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/christophgomez/threejs-tilemap.git"
+    "url": "https://github.com/christophgomez/tiles.js.git"
   },
   "author": "Christopher Gomez",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/christophgomez/threejs-tilemap/issues"
+    "url": "https://github.com/christophgomez/tiles.js/issues"
   },
-  "homepage": "https://christophgomez.github.io/threejs-tilemap/",
+  "homepage": "https://christophgomez.github.io/tiles.js/",
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/preset-typescript": "^7.6.0",

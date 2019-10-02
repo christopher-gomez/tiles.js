@@ -9,7 +9,7 @@ import Animation from '../utils/Animation';
 
 export default class Controller implements ViewController {
 
-  private _controls: OrbitControls;
+  public _controls: OrbitControls;
   private animations: Animation[] = [];
 
   constructor(private _view: View, config?: CameraControlSettings) {
@@ -72,6 +72,7 @@ export default class Controller implements ViewController {
   }
 
   panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void {
+    if (this.animations.length >= 1) this.cancelAnimation();
     if (left && top) {
       this._controls.pan(15, 15);
     } else if (left && bottom) {
@@ -101,17 +102,20 @@ export default class Controller implements ViewController {
   }
 
   panCameraTo(tile: Tile | Cell, durationMs: number): void {
-      const from = this._controls.target.clone();
-      const to = (tile as Tile).position.clone();
+    if (tile instanceof Cell) {
+      tile = tile.tile;
+    }
+    const from = this._controls.target.clone();
+    const to = tile.position.clone();
 
-      this.addAnimation(new Animation(durationMs, (a): void => {
-        this._view.focusOn(tile);
-        this._controls.target = from.lerp(to, a);
-        this._controls.update();
-      }));
+    this.addAnimation(new Animation(durationMs, (a): void => {
+      this._view.focusOn(tile);
+      this._controls.target = from.lerp(to, a);
+      this._controls.update();
+    }));
 
-      if(this.animations.length > 1)
-        this.cancelAnimation();
+    if (this.animations.length > 1)
+      this.cancelAnimation();
   }
 
   toggleControls(): void {
@@ -125,30 +129,29 @@ export default class Controller implements ViewController {
   }
 
   updateControls(settings: CameraControlSettings): void {
-    if (this._view.controlled) {
-      this._view.settings.cameraControlSettings = TM.Tools.merge(this._view.settings.cameraControlSettings, settings) as CameraControlSettings;
-      this._controls.minDistance = settings.minDistance || this._controls.minDistance;
-      this._controls.maxDistance = settings.maxDistance || this._controls.maxDistance;
-      this._controls.zoomSpeed = settings.zoomSpeed || this._controls.zoomSpeed;
-      settings.hotEdges !== undefined ? this._view.hotEdges = settings.hotEdges : this._view.hotEdges = this._view.settings.cameraControlSettings.hotEdges;
-      if (settings.autoRotate !== undefined) {
-        this.toggleHorizontalRotation(settings.autoRotate);
-        this._controls.autoRotate = settings.autoRotate;
-      } else {
-        this._controls.autoRotate = this._view.settings.cameraControlSettings.autoRotate;
-      }
-      settings.enableDamping !== undefined ? this._controls.enableDamping = settings.enableDamping : this._controls.enableDamping = this._view.settings.cameraControlSettings.enableDamping;
-      this._controls.dampingFactor = settings.dampingFactor || this._view.settings.cameraControlSettings.dampingFactor;
-      settings.screenSpacePanning !== undefined ? this._controls.screenSpacePanning = settings.screenSpacePanning : this._controls.screenSpacePanning = this._view.settings.cameraControlSettings.screenSpacePanning;
-      if (settings.minPolarAngle)
-        this._controls.minPolarAngle = settings.minPolarAngle;
-      if (settings.maxPolarAngle)
-        this._controls.maxPolarAngle = settings.maxPolarAngle
-      if (settings.maxAzimuthAngle)
-        this._controls.maxAzimuthAngle = settings.maxAzimuthAngle;
-      if (settings.minAzimuthAngle)
-        this._controls.minAzimuthAngle = settings.minAzimuthAngle;
+    this._view.settings.cameraControlSettings = TM.Tools.merge(this._view.settings.cameraControlSettings, settings) as CameraControlSettings;
+    this._controls.minDistance = settings.minDistance || this._controls.minDistance;
+    this._controls.maxDistance = settings.maxDistance || this._controls.maxDistance;
+    this._controls.zoomSpeed = settings.zoomSpeed || this._controls.zoomSpeed;
+    settings.hotEdges !== undefined ? this._view.hotEdges = settings.hotEdges : this._view.hotEdges = this._view.settings.cameraControlSettings.hotEdges;
+    if (settings.autoRotate !== undefined) {
+      this.toggleHorizontalRotation(settings.autoRotate);
+      this._controls.autoRotate = settings.autoRotate;
+    } else {
+      this._controls.autoRotate = this._view.settings.cameraControlSettings.autoRotate;
     }
+    settings.enableDamping !== undefined ? this._controls.enableDamping = settings.enableDamping : this._controls.enableDamping = this._view.settings.cameraControlSettings.enableDamping;
+    this._controls.dampingFactor = settings.dampingFactor || this._view.settings.cameraControlSettings.dampingFactor;
+    settings.screenSpacePanning !== undefined ? this._controls.screenSpacePanning = settings.screenSpacePanning : this._controls.screenSpacePanning = this._view.settings.cameraControlSettings.screenSpacePanning;
+    if (settings.minPolarAngle)
+      this._controls.minPolarAngle = settings.minPolarAngle;
+    if (settings.maxPolarAngle)
+      this._controls.maxPolarAngle = settings.maxPolarAngle
+    if (settings.maxAzimuthAngle)
+      this._controls.maxAzimuthAngle = settings.maxAzimuthAngle;
+    if (settings.minAzimuthAngle)
+      this._controls.minAzimuthAngle = settings.minAzimuthAngle;
+
   }
 
   toggleHorizontalRotation(bool: boolean): void {
@@ -183,5 +186,9 @@ export default class Controller implements ViewController {
         this._controls.minAzimuthAngle = this._view.settings.cameraControlSettings.minAzimuthAngle;
       this._controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
     }
+  }
+
+  rotateUp(angle: number): void {
+    this._controls.rotateUp(angle);
   }
 }
