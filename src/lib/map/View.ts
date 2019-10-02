@@ -80,7 +80,7 @@ export default class View implements ViewController {
       element: document.body,
       alpha: true,
       antialias: true,
-      clearColor: '#000000',
+      clearColor: '0x6495ED',
       sortObjects: false,
       fog: null,
       light: new DirectionalLight(0xffffff),
@@ -237,7 +237,7 @@ export default class View implements ViewController {
       alpha: this.settings.alpha,
       antialias: this.settings.antialias
     });
-    this.renderer.setClearColor(this.settings.clearColor, 1);
+    this.renderer.setClearColor(0x6495ED);
     this.renderer.sortObjects = this.settings.sortObjects;
 
     this.width = window.innerWidth;
@@ -290,8 +290,6 @@ export default class View implements ViewController {
         if (evt === MouseCaster.MOVE) {
           self.checkEdge(tile as MouseEvent);
         }
-
-        
       }
     }, this);
   }

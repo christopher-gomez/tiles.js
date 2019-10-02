@@ -9,7 +9,7 @@ import Animation from '../utils/Animation';
 
 export default class Controller implements ViewController {
 
-  public _controls: OrbitControls;
+  private _controls: OrbitControls;
   private animations: Animation[] = [];
 
   constructor(private _view: View, config?: CameraControlSettings) {

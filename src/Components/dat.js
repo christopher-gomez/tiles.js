@@ -1,9 +1,15 @@
 import * as dat from 'dat.gui';
 
 export default class GUI { 
-  constructor(cc, scene) {
+  constructor(options, scene) {
     this.gui = new dat.GUI({ autoPlace: false });
     document.getElementById('gui').append(this.gui.domElement);
+    document.getElementById('gui').addEventListener('mousedown', (e) => {
+      e.stopPropagation();
+    }, false);
+    document.getElementById('gui').addEventListener('mouseup', (e) => {
+      e.stopPropagation();
+    }, false);
     const camGUI = this.gui.addFolder('Camera');
     camGUI
       .add(scene.camera.position, 'x')
@@ -19,71 +25,71 @@ export default class GUI {
       .listen();
     const orbitControls = camGUI.addFolder('Control');
     orbitControls
-      .add(cc, 'controlled')
+      .add(options, 'controlled')
       .name('Enabled')
       .onChange(() => {
         scene.toggleControls();
       });
     orbitControls
-      .add(cc, 'enableDamping')
+      .add(options, 'enableDamping')
       .name('Damping')
       .onChange(val => {
         scene.updateControls({ enableDamping: val });
       });
     orbitControls
-      .add(cc, 'dampingFactor', 0, 1)
+      .add(options, 'dampingFactor', 0, 1)
       .step(0.01)
       .name('Damping Factor')
       .onChange(val => {
         scene.updateControls({ dampingFactor: val });
       });
     orbitControls
-      .add(cc, 'maxDistance', 0, 1000)
+      .add(options, 'maxDistance', 0, 1000)
       .step(10)
       .name('Max Zoom Out')
       .onChange(val => {
         scene.updateControls({ maxDistance: val });
       });
     orbitControls
-      .add(cc, 'minDistance', 0, 1000)
+      .add(options, 'minDistance', 0, 1000)
       .step(10)
       .name('Max Zoom In')
       .onChange(val => {
         scene.updateControls({ minDistance: val });
       });
     orbitControls
-      .add(cc, 'zoomSpeed', 0, 20)
+      .add(options, 'zoomSpeed', 0, 20)
       .step(1)
       .name('Zoom Speed')
       .onChange(val => {
         scene.updateControls({ zoomSpeed: val });
       });
     orbitControls
-      .add(cc, 'hotEdges')
+      .add(options, 'hotEdges')
       .name('Edge Scroll')
       .onChange(val => {
         scene.updateControls({ hotEdges: val });
       });
     orbitControls
-      .add(cc, 'autoRotate')
+      .add(options, 'autoRotate')
       .name('Auto Rotate')
       .onChange(val => {
         scene.updateControls({ autoRotate: val });
 
         if (val === true) {
-          cc.horizontalRotation = true;
+          options.horizontalRotation = true;
         } else {
-          cc.horizontalRotation = false;
+          options.horizontalRotation = false;
         }
       });
     orbitControls
-      .add(cc, 'screenSpacePanning')
+      .add(options, 'screenSpacePanning')
       .name('Screen Space Panning')
       .onChange(val => {
         scene.updateControls({ screenSpacePanning: val });
       });
     orbitControls
-      .add(cc, 'minPolarAngle', 0, 180)
+      .add(options, 'minPolarAngle', 0, 180)
       .step(1)
       .name('Min Polar Angle')
       .onChange(val => {
@@ -91,7 +97,7 @@ export default class GUI {
         scene.updateControls({ minPolarAngle: val });
       });
     orbitControls
-      .add(cc, 'maxPolarAngle', 0, 180)
+      .add(options, 'maxPolarAngle', 0, 180)
       .step(1)
       .name('Max Polar Angle')
       .onChange(val => {
@@ -99,7 +105,7 @@ export default class GUI {
         scene.updateControls({ minPolarAngle: val });
       });
     orbitControls
-      .add(cc, 'minAzimuthAngle', -180, 180)
+      .add(options, 'minAzimuthAngle', -180, 180)
       .step(1)
       .name('Min Azimuth Angle')
       .onChange(val => {
@@ -107,7 +113,7 @@ export default class GUI {
         scene.updateControls({ minAzimuthAngle: val });
       });
     orbitControls
-      .add(cc, 'maxAzimuthAngle', -180, 180)
+      .add(options, 'maxAzimuthAngle', -180, 180)
       .step(1)
       .name('Max Azimuth Angle')
       .onChange(val => {
@@ -115,7 +121,7 @@ export default class GUI {
         scene.updateControls({ maxAzimuthAngle: val });
       });
     orbitControls
-      .add(cc, 'horizontalRotation')
+      .add(options, 'horizontalRotation')
       .name('Hor. Rotation')
       .onChange(val => {
         scene.toggleHorizontalRotation(val);
