@@ -1,43 +1,11 @@
 import { ViewController, CameraControlSettings } from "../utils/Interfaces"
 import { OrbitControls } from "../lib/OrbitControls"
-import { MOUSE, Vector3 } from "three"
+import { MOUSE } from "three"
 import TM from '../tm';
 import View from "./View";
 import Tile from "../grids/Tile";
 import Cell from "../grids/Cell";
-
-class Animation {
-  /**
-   * Progress of the animation between 0.0 (start) and 1.0 (end).
-   */
-  private progress = 0.0;
-
-
-  /**
-   * Simple animation helper
-   * @param durationMs duration of the animation in milliseconds
-   * @param update animation function which will receive values between 0.0 and 1.0 over the duration of the animation
-   * @param easingFunction function that determines the progression of the animation over time
-   */
-  constructor(private durationMs: number, private update: (progress: number) => void, private easingFunction = Animation.easeInOutQuad) {
-  }
-
-  /**
-   * Advances the animation by the given amount of time in seconds.
-   * Returns true if the animation is finished.
-   */
-  animate(dtS: number): boolean {
-    this.progress = this.progress + dtS * 1000 / this.durationMs
-    this.update(this.easingFunction(this.progress))
-    return this.progress >= 1.0
-  }
-
-  static easeInOutQuad = (t: number): number => {
-    return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t
-  }
-
-  static easeLinear = (t: number): number => t
-}
+import Animation from '../utils/Animation';
 
 export default class Controller implements ViewController {
 
@@ -53,12 +21,54 @@ export default class Controller implements ViewController {
     }
   }
 
-  dispose(): void {
-    this._controls.dispose();
+  initControls(config: CameraControlSettings): void {
+    this._view.controlled = config.controlled;
+    this._controls = new OrbitControls(this._view.camera, this._view.renderer.domElement);
+    this._controls.minDistance = config.minDistance;
+    this._controls.maxDistance = config.maxDistance;
+    this._controls.zoomSpeed = config.zoomSpeed;
+    this._view.hotEdges = config.hotEdges;
+    this._controls.autoRotate = config.autoRotate;
+    this._controls.enableDamping = config.enableDamping;
+    this._controls.dampingFactor = config.dampingFactor;
+    this._controls.screenSpacePanning = config.screenSpacePanning;
+    this._controls.minPolarAngle = config.minPolarAngle;
+    this._controls.maxPolarAngle = config.maxPolarAngle;
+    if (!config.horizontalRotation) {
+      if (config.maxAzimuthAngle)
+        this._controls.maxAzimuthAngle = config.maxAzimuthAngle;
+      if (config.minAzimuthAngle)
+        this._controls.minAzimuthAngle = config.minAzimuthAngle;
+    }
+
+    this._controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
+
+    const onAnimate = (dtS: number): void => {
+      const animations = this.animations
+      for (let i = 0; i < animations.length; i++) {
+        // advance the animation
+        const animation = animations[i]
+        if (animation) {
+          const finished = animation.animate(dtS)
+          // if the animation is finished (returned true) remove it
+          if (finished) {
+            // remove the animation
+            animations[i] = animations[animations.length - 1]
+            animations[animations.length - 1] = animation
+            animations.pop()
+          }
+        }
+      }
+    }
+    this._view.setOnAnimateCallback(onAnimate.bind(this));
   }
 
   update(): void {
     this._controls.update();
+  }
+
+  dispose(): void {
+    this._controls.dispose();
   }
 
   panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void {
@@ -81,14 +91,16 @@ export default class Controller implements ViewController {
     }
     this._controls.update();
   }
+
   private addAnimation(animation: Animation): void {
-    this.animations.push(animation)
+    this.animations.push(animation);
   }
 
-  panCameraTo(tile: Tile | Cell | Vector3, durationMs: number): void {
-    if (tile instanceof Vector3) {
+  private cancelAnimation(): void {
+    this.animations.shift();
+  }
 
-    } else {
+  panCameraTo(tile: Tile | Cell, durationMs: number): void {
       const from = this._controls.target.clone();
       const to = (tile as Tile).position.clone();
 
@@ -96,10 +108,10 @@ export default class Controller implements ViewController {
         this._view.focusOn(tile);
         this._controls.target = from.lerp(to, a);
         this._controls.update();
-
-        //this._view.camera.position.copy(from.clone().lerp(to, a));
       }));
-    }
+
+      if(this.animations.length > 1)
+        this.cancelAnimation();
   }
 
   toggleControls(): void {
@@ -172,46 +184,4 @@ export default class Controller implements ViewController {
       this._controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
     }
   }
-
-  initControls(config: CameraControlSettings): void {
-    this._view.controlled = config.controlled;
-    this._controls = new OrbitControls(this._view.camera, this._view.renderer.domElement);
-    this._controls.minDistance = config.minDistance;
-    this._controls.maxDistance = config.maxDistance;
-    this._controls.zoomSpeed = config.zoomSpeed;
-    this._view.hotEdges = config.hotEdges;
-    this._controls.autoRotate = config.autoRotate;
-    this._controls.enableDamping = config.enableDamping;
-    this._controls.dampingFactor = config.dampingFactor;
-    this._controls.screenSpacePanning = config.screenSpacePanning;
-    this._controls.minPolarAngle = config.minPolarAngle;
-    this._controls.maxPolarAngle = config.maxPolarAngle;
-    if (!config.horizontalRotation) {
-      if (config.maxAzimuthAngle)
-        this._controls.maxAzimuthAngle = config.maxAzimuthAngle;
-      if (config.minAzimuthAngle)
-        this._controls.minAzimuthAngle = config.minAzimuthAngle;
-    }
-    this._controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
-
-    const onAnimate = (dtS: number): void => {
-      const animations = this.animations
-
-      for (let i = 0; i < animations.length; i++) {
-        // advance the animation
-        const animation = animations[i]
-        const finished = animation.animate(dtS)
-
-        // if the animation is finished (returned true) remove it
-        if (finished) {
-          // remove the animation
-          animations[i] = animations[animations.length - 1]
-          animations[animations.length - 1] = animation
-          animations.pop()
-        }
-      }
-    }
-    this._view.setOnAnimateCallback(onAnimate.bind(this));
-  }
-
 }
