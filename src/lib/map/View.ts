@@ -226,13 +226,14 @@ export default class View implements ViewController {
 
   initControls(config: CameraControlSettings): void {
     this.controls = new Controller(this, config);
+    
   }
 
   panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void {
     this.controls.panInDirection(left, right, top, bottom);
   }
 
-  panCameraTo(tile: Tile | Cell | Vector3, durationMs: number): void {
+  panCameraTo(tile: Tile | Cell, durationMs: number): void {
     this.controls.panCameraTo(tile, durationMs);
   }
 
@@ -276,7 +277,7 @@ export default class View implements ViewController {
     this._mouseCaster.signal.add(function (evt: string, tile: Tile | MouseEvent) {
       if (evt === MouseCaster.CLICK) {
         //(tile as Tile).toggle();
-        self.controls.panCameraTo(tile as Tile, 1000);
+        self.controls.panCameraTo(tile as Tile, 5000);
         // or we can use the mouse's raw coordinates to access the cell directly, just for fun:
         const cell = self.board.grid.pixelToCell(self._mouseCaster.position);
         const t = self.board.getTileAtCell(cell);
