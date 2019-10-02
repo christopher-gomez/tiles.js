@@ -11,7 +11,11 @@ This project is a personal hobby project of mine that developed out of the inter
 
 The engine uses Three.js for WebGL rendering, Webpack and Babel in order to utilize modern ES6/7 and TypeScript language features, and runs on React in the browser (or plain old HTML) or natively on the desktop thanks to Electron. 
 
-The goal is a a highly performant engine that can be used to render 3D polygonal hex scenes with easy to follow documentation so anyone with some programming experience can use.  
+The goal is a a highly performant engine that can be used to render 3D polygonal hex scenes with easy to follow documentation so anyone with some programming experience can use.
+
+#### But why modern web tech, why JavaScript? Why not Unity or Unreal?
+Simple. I love JavaScript and the web. With JavaScript you have the ability to reach nearly person in the world because JavaScript runs on virtually every computing device worldwide. Furthermore, JavaScript'ss standard package manager, NPM, has more packages than Java and PHP combined, most of them open source and freely available for use in any project. Harnessing the power of NPM and node allows for faster, smarter development. 
+
 
 ## Acknowledgments
 [Cory Birnbaum](https://github.com/vonWolfehaus) - He did most of the hard work a couple years ago. Thank you for the grid system and utility functions. They have proved invaluable.
