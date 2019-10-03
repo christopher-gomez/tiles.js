@@ -1,5 +1,5 @@
 import { SceneSettings, CameraControlSettings, ViewController } from '../utils/Interfaces';
-import { WebGLRenderer, DirectionalLight, Scene, AmbientLight, Camera, PerspectiveCamera, Mesh, Vector2, Vector3 } from 'three';
+import { WebGLRenderer, DirectionalLight, Scene, AmbientLight, Camera, PerspectiveCamera, Mesh, Vector3 } from 'three';
 import Tile from '../grids/Tile';
 import Cell from '../grids/Cell';
 import Controller from './Controller';
