@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/tiles.js/precache-manifest.3ce757fefaa31bd2514b7b43922790ea.js"
+  "/tiles.js/precache-manifest.05bf331931c41124964ef2565e524e59.js"
 );
 
 self.addEventListener('message', (event) => {
