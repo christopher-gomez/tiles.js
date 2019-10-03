@@ -106,6 +106,7 @@ export default class Tile {
     }
     else {
       this.select();
+      console.log(this.position);
     }
     return this;
   }

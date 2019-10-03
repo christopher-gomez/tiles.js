@@ -10,7 +10,7 @@ import Animation from '../utils/Animation';
 export default class Controller implements ViewController {
 
   private _controls: OrbitControls;
-  private animations: Animation[] = [];
+  public animations: Animation[] = [];
 
   constructor(private _view: View, config?: CameraControlSettings) {
     if (!_view) {
@@ -23,7 +23,7 @@ export default class Controller implements ViewController {
 
   initControls(config: CameraControlSettings): void {
     this._view.controlled = config.controlled;
-    this._controls = new OrbitControls(this._view.camera, this._view.renderer.domElement);
+    this._controls = new OrbitControls(this._view.camera, this._view.renderer.domElement, this._view);
     this._controls.minDistance = config.minDistance;
     this._controls.maxDistance = config.maxDistance;
     this._controls.zoomSpeed = config.zoomSpeed;
@@ -97,7 +97,7 @@ export default class Controller implements ViewController {
     this.animations.push(animation);
   }
 
-  private cancelAnimation(): void {
+  cancelAnimation(): void {
     this.animations.shift();
   }
 
@@ -157,7 +157,7 @@ export default class Controller implements ViewController {
   toggleHorizontalRotation(bool: boolean): void {
     if (bool) {
       this._controls.dispose();
-      this._controls = new OrbitControls(this._view.camera, this._view.renderer.domElement);
+      this._controls = new OrbitControls(this._view.camera, this._view.renderer.domElement, this._view);
       this._controls.minDistance = this._view.settings.cameraControlSettings.minDistance;
       this._controls.maxDistance = this._view.settings.cameraControlSettings.maxDistance;
       this._controls.zoomSpeed = this._view.settings.cameraControlSettings.zoomSpeed;
@@ -170,7 +170,7 @@ export default class Controller implements ViewController {
       this._controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
     } else {
       this._controls.dispose();
-      this._controls = new OrbitControls(this._view.camera, this._view.renderer.domElement);
+      this._controls = new OrbitControls(this._view.camera, this._view.renderer.domElement, this._view);
       this._controls.minDistance = this._view.settings.cameraControlSettings.minDistance;
       this._controls.maxDistance = this._view.settings.cameraControlSettings.maxDistance;
       this._controls.zoomSpeed = this._view.settings.cameraControlSettings.zoomSpeed;

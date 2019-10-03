@@ -48,11 +48,11 @@ class MouseCaster {
     this.element.addEventListener('DOMMouseScroll', this._onMouseWheel.bind(this), false); // firefox
     this.element.addEventListener("touchstart", (e) => {
       this._onDocumentMouseDown(e.touches[0]).bind(this)
-      e.preventDefault()
+      //e.preventDefault()
     }, false)
     this.element.addEventListener("touchmove", (e) => {
       this._onDocumentMouseMove(e.touches[0]).bind(this)
-      e.preventDefault()
+      //e.preventDefault()
     }, false)
     this.element.addEventListener("touchend", (e) => this._onDocumentMouseUp(e.touches[0] || e.changedTouches[0]).bind(this), false)
   }
@@ -71,10 +71,11 @@ class MouseCaster {
     if (!this.active) {
       return;
     }
+
     this._raycaster.setFromCamera(this.screenPosition, this._camera);
 
-    let intersects = this._raycaster.intersectObject(this.group, true);
-    var hit, obj;
+    const intersects = this.rayCast();
+    let hit, obj;
 
     if (intersects.length > 0) {
       // get the first object under the mouse
@@ -116,7 +117,7 @@ class MouseCaster {
 
   _onDocumentMouseDown(evt) {
     evt = evt || window.event;
-    //evt.preventDefault();
+    evt.preventDefault();
     if (this._preventDefault) {
       this._preventDefault = false;
       return false;
@@ -192,6 +193,7 @@ class MouseCaster {
     }
   }
   pickingRay(vector, camera) {
+    
     // set two vectors with opposing z values
     vector.z = -1.0;
     const end = new THREE.Vector3(vector.x, vector.y, 1.0);
@@ -202,6 +204,12 @@ class MouseCaster {
     // find direction from vector to end
     end.sub(vector).normalize();
     return new THREE.Raycaster(vector, end);
+  }
+
+  rayCast() {
+    this._raycaster.setFromCamera(this.screenPosition, this._camera);
+    const intersects = this._raycaster.intersectObject(this.group, true);
+    return intersects;
   }
 }
 

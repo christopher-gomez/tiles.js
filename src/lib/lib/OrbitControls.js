@@ -25,10 +25,10 @@ import {
 //    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
 //    Pan - right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move
 
-const OrbitControls = function ( object, domElement ) {
+const OrbitControls = function ( object, domElement, view ) {
 
 	this.object = object;
-
+	this.view = view;
 	this.domElement = ( domElement !== undefined ) ? domElement : document;
 
 	// Set to false to disable this control
@@ -90,7 +90,7 @@ const OrbitControls = function ( object, domElement ) {
 	this.mouseButtons = { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.PAN };
 
 	// Touch fingers
-	this.touches = { ONE: TOUCH.ROTATE, TWO: TOUCH.DOLLY_PAN };
+	this.touches = { ONE: TOUCH.DOLLY_PAN, TWO: TOUCH.ROTATE };
 
 	// for reset
 	this.target0 = this.target.clone();
@@ -539,13 +539,20 @@ const OrbitControls = function ( object, domElement ) {
 
 	}
 
-	function handleMouseMovePan( event ) {
+	function handleMouseMovePan(event) {
+		while (scope.view.controls.animations.length >= 1) {
+			scope.view.controls.cancelAnimation();
+		}
 
 		panEnd.set( event.clientX, event.clientY );
 
 		panDelta.subVectors( panEnd, panStart ).multiplyScalar( scope.panSpeed );
 
-		scope.pan( panDelta.x, panDelta.y );
+		scope.pan(panDelta.x, panDelta.y);
+		
+		const cell = scope.view.board.grid.pixelToCell(scope.object.position);
+		const t = scope.view.board.getTileAtCell(cell);
+		if (!t) scope.pan(-panDelta.x, -panDelta.y);
 
 		panStart.copy( panEnd );
 
@@ -792,8 +799,12 @@ const OrbitControls = function ( object, domElement ) {
 
 						if ( event.ctrlKey || event.metaKey || event.shiftKey ) {
 
-							if ( scope.enablePan === false ) return;
+							if (scope.enablePan === false) return;
+							if (scope.view._mouseCaster.pickedObject === null) return;
 
+							while (scope.view.controls.animations.length >= 1) {
+								scope.view.controls.cancelAnimation();
+							}
 							handleMouseDownPan( event );
 
 							state = STATE.PAN;
@@ -822,7 +833,8 @@ const OrbitControls = function ( object, domElement ) {
 
 						} else {
 
-							if ( scope.enablePan === false ) return;
+							if (scope.enablePan === false) return;
+							if (scope.view._mouseCaster.pickedObject === null) return;
 
 							handleMouseDownPan( event );
 
@@ -880,7 +892,8 @@ const OrbitControls = function ( object, domElement ) {
 
 					case MOUSE.PAN:
 
-						if ( scope.enablePan === false ) return;
+						if (scope.enablePan === false) return;
+						if (scope.view._mouseCaster.pickedObject === null) return;
 
 						handleMouseDownPan( event );
 
@@ -987,7 +1000,7 @@ const OrbitControls = function ( object, domElement ) {
 
 		if ( scope.enabled === false ) return;
 
-		event.preventDefault();
+		//event.preventDefault();
 
 		switch ( event.touches.length ) {
 
