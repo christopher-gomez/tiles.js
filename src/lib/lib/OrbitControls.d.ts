@@ -1,11 +1,13 @@
 /* eslint-disable */
 import { Camera, MOUSE, Object3D, TOUCH, Vector3 } from '../../../src/Three';
+import View from '../map/View';
 
 export class OrbitControls {
-	constructor(object: Camera, domElement?: HTMLElement);
+	constructor(object: Camera, domElement?: HTMLElement, view: View);
 
 	object: Camera;
 	domElement: HTMLElement | HTMLDocument;
+	view: View;
 
 	// API
 	enabled: boolean;

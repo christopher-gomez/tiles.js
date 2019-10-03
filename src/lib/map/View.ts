@@ -34,16 +34,10 @@ export default class View implements ViewController {
   private _lastTimestamp = Date.now();
   private _animationID: number;
 
-  // Edge Scrolling margins
-  private w1: number;
-  private w2: number;
-  private h1: number;
-  private h2: number;
-  public hotEdges: boolean;
-
-  private _mouseCaster: MouseCaster;
+  public _mouseCaster: MouseCaster;
 
   // This code should be with the Controller code 
+  public hotEdges: boolean;
   private _panning = false;
   private _panningLeft = false;
   private _panningRight = false;
@@ -151,7 +145,7 @@ export default class View implements ViewController {
     this.container.add(mesh);
   }
 
-  private board: Board;
+  public board: Board;
   addBoard(board: Board): void {
     this.board = board;
     this.container.add(board.group);
@@ -164,11 +158,9 @@ export default class View implements ViewController {
   private animate(timestamp: number): void {
     const dtS = (timestamp - this._lastTimestamp) / 1000.0;
     this._lastTimestamp = timestamp;
-    if (this._mouseCaster) {
-      this._mouseCaster.update();
-    }
+    this._mouseCaster.update();
     if (this.controlled) {
-      if (this.hotEdges && this._panning) {
+      if (this.hotEdges && this._panning && this._hoverTile) {
         this.panInDirection(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
       }
     }
@@ -200,12 +192,10 @@ export default class View implements ViewController {
 
   // Need to finish
   updateSettings(settings: SceneSettings): void {
-    this.w1 = settings.sceneMarginSize / window.innerWidth | this.settings.sceneMarginSize / window.innerWidth;
-    this.h1 = settings.sceneMarginSize / window.innerHeight | this.settings.sceneMarginSize / window.innerHeight
-    this.w2 = 1 - settings.sceneMarginSize / window.innerWidth | 1 - this.settings.sceneMarginSize / window.innerWidth;
-    this.h2 = 1 - settings.sceneMarginSize / window.innerHeight | this.settings.sceneMarginSize / window.innerHeight;
+    // update settings here
 
-    this.updateControls(this.settings.cameraControlSettings);
+    // then update controls
+    this.updateControls(settings.cameraControlSettings);
   }
 
   toggleControls(): void {
@@ -242,10 +232,112 @@ export default class View implements ViewController {
 
     this.width = window.innerWidth;
     this.height = window.innerHeight;
-    this.w1 = this.settings.sceneMarginSize / window.innerWidth;
-    this.h1 = this.settings.sceneMarginSize / window.innerHeight;
-    this.w2 = 1 - this.settings.sceneMarginSize / window.innerWidth;
-    this.h2 = 1 - this.settings.sceneMarginSize / window.innerHeight;
+
+    const self = this;
+    
+    const left = document.createElement('div');
+    left.style.cssText = 'position:absolute;left:0;height:100%;width:' + this.settings.sceneMarginSize + 'px;';
+    left.addEventListener('mouseover', () => {
+      self._panning = true;
+      self._panningLeft = true;
+    }, false);
+    left.addEventListener('mouseleave', () => {
+      self._panning = false;
+      self._panningLeft = false;
+    }, false);
+
+    const top = document.createElement('div');
+    top.style.cssText = 'position:absolute;top:0;width:100%;height:' + this.settings.sceneMarginSize + 'px;';
+    top.addEventListener('mouseover', () => {
+      self._panning = true;
+      self._panningUp = true;
+    }, false);
+    top.addEventListener('mouseleave', () => {
+      self._panning = false;
+      self._panningUp = false;
+    }, false);
+
+    const topLeft = document.createElement('div');
+    topLeft.style.cssText = 'position:absolute;left:0;top:0;height:' + this.settings.sceneMarginSize + 'px;width:' + this.settings.sceneMarginSize + 'px';
+    topLeft.addEventListener('mouseenter', () => {
+      self._panning = true;
+      self._panningUp = true;
+      self._panningLeft = true;
+    }, false);
+    topLeft.addEventListener('mouseleave', () => {
+      self._panning = false;
+      self._panningUp = false;
+      self._panningLeft = false;
+    }, false);
+
+    const right = document.createElement('div');
+    right.style.cssText = 'position:absolute;right:0;height:100%;width:' + this.settings.sceneMarginSize + 'px;';
+    right.addEventListener('mouseover', () => {
+      self._panning = true;
+      self._panningRight = true;
+    }, false);
+    right.addEventListener('mouseleave', () => {
+      self._panning = false;
+      self._panningRight = false;
+    }, false);
+
+    const topRight = document.createElement('div');
+    topRight.style.cssText = 'position:absolute;right:0;top:0;height:' + this.settings.sceneMarginSize + 'px;width:' + this.settings.sceneMarginSize + 'px';
+    topRight.addEventListener('mouseenter', () => {
+      self._panning = true;
+      self._panningUp = true;
+      self._panningRight = true;
+    }, false);
+    topRight.addEventListener('mouseleave', () => {
+      self._panning = false;
+      self._panningUp = false;
+      self._panningRight = false;
+    }, false);
+
+    const bottom = document.createElement('div');
+    bottom.style.cssText = 'position:absolute;bottom:0;width:100%;height:' + this.settings.sceneMarginSize+ 'px;';
+    bottom.addEventListener('mouseover', () => {
+      self._panning = true;
+      self._panningDown = true;
+    }, false);
+    bottom.addEventListener('mouseleave', () => {
+      self._panning = false;
+      self._panningDown = false;
+    }, false);
+
+    const bottomLeft = document.createElement('div');
+    bottomLeft.style.cssText = 'position:absolute;left:0;bottom:0;height:' + this.settings.sceneMarginSize + 'px;width:' + this.settings.sceneMarginSize + 'px';
+    bottomLeft.addEventListener('mouseenter', () => {
+      self._panning = true;
+      self._panningDown = true;
+      self._panningLeft = true;
+    }, false);
+    bottomLeft.addEventListener('mouseleave', () => {
+      self._panning = false;
+      self._panningDown = false;
+      self._panningLeft = false;
+    }, false);
+
+    const bottomRight = document.createElement('div');
+    bottomRight.style.cssText = 'position:absolute;right:0;bottom:0;height:' + this.settings.sceneMarginSize + 'px;width:' + this.settings.sceneMarginSize + 'px';
+    bottomRight.addEventListener('mouseenter', () => {
+      self._panning = true;
+      self._panningDown = true;
+      self._panningRight = true;
+    }, false);
+    bottomRight.addEventListener('mouseleave', () => {
+      self._panning = false;
+      self._panningDown = false;
+      self._panningRight = false;
+    }, false);
+    this.settings.element.appendChild(left);
+    this.settings.element.appendChild(top);
+    this.settings.element.appendChild(topLeft);
+    this.settings.element.appendChild(right);
+    this.settings.element.appendChild(topRight);
+    this.settings.element.appendChild(bottom);
+    this.settings.element.appendChild(bottomLeft);
+    this.settings.element.appendChild(bottomRight);
 
     this.container = new Scene();
     this.container.fog = this.settings.fog;
@@ -271,9 +363,11 @@ export default class View implements ViewController {
 
     this.initMouseCaster();
 
-    window.addEventListener('resize', this.onWindowResize.bind(this), false);
+    this.settings.element.addEventListener('resize', this.onWindowResize.bind(this), false);
   }
 
+  private _hoverTile: Tile;
+  
   private initMouseCaster(): void {
     this._mouseCaster = new MouseCaster(this.container, this.camera);
     const self = this;
@@ -287,36 +381,19 @@ export default class View implements ViewController {
           const t = self.board.getTileAtCell(cell);
           if (t) t.toggle();
         }
-        if (evt === MouseCaster.MOVE) {
-          self.checkEdge(tile as MouseEvent);
+        if (evt === MouseCaster.OVER) {
+          if (tile !== null) {
+            (tile as Tile).select();
+            self._hoverTile = tile as Tile;
+          }
+        }
+        if (evt === MouseCaster.OUT) {
+          if (tile !== null) {
+            (tile as Tile).deselect();
+            self._hoverTile = null;
+          }
         }
       }
     }, this);
-  }
-
-  private checkEdge(event: MouseEvent): void {
-    const position = new Vector2(event.clientX, event.clientY);
-    const x = (position.x / window.innerWidth), y = position.y / window.innerHeight;
-    if ((x > this.w2 || x < this.w1) || (y > this.h2 || y < this.h1)) {
-      this._panning = true;
-      if (x > this.w2) {
-        this._panningRight = true;
-      }
-      if (x < this.w1) {
-        this._panningLeft = true;
-      }
-      if (y > this.h2) {
-        this._panningDown = true;
-      }
-      if (y < this.h1) {
-        this._panningUp = true;
-      }
-    } else {
-      this._panning = false;
-      this._panningRight = false;
-      this._panningLeft = false;
-      this._panningDown = false;
-      this._panningUp = false;
-    }
   }
 }
