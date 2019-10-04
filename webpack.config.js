@@ -1,9 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+const highlight = require('highlight.js');
 
 module.exports = {
   mode: 'production',
-  entry: './src/lib/tm.ts',
+  entry: './src/lib/Engine.ts',
   // Enable sourcemaps for debugging webpack's output.
   devtool: "source-map",
 

@@ -2,10 +2,11 @@
 
 import React from 'react';
 import './App.css';
+import './Components/styles/dat.css';
 import { HashRouter as Router, Route, } from "react-router-dom";
 import Splash from './Components/Splash';
 import Sandbox from './Components/Sandbox';
-import Docs from './Components/Docs';
+import Docs from './Components/Docs/Docs';
 
 class App extends React.Component {
   render() {

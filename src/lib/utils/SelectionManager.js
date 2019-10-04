@@ -1,11 +1,12 @@
-import TM from '../tm';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import Engine from '../Engine';
 // 'utils/Tools', 'lib/LinkedList', 'utils/MouseCaster', 'lib/Signal'
 export default class SelectionManager {
   constructor(mouse) {
     this.mouse = mouse;
 
-    this.onSelect = new TM.Signal();
-    this.onDeselect = new TM.Signal();
+    this.onSelect = new Engine.Signal();
+    this.onDeselect = new Engine.Signal();
 
     this.selected = null;
     // deselect if player clicked on the same thing twice
@@ -56,14 +57,15 @@ export default class SelectionManager {
 
   onMouse(type, obj) {
     switch (type) {
-      case TM.MouseCaster.DOWN:
+      case Engine.MouseCaster.DOWN:
         if (!obj) {
           this.clearSelection();
         }
         break;
-
-      case TM.MouseCaster.CLICK:
+      case Engine.MouseCaster.CLICK:
         this.select(obj);
+        break;
+      default:
         break;
     }
   }

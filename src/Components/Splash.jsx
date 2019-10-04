@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import TM from '../lib/tm.ts';
+import Engine from '../lib/Engine.ts';
 import { Link } from "react-router-dom";
 
 export default class Splash extends React.Component {
@@ -24,13 +24,13 @@ export default class Splash extends React.Component {
   componentDidMount() {
     const cc = this.params.cameraControl;
     // this constructs the cells in grid coordinate space
-    this.gridSpace = new TM.Grid({
-      gridShape: TM.HEX,
+    this.gridSpace = new Engine.Grid({
+      gridShape: Engine.HEX,
       cellSize: 15,
       gridSize: 80
     });
-    this.map = new TM.Map(this.gridSpace);
-    this.scene = new TM.View(this.map, {
+    this.map = new Engine.Map(this.gridSpace);
+    this.scene = new Engine.View(this.map, {
       element: document.getElementById('engine'),
       cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {

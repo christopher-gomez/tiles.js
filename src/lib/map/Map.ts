@@ -1,5 +1,4 @@
-'use strict';
-import TM from '../tm';
+import Engine from '../Engine';
 import Tile from '../grids/Tile';
 import { GridInterface } from '../grids/Grid';
 import { Object3D, Vector3, LineBasicMaterial } from 'three';
@@ -33,9 +32,9 @@ export default class Map {
 
     this.grid = null;
     this.overlay = null;
-    this.finder = new TM.AStarFinder(finderConfig);
+    this.finder = new Engine.AStarFinder(finderConfig);
     // need to keep a resource cache around, so this Loader does that, use it instead of THREE.ImageUtils
-    TM.Loader.init();
+    Engine.Loader.init();
 
     this.setGrid(grid);
     this.generateTiles(boardConfig)
@@ -110,7 +109,7 @@ export default class Map {
   }
 
   getRandomTile(): Tile {
-    const i = TM.Tools.randomInt(0, this.tiles.length - 1);
+    const i = Engine.Tools.randomInt(0, this.tiles.length - 1);
     return this.tiles[i];
   }
 
@@ -133,7 +132,7 @@ export default class Map {
     this.tiles = [];
     this.tileGroup = new Object3D();
     this.group.add(this.tileGroup);
-    //this.group.rotateY(90 * TM.DEG_TO_RAD);
+    //this.group.rotateY(90 * Engine.DEG_TO_RAD);
   }
 
   generateOverlay(size: number): void {
@@ -166,7 +165,7 @@ export default class Map {
       } as ExtrudeSettings
     } as MapSettings;
     if (config)
-      settings = TM.Tools.merge(settings, config) as MapSettings;
+      settings = Engine.Tools.merge(settings, config) as MapSettings;
 
     this.reset();
 

@@ -1,4 +1,5 @@
-import TM from '../tm';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import Engine from '../Engine';
 import * as THREE from 'three';
 /*
 	Translates mouse interactivity into 3D positions, so we can easily pick objects in the scene.
@@ -31,7 +32,7 @@ class MouseCaster {
     // you can track exactly where the mouse is in the 3D scene by using the z component
     this.position = new THREE.Vector3();
     this.screenPosition = new THREE.Vector2();
-    this.signal = new TM.Signal();
+    this.signal = new Engine.Signal();
     this.group = group;
 
     // behind-the-scenes stuff you shouldn't worry about
@@ -81,7 +82,7 @@ class MouseCaster {
       // get the first object under the mouse
       hit = intersects[0];
       obj = hit.object.userData.structure;
-      if (this.pickedObject != obj) {
+      if (this.pickedObject !== obj) {
         // the first object changed, meaning there's a different one, or none at all
         if (this.pickedObject) {
           // it's a new object, notify the old object is going away
@@ -166,7 +167,7 @@ class MouseCaster {
     //evt.preventDefault();
     evt.stopPropagation();
 
-    var delta = 0;
+    let delta = 0;
     if (evt.wheelDelta !== undefined) { // WebKit / Opera / Explorer 9
       delta = evt.wheelDelta;
     }

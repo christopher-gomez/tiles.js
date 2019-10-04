@@ -1,4 +1,4 @@
-import TM from '../tm';
+import Engine from '../Engine';
 import {
   Shape,
   BufferGeometry,
@@ -55,13 +55,13 @@ export default class HexGrid implements GridInterface {
 
   constructor(config?: GridSettings) {
     let settings = {
-      gridShape: TM.HEX,
+      gridShape: Engine.HEX,
       gridSize: 10,
       cellSize: 10,
-      cellShape: TM.HEX,
+      cellShape: Engine.HEX,
     } as GridSettings;
     if (config)
-      settings = TM.Tools.merge(settings, config) as GridSettings
+      settings = Engine.Tools.merge(settings, config) as GridSettings
 
     this.gridShape = settings.gridShape;
     this.gridSize = settings.gridSize;
@@ -101,7 +101,7 @@ export default class HexGrid implements GridInterface {
     */
 
     this._cellWidth = this.cellSize * 2;
-    this._cellLength = (TM.SQRT3 * 0.5) * this._cellWidth;
+    this._cellLength = (Engine.SQRT3 * 0.5) * this._cellWidth;
     this._hashDelimeter = '.';
     // pre-computed permutations
     this._directions = [new Cell(+1, -1, 0), new Cell(+1, 0, -1), new Cell(0, +1, -1),
@@ -132,7 +132,7 @@ export default class HexGrid implements GridInterface {
   pixelToCell(pos: Vector3): Cell {
     // convert a position in world space ("pixels") to cell coordinates
     const q = pos.x * (HexGrid.TWO_THIRDS / this.cellSize);
-    const r = ((-pos.x / 3) + (TM.SQRT3 / 3) * pos.z) / this.cellSize;
+    const r = ((-pos.x / 3) + (Engine.SQRT3 / 3) * pos.z) / this.cellSize;
     this._cel.set(q, r, -q - r);
     return this._cubeRound(this._cel);
   }
@@ -140,7 +140,7 @@ export default class HexGrid implements GridInterface {
   getCellAt(pos: Vector3): Cell {
     // get the Cell (if any) at the passed world position
     const q = pos.x * (HexGrid.TWO_THIRDS / this.cellSize);
-    const r = ((-pos.x / 3) + (TM.SQRT3 / 3) * pos.z) / this.cellSize;
+    const r = ((-pos.x / 3) + (Engine.SQRT3 / 3) * pos.z) / this.cellSize;
     this._cel.set(q, r, -q - r);
     this._cubeRound(this._cel);
     return this.cells[this.cellToHash(this._cel)];
@@ -177,7 +177,7 @@ export default class HexGrid implements GridInterface {
   getRandomCell(): Cell {
     let c;
     let i = 0;
-    const x = TM.Tools.randomInt(0, this.numCells);
+    const x = Engine.Tools.randomInt(0, this.numCells);
     for (c in this.cells) {
       if (i === x) {
         return this.cells[c];
@@ -240,20 +240,20 @@ export default class HexGrid implements GridInterface {
     });
 
     const nx = cell.q / this._cellWidth - 0.5, ny = cell.s / (this as HexGrid)._cellLength - 0.5;
-    let e = (1.00 * TM.Tools.noise1(1 * nx, 1 * ny)
-      + 0.50 * TM.Tools.noise1(2 * nx, 2 * ny)
-      + 0.25 * TM.Tools.noise1(4 * nx, 4 * ny)
-      + 0.13 * TM.Tools.noise1(8 * nx, 8 * ny)
-      + 0.06 * TM.Tools.noise1(16 * nx, 16 * ny)
-      + 0.03 * TM.Tools.noise1(32 * nx, 32 * ny));
+    let e = (1.00 * Engine.Tools.noise1(1 * nx, 1 * ny)
+      + 0.50 * Engine.Tools.noise1(2 * nx, 2 * ny)
+      + 0.25 * Engine.Tools.noise1(4 * nx, 4 * ny)
+      + 0.13 * Engine.Tools.noise1(8 * nx, 8 * ny)
+      + 0.06 * Engine.Tools.noise1(16 * nx, 16 * ny)
+      + 0.03 * Engine.Tools.noise1(32 * nx, 32 * ny));
     e /= (1.00 + 0.50 + 0.25 + 0.13 + 0.06 + 0.03);
     e = Math.pow(e, 5.00);
-    let m = (1.00 * TM.Tools.noise2(1 * nx, 1 * ny)
-      + 0.75 * TM.Tools.noise2(2 * nx, 2 * ny)
-      + 0.33 * TM.Tools.noise2(4 * nx, 4 * ny)
-      + 0.33 * TM.Tools.noise2(8 * nx, 8 * ny)
-      + 0.33 * TM.Tools.noise2(16 * nx, 16 * ny)
-      + 0.50 * TM.Tools.noise2(32 * nx, 32 * ny));
+    let m = (1.00 * Engine.Tools.noise2(1 * nx, 1 * ny)
+      + 0.75 * Engine.Tools.noise2(2 * nx, 2 * ny)
+      + 0.33 * Engine.Tools.noise2(4 * nx, 4 * ny)
+      + 0.33 * Engine.Tools.noise2(8 * nx, 8 * ny)
+      + 0.33 * Engine.Tools.noise2(16 * nx, 16 * ny)
+      + 0.50 * Engine.Tools.noise2(32 * nx, 32 * ny));
     m /= (1.00 + 0.75 + 0.33 + 0.33 + 0.33 + 0.50);
     tile.setTerrain(e, m);
 
@@ -277,11 +277,11 @@ export default class HexGrid implements GridInterface {
       } as ExtrudeSettings
     } as MapSettings;
     if(config)
-      settings = TM.Tools.merge(settings, config) as MapSettings;
+      settings = Engine.Tools.merge(settings, config) as MapSettings;
 
 		/*if (!settings.material) {
 			settings.material = new THREE.MeshPhongMaterial({
-				color: TM.Tools.randomizeRGB('30, 30, 30', 10)
+				color: Engine.Tools.randomizeRGB('30, 30, 30', 10)
 			});
 		}*/
 
@@ -304,7 +304,7 @@ export default class HexGrid implements GridInterface {
     this.gridSize = typeof config.gridSize === 'undefined' ? this.gridSize : config.gridSize;
     this.gridShape = typeof config.gridShape === 'undefined' ? this.gridShape : config.gridShape;
     let c;
-    if (this.gridShape === TM.RCT) {
+    if (this.gridShape === Engine.RCT) {
       for (let q = -this.gridSize; q < this.gridSize; q++) {
         const rOffset = q >> 1; // or r>>1
         for (let r = -rOffset; r < this.gridSize - rOffset; r++) {
@@ -312,7 +312,7 @@ export default class HexGrid implements GridInterface {
           this.add(c);
         }
       }
-    } else if (this.gridShape === TM.HEX) {
+    } else if (this.gridShape === Engine.HEX) {
       /* HEX SHAPED GRID */
       let x, y, z;
       for (x = -this.gridSize; x < this.gridSize + 1; x++) {
@@ -337,7 +337,7 @@ export default class HexGrid implements GridInterface {
           this._cel.set(x, y, z); // define the cell
           const line = new Line(geo, overlayMat);
           line.position.copy(this.cellToPixel(this._cel));
-          line.rotation.x = 90 * TM.DEG_TO_RAD;
+          line.rotation.x = 90 * Engine.DEG_TO_RAD;
           overlayObj.add(line);
         }
       }
@@ -403,7 +403,7 @@ export default class HexGrid implements GridInterface {
 	*/
   load(url: string, cb: Function, scope: any): void {
     const self = this;
-    TM.Tools.getJSON({
+    Engine.Tools.getJSON({
       url: url,
       callback: function (json: GridJSONData) {
         self.fromJSON(json);
@@ -424,7 +424,7 @@ export default class HexGrid implements GridInterface {
     this.gridSize = json.size;
     this.cellSize = json.cellSize;
     this._cellWidth = this.cellSize * 2;
-    this._cellLength = (TM.SQRT3 * 0.5) * this._cellWidth;
+    this._cellLength = (Engine.SQRT3 * 0.5) * this._cellWidth;
 
     this.extrudeSettings = json.extrudeSettings;
     this.autogenerated = json.autogenerated;
@@ -472,14 +472,14 @@ export default class HexGrid implements GridInterface {
 	 */
 
   _createVertex(i: number): Vector3 {
-    const angle = (TM.TAU / 6) * i;
+    const angle = (Engine.TAU / 6) * i;
     return new Vector3((this.cellSize * Math.cos(angle)), (this.cellSize * Math.sin(angle)), 0);
   }
 
 	/*_pixelToAxial: function(pos) {
 		var q, r; // = x, y
 		q = pos.x * ((2/3) / this.cellSize);
-		r = ((-pos.x / 3) + (TM.SQRT3/3) * pos.y) / this.cellSize;
+		r = ((-pos.x / 3) + (Engine.SQRT3/3) * pos.y) / this.cellSize;
 		this._cel.set(q, r, -q-r);
 		return this._cubeRound(this._cel);
 	}*/
@@ -506,7 +506,7 @@ export default class HexGrid implements GridInterface {
 	/*_hexToPixel: function(h) {
 		var x, y; // = q, r
 		x = this.cellSize * 1.5 * h.x;
-		y = this.cellSize * TM.SQRT3 * (h.y + (h.x * 0.5));
+		y = this.cellSize * Engine.SQRT3 * (h.y + (h.x * 0.5));
 		return {x: x, y: y};
 	}*/
 
