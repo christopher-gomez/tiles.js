@@ -8,7 +8,7 @@ Keep an eye on it's progress and updates by checking the [sandbox](https://chris
 Or run it locally by downloading, installing the requirements, and running it on localhost: 
 ```
 $ git clone https://github.com/christophgomez/tiles.js.git
-$ cd tiles.js
+$ cd tiles.js-master
 $ npm install
 $ npm run startSandbox
 ```
