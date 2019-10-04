@@ -14,14 +14,13 @@ export default class AStarFinder {
   public heuristicFilter: Function;
   public list: LinkedList;
 
-  constructor(finderConfig: PathfinderSettings) {
-    finderConfig = finderConfig || {} as PathfinderSettings;
-
+  constructor(finderConfig?: PathfinderSettings) {
     let settings = {
       allowDiagonal: false,
       heuristicFilter: null as Function
     } as PathfinderSettings;
-    settings = Tools.merge(settings, finderConfig);
+    if(finderConfig)
+      settings = Tools.merge(settings, finderConfig);
 
     this.allowDiagonal = settings.allowDiagonal;
     this.heuristicFilter = settings.heuristicFilter;

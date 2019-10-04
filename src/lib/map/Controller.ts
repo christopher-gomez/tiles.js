@@ -9,7 +9,7 @@ import Animation from '../utils/Animation';
 
 export default class Controller implements ViewController {
 
-  private _controls: OrbitControls;
+  public _controls: OrbitControls;
   public animations: Animation[] = [];
 
   constructor(private _view: View, config?: CameraControlSettings) {
@@ -109,7 +109,7 @@ export default class Controller implements ViewController {
     const to = tile.position.clone();
 
     this.addAnimation(new Animation(durationMs, (a): void => {
-      this._view.focusOn(tile);
+      this._view.focusOn(tile as Tile);
       this._controls.target = from.lerp(to, a);
       this._controls.update();
     }));

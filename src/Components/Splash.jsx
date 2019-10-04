@@ -23,7 +23,14 @@ export default class Splash extends React.Component {
   }
   componentDidMount() {
     const cc = this.params.cameraControl;
-    this.scene = new TM.View({
+    // this constructs the cells in grid coordinate space
+    this.gridSpace = new TM.Grid({
+      gridShape: TM.HEX,
+      cellSize: 15,
+      gridSize: 80
+    });
+    this.map = new TM.Map(this.gridSpace);
+    this.scene = new TM.View(this.map, {
       element: document.getElementById('engine'),
       cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {
@@ -44,28 +51,16 @@ export default class Splash extends React.Component {
         horizontalRotation: cc.horizontalRotation
       }
     });
-    // this constructs the cells in grid coordinate space
-    this.gridSpace = new TM.Grid({
-      cellSize: 15,
-      gridSize: 100
-    });
-    this.board = new TM.Board(this.gridSpace);
-
-    // this will generate extruded hexagonal tiles
-    this.board.generateTilemap({
-      tileScale: .965 // you might have to scale the tile so the extruded geometry fits the cell size perfectly
-    });
-    this.board.generateTerrain();
     //this.board.generateOverlay(45);
-    this.scene.addBoard(this.board);
-    this.scene.focusOn(this.board.group);
+
+    this.scene.focusOn(this.map.group);
   }
   componentWillUnmount() {
     window.cancelAnimationFrame(this.animID);
     this.scene.dispose();
     this.gridSpace.dispose();
-    this.board.dispose();
-    delete this.board;
+    this.map.dispose();
+    delete this.map;
     delete this.gridSpace;
     delete this.scene;
   }

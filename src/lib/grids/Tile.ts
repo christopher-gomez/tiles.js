@@ -39,7 +39,8 @@ export default class Tile {
       geometry: null,
       material: null,
     };
-    settings = TM.Tools.merge(settings, config) as TileSettings;
+    if(config)
+      settings = TM.Tools.merge(settings, config) as TileSettings;
 
     if (!settings.cell || !settings.geometry) {
       throw new Error('Missing TM.Tile configuration');
@@ -106,7 +107,6 @@ export default class Tile {
     }
     else {
       this.select();
-      console.log(this.position);
     }
     return this;
   }

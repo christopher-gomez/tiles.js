@@ -1,13 +1,13 @@
+'use strict';
 import TM from '../tm';
 import Tile from '../grids/Tile';
 import { GridInterface } from '../grids/Grid';
 import { Object3D, Vector3, LineBasicMaterial } from 'three';
-import HexGrid from '../grids/HexGrid';
 import AStarFinder from '../pathing/AStarFinder';
 import Cell from '../grids/Cell';
-import { TilemapSettings, PathfinderSettings } from '../utils/Interfaces';
+import { MapSettings, PathfinderSettings, ExtrudeSettings } from '../utils/Interfaces';
 
-export default class Board {
+export default class Map {
   public tiles: Tile[];
   public tileGroup: Object3D;
   public group: Object3D;
@@ -15,7 +15,7 @@ export default class Board {
   public overlay: Object3D;
   public finder: AStarFinder;
 
-  dispose() {
+  dispose(): void {
     delete this.tiles;
     delete this.tileGroup;
     delete this.group;
@@ -23,7 +23,7 @@ export default class Board {
     delete this.finder;
   }
 
-  constructor(grid: GridInterface, finderConfig?: PathfinderSettings) {
+  constructor(grid: GridInterface, boardConfig?: MapSettings, finderConfig?: PathfinderSettings) {
     if (!grid) throw new Error('You must pass in a grid system for the board to use.');
 
     this.tiles = [] as Tile[];
@@ -38,6 +38,7 @@ export default class Board {
     TM.Loader.init();
 
     this.setGrid(grid);
+    this.generateTiles(boardConfig)
   }
   setEntityOnTile(entity: any, tile: Tile): void {
     // snap an entity's position to a tile; merely copies position
@@ -132,6 +133,7 @@ export default class Board {
     this.tiles = [];
     this.tileGroup = new Object3D();
     this.group.add(this.tileGroup);
+    //this.group.rotateY(90 * TM.DEG_TO_RAD);
   }
 
   generateOverlay(size: number): void {
@@ -151,11 +153,24 @@ export default class Board {
     this.group.add(this.overlay);
   }
 
-  generateTilemap(config: TilemapSettings): void {
+  generateTiles(config?: MapSettings): void {
+    let settings = {
+      tileScale: .965,
+      extrudeSettings: {
+        amount: 10,
+        bevelEnabled: true,
+        bevelSegments: 1,
+        steps: 1,
+        bevelSize: 0.5,
+        bevelThickness: 0.5
+      } as ExtrudeSettings
+    } as MapSettings;
+    if (config)
+      settings = TM.Tools.merge(settings, config) as MapSettings;
+
     this.reset();
 
-    const tiles = this.grid.generateTilemap(config);
-    this.tiles = tiles;
+    const tiles = this.tiles = this.grid.generateTiles(settings);
 
     this.tileGroup = new Object3D();
     for (let i = 0; i < tiles.length; i++) {
@@ -163,41 +178,6 @@ export default class Board {
     }
 
     this.group.add(this.tileGroup);
-  }
-
-  generateTerrain(): void {
-    // reset terrain eventually
-
-    if (this.grid.type === TM.HEX) {
-      const size = this.grid.size;
-      let x, y, z;
-      let i = 0;
-      for (x = -size; x < size + 1; x++) {
-        for (y = -size; y < size + 1; y++) {
-          z = -x - y;
-          if (Math.abs(x) <= size && Math.abs(y) <= size && Math.abs(z) <= size) {
-            const nx = x / (this.grid as HexGrid)._cellWidth - 0.5, ny = z / (this.grid as HexGrid)._cellLength - 0.5;
-            let e = (1.00 * TM.Tools.noise1(1 * nx, 1 * ny)
-              + 0.50 * TM.Tools.noise1(2 * nx, 2 * ny)
-              + 0.25 * TM.Tools.noise1(4 * nx, 4 * ny)
-              + 0.13 * TM.Tools.noise1(8 * nx, 8 * ny)
-              + 0.06 * TM.Tools.noise1(16 * nx, 16 * ny)
-              + 0.03 * TM.Tools.noise1(32 * nx, 32 * ny));
-            e /= (1.00 + 0.50 + 0.25 + 0.13 + 0.06 + 0.03);
-            e = Math.pow(e, 5.00);
-            let m = (1.00 * TM.Tools.noise2(1 * nx, 1 * ny)
-              + 0.75 * TM.Tools.noise2(2 * nx, 2 * ny)
-              + 0.33 * TM.Tools.noise2(4 * nx, 4 * ny)
-              + 0.33 * TM.Tools.noise2(8 * nx, 8 * ny)
-              + 0.33 * TM.Tools.noise2(16 * nx, 16 * ny)
-              + 0.50 * TM.Tools.noise2(32 * nx, 32 * ny));
-            m /= (1.00 + 0.75 + 0.33 + 0.33 + 0.33 + 0.50);
-            this.tiles[i].setTerrain(e, m);
-            i++;
-          }
-        }
-      }
-    }
   }
 
   reset(): void {

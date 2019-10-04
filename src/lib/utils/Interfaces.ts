@@ -10,6 +10,18 @@ export interface TileSettings {
   scale?: number;
 };
 
+export interface GridSettings {
+  gridShape?: string;
+  gridSize?: number;
+  cellSize?: number;
+  cellShape?: string;
+};
+
+export interface MapSettings {
+  tileScale?: number;
+  extrudeSettings?: ExtrudeSettings;
+}
+
 export interface ExtrudeSettings {
   amount?: number;
   bevelEnabled?: boolean;
@@ -17,19 +29,6 @@ export interface ExtrudeSettings {
   steps?: number;
   bevelSize?: number;
   bevelThickness?: number;
-};
-
-export interface TilemapSettings {
-  tileScale?: number;
-  cellSize?: number;
-  material?: MeshPhongMaterial;
-  extrudeSettings?: ExtrudeSettings;
-}
-
-export interface GridSettings {
-  type?: string;
-  cellSize?: number;
-  gridSize?: number;
 };
 
 export interface PathfinderSettings {
@@ -46,9 +45,7 @@ export interface SceneSettings {
   fog?: Fog;
   light?: Light;
   lightPosition?: Vector3;
-  //cameraType?: string;
   cameraPosition?: Vector3; 
-  //orthoZoom?: number;
   sceneMarginSize?: number;
   cameraControlSettings?: CameraControlSettings;
 }

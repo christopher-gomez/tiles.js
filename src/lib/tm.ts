@@ -26,7 +26,7 @@ import SelectionManager from './utils/SelectionManager';
 //export { default as SelectionManager } from './utils/SelectionManager';
 import Tools from './utils/Tools';
 //export { default as Tools } from './utils/Tools';
-import Board from './map/Board';
+import Map from './map/Map';
 // export { default as Board } from './Board';
 
 
@@ -53,7 +53,7 @@ export const TM = {
   View,
   SelectionManager,
   Tools,
-  Board,
+  Map,
 
   // useful enums for type checking. change to whatever fits your game. these are just examples
   TILE: 'tile', // visual representation of a grid cell
@@ -62,6 +62,7 @@ export const TM = {
 
   HEX: 'hex',
   SQR: 'square',
+  RCT: 'rectangle',
   ABS: 'abstract',
 }
 

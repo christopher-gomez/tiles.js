@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExpand, faCompress } from '@fortawesome/free-solid-svg-icons';
 import './dat.css';
 import GUI from './dat';
+import { Vector3 } from 'three';
 
 export default class Sandbox extends React.Component {
   params = {
@@ -31,7 +32,16 @@ export default class Sandbox extends React.Component {
 
   componentDidMount() {
     const cc = this.params.cameraControl;
-    this.scene = new TM.View({
+
+    // this constructs the cells in grid coordinate space
+    this.gridSpace = new TM.Grid({
+      gridShape: TM.RCT,
+      gridSize: 80,
+      cellSize: 20,
+    });
+    this.map = new TM.Map(this.gridSpace);
+
+    this.scene = new TM.View(this.map, {
       element: document.querySelector('.App'),
       cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {
@@ -53,21 +63,8 @@ export default class Sandbox extends React.Component {
       }
     });
 
-    // this constructs the cells in grid coordinate space
-    this.gridSpace = new TM.Grid({
-      cellSize: 20,
-      gridSize: 80
-    });
-    this.board = new TM.Board(this.gridSpace);
-
-    // this will generate extruded hexagonal tiles
-    this.board.generateTilemap({
-      tileScale: 0.965 // you might have to scale the tile so the extruded geometry fits the cell size perfectly
-    });
-    this.board.generateTerrain();
     //this.board.generateOverlay(45);
-    this.scene.addBoard(this.board);
-    this.scene.focusOn(this.board.group);
+    this.scene.controls.panCameraTo(this.map.getTileAtCell(this.gridSpace.pixelToCell(new Vector3(this.gridSpace.gridSize * 8, 1, this.gridSpace.gridSize * 8))), 2000);
 
     this.gui = new GUI(cc, this.scene);
   }
@@ -76,8 +73,8 @@ export default class Sandbox extends React.Component {
     window.cancelAnimationFrame(this.animID);
     this.scene.dispose();
     this.gridSpace.dispose();
-    this.board.dispose();
-    delete this.board;
+    this.map.dispose();
+    delete this.map;
     delete this.gridSpace;
     delete this.scene;
   }

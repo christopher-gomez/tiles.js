@@ -5,7 +5,7 @@ import Cell from '../grids/Cell';
 import Controller from './Controller';
 import MouseCaster from '../utils/MouseCaster';
 import Tools from '../utils/Tools';
-import Board from './Board';
+import Map from './Map';
 
 /*
 	Sets up and manages a THREEjs container, camera, and light, making it easy to get going.
@@ -19,7 +19,6 @@ export default class View implements ViewController {
   public width: number;
   public height: number;
   public renderer: WebGLRenderer;
-  //public orthoZoom: number;
   public container: Scene;
   public camera: Camera;
   public controlled: boolean;
@@ -28,7 +27,7 @@ export default class View implements ViewController {
 
   private _selectedTile: Tile;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private _onAnimate:  (dtS: number) => void = (dtS: number): void => {};
+  private _onAnimate: (dtS: number) => void = (dtS: number): void => { };
   private _onTileSelected: (tile: Tile) => void
   private _onLoaded: () => void;
   private _lastTimestamp = Date.now();
@@ -68,7 +67,7 @@ export default class View implements ViewController {
     this._mouseCaster = mouse;
   }
 
-  constructor(sceneConfig?: SceneSettings) {
+  constructor(map: Map, sceneConfig?: SceneSettings) {
     sceneConfig = sceneConfig || {} as SceneSettings;
     let sceneSettings = {
       element: document.body,
@@ -101,16 +100,18 @@ export default class View implements ViewController {
       } as CameraControlSettings,
     } as SceneSettings;
 
-    if (sceneConfig.cameraControlSettings !== undefined) {
+    if (sceneConfig.cameraControlSettings) {
       sceneSettings.cameraControlSettings = Tools.merge(sceneSettings.cameraControlSettings, sceneConfig.cameraControlSettings) as CameraControlSettings;
     }
 
-    sceneSettings = Tools.merge(sceneSettings, sceneConfig) as SceneSettings;
+    if (sceneConfig)
+      sceneSettings = Tools.merge(sceneSettings, sceneConfig) as SceneSettings;
     this.settings = sceneSettings;
 
     this._initSceneSettings();
 
     this.attachTo(sceneSettings.element);
+    this.addBoard(map);
     this.animate(0);
   }
 
@@ -145,8 +146,8 @@ export default class View implements ViewController {
     this.container.add(mesh);
   }
 
-  public board: Board;
-  addBoard(board: Board): void {
+  public board: Map;
+  addBoard(board: Map): void {
     this.board = board;
     this.container.add(board.group);
   }
@@ -170,8 +171,11 @@ export default class View implements ViewController {
     this._animationID = requestAnimationFrame(this.animate.bind(this));
   }
 
-  focusOn(obj: any): void {
-    this.camera.lookAt(obj.position);
+  focusOn(pos: Tile | Vector3): void {
+    if (pos instanceof Tile) {
+      pos = pos.position;
+    }
+    this.camera.lookAt(pos);
   }
 
   getViewCenter(): Vector3 {
@@ -223,6 +227,7 @@ export default class View implements ViewController {
   }
 
   private _initSceneSettings(): void {
+
     this.renderer = new WebGLRenderer({
       alpha: this.settings.alpha,
       antialias: this.settings.antialias
@@ -234,7 +239,7 @@ export default class View implements ViewController {
     this.height = window.innerHeight;
 
     const self = this;
-    
+
     const left = document.createElement('div');
     left.style.cssText = 'position:absolute;left:0;height:100%;width:' + this.settings.sceneMarginSize + 'px;';
     left.addEventListener('mouseover', () => {
@@ -295,7 +300,7 @@ export default class View implements ViewController {
     }, false);
 
     const bottom = document.createElement('div');
-    bottom.style.cssText = 'position:absolute;bottom:0;width:100%;height:' + this.settings.sceneMarginSize+ 'px;';
+    bottom.style.cssText = 'position:absolute;bottom:0;width:100%;height:' + this.settings.sceneMarginSize + 'px;';
     bottom.addEventListener('mouseover', () => {
       self._panning = true;
       self._panningDown = true;
@@ -367,7 +372,7 @@ export default class View implements ViewController {
   }
 
   private _hoverTile: Tile;
-  
+
   private initMouseCaster(): void {
     this._mouseCaster = new MouseCaster(this.container, this.camera);
     const self = this;
