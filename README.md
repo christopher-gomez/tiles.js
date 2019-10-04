@@ -14,7 +14,7 @@ $ npm run startSandbox
 ```
 
 ## Why
-This project is a personal hobby project of mine that developed out of the interest to develop a Steam game with the tools and languages I know and love (modern web technologies).
+This project is a personal hobby project of mine that developed out of the interest to develop a Steam game with the tools and languages I know and love (modern full-stack web technologies).
 
 The engine uses Three.js for WebGL rendering, Webpack and Babel in order to utilize modern ES6/7 and TypeScript language features, and runs on React in the browser (or plain old HTML) or natively on the desktop thanks to Electron. 
 
