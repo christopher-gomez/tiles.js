@@ -1,4 +1,4 @@
-import TM from '../tm';
+import Engine from '../Engine';
 import Tile from './Tile';
 
 // Coordinate data for a cell
@@ -32,7 +32,7 @@ export default class Cell {
     this._priority = 0;
     this._visited = false;
     this._parent = null;
-    this.uniqueID = TM.LinkedList.generateID();
+    this.uniqueID = Engine.LinkedList.generateID();
   }
   
   set(q: number, r: number, s: number): Cell {

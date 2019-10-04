@@ -1,7 +1,7 @@
 import { ViewController, CameraControlSettings } from "../utils/Interfaces"
 import { OrbitControls } from "../lib/OrbitControls"
 import { MOUSE } from "three"
-import TM from '../tm';
+import Engine from '../Engine';
 import View from "./View";
 import Tile from "../grids/Tile";
 import Cell from "../grids/Cell";
@@ -129,7 +129,7 @@ export default class Controller implements ViewController {
   }
 
   updateControls(settings: CameraControlSettings): void {
-    this._view.settings.cameraControlSettings = TM.Tools.merge(this._view.settings.cameraControlSettings, settings) as CameraControlSettings;
+    this._view.settings.cameraControlSettings = Engine.Tools.merge(this._view.settings.cameraControlSettings, settings) as CameraControlSettings;
     this._controls.minDistance = settings.minDistance || this._controls.minDistance;
     this._controls.maxDistance = settings.maxDistance || this._controls.maxDistance;
     this._controls.zoomSpeed = settings.zoomSpeed || this._controls.zoomSpeed;

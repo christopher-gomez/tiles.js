@@ -7,9 +7,6 @@ export default class GUI {
     document.getElementById('gui').addEventListener('mousedown', (e) => {
       e.stopPropagation();
     }, false);
-    document.getElementById('gui').addEventListener('mouseup', (e) => {
-      //e.stopPropagation();
-    }, false);
     const camGUI = this.gui.addFolder('Camera');
     camGUI
       .add(scene.camera.position, 'x')

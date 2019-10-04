@@ -1,9 +1,8 @@
 /* eslint-disable */
 import React from 'react';
-import TM from '../lib/tm.ts';
+import Engine from '../lib/Engine.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExpand, faCompress } from '@fortawesome/free-solid-svg-icons';
-import './dat.css';
 import GUI from './dat';
 import { Vector3 } from 'three';
 
@@ -34,14 +33,14 @@ export default class Sandbox extends React.Component {
     const cc = this.params.cameraControl;
 
     // this constructs the cells in grid coordinate space
-    this.gridSpace = new TM.Grid({
-      gridShape: TM.RCT,
+    this.gridSpace = new Engine.Grid({
+      gridShape: Engine.RCT,
       gridSize: 80,
       cellSize: 20,
     });
-    this.map = new TM.Map(this.gridSpace);
+    this.map = new Engine.Map(this.gridSpace);
 
-    this.scene = new TM.View(this.map, {
+    this.scene = new Engine.View(this.map, {
       element: document.querySelector('.App'),
       cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {

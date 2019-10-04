@@ -3,7 +3,7 @@ import { ExtrudeSettings, MapSettings, GridSettings } from "../utils/Interfaces"
 import { Shape, BufferGeometry, ShapeGeometry, Vector3, Object3D, Material } from "three";
 import Tile from "./Tile";
 import HexGrid from './HexGrid';
-import TM from '../tm';
+import Engine from '../Engine';
 import SqrGrid from "./SqrGrid";
 
 export interface GridInterface {
@@ -35,9 +35,9 @@ export interface GridInterface {
 
 export default class Grid {
   constructor(config?: GridSettings) {
-    if (!config || config.cellShape === undefined || config.cellShape === TM.HEX) {
+    if (!config || config.cellShape === undefined || config.cellShape === Engine.HEX) {
       return new HexGrid(config);
-    } else if (config.cellShape === TM.SQR) {
+    } else if (config.cellShape === Engine.SQR) {
       return new SqrGrid(config);
     }
   }

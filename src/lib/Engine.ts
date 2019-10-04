@@ -30,7 +30,7 @@ import Map from './map/Map';
 // export { default as Board } from './Board';
 
 
-export const TM = {
+export const Engine = {
   VERSION: '1.0.0',
 
   PI: Math.PI,
@@ -66,4 +66,4 @@ export const TM = {
   ABS: 'abstract',
 }
 
-export default TM;
+export default Engine;

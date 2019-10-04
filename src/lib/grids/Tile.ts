@@ -1,4 +1,4 @@
-import TM from '../tm';
+import Engine from '../Engine';
 import { Geometry, MeshPhongMaterial, Mesh, Vector3, Euler } from 'three';
 import Cell from './Cell';
 import { TileSettings } from '../utils/Interfaces';
@@ -40,27 +40,27 @@ export default class Tile {
       material: null,
     };
     if(config)
-      settings = TM.Tools.merge(settings, config) as TileSettings;
+      settings = Engine.Tools.merge(settings, config) as TileSettings;
 
     if (!settings.cell || !settings.geometry) {
-      throw new Error('Missing TM.Tile configuration');
+      throw new Error('Missing Engine.Tile configuration');
     }
 
     this.cell = settings.cell;
     if (this.cell.tile && this.cell.tile !== this) this.cell.tile.dispose(); // remove whatever was there
     this.cell.tile = this;
 
-    this.uniqueID = TM.Tools.generateID();
+    this.uniqueID = Engine.Tools.generateID();
 
     this.geometry = settings.geometry;
     this.material = settings.material;
     if (!this.material) {
       this.material = new MeshPhongMaterial({
-        color: TM.Tools.randomizeRGB('0, 105, 148', 13)
+        color: Engine.Tools.randomizeRGB('0, 105, 148', 13)
       });
     }
 
-    this.objectType = TM.TILE;
+    this.objectType = Engine.TILE;
     this.entity = null;
     this.userData = {};
 
@@ -75,7 +75,7 @@ export default class Tile {
     this.rotation = this.mesh.rotation;
 
     // rotate it to face "up" (the threejs coordinate space is Y+)
-    this.rotation.x = -90 * TM.DEG_TO_RAD;
+    this.rotation.x = -90 * Engine.DEG_TO_RAD;
     this.mesh.scale.set(settings.scale, settings.scale, 1);
 
     if (this.material.emissive) {
@@ -137,87 +137,87 @@ export default class Tile {
     }
     if (e < 0.06) {
       this.userData.terrain = 'BEACH';
-      this.material.color.set(TM.Tools.randomizeRGB('194,178,128', 13));
+      this.material.color.set(Engine.Tools.randomizeRGB('194,178,128', 13));
       return;
     }
     if (e < .3) {
       this.userData.terrain = 'PLAIN';
-      this.material.color.set(TM.Tools.randomizeRGB('70,118,58', 13));
+      this.material.color.set(Engine.Tools.randomizeRGB('70,118,58', 13));
       return;
     }
     if (e < 1) {
       this.userData.terrain = 'MOUNTAIN';
       
-      this.material.color.set(TM.Tools.randomizeRGB('107,110,112', 13));
+      this.material.color.set(Engine.Tools.randomizeRGB('107,110,112', 13));
       return;
     };
 
     /*if (e > 0.6) {
       if (m < 0.1) {
         this.userData.terrain = 'SCORCHED';
-        this.material.color.set(TM.Tools.randomizeRGB('171,95,58', 13));
+        this.material.color.set(Engine.Tools.randomizeRGB('171,95,58', 13));
         return;
       }
       if (m < 0.2) {
         this.userData.terrain = 'BARE';
-        this.material.color.set(TM.Tools.randomizeRGB('215,171,114', 13));
+        this.material.color.set(Engine.Tools.randomizeRGB('215,171,114', 13));
         return;
       }
       if (m < 0.5) {
         this.userData.terrain = 'TUNDRA';
-        this.material.color.set(TM.Tools.randomizeRGB('152,171,180', 13));
+        this.material.color.set(Engine.Tools.randomizeRGB('152,171,180', 13));
         return;
       }
       this.userData.terrain = 'SNOW';
-      this.material.color.set(TM.Tools.randomizeRGB('223,217,221', 13));
+      this.material.color.set(Engine.Tools.randomizeRGB('223,217,221', 13));
       return;
     }
 
     /*if (e > 0.45) {
       if (m < 0.33) {
         this.userData.terrain = 'TEMPERATE_DESERT';
-        this.material.color.set(TM.Tools.randomizeRGB('200,184,158', 13));
+        this.material.color.set(Engine.Tools.randomizeRGB('200,184,158', 13));
         return;
       }
       if (m < 0.66) {
         this.userData.terrain = 'SHRUBLAND';
-        this.material.color.set(TM.Tools.randomizeRGB('125,124,62', 13));
+        this.material.color.set(Engine.Tools.randomizeRGB('125,124,62', 13));
         return;
       };
       this.userData.terrain = 'TAIGA';
-      this.material.color.set(TM.Tools.randomizeRGB('16,86,76', 13));
+      this.material.color.set(Engine.Tools.randomizeRGB('16,86,76', 13));
       return;
     }
 
     if (e > 0.35) {
       if (m < 0.16) {
         this.userData.terrain = 'TEMPERATE_DESERT';
-        this.material.color.set(TM.Tools.randomizeRGB('200,184,158', 13));
+        this.material.color.set(Engine.Tools.randomizeRGB('200,184,158', 13));
         return;
       }
       if (m < 0.25) {
         this.userData.terrain = 'GRASSLAND';
-        this.material.color.set(TM.Tools.randomizeRGB('147,217,69', 13));
+        this.material.color.set(Engine.Tools.randomizeRGB('147,217,69', 13));
         return;
       }
       //if (m < 0.83) return 'TEMPERATE_DECIDUOUS_FOREST';
       this.userData.terrain = 'FOREST';
-      this.material.color.set(TM.Tools.randomizeRGB('16,59,35', 13));
+      this.material.color.set(Engine.Tools.randomizeRGB('16,59,35', 13));
       return;
     }
 
     if (m < 0.16) {
       this.userData.terrain = 'SUBTROPICAL_DESERT';
-      this.material.color.set(TM.Tools.randomizeRGB('152,79,15', 13));
+      this.material.color.set(Engine.Tools.randomizeRGB('152,79,15', 13));
       return;
     }
     if (m < 0.33) {
       this.userData.terrain = 'GRASSLAND';
-      this.material.color.set(TM.Tools.randomizeRGB('147,217,69', 13));
+      this.material.color.set(Engine.Tools.randomizeRGB('147,217,69', 13));
       return;
     }
     this.userData.terrain = 'TROPICAL_RAIN_FOREST';
-    this.material.color.set(TM.Tools.randomizeRGB('79,159,27', 13));
+    this.material.color.set(Engine.Tools.randomizeRGB('79,159,27', 13));
     return;*/
   }
 }
