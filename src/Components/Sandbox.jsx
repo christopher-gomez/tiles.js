@@ -63,7 +63,7 @@ export default class Sandbox extends React.Component {
     });
 
     //this.board.generateOverlay(45);
-    this.scene.controls.panCameraTo(this.map.getTileAtCell(this.gridSpace.pixelToCell(new Vector3(this.gridSpace.gridSize * 8, 1, this.gridSpace.gridSize * 8))), 2000);
+    this.scene.focusOn(this.map.group);
 
     this.gui = new GUI(cc, this.scene);
   }
