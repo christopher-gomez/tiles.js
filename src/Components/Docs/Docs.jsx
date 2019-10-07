@@ -3,6 +3,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import HTMLParser from 'react-markdown/plugins/html-parser';
 import { Intro, TOC, Grid, Map, View, Interfaces } from './markdown/ref.js';
+import { Link } from 'react-router-dom';
 const docs = [Intro, Grid, Map, View, Interfaces];
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -70,7 +71,7 @@ export default class Docs extends React.Component {
         </p>
       );
     } else if (href.startsWith('/')) {
-      return <a href={href}>{children}</a>;
+      return <Link to={href}>{children}</Link>;
     } else {
       return (
         <a href={href} target="_blank" rel="nofollow noopener noreferrer">

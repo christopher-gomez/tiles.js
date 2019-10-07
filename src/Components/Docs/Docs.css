@@ -73,12 +73,12 @@
   line-height: 1.5em;
 }
 
-.docs .toc ul a {
+.docs .toc ul a, .docs .toc h2 a {
   text-decoration: none;
   color: black;
 }
 
-.docs .toc ul a:hover {
+.docs .toc ul a:hover, .docs .toc h2 a:hover {
   text-decoration: underline;
   color: #006d9a;
 }
