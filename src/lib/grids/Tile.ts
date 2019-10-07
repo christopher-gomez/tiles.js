@@ -33,7 +33,6 @@ export default class Tile {
 
   
   constructor(config?: TileSettings) {
-    config = config || {} as TileSettings;
     let settings: TileSettings = {
       cell: null,
       geometry: null,

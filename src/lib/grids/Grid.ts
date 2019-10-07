@@ -21,7 +21,7 @@ export interface GridInterface {
 
   cellToPixel(cell: Cell): Vector3;
   add(cell: Cell): Cell;
-  remove(cell: Cell): void;
+  remove(cell: Cell): Cell;
   cellToHash(cell: Cell): string;
   pixelToCell(pos: Vector3): Cell;
   dispose(): void;
@@ -29,8 +29,10 @@ export interface GridInterface {
   generateTiles(tilemapSettings: MapSettings): Tile[];
   generateGrid(config: GridSettings): void;
   clearPath(): void;
-  getNeighbors(cell: Cell, diagonals: boolean, heuristic: Function): Cell[];
+  getNeighbors(cell: Cell, diagonals: boolean, heuristic: (origin: Cell, next: Cell) => {}): Cell[];
+  getRandomCell(): Cell;
   distance(cellA: Cell, cellB: Cell): number;
+  traverse(cb: (cell: Cell) => {}): void;
 };
 
 export default class Grid {

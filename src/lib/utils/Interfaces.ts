@@ -1,6 +1,9 @@
-import { Geometry, MeshPhongMaterial, Fog, Light, Vector3, Camera, WebGLRenderer } from 'three';
+import { Geometry, MeshPhongMaterial, Fog, Light, Vector3, Camera, WebGLRenderer, Material } from 'three';
 import Cell from '../grids/Cell';
 import Tile from '../grids/Tile';
+
+// Should return TRUE/FALSE
+export type heuristic = (origin: Cell, next: Cell) => {};
 
 /* CONFIG OBJECT INTERFACES */
 export interface TileSettings {
@@ -19,6 +22,7 @@ export interface GridSettings {
 
 export interface MapSettings {
   tileScale?: number;
+  material?: Material;
   extrudeSettings?: ExtrudeSettings;
 }
 
@@ -33,7 +37,7 @@ export interface ExtrudeSettings {
 
 export interface PathfinderSettings {
   allowDiagonal?: boolean;
-  heuristicFilter?: Function;
+  heuristicFilter?: heuristic;
 }
 
 export interface SceneSettings {

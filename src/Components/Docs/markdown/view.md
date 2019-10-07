@@ -9,4 +9,4 @@
 <hr style='width:100%; opacity:.5;' />
 
 ## Methods
-<hr style='width:100%; opacity:.5;' />gi
+<hr style='width:100%; opacity:.5;' />
