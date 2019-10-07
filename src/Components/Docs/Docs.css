@@ -3,6 +3,12 @@
   margin: 0 1em;
 }
 
+.docs .main {
+  margin-left: 16%; /* Same as the width of the sidebar */
+  padding: 0px 30px;
+  margin-bottom: 1em;
+}
+
 .docs .main p {
   font-size: 1.1em;
   font-weight: 500;
@@ -10,7 +16,25 @@
   text-decoration: underline;
 }
 
+.docs .main a {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: rgb(48, 52, 68);
+  text-decoration: underline;
+}
+
+.docs .main a:hover {
+  color: #006d9a;
+  text-decoration: underline;
+}
+
 .docs .main .description {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: rgb(48, 52, 68);
+}
+
+.docs .main .interfaces {
   font-size: 1.1em;
   font-weight: 500;
   color: rgb(48, 52, 68);
@@ -25,6 +49,8 @@
 .docs pre code {
   display: block;
   padding: 15px;
+  font-size: .9em;
+  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstr
 }
 
 .docs .toc {
@@ -43,8 +69,8 @@
 .docs .toc ul {
   list-style-type: none;
   margin: 0;
-  padding: 0 .45em;
-  line-height: 1.75em;
+  padding: 0 .40em;
+  line-height: 1.5em;
 }
 
 .docs .toc ul a {
@@ -75,15 +101,6 @@
   top: 0;
   display: inline-block;
   background: gray;
-}
-
-.docs .header h2 {
-}
-
-.docs .main {
-  margin-left: 16%; /* Same as the width of the sidebar */
-  padding: 0px 10px;
-  margin-bottom: 10px;
 }
 
 .docs .footer {

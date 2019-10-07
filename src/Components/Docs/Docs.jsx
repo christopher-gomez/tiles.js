@@ -6,10 +6,11 @@ import { Intro, TOC, Grid, Map, View, Interfaces } from './markdown/ref.js';
 const docs = [Intro, Grid, Map, View, Interfaces];
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
-import { HashLink as Link } from 'react-router-hash-link';
+import typescript from 'highlight.js/lib/languages/typescript';
 import './Docs.css';
-import 'highlight.js/styles/tomorrow-night.css';
+import 'highlight.js/styles/tomorrow-night-eighties.css';
 hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('typescript', typescript);
 
 export default class Docs extends React.Component {
   state = {
@@ -55,7 +56,7 @@ export default class Docs extends React.Component {
       const val = href.slice(1);
       const key = children[0].props.value;
       return (
-        <div>
+        <p>
           {this.state.currKey === key ? (
             <span></span>
           ) : null}
@@ -66,7 +67,7 @@ export default class Docs extends React.Component {
           >
             {children}
           </a>
-        </div>
+        </p>
       );
     } else if (href.startsWith('/')) {
       return <a href={href}>{children}</a>;

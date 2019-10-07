@@ -109,12 +109,6 @@ Disposes buffers, associative array, and geometry and material caches.
 Takes two Cells and returns the Euclidean distance between them. 
 </small>
 
-.pixelToCell(pos: Vector3): Cell
-
-<small>
-Takes a 3D coordinate and returns the Cell that contains that location.
-</small>
-
 .generateGrid(config?: GridSettings): void
 
 <small>
@@ -123,19 +117,19 @@ Called from the constructor. Call this with a new config to create a different g
 config - (optional) An object with one or more properties defining the Grid's properties.
 </small>  
 
+.generateOverlay(size: number, overlayObj: Object3D, overlayMat: Material): void
+
+<small>
+Generates an 3D group of lines over the Cells.<br/>
+Useful if you want to render flat terrain instead of physical tiles, but still want to render hex cells. 
+</small>
+
 .generateTiles(config?: MapSettings): Tile[]
 
 <small>
 Generates and returns an array of Tiles.<br/>
 Called automatically by Map when a Grid is passed into it.<br/><br/>
 config - (optional) An object with one or more properties defining the physical representation of the cell on the map.
-</small>
-
-.generateOverlay(size: number, overlayObj: Object3D, overlayMat: Material): void
-
-<small>
-Generates an 3D group of lines over the Cells.<br/>
-Useful if you want to render flat terrain instead of physical tiles, but still want to render hex cells. 
 </small>
 
 .getNeighbors(cell: Cell, diagonals?: boolean, heuristicFilter?: (origin: Cell, next: Cell) => {}): Cell[]
@@ -153,8 +147,20 @@ heurisiticFilter - (optional) A function that takes the original Cell, and the C
 Returns a random Cell in the Grid.
 </small>
 
+.pixelToCell(pos: Vector3): Cell
+
+<small>
+Takes a 3D coordinate and returns the Cell that contains that location.
+</small>
+
 .remove(cell: Cell): Cell
 
 <small>
 Takes a Cell reference, removes it from the Grid, and returns it.
+</small>
+
+.traverse(cb: (cell: Cell) => {}): void
+
+<small>
+Traverse the entire grid, perform a function at each Cell. 
 </small>

@@ -5,14 +5,13 @@ import {
   ShapeGeometry,
   Vector3,
   Geometry,
-  MeshPhongMaterial,
   ExtrudeGeometry,
   Object3D,
   Material,
   Line,
 } from 'three';
 import { GridInterface } from './Grid';
-import { GridSettings, ExtrudeSettings, MapSettings, GridJSONData, TileSettings } from '../utils/Interfaces';
+import { GridSettings, ExtrudeSettings, MapSettings, GridJSONData, TileSettings, heuristic } from '../utils/Interfaces';
 import Cell from './Cell';
 import Tile from './Tile';
 
@@ -146,7 +145,7 @@ export default class HexGrid implements GridInterface {
     return this.cells[this.cellToHash(this._cel)];
   }
 
-  getNeighbors(cell: Cell, diagonal?: boolean, filter?: (origin: Cell, next: Cell) => {}): Cell[] {
+  getNeighbors(cell: Cell, diagonal?: boolean, filter?: heuristic): Cell[] {
     // always returns an array
     let i, n;
     const l = this._directions.length;
