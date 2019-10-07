@@ -2,7 +2,8 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import HTMLParser from 'react-markdown/plugins/html-parser';
-import { Intro, TOC, Grid, Interfaces } from './markdown/ref.js';
+import { Intro, TOC, Grid, Map, View, Interfaces } from './markdown/ref.js';
+const docs = [Intro, Grid, Map, View, Interfaces];
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import { HashLink as Link } from 'react-router-hash-link';
@@ -13,58 +14,66 @@ hljs.registerLanguage('javascript', javascript);
 export default class Docs extends React.Component {
   state = {
     toc: null,
-    combinedData: 'Documentation',
-    currSlide: 0
+    combinedData: [],
+    currSlide: 0,
+    currKey: 'Installation'
   };
   componentDidMount() {
-    this.updateCodeSyntaxHighlighting();
-    this.init();
+    fetch(TOC)
+      .then(response => {
+        return response.text();
+      })
+      .then(text => {
+        this.setState({ toc: text });
+      });
+    for (let i in docs) {
+      docs[i] = fetch(docs[i]).then(response => {
+        return response.text();
+      });
+    }
+    let combinedData = [];
+    const self = this;
+    Promise.all(docs).then(values => {
+      for (let i in values) {
+        combinedData.push(values[i]);
+      }
+      self.setState({ combinedData }, () => {
+        self.updateCodeSyntaxHighlighting();
+      });
+    });
   }
   componentDidUpdate() {
     this.updateCodeSyntaxHighlighting();
-  }
-  init() {
-    const tocRequest = fetch(TOC).then(function(response) {
-      return response.text();
-    });
-    const introRequest = fetch(Intro).then(function(response) {
-      return response.text();
-    });
-    const gridRequest = fetch(Grid).then(function(response) {
-      return response.text();
-    });
-    const interfacesRequest = fetch(Interfaces).then(function(response) {
-      return response.text();
-    });
-    var combinedData = [];
-    const self = this;
-    Promise.all([tocRequest, introRequest, gridRequest, interfacesRequest]).then(function(values) {
-      const toc = values[0];
-      for (let i = 1; i < values.length; i++) {
-        combinedData.push(values[i]);
-      }
-      self.setState({ toc, combinedData });
-    });
   }
   updateCodeSyntaxHighlighting = () => {
     document.querySelectorAll('pre code').forEach(block => {
       hljs.highlightBlock(block);
     });
   };
-  markdownLinkRenderer(props) {
-    if (props.href.startsWith('#')) {
-      const h = props.href;
+  markdownLinkRenderer({ href, children }) {
+    if (href.startsWith('#')) {
+      const val = href.slice(1);
+      const key = children[0].props.value;
       return (
-        <Link smooth to={h}>
-          {props.children}
-        </Link>
+        <div>
+          {this.state.currKey === key ? (
+            <span></span>
+          ) : null}
+          <a
+            href={'#/docs'}
+            id={key}
+            onClick={() => this.setCurrSlide(key, val)}
+          >
+            {children}
+          </a>
+        </div>
       );
-    } else if (props.href.startsWith('/')) {
-      return <a href={props.href}>{props.children}</a>;
+    } else if (href.startsWith('/')) {
+      return <a href={href}>{children}</a>;
     } else {
       return (
-        <a href={props.href} target="_blank" rel="nofollow noopener noreferrer">
-          {props.children}
+        <a href={href} target="_blank" rel="nofollow noopener noreferrer">
+          {children}
         </a>
       );
     }
@@ -81,11 +90,12 @@ export default class Docs extends React.Component {
     );
     return React.createElement('pre', {}, code);
   }
+  setCurrSlide(key, curr) {
+    this.setState({ currKey: key, currSlide: curr });
+  }
   next() {
     const next = ++this.state.currSlide;
-    this.setState({ currSlide: next }, () => {
-      console.log(next); 
-    });
+    this.setState({ currSlide: next });
   }
   prev() {
     const prev = --this.state.currSlide;
@@ -97,7 +107,7 @@ export default class Docs extends React.Component {
         <div className="toc">
           <ReactMarkdown
             renderers={{
-              link: this.markdownLinkRenderer,
+              link: this.markdownLinkRenderer.bind(this),
               code: this.markdownCodeRenderer
             }}
             plugins={[HTMLParser]}
@@ -113,18 +123,7 @@ export default class Docs extends React.Component {
             plugins={[HTMLParser]}
             source={this.state.combinedData[this.state.currSlide]}
           />
-          <div className="footer">
-            {this.state.currSlide > 0 ? (
-              <button className="prev" onClick={this.prev.bind(this)}>
-                Prev
-              </button>
-            ) : null}
-            {this.state.currSlide < this.state.combinedData.length ? (
-              <button className="next" onClick={this.next.bind(this)}>
-                Next
-              </button>
-            ) : null}
-          </div>
+
         </div>
       </div>
     );

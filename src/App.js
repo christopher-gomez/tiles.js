@@ -14,7 +14,7 @@ class App extends React.Component {
       <Router basename='/'>
           <Route path="/" exact component={Splash} />
           <Route path="/sandbox" component={Sandbox} />
-          <Route path='/docs' component={Docs}/>
+          <Route path='/docs' component={Docs} />
       </Router>
     )
   }
