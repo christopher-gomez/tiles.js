@@ -3,6 +3,8 @@
 # Grid
 A wrapper class for HexGrid and SqrGrid. Used to encapsulate all Grid properties and methods in one generic Grid object. 
 
+This object represents a grid in virtual space, it is <i>not</i> the grid of 3D tiles that is rendered, but rather a collection of Cells in a hash table and some grid math operations. The Map class uses a Grid to render tiles at their respective coordinates. 
+
 ## Constructor
 <hr style='width:100%; opacity:.5;' />
 
