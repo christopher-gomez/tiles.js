@@ -1,5 +1,5 @@
 import PathUtil from './PathUtil';
-import { PathfinderSettings } from '../utils/Interfaces';
+import { PathfinderSettings, heuristic } from '../utils/Interfaces';
 import LinkedList from '../lib/LinkedList';
 import Tools from '../utils/Tools';
 import Cell from '../grids/Cell';
@@ -9,18 +9,19 @@ import { GridInterface } from '../grids/Grid';
 	@author Corey Birnbaum https://github.com/vonWolfehaus/
  */
 // 'utils/Tools', 'lib/LinkedList'
+
 export default class AStarFinder {
   public allowDiagonal: boolean;
-  public heuristicFilter: Function;
+  public heuristicFilter: heuristic;
   public list: LinkedList;
 
   constructor(finderConfig?: PathfinderSettings) {
     let settings = {
       allowDiagonal: false,
-      heuristicFilter: null as Function
+      heuristicFilter: null as heuristic,
     } as PathfinderSettings;
     if(finderConfig)
-      settings = Tools.merge(settings, finderConfig);
+      settings = Tools.merge(settings, finderConfig) as PathfinderSettings;
 
     this.allowDiagonal = settings.allowDiagonal;
     this.heuristicFilter = settings.heuristicFilter;
@@ -31,7 +32,7 @@ export default class AStarFinder {
 		Find and return the path.
 		@return Array<Cell> The path, including both start and end positions. Null if it failed.
 	 */
-  findPath(startNode: Cell, endNode: Cell, heuristic: Function, grid: GridInterface): Cell[][] {
+  findPath(startNode: Cell, endNode: Cell, heuristic: heuristic, grid: GridInterface): Cell[][] {
     let current, costSoFar, neighbors, n, i, l;
     heuristic = heuristic || this.heuristicFilter;
     // clear old values from previous finding

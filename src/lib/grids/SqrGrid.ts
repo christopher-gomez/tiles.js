@@ -121,7 +121,7 @@ export default class SqrGrid implements GridInterface {
     return this.cells[this.cellToHash(this._cel)];
   }
 
-  getNeighbors(cell: Cell, diagonal: boolean, filter: Function): Cell[] {
+  getNeighbors(cell: Cell, diagonal: boolean, filter: (origin: Cell, next: Cell) => {}): Cell[] {
     // always returns an array
     let i, n;
     const l = this._directions.length;
@@ -182,7 +182,7 @@ export default class SqrGrid implements GridInterface {
     }
   }
 
-  traverse(cb: Function): void {
+  traverse(cb: (cell: Cell) => {}): void {
     let i;
     for (i in this.cells) {
       cb(this.cells[i]);
@@ -297,12 +297,13 @@ export default class SqrGrid implements GridInterface {
     return cell;
   }
 
-  remove(cell: Cell): void {
+  remove(cell: Cell): Cell {
     const h = this.cellToHash(cell);
     if (this.cells[h]) {
       delete this.cells[h];
       this.numCells--;
     }
+    return cell;
   }
 
   dispose(): void {

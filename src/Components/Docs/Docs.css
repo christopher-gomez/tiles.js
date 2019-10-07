@@ -5,10 +5,21 @@
 
 .docs .main p {
   font-size: 1.1em;
+  font-weight: 500;
+  color: rgb(48, 52, 68);
+  text-decoration: underline;
+}
+
+.docs .main .description {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: rgb(48, 52, 68);
 }
 
 .docs .main small {
-  font-size: .9em;
+  font-size: .95em;
+  line-height: .75em;
+  letter-spacing: .024em;
 }
 
 .docs pre code {
