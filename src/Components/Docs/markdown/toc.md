@@ -1,9 +1,15 @@
-## Reference
+## Tiles.js
 
-* [Getting Started](#start)
-  * [Example](#example)
-* [Classes](#classes)
-  * [Grid](#grid)
-  * [Map](#map)
-  * [View](#view)
-* [Interfaces](#interfaces)
+* Getting Started
+<hr style='width:100%; opacity:.5;' />
+
+  * [Installation](#0)
+  * [Example](#0)
+* Classes
+<hr style='width:100%;opacity:.5;'/>
+
+  * [Grid](#1)
+  * [Map](#2)
+  * [View](#3)
+* Interfaces
+<hr style='width:100%;opacity:.5;'/>

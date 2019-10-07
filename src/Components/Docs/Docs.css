@@ -3,13 +3,17 @@
   margin: 0 1em;
 }
 
+.docs .main p {
+  font-size: 1.1em;
+}
+
+.docs .main small {
+  font-size: .9em;
+}
+
 .docs pre code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-  font-size: .8em;
-  border: 1px solid #999;
   display: block;
-  padding: 20px;
+  padding: 15px;
 }
 
 .docs .toc {
@@ -28,7 +32,41 @@
 .docs .toc ul {
   list-style-type: none;
   margin: 0;
-  padding: .25em;
+  padding: 0 .45em;
+  line-height: 1.75em;
+}
+
+.docs .toc ul a {
+  text-decoration: none;
+  color: black;
+}
+
+.docs .toc ul a:hover {
+  text-decoration: underline;
+  color: #006d9a;
+}
+
+.docs .toc ul span {
+  transition: transform 0.4s;
+  width: 5px;
+  background-image: linear-gradient(90deg, #006d9a, #034b69);
+  background-size: 100%;
+  height: 25px;
+  transform: translateY(0px);
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+.docs .header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  display: inline-block;
+  background: gray;
+}
+
+.docs .header h2 {
 }
 
 .docs .main {
@@ -58,19 +96,19 @@
   font-size: inherit;
   color: inherit;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 5px 15px;
   display: inline-block;
-  text-transform: uppercase;
   outline: none;
   background: white;
   color: black;
-  -webkit-transition: background linear .25s;;
-  -moz-transition: background linear .25s;;
-  transition: background linear .25s;
+  -webkit-transition: background linear .25s, border linear .25s, color linear .25s;
+  -moz-transition: background linear .25s, border linear .25s, color linear .25s;
+  transition: background linear .25s, border linear .25s, color linear .25s;
   border-radius: 40px;
 }
 
-.docs .footer .next:hover {
-  background: black;
+.docs .footer .next:hover, .docs .footer .prev:hover {
+  background: #006d9a;
+  border-color: #006d9a;
   color: white;
 }

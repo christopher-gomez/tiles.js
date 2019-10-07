@@ -27,7 +27,3 @@ const scene = new Engine.View(map);
 
 scene.focusOn(map.group);
 ```
-
-```react
-<button>dkjbns</button>
-```
