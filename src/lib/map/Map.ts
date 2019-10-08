@@ -4,7 +4,7 @@ import { GridInterface } from '../grids/Grid';
 import { Object3D, Vector3, LineBasicMaterial } from 'three';
 import AStarFinder from '../pathing/AStarFinder';
 import Cell from '../grids/Cell';
-import { MapSettings, PathfinderSettings, ExtrudeSettings, heuristic } from '../utils/Interfaces';
+import { MapSettings, PathfinderSettings, ExtrudeSettings } from '../utils/Interfaces';
 
 export default class Map {
   public tiles: Tile[];
@@ -113,7 +113,7 @@ export default class Map {
     return this.tiles[i];
   }
 
-  findPath(startTile: Tile, endTile: Tile, heuristic: heuristic): Cell[][] {
+  findPath(startTile: Tile, endTile: Tile, heuristic: (origin: Cell, next: Cell) => {}): Cell[][] {
     return this.finder.findPath(startTile.cell, endTile.cell, heuristic, this.grid);
   }
 
