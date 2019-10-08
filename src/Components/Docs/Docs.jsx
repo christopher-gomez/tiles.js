@@ -2,9 +2,9 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import HTMLParser from 'react-markdown/plugins/html-parser';
-import { Intro, TOC, Grid, Map, View, Interfaces } from './markdown/ref.js';
+import { TOC } from './markdown/ref.js';
+import * as docFiles from './markdown/ref';
 import { Link } from 'react-router-dom';
-const docs = [Intro, Grid, Map, View, Interfaces];
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
@@ -15,32 +15,36 @@ hljs.registerLanguage('typescript', typescript);
 
 export default class Docs extends React.Component {
   state = {
-    toc: null,
+    toc: '',
     combinedData: [],
     currSlide: 0,
     currKey: 'Installation'
   };
   componentDidMount() {
+    const self = this;
     fetch(TOC)
       .then(response => {
         return response.text();
       })
       .then(text => {
-        this.setState({ toc: text });
+        self.setState({ toc: text });
       });
-    for (let i in docs) {
-      docs[i] = fetch(docs[i]).then(response => {
-        return response.text();
-      });
-    }
     let combinedData = [];
-    const self = this;
-    Promise.all(docs).then(values => {
+    let fetchedDocData = Object.keys(docFiles)
+      .slice(1, Object.keys(docFiles).length)
+      .map((key, index) => {
+        return fetch(docFiles[key]).then(response => {
+          return response.text();
+        });
+      });
+    Promise.all(fetchedDocData).then(values => {
       for (let i in values) {
         combinedData.push(values[i]);
       }
       self.setState({ combinedData }, () => {
         self.updateCodeSyntaxHighlighting();
+        //console.log(combinedData);
+        //console.log(Object.keys(combinedData));
       });
     });
   }
@@ -58,9 +62,7 @@ export default class Docs extends React.Component {
       const key = children[0].props.value;
       return (
         <p>
-          {this.state.currKey === key ? (
-            <span></span>
-          ) : null}
+          {this.state.currKey === key ? <span></span> : null}
           <a
             href={'#/docs'}
             id={key}
@@ -95,14 +97,6 @@ export default class Docs extends React.Component {
   setCurrSlide(key, curr) {
     this.setState({ currKey: key, currSlide: curr });
   }
-  next() {
-    const next = ++this.state.currSlide;
-    this.setState({ currSlide: next });
-  }
-  prev() {
-    const prev = --this.state.currSlide;
-    this.setState({ currSlide: prev });
-  }
   render() {
     return (
       <div className="docs">
@@ -119,13 +113,12 @@ export default class Docs extends React.Component {
         <div className="main">
           <ReactMarkdown
             renderers={{
-              link: this.markdownLinkRenderer,
+              link: this.markdownLinkRenderer.bind(this),
               code: this.markdownCodeRenderer
             }}
             plugins={[HTMLParser]}
             source={this.state.combinedData[this.state.currSlide]}
           />
-
         </div>
       </div>
     );
