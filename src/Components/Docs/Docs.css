@@ -6,6 +6,7 @@
 .docs .main {
   margin-left: 16%; /* Same as the width of the sidebar */
   padding: 0px 30px;
+  padding-right: 90px;
   margin-bottom: 1em;
 }
 
@@ -41,16 +42,17 @@
 }
 
 .docs .main small {
-  font-size: .95em;
-  line-height: .75em;
-  letter-spacing: .024em;
+  font-size: 0.95em;
+  line-height: 0.75em;
+  letter-spacing: 0.024em;
 }
 
 .docs pre code {
   display: block;
   padding: 15px;
-  font-size: .9em;
-  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstr
+  font-size: 0.9em;
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstr;
 }
 
 .docs .toc {
@@ -66,19 +68,42 @@
   padding: 10px;
 }
 
+@media screen and (max-width: 700px) {
+  .docs .toc {
+    display: none;
+  }
+
+  .docs .main {
+    padding: 0 20px;
+    margin-left: 0;
+    font-size: 0.9em;
+  }
+
+  .docs pre code {
+    font-size: 0.7em;
+  }
+
+  .docs .footer .next,
+  .docs .footer .prev {
+    display: inline-block !important;
+  }
+}
+
 .docs .toc ul {
   list-style-type: none;
   margin: 0;
-  padding: 0 .40em;
+  padding: 0 0.4em;
   line-height: 1.5em;
 }
 
-.docs .toc ul a, .docs .toc h2 a {
+.docs .toc ul a,
+.docs .toc h2 a {
   text-decoration: none;
   color: black;
 }
 
-.docs .toc ul a:hover, .docs .toc h2 a:hover {
+.docs .toc ul a:hover,
+.docs .toc h2 a:hover {
   text-decoration: underline;
   color: #006d9a;
 }
@@ -117,7 +142,8 @@
   left: 0px;
 }
 
-.docs .footer .next, .docs .footer .prev {
+.docs .footer .next,
+.docs .footer .prev {
   position: absolute;
   text-decoration: none;
   border: 1px solid black;
@@ -125,17 +151,20 @@
   color: inherit;
   cursor: pointer;
   padding: 5px 15px;
-  display: inline-block;
+  display: none;
   outline: none;
   background: white;
   color: black;
-  -webkit-transition: background linear .25s, border linear .25s, color linear .25s;
-  -moz-transition: background linear .25s, border linear .25s, color linear .25s;
-  transition: background linear .25s, border linear .25s, color linear .25s;
+  -webkit-transition: background linear 0.25s, border linear 0.25s,
+    color linear 0.25s;
+  -moz-transition: background linear 0.25s, border linear 0.25s,
+    color linear 0.25s;
+  transition: background linear 0.25s, border linear 0.25s, color linear 0.25s;
   border-radius: 40px;
 }
 
-.docs .footer .next:hover, .docs .footer .prev:hover {
+.docs .footer .next:hover,
+.docs .footer .prev:hover {
   background: #006d9a;
   border-color: #006d9a;
   color: white;

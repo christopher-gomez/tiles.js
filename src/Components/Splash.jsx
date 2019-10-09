@@ -9,13 +9,13 @@ export default class Splash extends React.Component {
       enableDamping: true,
       controlled: false,
       dampingFactor: 0.05,
-      minDistance: 250,
-      maxDistance: 400,
+      minDistance: 150,
+      maxDistance: 200,
       zoomSpeed: 3,
       autoRotate: true,
       screenSpacePanning: false,
-      minPolarAngle: Math.PI / 10, // Math.PI / 10
-      maxPolarAngle: Math.PI / 4,
+      minPolarAngle: 0, // Math.PI / 10
+      maxPolarAngle: 60,
       minAzimuthAngle: 0,
       maxAzimuthAngle: -Math.PI,
       horizontalRotation: true
@@ -32,7 +32,7 @@ export default class Splash extends React.Component {
     this.map = new Engine.Map(this.gridSpace);
     this.scene = new Engine.View(this.map, {
       element: document.getElementById('engine'),
-      cameraPosition: { x: 0, y: 40, z: 50 },
+      cameraPosition: { x: 50, y: 52, z: 50 },
       cameraControlSettings: {
         controlled: cc.controlled,
         enableDamping: cc.enableDamping,
@@ -53,7 +53,7 @@ export default class Splash extends React.Component {
     });
     //this.board.generateOverlay(45);
 
-    this.scene.focusOn(this.map.group);
+    this.scene.focusOn(this.map.getRandomTile());
   }
   componentWillUnmount() {
     window.cancelAnimationFrame(this.animID);

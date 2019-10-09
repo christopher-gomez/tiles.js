@@ -7,22 +7,23 @@ import Cell from '../grids/Cell';
 import { MapSettings, PathfinderSettings, ExtrudeSettings } from '../utils/Interfaces';
 
 export default class Map {
-  public tiles: Tile[];
-  public tileGroup: Object3D;
-  public group: Object3D;
+
   public grid: GridInterface;
-  public overlay: Object3D;
-  public finder: AStarFinder;
+  public pathFinder: AStarFinder;
+  public tiles: Tile[];
+  public group: Object3D;
+  public tileGroup: Object3D;
+  public tileOverlay: Object3D;
 
   dispose(): void {
     delete this.tiles;
     delete this.tileGroup;
     delete this.group;
-    delete this.overlay;
-    delete this.finder;
+    delete this.tileOverlay;
+    delete this.pathFinder;
   }
 
-  constructor(grid: GridInterface, boardConfig?: MapSettings, finderConfig?: PathfinderSettings) {
+  constructor(grid: GridInterface, mapConfig?: MapSettings, finderConfig?: PathfinderSettings) {
     if (!grid) throw new Error('You must pass in a grid system for the board to use.');
 
     this.tiles = [] as Tile[];
@@ -31,13 +32,13 @@ export default class Map {
     this.group = new Object3D(); // can hold all entities, also holds tileGroup, never trashed
 
     this.grid = null;
-    this.overlay = null;
-    this.finder = new Engine.AStarFinder(finderConfig);
+    this.tileOverlay = null;
+    this.pathFinder = new Engine.AStarFinder(finderConfig);
     // need to keep a resource cache around, so this Loader does that, use it instead of THREE.ImageUtils
     Engine.Loader.init();
 
     this.setGrid(grid);
-    this.generateTiles(boardConfig)
+    this.generateTiles(mapConfig)
   }
   setEntityOnTile(entity: any, tile: Tile): void {
     // snap an entity's position to a tile; merely copies position
@@ -114,7 +115,7 @@ export default class Map {
   }
 
   findPath(startTile: Tile, endTile: Tile, heuristic: (origin: Cell, next: Cell) => {}): Cell[][] {
-    return this.finder.findPath(startTile.cell, endTile.cell, heuristic, this.grid);
+    return this.pathFinder.findPath(startTile.cell, endTile.cell, heuristic, this.grid);
   }
 
   setGrid(newGrid: GridInterface): void {
@@ -141,15 +142,15 @@ export default class Map {
       opacity: 0.9
     });
 
-    if (this.overlay) {
-      this.group.remove(this.overlay);
+    if (this.tileOverlay) {
+      this.group.remove(this.tileOverlay);
     }
 
-    this.overlay = new Object3D();
+    this.tileOverlay = new Object3D();
 
-    this.grid.generateOverlay(size, this.overlay, mat);
+    this.grid.generateOverlay(size, this.tileOverlay, mat);
 
-    this.group.add(this.overlay);
+    this.group.add(this.tileOverlay);
   }
 
   generateTiles(config?: MapSettings): void {

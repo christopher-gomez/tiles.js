@@ -1,4 +1,4 @@
-import { SceneSettings, CameraControlSettings, ViewController } from '../utils/Interfaces';
+import { ViewSettings, CameraControlSettings, ViewController } from '../utils/Interfaces';
 import { WebGLRenderer, DirectionalLight, Scene, AmbientLight, Camera, PerspectiveCamera, Mesh, Vector3 } from 'three';
 import Tile from '../grids/Tile';
 import Cell from '../grids/Cell';
@@ -22,7 +22,7 @@ export default class View implements ViewController {
   public container: Scene;
   public camera: Camera;
   public controlled: boolean;
-  public settings: SceneSettings;
+  public settings: ViewSettings;
   public controls: Controller;
 
   private _selectedTile: Tile;
@@ -67,8 +67,8 @@ export default class View implements ViewController {
     this._mouseCaster = mouse;
   }
 
-  constructor(map: Map, sceneConfig?: SceneSettings) {
-    sceneConfig = sceneConfig || {} as SceneSettings;
+  constructor(map: Map, viewConfig?: ViewSettings) {
+    viewConfig = viewConfig || {} as ViewSettings;
     let sceneSettings = {
       element: document.body,
       alpha: true,
@@ -98,14 +98,14 @@ export default class View implements ViewController {
         maxAzimuthAngle: -Math.PI,
         horizontalRotation: false,
       } as CameraControlSettings,
-    } as SceneSettings;
+    } as ViewSettings;
 
-    if (sceneConfig.cameraControlSettings) {
-      sceneSettings.cameraControlSettings = Tools.merge(sceneSettings.cameraControlSettings, sceneConfig.cameraControlSettings) as CameraControlSettings;
+    if (viewConfig.cameraControlSettings) {
+      sceneSettings.cameraControlSettings = Tools.merge(sceneSettings.cameraControlSettings, viewConfig.cameraControlSettings) as CameraControlSettings;
     }
 
-    if (sceneConfig)
-      sceneSettings = Tools.merge(sceneSettings, sceneConfig) as SceneSettings;
+    if (viewConfig)
+      sceneSettings = Tools.merge(sceneSettings, viewConfig) as ViewSettings;
     this.settings = sceneSettings;
 
     this._initSceneSettings();
@@ -195,7 +195,7 @@ export default class View implements ViewController {
   }
 
   // Need to finish
-  updateSettings(settings: SceneSettings): void {
+  updateSettings(settings: ViewSettings): void {
     // update settings here
 
     // then update controls
