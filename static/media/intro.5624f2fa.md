@@ -25,7 +25,11 @@ import Engine from 'tiles.js'; // Or wherever you have it saved './lib/tiles.js'
 // or only import what you need
 // import {Grid, Map, View} from 'tiles.js';
 
-const grid = new Engine.Grid();
+const grid = new Engine.Grid({
+  gridShape: Engine.HEX,
+  gridSize: 50,
+  cellSize: 5
+});
 const map = new Engine.Map(grid);
 const scene = new Engine.View(map);
 
