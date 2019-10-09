@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom';
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
+import bash from 'highlight.js/lib/languages/bash';
 import './Docs.css';
 import 'highlight.js/styles/atelier-sulphurpool-light.css';
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('bash', bash);
 
 export default class Docs extends React.Component {
   state = {
