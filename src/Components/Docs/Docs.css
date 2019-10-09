@@ -14,7 +14,14 @@
   font-size: 1.1em;
   font-weight: 500;
   color: rgb(48, 52, 68);
-  text-decoration: underline;
+}
+
+.docs .main p code {
+  background: white;
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstr;
+  font-size: 0.85em;
+  padding:0;
 }
 
 .docs .main a {

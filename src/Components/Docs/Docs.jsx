@@ -9,7 +9,7 @@ import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
 import './Docs.css';
-import 'highlight.js/styles/tomorrow-night-eighties.css';
+import 'highlight.js/styles/atelier-sulphurpool-light.css';
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);
 
@@ -54,6 +54,10 @@ export default class Docs extends React.Component {
   updateCodeSyntaxHighlighting = () => {
     document.querySelectorAll('pre code').forEach(block => {
       hljs.highlightBlock(block);
+    });
+    document.querySelectorAll('p code').forEach(block => {
+      hljs.highlightBlock(block);
+      block.className = 'language-typescript hljs'
     });
   };
   markdownLinkRenderer({ href, children }) {

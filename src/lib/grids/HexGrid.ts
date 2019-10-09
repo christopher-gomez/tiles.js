@@ -204,7 +204,7 @@ export default class HexGrid implements GridInterface {
     }
   }
 
-  traverse(cb: (cell: Cell) => {}): void {
+  traverse(cb: (cell: Cell) => void): void {
     let i;
     for (i in this.cells) {
       cb(this.cells[i]);

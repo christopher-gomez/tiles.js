@@ -11,7 +11,7 @@ import { Geometry, MeshPhongMaterial, Fog, Light, Vector3, Camera, WebGLRenderer
 import Cell from '../grids/Cell';
 import Tile from '../grids/Tile';
 
-export type heuristic = (origin: Cell, next: Cell) => {}; // Should return true/false
+export type heuristic = (origin: Cell, next: Cell) => boolean; // Should return true/false
 
 /*******CONFIG OBJECT INTERFACES*******/
 export interface TileSettings {
