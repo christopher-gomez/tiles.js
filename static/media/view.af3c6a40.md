@@ -53,4 +53,30 @@ viewConfig - (optional) An object with one or more properties describing the Vie
 ## Methods
 <hr style='width:100%; opacity:.5;' />
 
+`.add(mesh: Mesh): void`
 
+`.addMap(map: Map): void`
+
+`.attachTo(element: HTMLElement): void`
+
+`.dispose()`
+
+`.focusOn(pos: Tile | Vector3): void`
+
+`.getViewCenter(): Vector3`
+
+`.panCameraTo(tile: Tile | Cell, durationMs: number): void`
+
+`.panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void`
+
+`.remove(mesh: Mesh): void`
+
+`.setOnAnimateCallback(cb: (dtS: number) => void): void`
+
+`.toggleControls(): void`
+
+`.toggleHorizontalRotation(bool: boolean): void`
+
+`.updateControls(config: CameraControlsSettings): void`
+
+`.updateSettings(config: ViewSettings): void`
