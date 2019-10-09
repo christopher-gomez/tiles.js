@@ -126,7 +126,7 @@ export default class View implements ViewController {
     delete this._mouseCaster;
   }
 
-  onWindowResize(): void {
+  private onWindowResize(): void {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
     (this.camera as PerspectiveCamera).aspect = this.width / this.height;
@@ -183,17 +183,6 @@ export default class View implements ViewController {
     return pos;
   }
 
-  getCameraFocusPosition(pos: Vector3): Vector3 {
-    return this.getCameraFocusPositionWorld(pos)
-  }
-
-  getCameraFocusPositionWorld(pos: Vector3): Vector3 {
-    const currentPos = this.camera.position.clone()
-    const viewOffset = currentPos.sub(this.getViewCenter());
-
-    return pos.add(viewOffset)
-  }
-
   // Need to finish
   updateSettings(settings: ViewSettings): void {
     // update settings here
@@ -211,10 +200,10 @@ export default class View implements ViewController {
   }
 
   toggleHorizontalRotation(bool: boolean): void {
-    this.toggleHorizontalRotation(bool);
+    this.controls.toggleHorizontalRotation(bool);
   }
 
-  initControls(config: CameraControlSettings): void {
+  private initControls(config: CameraControlSettings): void {
     this.controls = new Controller(this, config);
   }
 
