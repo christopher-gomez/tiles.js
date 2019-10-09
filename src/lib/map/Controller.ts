@@ -21,7 +21,7 @@ export default class Controller implements ViewController {
     }
   }
 
-  initControls(config: CameraControlSettings): void {
+  private initControls(config: CameraControlSettings): void {
     this._view.controlled = config.controlled;
     this._controls = new OrbitControls(this._view.camera, this._view.renderer.domElement, this._view);
     this._controls.minDistance = config.minDistance;

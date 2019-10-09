@@ -1,4 +1,4 @@
-import { Geometry, MeshPhongMaterial, Fog, Light, Vector3, Camera, WebGLRenderer, Material } from 'three';
+import { Geometry, MeshPhongMaterial, Fog, Light, Vector3, Material } from 'three';
 import Cell from '../grids/Cell';
 import Tile from '../grids/Tile';
 
@@ -83,7 +83,6 @@ export interface GridJSONData {
 
 /*MAP INTERFACES*/
 export interface ViewController {
-  initControls(config: CameraControlSettings, camera: Camera, renderer: WebGLRenderer): void;
   dispose(): void;
   updateControls(config: CameraControlSettings): void;
   toggleControls(): void;
