@@ -111,7 +111,7 @@ export default class View implements ViewController {
     this._initSceneSettings();
 
     this.attachTo(sceneSettings.element);
-    this.addBoard(map);
+    this.addMap(map);
     this.animate(0);
   }
 
@@ -146,10 +146,10 @@ export default class View implements ViewController {
     this.container.add(mesh);
   }
 
-  public board: Map;
-  addBoard(board: Map): void {
-    this.board = board;
-    this.container.add(board.group);
+  public map: Map;
+  addMap(map: Map): void {
+    this.map = map;
+    this.container.add(map.group);
   }
 
   remove(mesh: Mesh): void {
@@ -382,8 +382,8 @@ export default class View implements ViewController {
           //(tile as Tile).toggle();
           self.controls.panCameraTo(tile as Tile, 2500);
           // or we can use the mouse's raw coordinates to access the cell directly, just for fun:
-          const cell = self.board.grid.pixelToCell(self._mouseCaster.position);
-          const t = self.board.getTileAtCell(cell);
+          const cell = self.map.grid.pixelToCell(self._mouseCaster.position);
+          const t = self.map.getTileAtCell(cell);
           if (t) t.toggle();
         }
         if (evt === MouseCaster.OVER) {

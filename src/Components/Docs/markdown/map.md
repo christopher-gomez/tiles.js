@@ -11,7 +11,7 @@ The object this class creates is meant to be used to interact with the Map in th
 ## Constructor
 <hr style='width:100%; opacity:.5;' />
 
-Map (grid: GridInterface, mapConfig?: MapSettings, finderConfig?: PathfinderSettings)
+`Map(grid: GridInterface, mapConfig?: MapSettings, finderConfig?: PathfinderSettings)`
 
 <small>
 grid - (required) Any grid object that implements GridInterface.<br>
@@ -22,37 +22,37 @@ finderConfig - (optional) An object with one or more properties describing the P
 ## Properties
 <hr style='width:100%; opacity:.5;' />
 
-.grid: GridInterface
+`.grid: GridInterface`
 
 <small>
 The current Grid object the Map is rendering.<br>Can by any Grid that implements the GridInterface. 
 </small>
 
-.pathFinder: AStarFinder
+`.pathFinder: AStarFinder`
 
 <small>
 The pathFinder object, of type AStarFinder. Used for pathfinding. (using A* search) 
 </small>
 
-.tiles: Tile[]
+`.tiles: Tile[]`
 
 <small>
 An array of Tiles, for every tile on the Map. 
 </small>
 
-.group: Object3D
+`.group: Object3D`
 
 <small>
 A container Object3D for the tileGroup and tileOverlay objects.
 </small>
 
-.tileGroup: Object3D
+`.tileGroup: Object3D`
 
 <small>
 A container object for every Tile mesh.
 </small>
 
-.tileOverlay: Object3D
+`.tileOverlay: Object3D`
 
 <small>
 A collection of lines overlaying the Cells.
@@ -61,38 +61,38 @@ A collection of lines overlaying the Cells.
 ## Methods
 <hr style='width:100%; opacity:.5;' />
 
-.addTile(tile: Tile): void
+`.addTile(tile: Tile): void`
 
-.dispose(): void
+`.dispose(): void`
 
-.findPath(startTile: Tile, endTile: Tile, heuristic: (origin: Cell, next: Cell) => {}): Cell[][]
+`.findPath(startTile: Tile, endTile: Tile, filter?: (origin: Cell, next: Cell) => boolean): Cell[][]`
 
-.generateOverlay(size: number): void
+`.generateOverlay(size: number): void`
 
-.generateTiles(config?: MapSettings): void
+`.generateTiles(config?: MapSettings): void`
 
-.getRandomTile(): Tile
+`.getRandomTile(): Tile`
 
-.getTileAtCell(cell: Cell): Tile
+`.getTileAtCell(cell: Cell): Tile`
 
-.removeAllTiles(): void
+`.removeAllTiles(): void`
 
-.removeTile(tile: Tile): void
+`.removeTile(tile: Tile): void`
 
-.reset(): void
+`.reset(): void`
 
 <small>
 removes all tiles from the scene, but leaves the grid intact
 </small>
 
-.setEntityOnTile(entity: any, tile: Tile): void
+`.setEntityOnTile(entity: any, tile: Tile): void`
 
-.setGrid(newGrid: GridInterface): void
+`.setGrid(newGrid: GridInterface): void`
 
 <small>
 Called from the constructor, but can be used to create a new map.
 </small>
 
-.snapTileToGrid(tile: Tile): Tile
+`.snapTileToGrid(tile: Tile): Tile`
 
-.snapToGrid(pos: Vector3): void
+`.snapToGrid(pos: Vector3): void`

@@ -5,6 +5,7 @@ import Tile from "./Tile";
 import HexGrid from './HexGrid';
 import Engine from '../Engine';
 import SqrGrid from "./SqrGrid";
+import { heuristic } from '../utils/Interfaces';
 
 export interface GridInterface {
   gridShape: string;
@@ -26,13 +27,13 @@ export interface GridInterface {
   pixelToCell(pos: Vector3): Cell;
   dispose(): void;
   generateOverlay(size: number, overlayObj: Object3D, overlayMat: Material): void;
-  generateTiles(tilemapSettings: MapSettings): Tile[];
+  generateTiles(tilemapSettings?: MapSettings): Tile[];
   generateGrid(config: GridSettings): void;
   clearPath(): void;
-  getNeighbors(cell: Cell, diagonals: boolean, heuristic: (origin: Cell, next: Cell) => {}): Cell[];
+  getNeighbors(cell: Cell, diagonals?: boolean, filter?: heuristic): Cell[];
   getRandomCell(): Cell;
   distance(cellA: Cell, cellB: Cell): number;
-  traverse(cb: (cell: Cell) => {}): void;
+  traverse(cb: (cell: Cell) => void): void;
 };
 
 export default class Grid {

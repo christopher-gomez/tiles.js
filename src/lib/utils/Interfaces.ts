@@ -3,7 +3,7 @@ import Cell from '../grids/Cell';
 import Tile from '../grids/Tile';
 
 // Should return TRUE/FALSE
-export type heuristic = (origin: Cell, next: Cell) => {};
+export type heuristic = (origin: Cell, next: Cell) => boolean;
 
 /* CONFIG OBJECT INTERFACES */
 export interface TileSettings {

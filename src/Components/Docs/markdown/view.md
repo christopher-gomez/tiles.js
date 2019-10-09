@@ -10,7 +10,7 @@ The View also implements the ViewController interface, allowing for all Controll
 ## Constructor
 <hr style='width:100%; opacity:.5;' />
 
-View (map: Map, viewConfig?: ViewSettings)
+`View(map: Map, viewConfig?: ViewSettings)`
 
 <small>
 map - (required) A Map object to render.<br> 
@@ -19,6 +19,36 @@ viewConfig - (optional) An object with one or more properties describing the Vie
 
 ## Properties
 <hr style='width:100%; opacity:.5;' />
+
+`.camera: Camera`
+
+`.container: Scene`
+
+`.controlled: boolean;`
+
+`.controls: Controller`
+
+`.height: number;`
+
+`.hotEdges: boolean;`
+
+`.map: Map`
+
+`.mouseCaster: MouseCaster`
+
+`.onAnimate: (dtS: number) => void`
+
+`.onLoaded: cb: () => void`
+
+`.onTileSelected: cb: (tile: Tile) => void`
+
+`.renderer: WebGLRenderer`
+
+`.selectedTile: Tile`
+
+`.settings: ViewSettings`
+
+`.width: number`
 
 ## Methods
 <hr style='width:100%; opacity:.5;' />
