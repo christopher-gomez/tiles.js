@@ -157,18 +157,29 @@ export default class View implements ViewController {
   }
 
   private animate(timestamp: number): void {
-    const dtS = (timestamp - this._lastTimestamp) / 1000.0;
-    this._lastTimestamp = timestamp;
-    this._mouseCaster.update();
-    if (this.controlled) {
-      if (this.hotEdges && this._panning && this._hoverTile) {
-        this.panInDirection(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
+    if (!this._paused) {
+      const dtS = (timestamp - this._lastTimestamp) / 1000.0;
+      this._lastTimestamp = timestamp;
+      this._mouseCaster.update();
+      if (this.controlled) {
+        if (this.hotEdges && this._panning && this._hoverTile) {
+          this.panInDirection(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
+        }
       }
+      this._onAnimate(dtS);
+      this.controls.update();
+      this.renderer.render(this.container, this.camera);
     }
-    this._onAnimate(dtS);
-    this.controls.update();
-    this.renderer.render(this.container, this.camera);
     this._animationID = requestAnimationFrame(this.animate.bind(this));
+  }
+
+  private _paused = false;
+  set paused(paused: boolean) {
+    this._paused = paused;
+  }
+
+  toggleAnimationLoop(): void {
+    this._paused = !this._paused;
   }
 
   focusOn(pos: Tile | Vector3): void {
