@@ -40,7 +40,7 @@ export interface PathfinderSettings {
   heuristicFilter?: heuristic;
 }
 
-export interface SceneSettings {
+export interface ViewSettings {
   element?: HTMLElement;
   alpha?: boolean;
   antialias?: boolean;

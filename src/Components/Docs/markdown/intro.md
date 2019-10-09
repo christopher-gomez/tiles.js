@@ -1,7 +1,9 @@
 # Tiles.js
 
 <div class='description'>
-Tiles.js is a simple to use 3D tile map engine.
+Tiles.js is a simple to use 3D tile map engine.<br><br>
+Mostly documenting for my own reference.<br><br>
+Please bear with me while I build the documentation components.<br>(Rendering Markdown in React is just as fun as 3D rendering!)
 </div>
 
 <a id='start'></a>
@@ -9,11 +11,10 @@ Tiles.js is a simple to use 3D tile map engine.
 ## Getting Started
 
 <div class='description'>
-This library is still under development and thus, incomplete.<br/><br/>
-Eventually, I plan on releasing it as a package on npm, along with a minified version on a CDN.
+This library is still under development and incomplete.<br/><br/>
+I plan on eventually releasing it as a package on npm, along with a minified version on a CDN, after I've released a Steam game with it.<br/><br>
+If you still want to play around with it, you can clone or download it from it's <a href='https://github.com/christophgomez/tiles.js' target="_blank" rel="nofollow noopener noreferrer">repo</a> on GitHub and include it directly in your project.
 </div>
-
-If you still want to fiddle around with it or contribute to it's development, you can clone or download it from it's [repo](https://github.com/christophgomez/tiles.js) on GitHub and include it directly in your project.
 
 <a id='example'></a>
 

@@ -58,7 +58,7 @@ export default class Docs extends React.Component {
   };
   markdownLinkRenderer({ href, children }) {
     if (href.startsWith('#')) {
-      const val = href.slice(1);
+      const slide = href.slice(1);
       const key = children[0].props.value;
       return (
         <p>
@@ -66,7 +66,7 @@ export default class Docs extends React.Component {
           <a
             href={'#/docs'}
             id={key}
-            onClick={() => this.setCurrSlide(key, val)}
+            onClick={() => this.setCurrSlide(slide, key)}
           >
             {children}
           </a>
@@ -94,8 +94,8 @@ export default class Docs extends React.Component {
     );
     return React.createElement('pre', {}, code);
   }
-  setCurrSlide(key, curr) {
-    this.setState({ currKey: key, currSlide: curr });
+  setCurrSlide(currSlide, currKey) {
+    this.setState({ currSlide, currKey });
   }
   render() {
     return (
@@ -119,6 +119,23 @@ export default class Docs extends React.Component {
             plugins={[HTMLParser]}
             source={this.state.combinedData[this.state.currSlide]}
           />
+        </div>
+        <div className="footer">
+          {this.state.currSlide > 0 ? (
+            <button className="prev" onClick={() => {
+              this.setCurrSlide(this.state.currSlide - 1, this.state.currKey - 1);
+            }}>Prev</button>
+          ) : null}
+          {this.state.currSlide < this.state.combinedData.length ? (
+            <button
+              className="next"
+              onClick={() => {
+                this.setCurrSlide(this.state.currSlide + 1, this.state.currKey + 1);
+              }}
+            >
+              Next
+            </button>
+          ) : null}
         </div>
       </div>
     );
