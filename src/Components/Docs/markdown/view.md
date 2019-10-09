@@ -36,6 +36,8 @@ viewConfig - (optional) An object with one or more properties describing the Vie
 
 `.mouseCaster: MouseCaster`
 
+`paused: boolean`
+
 `.onAnimate: (dtS: number) => void`
 
 `.onLoaded: cb: () => void`
@@ -74,6 +76,8 @@ viewConfig - (optional) An object with one or more properties describing the Vie
 `.setOnAnimateCallback(cb: (dtS: number) => void): void`
 
 `.toggleControls(): void`
+
+`.toggleAnimationLoop(): void`
 
 `.toggleHorizontalRotation(bool: boolean): void`
 
