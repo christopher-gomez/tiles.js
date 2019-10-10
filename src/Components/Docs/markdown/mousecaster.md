@@ -13,6 +13,39 @@ Currently, View does all the heavy lifting when it comes to the MouseCaster. Fut
 ## Properties
 <hr style='width:100%; opacity:.5;' />
 
+`.active: boolean`
+
+`.allHits: Intersection[]`
+
+`.ctrl: boolean`
+
+`.down: boolean`
+
+`.element: HTMLElement`
+
+`.group: Object3D`
+
+`.pickedObject: Tile`
+
+`.position: Vector3`
+
+`.rightDown: boolean`
+
+`.selectedObject: Tile`
+
+`.screenPosition: Vector2`
+
+`.shift: boolean`
+
+`.signal: Signal`
+
+`.wheel: number`
 
 ## Methods
 <hr style='width:100%; opacity:.5;' />
+
+`.dispose()`
+
+`.raycast()`
+
+`.update()`

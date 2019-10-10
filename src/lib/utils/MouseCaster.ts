@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import Engine from '../Engine';
 import * as THREE from 'three';
+import Tile from '../grids/Tile';
+import { Intersection, Vector3, Vector2, Camera, Raycaster, Object3D } from 'three';
+import Signal from '../lib/Signal';
 /*
 	Translates mouse interactivity into 3D positions, so we can easily pick objects in the scene.
 
@@ -13,7 +16,36 @@ import * as THREE from 'three';
 	@author Corey Birnbaum https://github.com/vonWolfehaus/
  */
 class MouseCaster {
-  constructor(group, camera, element) {
+
+  static OVER: string;
+  static OUT: string;
+  static DOWN: string;
+  static UP: string;
+  static CLICK: string; // only fires if the user clicked down and up while on the same object
+  static WHEEL: string;
+  static MOVE: string;
+
+  public down: boolean;
+  public rightDown: boolean;
+  public pickedObject: Tile;
+  public selectedObject: Tile;
+  public allHits: Intersection[];
+  public active: boolean;
+  public shift: boolean;
+  public ctrl: boolean;
+  public wheel: number;
+
+  public position: Vector3;
+  public screenPosition: Vector2;
+  public signal: Signal;
+  public group: Object3D;
+
+  private _camera: Camera;
+  private _raycaster: Raycaster;
+  private _preventDefault: boolean;
+  public element: HTMLElement | Document;
+
+  constructor(group: Object3D, camera: Camera, element?: HTMLElement) {
     this.down = false; // left click
     this.rightDown = false;
     // the object that was just clicked on
@@ -47,17 +79,17 @@ class MouseCaster {
     this.element.addEventListener('mouseup', this._onDocumentMouseUp.bind(this), false);
     this.element.addEventListener('mousewheel', this._onMouseWheel.bind(this), false);
     this.element.addEventListener('DOMMouseScroll', this._onMouseWheel.bind(this), false); // firefox
-    this.element.addEventListener("touchstart", (e) => {
-      this._onDocumentMouseDown(e.touches[0]).bind(this)
+    this.element.addEventListener("touchstart", (e: Event | TouchEvent) => {
+      this._onDocumentMouseDown((e as TouchEvent).touches[0])
       //e.preventDefault()
     }, false)
-    this.element.addEventListener("touchmove", (e) => {
-      this._onDocumentMouseMove(e.touches[0]).bind(this)
+    this.element.addEventListener("touchmove", (e: Event | TouchEvent) => {
+      this._onDocumentMouseDown((e as TouchEvent).touches[0])
       //e.preventDefault()
     }, false)
-    this.element.addEventListener("touchend", (e) => this._onDocumentMouseUp(e.touches[0] || e.changedTouches[0]).bind(this), false)
+    this.element.addEventListener("touchend", (e) => this._onDocumentMouseUp((e as TouchEvent).touches[0] || (e as TouchEvent).changedTouches[0]), false)
   }
-  dispose(ctx) {
+  dispose(ctx: any) {
     this.signal.removeAll(ctx);
     this.element.removeEventListener('mousemove', this._onDocumentMouseDown, false);
     this.element.removeEventListener('touchmove', this._onDocumentMouseMove, false);
@@ -97,7 +129,7 @@ class MouseCaster {
         this.signal.dispatch('over', this.pickedObject);
       }
       this.position.copy(hit.point);
-      this.screenPosition.z = hit.distance;
+      (this.screenPosition as any).z = hit.distance;
     }
     else {
       // there isn't anything under the mouse
@@ -116,7 +148,7 @@ class MouseCaster {
     this._preventDefault = true;
   }
 
-  _onDocumentMouseDown(evt) {
+  _onDocumentMouseDown(evt: any) {
     evt = evt || window.event;
     evt.preventDefault();
     if (this._preventDefault) {
@@ -135,7 +167,7 @@ class MouseCaster {
     this.signal.dispatch('down', this.pickedObject);
   }
 
-  _onDocumentMouseUp(evt) {
+  _onDocumentMouseUp(evt: any) {
     evt.preventDefault();
     if (this._preventDefault) {
       this._preventDefault = false;
@@ -153,14 +185,14 @@ class MouseCaster {
     this.rightDown = evt.which === 3 ? false : this.rightDown;
   }
 
-  _onDocumentMouseMove(evt) {
+  _onDocumentMouseMove(evt: any) {
     evt.preventDefault();
     this.screenPosition.x = (evt.clientX / window.innerWidth) * 2 - 1;
     this.screenPosition.y = -(evt.clientY / window.innerHeight) * 2 + 1;
     this.signal.dispatch('move', evt);
   }
 
-  _onMouseWheel(evt) {
+  _onMouseWheel(evt: any) {
     if (!this.active) {
       return;
     }
