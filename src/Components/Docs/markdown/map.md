@@ -1,5 +1,3 @@
-<a id='map'></a>
-
 # Map
 
 <div class='description'>

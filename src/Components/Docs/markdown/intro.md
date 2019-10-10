@@ -6,8 +6,6 @@ Mostly documenting for my own reference.<br><br>
 Please bear with me while I build the documentation components.<br>(Rendering Markdown in React is just as fun as 3D rendering!)
 </div>
 
-<a id='start'></a>
-
 ## Getting Started
 
 <div class='description'>
@@ -34,8 +32,6 @@ A browser window should automatically open and navigate to http://localhost:3000
 Once that's open, feel free to mess around with the lib folder in the src folder, that's the source code.<br>
 Or import the built code into one of the React components (or plain HTML file) and start building something cool with Tiles!
 </div>
-
-<a id='example'></a>
 
 ## Example
 

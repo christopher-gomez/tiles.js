@@ -1,5 +1,3 @@
-<a id='grid'></a>
-
 # Grid
 
 <div class='description'>

@@ -1,5 +1,3 @@
-<a id='view'></a>
-
 # View
 
 <div class='description'>
