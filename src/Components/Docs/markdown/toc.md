@@ -17,7 +17,8 @@
     * [View](#5)
     * [Controller](#6)
   * #### Utility
-    * [AStarFinder](#7)
-    * [MouseCaster](#8)
-* ### [Interfaces](#9)
+    * [Animation](#7)
+    * [AStarFinder](#8)
+    * [MouseCaster](#9)
+* ### [Interfaces](#10)
 <hr style='width:100%;opacity:.5;'/>
