@@ -111,6 +111,10 @@ input[type=checkbox]:checked ~ p label:before {
   border-right: 1px solid rgba(128, 128, 128, 0.39);
   padding: 10px;
 }
+.docs .toc h4, .docs .toc h4 > p {
+  margin-block-start: 0em;
+  margin-block-end: .2em;
+}
 
 @media screen and (max-width: 700px) {
   .docs .toc {
@@ -148,7 +152,6 @@ input[type=checkbox]:checked ~ p label:before {
 
 .docs .toc ul a:hover,
 .docs .toc h2 a:hover {
-  text-decoration: underline;
   color: #006d9a;
 }
 

@@ -182,31 +182,6 @@ class MouseCaster {
     }
     this.signal.dispatch('wheel', this.wheel);
   }
-  mouseToWorld(pos, camera) {
-    if (pos) {
-      const mv = new THREE.Vector3((pos.x / window.innerWidth) * 2 - 1, -(pos.y / window.innerHeight) * 2 + 1, 0.5)
-      const raycaster = this.pickingRay(mv, camera);
-      return raycaster.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 0, 1), 0))
-    } else {
-      const mv = new THREE.Vector3((this.screenPosition.x / window.innerWidth) * 2 - 1, -(this.screenPosition.y / window.innerHeight) * 2 + 1, 0.5)
-      const raycaster = this.pickingRay(mv, camera);
-      return raycaster.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 0, 1), 0))
-    }
-  }
-  pickingRay(vector, camera) {
-    
-    // set two vectors with opposing z values
-    vector.z = -1.0;
-    const end = new THREE.Vector3(vector.x, vector.y, 1.0);
-
-    vector.unproject(camera);
-    end.unproject(camera);
-
-    // find direction from vector to end
-    end.sub(vector).normalize();
-    return new THREE.Raycaster(vector, end);
-  }
-
   rayCast() {
     this._raycaster.setFromCamera(this.screenPosition, this._camera);
     const intersects = this._raycaster.intersectObject(this.group, true);

@@ -72,6 +72,11 @@ export default class Docs extends React.Component {
           <a
             href={'#/docs'}
             id={key}
+            style={
+              this.state.currKey === key
+                ? { color: '#006d9a', borderBottom: '1px solid #006d9a' }
+                : null
+            }
             onClick={() => this.setCurrSlide(slide, key)}
           >
             {children}

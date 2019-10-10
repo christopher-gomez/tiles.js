@@ -63,8 +63,6 @@ viewConfig - (optional) An object with one or more properties describing the Vie
 
 `.focusOn(pos: Tile | Vector3): void`
 
-`.getViewCenter(): Vector3`
-
 `.panCameraTo(tile: Tile | Cell, durationMs: number): void`
 
 `.panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void`
