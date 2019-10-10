@@ -1,4 +1,5 @@
 ## [Tiles.js](/)
+<div class='logo'></div>
 
 * ### Getting Started
 <hr style='width:100%; opacity:.5;' />
