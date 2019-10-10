@@ -1,7 +1,7 @@
 # AStarFinder
 
 <div class='description'>
-The AStarFinder is a class used by the Grid and the Map for pathfinding, but could theoretically be used for any entity that required pathfinding abilities on the Grid (AI).<br><br>
+The AStarFinder is a class used by the Grid and the Map for pathfinding, but could theoretically be used for any entity that requires pathfinding abilities on the Grid (AI).<br><br>
 If a filter function is provided, the pathfinder will use A* search with the filter as the heuristic to select the most optimal path.
 </div>
 
