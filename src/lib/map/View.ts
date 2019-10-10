@@ -189,11 +189,6 @@ export default class View implements ViewController {
     this.camera.lookAt(pos);
   }
 
-  getViewCenter(): Vector3 {
-    const pos = this._mouseCaster.mouseToWorld({ x: window.innerWidth / 2, y: window.innerHeight / 2 }, this.camera);
-    return pos;
-  }
-
   // Need to finish
   updateSettings(settings: ViewSettings): void {
     // update settings here
