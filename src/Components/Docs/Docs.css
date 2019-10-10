@@ -1,6 +1,7 @@
 .docs {
   text-align: justify;
   margin: 0 1em;
+  padding: 10px;
 }
 
 .docs .main {
@@ -107,9 +108,9 @@ input[type=checkbox]:checked ~ p label:before {
   top: 0; /* Stay at the top */
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
   border-right: 1px solid rgba(128, 128, 128, 0.39);
-  padding: 10px;
+  padding: 20px 20px;
+  margin-bottom: 1em;
 }
 .docs .toc h4, .docs .toc h4 > p {
   margin-block-start: 0em;
@@ -148,6 +149,24 @@ input[type=checkbox]:checked ~ p label:before {
 .docs .toc h2 a {
   text-decoration: none;
   color: black;
+}
+
+.docs .toc h2 {
+  padding: 20px 0;
+  display:inline; width: 55%;
+  
+}
+
+.docs .toc .logo {
+  background: url('../Assets/hex_ico.svg') no-repeat;
+  background-size: 30px; /** moved this property down */
+  height: 35px;
+  float:right; display:inline; width: 55%;
+}
+
+.docs .toc .logo:hover {
+  cursor: pointer;
+
 }
 
 .docs .toc ul a:hover,
