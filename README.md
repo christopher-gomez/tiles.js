@@ -26,5 +26,5 @@ Simple. I love JavaScript and the web. With JavaScript you have the ability to r
 
 
 ## Acknowledgments
-- [Cory Birnbaum](https://github.com/vonWolfehaus) - Much of the underlying file structure and utility functions come from Cory's excellent Vongrid system.
+- [Cory Birnbaum](https://github.com/vonWolfehaus) - Much of the underlying file structure and utility functions come from Cory's excellent von-grid system.
 - [Amit Patel](https://github.com/amitp) - Of course, almost everyone on the web owes some thanks to Amit's excellent website and hex map resources on grid math, procedural generation, and map implementations and algorithms. [(Red Blob Games)](https://www.redblobgames.com/) 
