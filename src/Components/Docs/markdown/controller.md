@@ -8,10 +8,10 @@ This class should be mostly ignored, as the View automatically takes care of mos
 ## Constructor
 <hr style='width:100%; opacity:.5;' />
 
-`Controller(private _view: View, config?: CameraControlSettings)`
+`Controller(view: View, config?: CameraControlSettings)`
 
 <small>
-_view - (required) The View that this Controller object is controlling. This constructor parameter sets the private poperty.<br>
+view - (required) The View that this Controller object is controlling.<br>
 config - (optional) An object with one or more properties defining the Controller's properties. 
 </small> 
 

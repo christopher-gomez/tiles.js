@@ -54,11 +54,13 @@ input[type=checkbox]:checked ~ p label:before {
 }
 
 .docs .main p code {
-  background: white;
+  background: inherit;
   font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
     DejaVu Sans Mono, Bitstr;
   font-size: 0.85em;
   padding:0;
+  width: auto;
+  display: inline;
 }
 
 .docs .main a {
@@ -101,16 +103,19 @@ input[type=checkbox]:checked ~ p label:before {
 }
 
 .docs .toc {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
+  height: 95%; /* Full-height: remove this if you want "auto" height */
   width: 15%; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
+  bottom: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
   border-right: 1px solid rgba(128, 128, 128, 0.39);
   padding: 20px 20px;
-  margin-bottom: 1em;
+  padding-bottom: 4em;
+  margin-bottom: 2em;
+
 }
 .docs .toc h4, .docs .toc h4 > p {
   margin-block-start: 0em;
