@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5ce062df7c2e4bfbd043776597ce87be",
+    "revision": "8cc76207486ff65c5bd0b2211793c61d",
     "url": "/tiles.js/index.html"
   },
   {
@@ -8,16 +8,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tiles.js/static/css/2.a32c5284.chunk.css"
   },
   {
-    "revision": "1169163e361bc743c79a",
-    "url": "/tiles.js/static/css/main.6a5a170e.chunk.css"
+    "revision": "fa0c8fa7d216ded770d9",
+    "url": "/tiles.js/static/css/main.a5b951b2.chunk.css"
   },
   {
     "revision": "3aeee74ecb1d6b1bd432",
     "url": "/tiles.js/static/js/2.a90603f8.chunk.js"
   },
   {
-    "revision": "1169163e361bc743c79a",
-    "url": "/tiles.js/static/js/main.e8b4ddda.chunk.js"
+    "revision": "fa0c8fa7d216ded770d9",
+    "url": "/tiles.js/static/js/main.68720387.chunk.js"
   },
   {
     "revision": "c7a2166863168897d597",
@@ -40,6 +40,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tiles.js/static/media/grid.a7e2d3a8.md"
   },
   {
+    "revision": "db7b60bdd3eae81d12bead51ed3ab22b",
+    "url": "/tiles.js/static/media/hex_ico.db7b60bd.svg"
+  },
+  {
     "revision": "4692247b85d33e87f0fdf5f4a9b36640",
     "url": "/tiles.js/static/media/interfaces.4692247b.md"
   },
@@ -60,8 +64,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tiles.js/static/media/tile.20b03796.md"
   },
   {
-    "revision": "dd0b5e76ca614320a3609fc0ae5cce29",
-    "url": "/tiles.js/static/media/toc.dd0b5e76.md"
+    "revision": "fb67b3bf3910bf91ad5d3ed02e486a46",
+    "url": "/tiles.js/static/media/toc.fb67b3bf.md"
   },
   {
     "revision": "008cd753c76d3b18004b0265801afef9",
