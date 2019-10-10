@@ -1,5 +1,3 @@
-<a id='interfaces'></a>
-
 ## Interfaces
 
 <div class='description'>

@@ -11,5 +11,6 @@
   * [Grid](#1)
   * [Map](#2)
   * [View](#3)
-* #### [Interfaces](#4)
+  * [Controller](#4)
+* #### [Interfaces](#5)
 <hr style='width:100%;opacity:.5;'/>

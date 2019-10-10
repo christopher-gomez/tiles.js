@@ -199,15 +199,15 @@ export default class View implements ViewController {
     // update settings here
 
     // then update controls
-    this.updateControls(settings.cameraControlSettings);
+    this.updateControlSettings(settings.cameraControlSettings);
   }
 
   toggleControls(): void {
     this.controls.toggleControls();
   }
 
-  updateControls(settings: CameraControlSettings): void {
-    this.controls.updateControls(settings);
+  updateControlSettings(settings: CameraControlSettings): void {
+    this.controls.updateControlSettings(settings);
   }
 
   toggleHorizontalRotation(bool: boolean): void {

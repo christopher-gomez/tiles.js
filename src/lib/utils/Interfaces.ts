@@ -84,7 +84,7 @@ export interface GridJSONData {
 /*MAP INTERFACES*/
 export interface ViewController {
   dispose(): void;
-  updateControls(config: CameraControlSettings): void;
+  updateControlSettings(config: CameraControlSettings): void;
   toggleControls(): void;
   toggleHorizontalRotation(bool: boolean): void;
   panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void;

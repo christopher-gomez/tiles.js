@@ -88,6 +88,7 @@ input[type=checkbox]:checked ~ p label:before {
   font-size: 0.95em;
   line-height: 0.75em;
   letter-spacing: 0.024em;
+  color: rgb(48, 52, 68);
 }
 
 .docs pre code {
