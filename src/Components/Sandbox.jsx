@@ -62,7 +62,7 @@ export default class Sandbox extends React.Component {
       }
     });
 
-    //this.board.generateOverlay(45);
+    //this.map.generateOverlay(45);
     this.scene.focusOn(this.map.group);
 
     this.gui = new GUI(cc, this.scene);

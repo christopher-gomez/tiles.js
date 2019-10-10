@@ -125,7 +125,7 @@ export default class GUI {
       })
       .listen();
     const worldGUI = this.gui.addFolder('World');
-    worldGUI.addFolder('Grid/Board');
+    worldGUI.addFolder('Grid/Map');
     worldGUI.addFolder('Terrain');
     camGUI.open();
     orbitControls.open();

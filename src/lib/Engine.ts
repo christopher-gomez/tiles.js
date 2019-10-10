@@ -27,7 +27,7 @@ import SelectionManager from './utils/SelectionManager';
 import Tools from './utils/Tools';
 //export { default as Tools } from './utils/Tools';
 import Map from './map/Map';
-// export { default as Board } from './Board';
+// export { default as map } from './map';
 
 
 export const Engine = {

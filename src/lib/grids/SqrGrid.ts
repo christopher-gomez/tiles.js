@@ -98,7 +98,7 @@ export default class SqrGrid implements GridInterface {
   }
   /*
 		________________________________________________________________________
-		High-leves that the Board interfaces with (all grids implement)
+		High-leves that the map interfaces with (all grids implement)
 	 */
 
   cellToPixel(cell: Cell): Vector3 {

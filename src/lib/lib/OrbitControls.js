@@ -550,8 +550,8 @@ const OrbitControls = function ( object, domElement, view ) {
 
 		scope.pan(panDelta.x, panDelta.y);
 		
-		const cell = scope.view.board.grid.pixelToCell(scope.object.position);
-		const t = scope.view.board.getTileAtCell(cell);
+		const cell = scope.view.map.grid.pixelToCell(scope.object.position);
+		const t = scope.view.map.getTileAtCell(cell);
 		if (!t) scope.pan(-panDelta.x, -panDelta.y);
 
 		panStart.copy( panEnd );

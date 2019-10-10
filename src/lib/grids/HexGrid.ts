@@ -117,7 +117,7 @@ export default class HexGrid implements GridInterface {
     this.generateGrid(settings);
   }
   /*  ________________________________________________________________________
-		High-level functions that the Board interfaces with (all grids implement)
+		High-level functions that the map interfaces with (all grids implement)
 	 */
 
   // grid cell (Hex in cube coordinate space) to position in pixels/world

@@ -24,7 +24,7 @@ export default class Map {
   }
 
   constructor(grid: GridInterface, mapConfig?: MapSettings, finderConfig?: PathfinderSettings) {
-    if (!grid) throw new Error('You must pass in a grid system for the board to use.');
+    if (!grid) throw new Error('You must pass in a grid system for the map to use.');
 
     this.tiles = [] as Tile[];
     this.tileGroup = null; // only for tiles
