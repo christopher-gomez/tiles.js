@@ -1,4 +1,4 @@
-## Tile
+# Tile
 
 <div class='description'>
 The mighty Tile class. The Tile is the physical (virtual) representation of a Cell.<br><br>

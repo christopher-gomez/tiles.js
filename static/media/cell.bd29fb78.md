@@ -1,4 +1,4 @@
-## Cell
+# Cell
 
 <div class='description'>
 The most basic unit of the Grid. Many Cells make up the Grid, the Grid makes the Map.<br><br> 

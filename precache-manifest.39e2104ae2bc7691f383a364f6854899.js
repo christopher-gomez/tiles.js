@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "678fecd9b8872e44f27d8ba2c655c951",
+    "revision": "0cd02d11b02f0cb783362fddcb551f81",
     "url": "/tiles.js/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tiles.js/static/css/2.a32c5284.chunk.css"
   },
   {
-    "revision": "73dab5a4bbfe5d604fb4",
+    "revision": "8a96a126c826ce61855a",
     "url": "/tiles.js/static/css/main.c27ce25d.chunk.css"
   },
   {
@@ -16,20 +16,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tiles.js/static/js/2.63a87dab.chunk.js"
   },
   {
-    "revision": "73dab5a4bbfe5d604fb4",
-    "url": "/tiles.js/static/js/main.371fb0d6.chunk.js"
+    "revision": "8a96a126c826ce61855a",
+    "url": "/tiles.js/static/js/main.041a4f32.chunk.js"
   },
   {
     "revision": "c7a2166863168897d597",
     "url": "/tiles.js/static/js/runtime~main.1ecf8238.js"
   },
   {
-    "revision": "fc5639d56b738f362e0dd0f6098d64d6",
-    "url": "/tiles.js/static/media/animation.fc5639d5.md"
+    "revision": "7c526e3a3c2c725a3babd84e4b300970",
+    "url": "/tiles.js/static/media/animation.7c526e3a.md"
   },
   {
-    "revision": "8ba770acfd97d001cbba7179a3ea8462",
-    "url": "/tiles.js/static/media/cell.8ba770ac.md"
+    "revision": "bd29fb78328b39cf2d0c1736884f5ff9",
+    "url": "/tiles.js/static/media/cell.bd29fb78.md"
   },
   {
     "revision": "fdc60555efc759f75219999581aa5c9e",
@@ -48,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tiles.js/static/media/hex_ico.db7b60bd.svg"
   },
   {
-    "revision": "d2845ee22dfd33534c66fae7b32f561c",
-    "url": "/tiles.js/static/media/interfaces.d2845ee2.md"
+    "revision": "468bd753db0aee11baac8931eaeee040",
+    "url": "/tiles.js/static/media/interfaces.468bd753.md"
   },
   {
     "revision": "c6d067710676315c2e3ec87c741364e8",
@@ -60,12 +60,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tiles.js/static/media/map.cf860fea.md"
   },
   {
-    "revision": "4237bb39164dd80e738eb0bf42139618",
-    "url": "/tiles.js/static/media/mousecaster.4237bb39.md"
+    "revision": "a0dbffdad2a8fc9dda7874d4bc89b969",
+    "url": "/tiles.js/static/media/mousecaster.a0dbffda.md"
   },
   {
-    "revision": "20b037965088c0b952ca3e35440d6719",
-    "url": "/tiles.js/static/media/tile.20b03796.md"
+    "revision": "fd1aa1d64a37404adc2a3044a49febe9",
+    "url": "/tiles.js/static/media/tile.fd1aa1d6.md"
   },
   {
     "revision": "355812616a4ded4021725e0072b815be",
