@@ -131,7 +131,7 @@ export default class View implements ViewController {
     this.height = window.innerHeight;
     (this.camera as PerspectiveCamera).aspect = this.width / this.height;
     (this.camera as PerspectiveCamera).updateProjectionMatrix();
-    this.renderer.setSize(this.width, this.height);
+    this.renderer.setSize(this.width, this.height, true);
   }
 
   attachTo(element: HTMLElement): void {

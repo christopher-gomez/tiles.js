@@ -105,8 +105,6 @@ class MouseCaster {
       return;
     }
 
-    this._raycaster.setFromCamera(this.screenPosition, this._camera);
-
     const intersects = this.rayCast();
     let hit, obj;
 
