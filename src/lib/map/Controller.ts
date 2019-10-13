@@ -10,7 +10,6 @@ import Animation from '../utils/Animation';
 export default class Controller implements ViewController {
 
   public controls: OrbitControls;
-  public animations: Animation[] = [];
 
   constructor(private _view: View, config?: CameraControlSettings) {
     if (!_view) {
@@ -43,24 +42,6 @@ export default class Controller implements ViewController {
 
     this.controls.mouseButtons = { LEFT: MOUSE.RIGHT, MIDDLE: MOUSE.MIDDLE, RIGHT: MOUSE.LEFT };
 
-    const onAnimate = (dtS: number): void => {
-      const animations = this.animations
-      for (let i = 0; i < animations.length; i++) {
-        // advance the animation
-        const animation = animations[i]
-        if (animation) {
-          const finished = animation.animate(dtS)
-          // if the animation is finished (returned true) remove it
-          if (finished) {
-            // remove the animation
-            animations[i] = animations[animations.length - 1]
-            animations[animations.length - 1] = animation
-            animations.pop()
-          }
-        }
-      }
-    }
-    this._view.setOnAnimateCallback(onAnimate.bind(this));
   }
 
   update(): void {
@@ -72,7 +53,7 @@ export default class Controller implements ViewController {
   }
 
   panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void {
-    if (this.animations.length >= 1) this.cancelAnimation();
+    if (this._view.animationManager.animations.length >= 1) this._view.animationManager.cancelAnimation();
     if (left && top) {
       this.controls.pan(15, 15);
     } else if (left && bottom) {
@@ -93,14 +74,6 @@ export default class Controller implements ViewController {
     this.controls.update();
   }
 
-  addAnimation(animation: Animation): void {
-    this.animations.push(animation);
-  }
-
-  cancelAnimation(): void {
-    this.animations.shift();
-  }
-
   panCameraTo(tile: Tile | Cell, durationMs: number): void {
     if (tile instanceof Cell) {
       tile = tile.tile;
@@ -108,14 +81,14 @@ export default class Controller implements ViewController {
     const from = this.controls.target.clone();
     const to = tile.position.clone();
 
-    this.addAnimation(new Animation(durationMs, (a): void => {
+    this._view.animationManager.addAnimation(new Animation(durationMs, (a): void => {
       this._view.focusOn(tile as Tile);
       this.controls.target = from.lerp(to, a);
       this.controls.update();
     }));
 
-    if (this.animations.length > 1)
-      this.cancelAnimation();
+    if (this._view.animationManager.animations.length > 1)
+      this._view.animationManager.cancelAnimation();
   }
 
   toggleControls(): void {
