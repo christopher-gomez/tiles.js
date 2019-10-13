@@ -6,6 +6,7 @@ import Controller from './Controller';
 import MouseCaster from '../utils/MouseCaster';
 import Tools from '../utils/Tools';
 import Map from './Map';
+import AnimationManager from '../utils/AnimationManager';
 
 /*
 	Sets up and manages a THREEjs container, camera, and light, making it easy to get going.
@@ -15,6 +16,8 @@ import Map from './Map';
  */
 // 'utils/Tools'
 export default class View implements ViewController {
+
+  public map: Map;
 
   public width: number;
   public height: number;
@@ -27,13 +30,13 @@ export default class View implements ViewController {
 
   private _selectedTile: Tile;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private _onAnimate: (dtS: number) => void = (dtS: number): void => { };
   private _onTileSelected: (tile: Tile) => void
   private _onLoaded: () => void;
-  private _lastTimestamp = Date.now();
-  private _animationID: number;
+  public animationManager: AnimationManager;
 
-  public _mouseCaster: MouseCaster;
+  private _mouseCaster: MouseCaster;
+
+  private _hoverTile: Tile;
 
   // This code should be with the Controller code 
   public hotEdges: boolean;
@@ -42,30 +45,6 @@ export default class View implements ViewController {
   private _panningRight = false;
   private _panningUp = false;
   private _panningDown = false;
-
-  set onAnimate(callback: (dtS: number) => void) {
-    if (!callback) {
-      throw new Error("Invalid onRender callback")
-    }
-    this._onAnimate = callback;
-  }
-  set onTileSelected(callback: (tile: Tile) => void) {
-    this._onTileSelected = callback
-  }
-
-  set onLoaded(callback: () => void) {
-    this._onLoaded = callback
-  }
-  setOnAnimateCallback(callback: (dtS: number) => void): void {
-    this.onAnimate = callback
-  }
-  get selectedTile(): Tile {
-    return this._selectedTile
-  }
-
-  set mouseCaster(mouse: MouseCaster) {
-    this._mouseCaster = mouse;
-  }
 
   constructor(map: Map, viewConfig?: ViewSettings) {
     viewConfig = viewConfig || {} as ViewSettings;
@@ -112,26 +91,39 @@ export default class View implements ViewController {
 
     this.attachTo(sceneSettings.element);
     this.addMap(map);
-    this.animate(0);
+    this.animationManager.animate(0);
   }
 
-  dispose(): void {
-    window.removeEventListener('resize', this.onWindowResize, false);
-    this.controls.dispose();
-    this._mouseCaster.dispose(this);
-    window.cancelAnimationFrame(this._animationID);
-    delete this.container;
-    delete this.camera;
-    delete this.controls;
-    delete this._mouseCaster;
+  set mouseCaster(mouse: MouseCaster) {
+    this._mouseCaster = mouse;
   }
 
-  private onWindowResize(): void {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
-    (this.camera as PerspectiveCamera).aspect = this.width / this.height;
-    (this.camera as PerspectiveCamera).updateProjectionMatrix();
-    this.renderer.setSize(this.width, this.height, true);
+  set onAnimate(callback: ((dtS: number) => void)[] | {(dtS: number): void}) {
+    if (!callback) {
+      throw new Error("Invalid onRender callback")
+    }
+    this.animationManager.setOnAnimateCallback(callback);
+  }
+
+  set onLoaded(callback: () => void) {
+    this._onLoaded = callback
+  }
+
+  set onTileSelected(callback: (tile: Tile) => void) {
+    this._onTileSelected = callback
+  }
+
+  get selectedTile(): Tile {
+    return this._selectedTile
+  }
+
+  add(mesh: Mesh): void {
+    this.container.add(mesh);
+  }
+
+  addMap(map: Map): void {
+    this.map = map;
+    this.container.add(map.group);
   }
 
   attachTo(element: HTMLElement): void {
@@ -142,44 +134,16 @@ export default class View implements ViewController {
     element.appendChild(this.renderer.domElement);
   }
 
-  add(mesh: Mesh): void {
-    this.container.add(mesh);
-  }
-
-  public map: Map;
-  addMap(map: Map): void {
-    this.map = map;
-    this.container.add(map.group);
-  }
-
-  remove(mesh: Mesh): void {
-    this.container.remove(mesh);
-  }
-
-  private animate(timestamp: number): void {
-    if (!this._paused) {
-      const dtS = (timestamp - this._lastTimestamp) / 1000.0;
-      this._lastTimestamp = timestamp;
-      this._mouseCaster.update();
-      if (this.controlled) {
-        if (this.hotEdges && this._panning && this._hoverTile) {
-          this.panInDirection(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
-        }
-      }
-      this._onAnimate(dtS);
-      this.controls.update();
-      this.renderer.render(this.container, this.camera);
-    }
-    this._animationID = requestAnimationFrame(this.animate.bind(this));
-  }
-
-  private _paused = false;
-  set paused(paused: boolean) {
-    this._paused = paused;
-  }
-
-  toggleAnimationLoop(): void {
-    this._paused = !this._paused;
+  dispose(): void {
+    window.removeEventListener('resize', this.onWindowResize, false);
+    this.controls.dispose();
+    this._mouseCaster.dispose(this);
+    this.animationManager.dispose();
+    delete this.animationManager;
+    delete this.container;
+    delete this.camera;
+    delete this.controls;
+    delete this._mouseCaster;
   }
 
   focusOn(pos: Tile | Vector3): void {
@@ -189,36 +153,44 @@ export default class View implements ViewController {
     this.camera.lookAt(pos);
   }
 
-  // Need to finish
-  updateSettings(settings: ViewSettings): void {
-    // update settings here
-
-    // then update controls
-    this.updateControlSettings(settings.cameraControlSettings);
-  }
-
-  toggleControls(): void {
-    this.controls.toggleControls();
-  }
-
-  updateControlSettings(settings: CameraControlSettings): void {
-    this.controls.updateControlSettings(settings);
-  }
-
-  toggleHorizontalRotation(bool: boolean): void {
-    this.controls.toggleHorizontalRotation(bool);
-  }
-
-  private initControls(config: CameraControlSettings): void {
-    this.controls = new Controller(this, config);
+  panCameraTo(tile: Tile | Cell, durationMs: number): void {
+    this.controls.panCameraTo(tile, durationMs);
   }
 
   panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void {
     this.controls.panInDirection(left, right, top, bottom);
   }
 
-  panCameraTo(tile: Tile | Cell, durationMs: number): void {
-    this.controls.panCameraTo(tile, durationMs);
+  remove(mesh: Mesh): void {
+    this.container.remove(mesh);
+  }
+
+  setOnAnimateCallback(callback: (dtS: number) => void): void {
+    this.onAnimate = callback
+  }
+
+  toggleAnimationLoop(): void {
+    this.animationManager.toggleAnimationLoop();
+  }
+
+  toggleControls(): void {
+    this.controls.toggleControls();
+  }
+
+  toggleHorizontalRotation(bool: boolean): void {
+    this.controls.toggleHorizontalRotation(bool);
+  }
+
+  updateControlSettings(settings: CameraControlSettings): void {
+    this.controls.updateControlSettings(settings);
+  }
+
+  // Need to finish
+  updateSettings(settings: ViewSettings): void {
+    // update settings here
+
+    // then update controls
+    this.updateControlSettings(settings.cameraControlSettings);
   }
 
   private _initSceneSettings(): void {
@@ -359,16 +331,35 @@ export default class View implements ViewController {
       this.camera.position.copy(this.settings.cameraPosition);
     }
 
-    this.initControls(this.settings.cameraControlSettings);
+    this._initControls(this.settings.cameraControlSettings);
 
-    this.initMouseCaster();
+    this._initMouseCaster();
+
+    this._initAnimationManager();
 
     this.settings.element.addEventListener('resize', this.onWindowResize.bind(this), false);
   }
 
-  private _hoverTile: Tile;
+  private _initControls(config: CameraControlSettings): void {
+    this.controls = new Controller(this, config);
+  }
 
-  private initMouseCaster(): void {
+  private _initAnimationManager(): void {
+    this.animationManager = new AnimationManager();
+    const onAnimate = (): void => {
+      if (this.controlled) {
+        if (this.hotEdges && this._panning && this._hoverTile) {
+          this.panInDirection(this._panningLeft, this._panningRight, this._panningUp, this._panningDown);
+        }
+      }
+      this.controls.update();
+      this._mouseCaster.update();
+      this.renderer.render(this.container, this.camera);
+    }
+    this.animationManager.addOnAnimate(onAnimate.bind(this));
+  }
+
+  private _initMouseCaster(): void {
     this._mouseCaster = new MouseCaster(this.container, this.camera);
     const self = this;
     this._mouseCaster.signal.add(function (evt: string, tile: Tile | MouseEvent) {
@@ -395,5 +386,13 @@ export default class View implements ViewController {
         }
       }
     }, this);
+  }
+
+  private onWindowResize(): void {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    (this.camera as PerspectiveCamera).aspect = this.width / this.height;
+    (this.camera as PerspectiveCamera).updateProjectionMatrix();
+    this.renderer.setSize(this.width, this.height, true);
   }
 }
