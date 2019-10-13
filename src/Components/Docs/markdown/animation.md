@@ -1,4 +1,4 @@
-## Animation
+# Animation
 
 <div class='description'>
 A utility class for animations. Pass a function into the constructor to run that function smoothly over the given duration.<br><br>

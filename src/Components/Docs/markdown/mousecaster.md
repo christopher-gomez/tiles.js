@@ -1,4 +1,4 @@
-## MouseCaster
+# MouseCaster
 
 <div class='description'>
 The MouseCaster class serves as a wrapper for the Three.js ray casting system.<br><br>

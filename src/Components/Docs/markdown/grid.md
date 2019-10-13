@@ -3,7 +3,6 @@
 <div class='description'>
 A wrapper class for HexGrid and SqrGrid. Used to encapsulate all Grid properties and methods in one generic Grid object.<br/><br/>
 This object represents a grid in virtual space, it is <i>not</i> the grid of 3D tiles that is rendered, but rather a collection of Cells in a hash table and some grid math operations. The Map class uses a Grid to render Cells as tiles at their respective coordinates.<br><br>
-You should <b>not</b> be using the Grid object too often, if you are, maybe the Map should do it instead?
 </div>
 
 ## Constructor
