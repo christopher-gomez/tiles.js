@@ -31,6 +31,7 @@ Simple. I love JavaScript and the web. With JavaScript you have the ability to r
 
 ### TODO:
 - Map Chunks
+- Biomes
 - Textures
 - Better world generation (better solution than Perlin noise? Tectonic plate modeling)
   - Import map image for tile map generation feature
