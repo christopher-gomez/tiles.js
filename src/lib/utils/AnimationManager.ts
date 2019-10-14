@@ -5,7 +5,7 @@ export default class AnimationManager {
 
   private _lastTimestamp = Date.now();
   private _animationID: number;
-  private _onAnimate: ((dts: number) => void)[] = [];
+  private _onAnimate: { [id: string]: (dts: number) => void } = {};
   private _paused = false;
 
   constructor() {
@@ -26,29 +26,25 @@ export default class AnimationManager {
         }
       }
     }
-    this.onAnimate = onAnimate;
+    this._onAnimate[this.genID()] = onAnimate;
   }
 
   set paused(paused: boolean) {
     this._paused = paused;
   }
 
-  set onAnimate(callback: ((dtS: number) => void)[] | {(dtS: number): void}) {
-    if (!callback) {
-      throw new Error("Invalid onRender callback")
-    }
-    if (Array.isArray(callback))
-      this._onAnimate = callback;
-    else
-      this._onAnimate.push(callback);
-  }
-
-  addOnAnimate(callback: (dtS: number) => void): void {
-    this._onAnimate.push(callback);
+  addOnAnimate(callback: (dtS: number) => void): string {
+    const id = this.genID();
+    this._onAnimate[id] = callback;
+    return id;
   }
 
   addAnimation(animation: Animation): void {
     this.animations.push(animation);
+  }
+
+  cancelOnAnimate(id: string): void {
+    delete this._onAnimate[id];
   }
 
   cancelAnimation(): void {
@@ -57,11 +53,7 @@ export default class AnimationManager {
 
   dispose(): void {
     window.cancelAnimationFrame(this._animationID);
-  }
-
-  // Same as set onAnimate, just function vs property
-  setOnAnimateCallback(callback: ((dtS: number) => void)[] | {(dtS: number): void}): void {
-    this.onAnimate = callback
+    delete this.animations;
   }
   
   animate(timestamp: number): void {
@@ -78,4 +70,11 @@ export default class AnimationManager {
   toggleAnimationLoop(): void {
     this._paused = !this._paused;
   }
+
+  private genID(): string {
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return '_' + Math.random().toString(36).substr(2, 9);
+  };
 }
