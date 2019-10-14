@@ -10,7 +10,7 @@ import AnimationManager from '../utils/AnimationManager';
 
 /*
 	Sets up and manages a THREEjs container, camera, and light, making it easy to get going.
-	Also provides camera control.
+	Also provides camera control, mouse control, animation control.
 
 	Assumes full screen.
  */
@@ -27,12 +27,12 @@ export default class View implements ViewController {
   public controlled: boolean;
   public settings: ViewSettings;
   public controls: Controller;
+  public animationManager: AnimationManager;
 
   private _selectedTile: Tile;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _onTileSelected: (tile: Tile) => void
   private _onLoaded: () => void;
-  public animationManager: AnimationManager;
 
   private _mouseCaster: MouseCaster;
 
@@ -98,13 +98,6 @@ export default class View implements ViewController {
     this._mouseCaster = mouse;
   }
 
-  set onAnimate(callback: ((dtS: number) => void)[] | {(dtS: number): void}) {
-    if (!callback) {
-      throw new Error("Invalid onRender callback")
-    }
-    this.animationManager.setOnAnimateCallback(callback);
-  }
-
   set onLoaded(callback: () => void) {
     this._onLoaded = callback
   }
@@ -163,10 +156,6 @@ export default class View implements ViewController {
 
   remove(mesh: Mesh): void {
     this.container.remove(mesh);
-  }
-
-  setOnAnimateCallback(callback: (dtS: number) => void): void {
-    this.onAnimate = callback
   }
 
   toggleAnimationLoop(): void {

@@ -11,16 +11,27 @@ export default class Controller implements ViewController {
 
   public controls: OrbitControls;
 
+  set active(active: boolean) {
+    this._view.controlled = active;
+  }
+
+  get active(): boolean {
+    return this._view.controlled;
+  }
+
   constructor(private _view: View, config?: CameraControlSettings) {
     if (!_view) {
       throw new Error('Controller missing View reference');
     }
     if (config) {
-      this.initControls(config);
+      this._initControls(config);
+    } else {
+      this._view.controlled = false;
+      this.controls = new OrbitControls(this._view.camera, this._view.renderer.domElement, this._view);
     }
   }
 
-  private initControls(config: CameraControlSettings): void {
+  private _initControls(config: CameraControlSettings): void {
     this._view.controlled = config.controlled;
     this.controls = new OrbitControls(this._view.camera, this._view.renderer.domElement, this._view);
     this.controls.minDistance = config.minDistance;
@@ -94,10 +105,8 @@ export default class Controller implements ViewController {
   toggleControls(): void {
     if (this._view.controlled) {
       this._view.controlled = false;
-      this.controls.dispose();
-      delete this.controls;
     } else {
-      this.initControls(this._view.settings.cameraControlSettings);
+      this._view.controlled = true;
     }
   }
 

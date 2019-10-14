@@ -7,6 +7,7 @@ export { default as Map } from './map.md';
 export { default as View } from './view.md';
 export { default as Controller } from './controller.md';
 export { default as Animation } from './animation.md';
+export { default as AnimationManager } from './animationmanager.md';
 export { default as Finder } from './finder.md';
 export { default as Caster } from './mousecaster.md';
 export { default as Interfaces } from './interfaces.md';

@@ -18,16 +18,12 @@ config - (optional) An object with one or more properties defining the Controlle
 ## Properties
 <hr style='width:100%; opacity:.5;' />
 
-`.controls: OrbitControls`
+`.active: boolean`
 
-`.animations: Animation[]`
+`.controls: OrbitControls`
 
 ## Methods
 <hr style='width:100%; opacity:.5;' />
-
-`.addAnimation(animation: Animation): void`
-
-`.cancelAnimation(): void`
 
 `.dispose(): void`
 

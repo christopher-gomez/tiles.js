@@ -3,7 +3,6 @@
 <div class='description'>
 The View portion of the MVC pattern. The View class acts as a container for the Three.js Scene and Camera system.<br><br>
 The View also implements the ViewController interface, allowing for all Controlling to be done through the View, and worrying about one less object. Direct access to the Controller class is still available of course, these wrapper methods are for convenience and because the View and Controller are so intrinsically linked in this type of engine. <br><br>
-The View runs an animation loop, and currently the Controller provides the .onAnimate callback function and it's discouraged to provide your own by modifying the object property. I'm currently working on an AnimationManager class that will take care of Animations and decouple the animation logic from the Controller and the View, because right now the Controller relies on that code to smoothly pan the camera. 
 </div>
 
 ## Constructor
@@ -18,6 +17,8 @@ viewConfig - (optional) An object with one or more properties describing the Vie
 
 ## Properties
 <hr style='width:100%; opacity:.5;' />
+
+`.animationManager: AnimationManager`
 
 `.camera: Camera`
 
@@ -36,8 +37,6 @@ viewConfig - (optional) An object with one or more properties describing the Vie
 `.mouseCaster: MouseCaster`
 
 `.paused: boolean`
-
-`.onAnimate: (dtS: number) => void`
 
 `.onLoaded: cb: () => void`
 
@@ -69,8 +68,6 @@ viewConfig - (optional) An object with one or more properties describing the Vie
 `.panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void`
 
 `.remove(mesh: Mesh): void`
-
-`.setOnAnimateCallback(cb: (dtS: number) => void): void`
 
 `.toggleControls(): void`
 
