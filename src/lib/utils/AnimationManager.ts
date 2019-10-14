@@ -3,7 +3,7 @@ import Animation from './Animation';
 export default class AnimationManager {
   public animations: Animation[] = [];
 
-  private _lastTimestamp = Date.now();
+  private _lastTimestamp = performance.now();
   private _animationID: number;
   private _onAnimate: { [id: string]: (dts: number) => void } = {};
   private _paused = false;
@@ -55,7 +55,7 @@ export default class AnimationManager {
     window.cancelAnimationFrame(this._animationID);
     delete this.animations;
   }
-  
+
   animate(timestamp: number): void {
     if (!this._paused) {
       const dtS = (timestamp - this._lastTimestamp) / 1000.0;
