@@ -4,7 +4,7 @@ import Engine from '../lib/Engine.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExpand, faCompress } from '@fortawesome/free-solid-svg-icons';
 import GUI from './dat';
-import { Vector3 } from 'three';
+import './styles/sandbox.css';
 
 export default class Sandbox extends React.Component {
   params = {
@@ -42,7 +42,6 @@ export default class Sandbox extends React.Component {
 
     this.scene = new Engine.View(this.map, {
       element: document.querySelector('.App'),
-      cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {
         controlled: cc.controlled,
         enableDamping: cc.enableDamping,
@@ -63,13 +62,20 @@ export default class Sandbox extends React.Component {
     });
 
     //this.map.generateOverlay(45);
-    this.scene.focusOn(this.map.group);
+    const el = document.getElementById('fps');
+    const onAnimation = (dtS) => {
+      const fps = 1 / dtS;
+      el.innerHTML = 'FPS: ' + fps.toFixed(0);
+    }
+    this.animationID = this.scene.animationManager.addOnAnimate(onAnimation.bind(this));
 
     this.gui = new GUI(cc, this.scene);
+    const t = this.map.getRandomTile();
+    this.scene.panCameraTo(t, 4000);
+    this.scene.focusOn(t);
   }
 
   componentWillUnmount() {
-    window.cancelAnimationFrame(this.animID);
     this.scene.dispose();
     this.gridSpace.dispose();
     this.map.dispose();
@@ -105,7 +111,10 @@ export default class Sandbox extends React.Component {
     }
     return (
       <div className="App">
-        <div id="gui"></div>
+        <div id="gui">
+        </div>
+        <div id='fps'>
+        </div>
         <button className='fullScreenToggle' onClick={() => this.toggleFullscreen()}>{toggle}</button>
       </div>
     );

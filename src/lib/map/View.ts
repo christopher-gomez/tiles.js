@@ -23,7 +23,7 @@ export default class View implements ViewController {
   public height: number;
   public renderer: WebGLRenderer;
   public container: Scene;
-  public camera: Camera;
+  public camera: PerspectiveCamera;
   public controlled: boolean;
   public settings: ViewSettings;
   public controls: Controller;
