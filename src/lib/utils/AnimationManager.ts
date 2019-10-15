@@ -1,4 +1,5 @@
 import Animation from './Animation';
+import { Renderer, Camera, Scene } from 'three';
 
 export default class AnimationManager {
   public animations: Animation[] = [];
@@ -8,7 +9,7 @@ export default class AnimationManager {
   private _onAnimate: { [id: string]: (dts: number) => void } = {};
   private _paused = false;
 
-  constructor() {
+  constructor(private renderer: Renderer, private container: Scene, private camera: Camera, onAnim?: (dtS: number) => void) {
     const onAnimate = (dtS: number): void => {
       const animations = this.animations
       for (let i = 0; i < animations.length; i++) {
@@ -25,6 +26,9 @@ export default class AnimationManager {
           }
         }
       }
+    }
+    if (onAnim) {
+      this._onAnimate[this.genID()] = onAnim;
     }
     this._onAnimate[this.genID()] = onAnimate;
   }
@@ -64,6 +68,7 @@ export default class AnimationManager {
         this._onAnimate[i](dtS);
       }
     }
+    this.renderer.render(this.container, this.camera);
     this._animationID = requestAnimationFrame(this.animate.bind(this));
   }
   

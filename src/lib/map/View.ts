@@ -1,5 +1,5 @@
 import { ViewSettings, CameraControlSettings, ViewController } from '../utils/Interfaces';
-import { WebGLRenderer, DirectionalLight, Scene, AmbientLight, Camera, PerspectiveCamera, Mesh, Vector3 } from 'three';
+import { WebGLRenderer, DirectionalLight, Scene, AmbientLight, PerspectiveCamera, Mesh, Vector3 } from 'three';
 import Tile from '../grids/Tile';
 import Cell from '../grids/Cell';
 import Controller from './Controller';
@@ -334,7 +334,6 @@ export default class View implements ViewController {
   }
 
   private _initAnimationManager(): void {
-    this.animationManager = new AnimationManager();
     const onAnimate = (): void => {
       if (this.controlled) {
         if (this.hotEdges && this._panning && this._hoverTile) {
@@ -343,9 +342,8 @@ export default class View implements ViewController {
       }
       this.controls.update();
       this._mouseCaster.update();
-      this.renderer.render(this.container, this.camera);
     }
-    this.animationManager.addOnAnimate(onAnimate.bind(this));
+    this.animationManager = new AnimationManager(this.renderer, this.container, this.camera, onAnimate.bind(this));
   }
 
   private _initMouseCaster(): void {

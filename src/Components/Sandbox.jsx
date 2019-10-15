@@ -42,6 +42,7 @@ export default class Sandbox extends React.Component {
 
     this.scene = new Engine.View(this.map, {
       element: document.querySelector('.App'),
+      cameraPosition: { x: 0, y: 40, z: 50 },
       cameraControlSettings: {
         controlled: cc.controlled,
         enableDamping: cc.enableDamping,
@@ -62,6 +63,8 @@ export default class Sandbox extends React.Component {
     });
 
     //this.map.generateOverlay(45);
+    this.scene.focusOn(this.map.group);
+
     const el = document.getElementById('fps');
     const onAnimation = (dtS) => {
       const fps = 1 / dtS;
@@ -70,7 +73,6 @@ export default class Sandbox extends React.Component {
     this.animationID = this.scene.animationManager.addOnAnimate(onAnimation.bind(this));
 
     this.gui = new GUI(cc, this.scene);
-    this.scene.focusOn(this.map.group);
   }
 
   componentWillUnmount() {
