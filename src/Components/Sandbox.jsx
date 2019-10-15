@@ -70,9 +70,7 @@ export default class Sandbox extends React.Component {
     this.animationID = this.scene.animationManager.addOnAnimate(onAnimation.bind(this));
 
     this.gui = new GUI(cc, this.scene);
-    const t = this.map.getRandomTile();
-    this.scene.panCameraTo(t, 4000);
-    this.scene.focusOn(t);
+    this.scene.focusOn(this.map.group);
   }
 
   componentWillUnmount() {
