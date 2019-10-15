@@ -6,7 +6,7 @@ The AnimationManager class manages the engine animation loop and provides the ab
 
 ## Constructor
 
-`AnimationManager ()`
+`AnimationManager(renderer: Renderer, container: Scene, camera: Camera, onAnimate?: (dtS: number) => void)`
 
 ## Properties
 
