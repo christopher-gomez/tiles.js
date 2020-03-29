@@ -11,7 +11,7 @@ module.exports = {
   resolve: { extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'] },
   output: {
     path: path.resolve('dist'),
-    filename: 'index.js',
+    filename: 'tiles.js',
     libraryTarget: 'commonjs2',
   },
   module: {
