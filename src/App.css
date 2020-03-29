@@ -1,97 +1,113 @@
+body {
+    text-align: center;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+    width: 100%;
+}
+
 #gui {
-  position: fixed !important;
-  right: 0;
-  bottom: 0;
-  margin-bottom: 2px;
-  z-index: 100 !important;
+    position: fixed !important;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 2px;
+    z-index: 100 !important;
 }
 
 #overlay {
-  position: fixed; /* Sit on top of the page content */
-  display: block; /* Hidden by default */
-  width: 100%; /* Full width (cover the whole page) */
-  height: 100%; /* Full height (cover the whole page) */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.15); /* Black background with opacity */
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    position: fixed;
+    /* Sit on top of the page content */
+    display: block;
+    /* Hidden by default */
+    width: 100%;
+    /* Full width (cover the whole page) */
+    height: 100%;
+    /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.15);
+    /* Black background with opacity */
+    z-index: 2;
+    /* Specify a stack order in case you're using a different order for other elements */
 }
 
 #overlay h1 {
-  margin-top: 10%;
-  font-size: 3em;
-  font-weight: 100;
+    margin-top: 10%;
+    font-size: 3em;
+    font-weight: 100;
 }
 
 #overlay {
-  color: white;
+    color: white;
 }
 
 #overlay a {
-  text-decoration: none;
-  border: none;
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-  background: none;
-  cursor: pointer;
-  padding: 15px 40px;
-  display: inline-block;
-  margin: 10px 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 200;
-  outline: none;
-  position: relative;
-  background: white;
-  color: black;
-  -webkit-transition: none;
-  -moz-transition: none;
-  transition: none;
-  border-radius: 40px;
+    text-decoration: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 15px 40px;
+    display: inline-block;
+    margin: 10px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 200;
+    outline: none;
+    position: relative;
+    background: white;
+    color: black;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+    border-radius: 40px;
 }
 
 #overlay a::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
 }
 
 #overlay h3 {
-  font-size: 1.2em;
-  font-weight: 100;
+    font-size: 1.2em;
+    font-weight: 100;
 }
 
 hr {
-  border-color: white;
-  width: 30%;
-  margin-top: -20px;
+    border-color: white;
+    width: 30%;
+    margin-top: -20px;
 }
 
 .fullScreenToggle {
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 2;
-  background: none;
-  border: none;
-  margin: 10px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    background: none;
+    border: none;
+    margin: 10px;
 }
 
 .fullScreenToggle:focus {
-  outline: 0;
+    outline: 0;
 }
 
 .fullScreenToggle:active {
-  outline: none;
-  border: none;
+    outline: none;
+    border: none;
 }
 
 .fullScreenToggle:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
