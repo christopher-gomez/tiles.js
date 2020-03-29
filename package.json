@@ -1,8 +1,8 @@
 {
-	"name": "threejs-tilemap",
+	"name": "tiles.js",
 	"version": "1.0.0",
 	"description": "A 3D tilemap JavaScript engine",
-	"private": true,
+	"private": false,
 	"module": "src/Engine.ts",
 	"main": "dist/index.js",
 	"scripts": {
