@@ -10,9 +10,9 @@
 		"build-sandbox": "react-scripts build",
 		"build": "webpack --mode production",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"predeploy": "npm run buildSandbox",
+		"predeploy": "npm run build-sandbox",
 		"deploy": "gh-pages -d build",
-		"electron-dev": "concurrently \"BROWSER=none npm run startSandbox\" \"wait-on http://localhost:3000 && electron .\""
+		"electron-dev": "concurrently \"BROWSER=none npm run start-sandbox\" \"wait-on http://localhost:3000 && electron .\""
 	},
 	"repository": {
 		"type": "git",
