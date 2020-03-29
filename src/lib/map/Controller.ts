@@ -19,7 +19,7 @@ export default class Controller implements ViewController {
     return this._view.controlled;
   }
 
-  constructor(private _view: View, config?: CameraControlSettings) {
+  constructor (private _view: View, config?: CameraControlSettings) {
     if (!_view) {
       throw new Error('Controller missing View reference');
     }
@@ -136,8 +136,8 @@ export default class Controller implements ViewController {
 
   }
 
-  toggleHorizontalRotation(bool: boolean): void {
-    if (bool) {
+  toggleHorizontalRotation(val: boolean): void {
+    if (val) {
       this.controls.dispose();
       this.controls = new OrbitControls(this._view.camera, this._view.renderer.domElement, this._view);
       this.controls.minDistance = this._view.settings.cameraControlSettings.minDistance;
