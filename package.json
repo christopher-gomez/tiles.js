@@ -1,5 +1,5 @@
 {
-	"name": "tiles",
+	"name": "tiles.js-engine",
 	"version": "0.0.1",
 	"description": "tiles.js: A 3D tilemap JavaScript engine",
 	"private": false,
