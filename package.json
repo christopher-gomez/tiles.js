@@ -1,7 +1,7 @@
 {
-	"name": "tiles-js",
+	"name": "tiles",
 	"version": "0.0.1",
-	"description": "A 3D tilemap JavaScript engine",
+	"description": "tiles.js: A 3D tilemap JavaScript engine",
 	"private": false,
 	"module": "dist/index.js",
 	"main": "dist/index.js",
