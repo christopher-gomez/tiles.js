@@ -7,18 +7,18 @@ A 3D tile map JavaScript engine created with [Three.js](https://threejs.org/).
 
 Keep an eye on it's progress and updates by checking the [sandbox](https://christophgomez.github.io/tiles.js/) every now and then.
 
-Or run it locally by downloading, installing the requirements, and running it on localhost: 
+Or run it locally by downloading, installing the dependncies, and running it on localhost: 
 ```bash
 $ git clone https://github.com/christophgomez/tiles.js.git
 $ cd tiles.js-master
 $ npm install
-$ npm run startSandbox
+$ npm run start-sandbox
 ```
 
 ## Why
 This project is a personal hobby project of mine that developed out of the interest to develop a Steam game with the tools and languages I know and love (modern full-stack web technologies).
 
-The engine uses Three.js for WebGL rendering, Webpack and Babel in order to utilize modern ES6/7 and TypeScript language features, and runs on React in the browser (or plain old HTML) or natively on the desktop thanks to Electron. 
+The engine uses Three.js for WebGL rendering, Webpack and Babel in order to utilize modern ESNext and TypeScript language features, and runs on React in the browser (or plain old HTML) or natively on the desktop thanks to Electron. 
 
 The goal is a a highly performant engine that can be used to render 3D polygonal tile scenes with easy to follow documentation so anyone with some programming experience can render tile maps.
 
