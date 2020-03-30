@@ -1,6 +1,6 @@
 {
 	"name": "tiles.js-engine",
-	"version": "0.0.1-alpha.0",
+	"version": "0.0.1-alpha.1",
 	"description": "tiles.js: A 3D tilemap JavaScript engine",
 	"private": false,
 	"module": "dist/tiles.js",
