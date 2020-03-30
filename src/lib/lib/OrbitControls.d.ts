@@ -47,7 +47,7 @@ export class OrbitControls {
 
 	enableKeys: boolean;
 	keys: { LEFT: number; UP: number; RIGHT: number; BOTTOM: number; };
-	mouseButtons: { LEFT: MOUSE; MIDDLE: MOUSE; RIGHT: MOUSE;  };
+	mouseButtons: { LEFT: MOUSE; MIDDLE: MOUSE; RIGHT: MOUSE; };
 	touches: { ONE: TOUCH; TWO: TOUCH };
 
 	rotateLeft(angle?: number): void;
@@ -130,7 +130,7 @@ export class MapControls {
 
 	enableKeys: boolean;
 	keys: { LEFT: number; UP: number; RIGHT: number; BOTTOM: number; };
-	mouseButtons: { LEFT: MOUSE; MIDDLE: MOUSE; RIGHT: MOUSE;  };
+	mouseButtons: { LEFT: MOUSE; MIDDLE: MOUSE; RIGHT: MOUSE; };
 	touches: { ONE: TOUCH; TWO: TOUCH };
 
 	rotateLeft(angle?: number): void;

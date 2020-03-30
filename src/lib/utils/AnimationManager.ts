@@ -9,28 +9,25 @@ export default class AnimationManager {
   private _onAnimate: { [id: string]: (dts: number) => void } = {};
   private _paused = false;
 
-  constructor(private renderer: Renderer, private container: Scene, private camera: Camera, onAnim?: (dtS: number) => void) {
-    const onAnimate = (dtS: number): void => {
-      const animations = this.animations
-      for (let i = 0; i < animations.length; i++) {
+  constructor(private renderer: Renderer, private container: Scene, private camera: Camera, onAnimate?: (dtS: number) => void) {
+    const _onAnimate = (dtS: number): void => {
+      for(let i = 0; i < this.animations.length; i++) {
         // advance the animation
-        const animation = animations[i]
+        const animation = this.animations[i]
         if (animation) {
           const finished = animation.animate(dtS)
           // if the animation is finished (returned true) remove it
           if (finished) {
             // remove the animation
-            animations[i] = animations[animations.length - 1]
-            animations[animations.length - 1] = animation
-            animations.pop()
+			this.animations.shift();
           }
         }
       }
+	}
+	this._onAnimate[this.genID()] = _onAnimate;
+    if (onAnimate) {
+      this._onAnimate[this.genID()] = onAnimate;
     }
-    if (onAnim) {
-      this._onAnimate[this.genID()] = onAnim;
-    }
-    this._onAnimate[this.genID()] = onAnimate;
   }
 
   set paused(paused: boolean) {
@@ -57,7 +54,7 @@ export default class AnimationManager {
 
   dispose(): void {
     window.cancelAnimationFrame(this._animationID);
-    delete this.animations;
+    this.animations = null;
   }
 
   animate(timestamp: number): void {
