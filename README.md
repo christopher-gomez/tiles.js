@@ -23,7 +23,7 @@ The engine uses Three.js for WebGL rendering, Webpack and Babel in order to util
 The goal is a a highly performant engine that can be used to render 3D polygonal tile scenes with easy to follow documentation so anyone with some programming experience can render tile maps.
 
 #### But why modern web tech, why JavaScript? Why not Unity or Unreal?
-Simple. I love JavaScript and the web. With JavaScript you have the ability to reach nearly person in the world because JavaScript runs on virtually every computing device worldwide. Furthermore, JavaScript's standard package manager, npm, has more packages than Java and PHP combined, most of them open source and freely available for use in any project. Harnessing the power of npm and Node allows for faster, smarter development. 
+Simple. I love JavaScript and the web. With JavaScript you have the ability to reach nearly every person in the world with access to a computer because JavaScript runs on virtually every computing device worldwide. Furthermore, JavaScript's standard package manager, npm, has more packages than Java and PHP combined, most of them open source and freely available for use in any project. Harnessing the power of npm and Node allows for faster, smarter development. 
 
 
 
