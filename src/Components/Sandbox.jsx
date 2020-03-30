@@ -79,9 +79,9 @@ export default class Sandbox extends React.Component {
     this.scene.dispose();
     this.gridSpace.dispose();
     this.map.dispose();
-    delete this.map;
-    delete this.gridSpace;
-    delete this.scene;
+    this.map= null;
+    this.gridSpace = null;
+    this.scene = null;
   }
 
   toggleFullscreen() {

@@ -23,325 +23,325 @@
  */
 
 class Node {
-  constructor() {
-    this.obj = null;
-    this.next = null;
-    this.prev = null;
-    this.free = true;
-  }
+	constructor() {
+		this.obj = null;
+		this.next = null;
+		this.prev = null;
+		this.free = true;
+	}
 }
 
 export default class LinkedList {
-  constructor() {
-    this.first = null;
-    this.last = null;
-    this.length = 0;
-    this.objToNodeMap = {}; // a quick lookup list to map linked list nodes to objects
-    this.uniqueID = Date.now() + '' + Math.floor(Math.random() * 1000);
+	constructor() {
+		this.first = null;
+		this.last = null;
+		this.length = 0;
+		this.objToNodeMap = {}; // a quick lookup list to map linked list nodes to objects
+		this.uniqueID = Date.now() + '' + Math.floor(Math.random() * 1000);
 
-    this.sortArray = [];
-  }
+		this.sortArray = [];
+	}
 
-  // static function for utility
-  static generateID(obj) {
-    return Math.random().toString(36).slice(2) + Date.now();
-  }
+	// static function for utility
+	static generateID(obj) {
+		return Math.random().toString(36).slice(2) + Date.now();
+	}
 
-  /*
-			Get the LinkedListNode for this object.
-			@param obj The object to get the node for
-		 */
-  getNode(obj) {
-    // objects added to a list must implement a uniqueID which returns a unique object identifier string
-    return this.objToNodeMap[obj.uniqueID];
-  }
+	/*
+			  Get the LinkedListNode for this object.
+			  @param obj The object to get the node for
+		   */
+	getNode(obj) {
+		// objects added to a list must implement a uniqueID which returns a unique object identifier string
+		return this.objToNodeMap[obj.uniqueID];
+	}
 
-  /*
-    Adds a new node to the list -- typically only used internally unless you're doing something funky
-    Use add() to add an object to the list, not this.
-   */
-  addNode(obj) {
-    const node = new Node();
-    if (!obj.uniqueID) {
-      try {
-        obj.uniqueID = LinkedList.generateID();
-        // console.log('New ID: '+obj.uniqueID);
-      }
-      catch (err) {
-        console.error('[LinkedList.addNode] obj passed is immutable: cannot attach necessary identifier');
-        return null;
-      }
-    }
+	/*
+	  Adds a new node to the list -- typically only used internally unless you're doing something funky
+	  Use add() to add an object to the list, not this.
+	 */
+	addNode(obj) {
+		const node = new Node();
+		if (!obj.uniqueID) {
+			try {
+				obj.uniqueID = LinkedList.generateID();
+				// console.log('New ID: '+obj.uniqueID);
+			}
+			catch (err) {
+				console.error('[LinkedList.addNode] obj passed is immutable: cannot attach necessary identifier');
+				return null;
+			}
+		}
 
-    node.obj = obj;
-    node.free = false;
-    this.objToNodeMap[obj.uniqueID] = node;
-    return node;
-  }
+		node.obj = obj;
+		node.free = false;
+		this.objToNodeMap[obj.uniqueID] = node;
+		return node;
+	}
 
-  swapObjects(node, newObj) {
-    this.objToNodeMap[node.obj.uniqueID] = null;
-    this.objToNodeMap[newObj.uniqueID] = node;
-    node.obj = newObj;
-  }
+	swapObjects(node, newObj) {
+		this.objToNodeMap[node.obj.uniqueID] = null;
+		this.objToNodeMap[newObj.uniqueID] = node;
+		node.obj = newObj;
+	}
 
-  /*
-    Add an item to the list
-    @param obj The object to add
-   */
-  add(obj) {
-    let node = this.objToNodeMap[obj.uniqueID];
+	/*
+	  Add an item to the list
+	  @param obj The object to add
+	 */
+	add(obj) {
+		let node = this.objToNodeMap[obj.uniqueID];
 
-    if (!node) {
-      node = this.addNode(obj);
-    }
-    else {
-      if (node.free === false) return;
+		if (!node) {
+			node = this.addNode(obj);
+		}
+		else {
+			if (node.free === false) return;
 
-      // reusing a node, so we clean it up
-      // this caching of node/object pairs is the reason an object can only exist
-      // once in a list -- which also makes things faster (not always creating new node
-      // object every time objects are moving on and off the list
-      node.obj = obj;
-      node.free = false;
-      node.next = null;
-      node.prev = null;
-    }
+			// reusing a node, so we clean it up
+			// this caching of node/object pairs is the reason an object can only exist
+			// once in a list -- which also makes things faster (not always creating new node
+			// object every time objects are moving on and off the list
+			node.obj = obj;
+			node.free = false;
+			node.next = null;
+			node.prev = null;
+		}
 
-    // append this obj to the end of the list
-    if (!this.first) { // is this the first?
-      this.first = node;
-      this.last = node;
-      node.next = null; // clear just in case
-      node.prev = null;
-    }
-    else {
-      if (!this.last) {
-        throw new Error("[LinkedList.add] No last in the list -- that shouldn't happen here");
-      }
+		// append this obj to the end of the list
+		if (!this.first) { // is this the first?
+			this.first = node;
+			this.last = node;
+			node.next = null; // clear just in case
+			node.prev = null;
+		}
+		else {
+			if (!this.last) {
+				throw new Error("[LinkedList.add] No last in the list -- that shouldn't happen here");
+			}
 
-      // add this entry to the end of the list
-      this.last.next = node; // current end of list points to the new end
-      node.prev = this.last;
-      this.last = node;            // new object to add becomes last in the list
-      node.next = null;      // just in case this was previously set
-    }
-    this.length++;
+			// add this entry to the end of the list
+			this.last.next = node; // current end of list points to the new end
+			node.prev = this.last;
+			this.last = node;            // new object to add becomes last in the list
+			node.next = null;      // just in case this was previously set
+		}
+		this.length++;
 
-    if (this.showDebug) this.dump('after add');
-  }
+		if (this.showDebug) this.dump('after add');
+	}
 
-  has(obj) {
-    return !!this.objToNodeMap[obj.uniqueID];
-  }
+	has(obj) {
+		return !!this.objToNodeMap[obj.uniqueID];
+	}
 
-  /*
-    Moves this item upwards in the list
-    @param obj
-   */
-  moveUp(obj) {
-    this.dump('before move up');
-    const c = this.getNode(obj);
-    if (!c) throw Error("Oops, trying to move an object that isn't in the list");
-    if (!c.prev) return; // already first, ignore
+	/*
+	  Moves this item upwards in the list
+	  @param obj
+	 */
+	moveUp(obj) {
+		this.dump('before move up');
+		const c = this.getNode(obj);
+		if (!c) throw Error("Oops, trying to move an object that isn't in the list");
+		if (!c.prev) return; // already first, ignore
 
-    // This operation makes C swap places with B:
-    // A <-> B <-> C <-> D
-    // A <-> C <-> B <-> D
+		// This operation makes C swap places with B:
+		// A <-> B <-> C <-> D
+		// A <-> C <-> B <-> D
 
-    const b = c.prev;
-    const a = b.prev;
+		const b = c.prev;
+		const a = b.prev;
 
-    // fix last
-    if (c == this.last) this.last = b;
+		// fix last
+		if (c == this.last) this.last = b;
 
-    const oldCNext = c.next;
+		const oldCNext = c.next;
 
-    if (a) a.next = c;
-    c.next = b;
-    c.prev = b.prev;
+		if (a) a.next = c;
+		c.next = b;
+		c.prev = b.prev;
 
-    b.next = oldCNext;
-    b.prev = c;
+		b.next = oldCNext;
+		b.prev = c;
 
-    // check to see if we are now first
-    if (this.first == b) this.first = c;
-  }
+		// check to see if we are now first
+		if (this.first == b) this.first = c;
+	}
 
-  /*
-    Moves this item downwards in the list
-    @param obj
-   */
-  moveDown(obj) {
-    const b = this.getNode(obj);
-    if (!b) throw "Oops, trying to move an object that isn't in the list";
-    if (!b.next) return; // already last, ignore
+	/*
+	  Moves this item downwards in the list
+	  @param obj
+	 */
+	moveDown(obj) {
+		const b = this.getNode(obj);
+		if (!b) throw "Oops, trying to move an object that isn't in the list";
+		if (!b.next) return; // already last, ignore
 
-    // This operation makes B swap places with C:
-    // A <-> B <-> C <-> D
-    // A <-> C <-> B <-> D
+		// This operation makes B swap places with C:
+		// A <-> B <-> C <-> D
+		// A <-> C <-> B <-> D
 
-    const c = b.next;
-    this.moveUp(c.obj);
+		const c = b.next;
+		this.moveUp(c.obj);
 
-    // check to see if we are now last
-    if (this.last == c) this.last = b;
-  }
+		// check to see if we are now last
+		if (this.last == c) this.last = b;
+	}
 
-  /*
-    Take everything off the list and put it in an array, sort it, then put it back.
-   */
-  sort(compare) {
-    const sortArray = this.sortArray;
-    let i, l, node = this.first;
-    sortArray.length = 0;
+	/*
+	  Take everything off the list and put it in an array, sort it, then put it back.
+	 */
+	sort(compare) {
+		const sortArray = this.sortArray;
+		let i, l, node = this.first;
+		sortArray.length = 0;
 
-    while (node) {
-      sortArray.push(node.obj);
-      node = node.next;
-    }
+		while (node) {
+			sortArray.push(node.obj);
+			node = node.next;
+		}
 
-    this.clear();
+		this.clear();
 
-    sortArray.sort(compare);
-    // console.log(sortArray);
-    l = sortArray.length;
-    for (i = 0; i < l; i++) {
-      this.add(sortArray[i]);
-    }
-  }
+		sortArray.sort(compare);
+		// console.log(sortArray);
+		l = sortArray.length;
+		for (i = 0; i < l; i++) {
+			this.add(sortArray[i]);
+		}
+	}
 
-  /*
-    Removes an item from the list
-    @param obj The object to remove
-    @returns boolean true if the item was removed, false if the item was not on the list
-   */
-  remove(obj) {
-    const node = this.getNode(obj);
-    if (!node || node.free) {
-      return false; // ignore this error (trying to remove something not there)
-    }
+	/*
+	  Removes an item from the list
+	  @param obj The object to remove
+	  @returns boolean true if the item was removed, false if the item was not on the list
+	 */
+	remove(obj) {
+		const node = this.getNode(obj);
+		if (!node || node.free) {
+			return false; // ignore this error (trying to remove something not there)
+		}
 
-    // pull this object out and tie up the ends
-    if (node.prev) node.prev.next = node.next;
-    if (node.next) node.next.prev = node.prev;
+		// pull this object out and tie up the ends
+		if (node.prev) node.prev.next = node.next;
+		if (node.next) node.next.prev = node.prev;
 
-    // fix first and last
-    if (!node.prev) // if this was first on the list
-      this.first = node.next; // make the next on the list first (can be null)
-    if (!node.next) // if this was the last
-      this.last = node.prev; // then this node's previous becomes last
+		// fix first and last
+		if (!node.prev) // if this was first on the list
+			this.first = node.next; // make the next on the list first (can be null)
+		if (!node.next) // if this was the last
+			this.last = node.prev; // then this node's previous becomes last
 
-    node.free = true;
-    node.prev = null;
-    node.next = null;
+		node.free = true;
+		node.prev = null;
+		node.next = null;
 
-    this.length--;
+		this.length--;
 
-    return true;
-  }
+		return true;
+	}
 
-  // remove the head and return it's object
-  shift() {
-    const node = this.first;
-    if (this.length === 0) return null;
-    // if (node == null || node.free == true) return null;
+	// remove the head and return it's object
+	shift() {
+		const node = this.first;
+		if (this.length === 0) return null;
+		// if (node == null || node.free == true) return null;
 
-    // pull this object out and tie up the ends
-    if (node.prev) {
-      node.prev.next = node.next;
-    }
-    if (node.next) {
-      node.next.prev = node.prev;
-    }
+		// pull this object out and tie up the ends
+		if (node.prev) {
+			node.prev.next = node.next;
+		}
+		if (node.next) {
+			node.next.prev = node.prev;
+		}
 
-    // make the next on the list first (can be null)
-    this.first = node.next;
-    if (!node.next) this.last = null; // make sure we clear this
+		// make the next on the list first (can be null)
+		this.first = node.next;
+		if (!node.next) this.last = null; // make sure we clear this
 
-    node.free = true;
-    node.prev = null;
-    node.next = null;
+		node.free = true;
+		node.prev = null;
+		node.next = null;
 
-    this.length--;
-    return node.obj;
-  }
+		this.length--;
+		return node.obj;
+	}
 
-  // remove the tail and return it's object
-  pop() {
-    const node = this.last;
-    if (this.length === 0) return null;
+	// remove the tail and return it's object
+	pop() {
+		const node = this.last;
+		if (this.length === 0) return null;
 
-    // pull this object out and tie up the ends
-    if (node.prev) {
-      node.prev.next = node.next;
-    }
-    if (node.next) {
-      node.next.prev = node.prev;
-    }
+		// pull this object out and tie up the ends
+		if (node.prev) {
+			node.prev.next = node.next;
+		}
+		if (node.next) {
+			node.next.prev = node.prev;
+		}
 
-    // this node's previous becomes last
-    this.last = node.prev;
-    if (!node.prev) this.first = null; // make sure we clear this
+		// this node's previous becomes last
+		this.last = node.prev;
+		if (!node.prev) this.first = null; // make sure we clear this
 
-    node.free = true;
-    node.prev = null;
-    node.next = null;
+		node.free = true;
+		node.prev = null;
+		node.next = null;
 
-    this.length--;
-    return node.obj;
-  }
+		this.length--;
+		return node.obj;
+	}
 
-  /**
-   * Add the passed list to this list, leaving it untouched.
-   */
-  concat(list) {
-    let node = list.first;
-    while (node) {
-      this.add(node.obj);
-      node = node.next;
-    }
-  }
+	/**
+	 * Add the passed list to this list, leaving it untouched.
+	 */
+	concat(list) {
+		let node = list.first;
+		while (node) {
+			this.add(node.obj);
+			node = node.next;
+		}
+	}
 
-  /**
-   * Clears the list out
-   */
-  clear() {
-    let next = this.first;
+	/**
+	 * Clears the list out
+	 */
+	clear() {
+		let next = this.first;
 
-    while (next) {
-      next.free = true;
-      next = next.next;
-    }
+		while (next) {
+			next.free = true;
+			next = next.next;
+		}
 
-    this.first = null;
-    this.length = 0;
-  }
+		this.first = null;
+		this.length = 0;
+	}
 
-  dispose() {
-    let next = this.first;
+	dispose() {
+		let next = this.first;
 
-    while (next) {
-      next.obj = null;
-      next = next.next;
-    }
-    this.first = null;
+		while (next) {
+			next.obj = null;
+			next = next.next;
+		}
+		this.first = null;
 
-    this.objToNodeMap = null;
-  }
+		this.objToNodeMap = null;
+	}
 
-  /*
-    Outputs the contents of the current list for debugging.
-   */
-  dump(msg) {
-    console.log('====================' + msg + '=====================');
-    let a = this.first;
-    while (a) {
-      console.log("{" + a.obj.toString() + "} previous=" + (a.prev ? a.prev.obj : "NULL"));
-      a = a.next();
-    }
-    console.log("===================================");
-    console.log("Last: {" + (this.last ? this.last.obj : 'NULL') + "} " +
-      "First: {" + (this.first ? this.first.obj : 'NULL') + "}");
-  }
+	/*
+	  Outputs the contents of the current list for debugging.
+	 */
+	dump(msg) {
+		console.log('====================' + msg + '=====================');
+		let a = this.first;
+		while (a) {
+			console.log("{" + a.obj.toString() + "} previous=" + (a.prev ? a.prev.obj : "NULL"));
+			a = a.next();
+		}
+		console.log("===================================");
+		console.log("Last: {" + (this.last ? this.last.obj : 'NULL') + "} " +
+			"First: {" + (this.first ? this.first.obj : 'NULL') + "}");
+	}
 }

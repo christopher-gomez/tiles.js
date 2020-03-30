@@ -31,39 +31,39 @@ import Map from './map/Map';
 
 
 export const Engine = {
-  VERSION: '1.0.0',
+	VERSION: '1.0.0',
 
-  PI: Math.PI,
-  TAU: Math.PI * 2,
-  DEG_TO_RAD: 0.0174532925,
-  RAD_TO_DEG: 57.2957795,
-  SQRT3: Math.sqrt(3), // used often in hex conversions
+	PI: Math.PI,
+	TAU: Math.PI * 2,
+	DEG_TO_RAD: 0.0174532925,
+	RAD_TO_DEG: 57.2957795,
+	SQRT3: Math.sqrt(3), // used often in hex conversions
 
-  Cell,
-  Grid,
-  HexGrid,
-  SqrGrid,
-  Tile,
-  LinkedList,
-  Signal,
-  AStarFinder,
-  PathUtil,
-  Loader,
-  MouseCaster,
-  View,
-  SelectionManager,
-  Tools,
-  Map,
+	Cell,
+	Grid,
+	HexGrid,
+	SqrGrid,
+	Tile,
+	LinkedList,
+	Signal,
+	AStarFinder,
+	PathUtil,
+	Loader,
+	MouseCaster,
+	View,
+	SelectionManager,
+	Tools,
+	Map,
 
-  // useful enums for type checking. change to whatever fits your game. these are just examples
-  TILE: 'tile', // visual representation of a grid cell
-  ENT: 'entity', // dynamic things
-  STR: 'structure', // static things
+	// useful enums for type checking. change to whatever fits your game. these are just examples
+	TILE: 'tile', // visual representation of a grid cell
+	ENT: 'entity', // dynamic things
+	STR: 'structure', // static things
 
-  HEX: 'hex',
-  SQR: 'square',
-  RCT: 'rectangle',
-  ABS: 'abstract',
+	HEX: 'hex',
+	SQR: 'square',
+	RCT: 'rectangle',
+	ABS: 'abstract',
 }
 
 export default Engine;

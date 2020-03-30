@@ -4,6 +4,7 @@ export default class Animation {
    */
   public progress = 0.0;
 
+  public complete = false;
 
   /**
    * Simple animation helper
@@ -20,7 +21,9 @@ export default class Animation {
    */
   animate(dtS: number): boolean {
     this.progress = this.progress + dtS * 1000 / this.durationMs
-    this.update(this.easingFunction(this.progress))
+	this.update(this.easingFunction(this.progress))
+	if(this.progress >= 1.0)
+	  this.complete = true;
     return this.progress >= 1.0
   }
 

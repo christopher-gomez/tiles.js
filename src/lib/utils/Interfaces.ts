@@ -1,4 +1,4 @@
-import { Geometry, MeshPhongMaterial, Fog, Light, Vector3, Material } from 'three';
+import { Geometry, MeshPhongMaterial, Fog, Light, Vector3, Material, Vector2 } from 'three';
 import Cell from '../grids/Cell';
 import Tile from '../grids/Tile';
 
@@ -44,7 +44,7 @@ export interface ViewSettings {
   element?: HTMLElement;
   alpha?: boolean;
   antialias?: boolean;
-  clearColor?: string;
+  clearColor?: number;
   sortObjects?: boolean;
   fog?: Fog;
   light?: Light;
@@ -87,6 +87,6 @@ export interface ViewController {
   updateControlSettings(config: CameraControlSettings): void;
   toggleControls(): void;
   toggleHorizontalRotation(bool: boolean): void;
-  panInDirection(left: boolean, right: boolean, top: boolean, bottom: boolean): void;
+  panInDirection(direction: Vector2): void;
   panCameraTo(tile: Tile | Cell, durationMs: number): void;
 }
