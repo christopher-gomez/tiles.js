@@ -41,6 +41,9 @@ export default class AnimationManager {
   }
 
   addAnimation(animation: Animation): void {
+    if (this.animations.length > 0) {
+      this.cancelAnimation();
+    }
     this.animations.push(animation);
   }
 

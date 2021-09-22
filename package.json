@@ -68,10 +68,10 @@
 		"webpack-cli": "^3.3.11"
 	},
 	"dependencies": {
-		"dat.gui": "^0.7.6",
+		"dat.gui": "^0.7.7",
 		"prng-parkmiller-js": "^0.1.1",
 		"simplex-noise": "^2.4.0",
-		"three": "^0.108.0"
+		"three": "^0.132.2"
 	},
 	"browserslist": {
 		"production": [
