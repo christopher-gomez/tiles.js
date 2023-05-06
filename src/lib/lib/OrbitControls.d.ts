@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Camera, MOUSE, Object3D, TOUCH, Vector3 } from '../../../src/Three';
-import View from '../map/View';
+import View from '../scene/View';
 
 export class OrbitControls {
 	constructor(object: Camera, domElement?: HTMLElement, view: View);

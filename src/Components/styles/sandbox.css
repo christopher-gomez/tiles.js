@@ -9,3 +9,40 @@
   letter-spacing: .05em;
   left: .5em;
 }
+
+.App {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#gui {
+  position: fixed !important;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 2px;
+  z-index: 100 !important;
+}
+
+.fullScreenToggle {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  background: none;
+  border: none;
+  margin: 10px;
+}
+
+.fullScreenToggle:focus {
+  outline: 0;
+}
+
+.fullScreenToggle:active {
+  outline: none;
+  border: none;
+}
+
+.fullScreenToggle:hover {
+  cursor: pointer;
+}

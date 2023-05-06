@@ -20,7 +20,7 @@ config - (optional) An object with one or more properties defining the Grid's pr
 `.gridShape: string`
 
 <small>
-A string describing the shape of the grid. Possible values are "sqr", "rect", "hex", and "abs".<br/>
+A string describing the shape of the grid. Possible values are "square", "rectable", "hex", and "abstract".<br/>
 Default is <b>"hex"</b>.
 </small>
 
@@ -50,17 +50,17 @@ An associative array, where the key is the Cell's vector coordinates.
 How many cells in the grid.
 </small>
 
-`.extrudeSettings: ExtrudeSettings`
+<!-- `.extrudeSettings: ExtrudeSettings`
 
 <small>
 An object with properties that describe how much each tile extrudes.<br/>
 Used by Map to render Cells in 3D space. 
-</small>
+</small> -->
 
 `.cellShape: string`
 
 <small>
-A string describing the shape of each cell. Possible values are "sqr", "rect", "hex". <br/>
+A string describing the shape of each cell. Possible values are "square", "rectangle", and "hex". <br/>
 Default is <b>"hex"</b>.
 </small>
 

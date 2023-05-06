@@ -3,7 +3,7 @@
 /*
 	@source https://github.com/qiao/PathFinding.js/
 */
-import Cell from '../grids/Cell';
+import Cell from '../grid/Cell';
 
 class PathUtil {
 	/**

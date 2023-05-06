@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import HTMLParser from 'react-markdown/plugins/html-parser';
+// import HTMLParser from 'react-markdown/plugins/html-parser';
 import { TOC } from './markdown/ref.js';
 import * as docFiles from './markdown/ref';
 import { Link } from 'react-router-dom';
@@ -117,7 +117,7 @@ export default class Docs extends React.Component {
               link: this.markdownLinkRenderer.bind(this),
               code: this.markdownCodeRenderer
             }}
-            plugins={[HTMLParser]}
+            // plugins={[HTMLParser]}
             source={this.state.toc}
           />
         </div>

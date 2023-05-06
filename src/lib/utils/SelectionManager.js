@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import Engine from '../Engine';
 // 'utils/Tools', 'lib/LinkedList', 'utils/MouseCaster', 'lib/Signal'
 export default class SelectionManager {
@@ -57,12 +56,12 @@ export default class SelectionManager {
 
 	onMouse(type, obj) {
 		switch (type) {
-			case Engine.MouseCaster.DOWN:
+			case Engine.MouseCaster.LEFT_DOWN:
 				if (!obj) {
 					this.clearSelection();
 				}
 				break;
-			case Engine.MouseCaster.CLICK:
+			case Engine.MouseCaster.LEFT_CLICK:
 				this.select(obj);
 				break;
 			default:

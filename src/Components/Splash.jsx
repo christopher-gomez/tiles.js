@@ -1,7 +1,8 @@
 /* eslint-disable */
-import React from 'react';
-import Engine from '../lib/Engine.ts';
+import React from "react";
+import Engine from "../lib/Engine";
 import { Link } from "react-router-dom";
+import { Vector3 } from "three";
 
 export default class Splash extends React.Component {
   params = {
@@ -17,22 +18,22 @@ export default class Splash extends React.Component {
       minPolarAngle: 0, // Math.PI / 10
       maxPolarAngle: 60,
       minAzimuthAngle: 0,
-      maxAzimuthAngle: -Math.PI,
-      horizontalRotation: true
-    }
-  }
+      maxAzimuthAngle: 180,
+      horizontalRotation: true,
+    },
+  };
   componentDidMount() {
     const cc = this.params.cameraControl;
     // this constructs the cells in grid coordinate space
-    this.gridSpace = new Engine.Grid({
-      gridShape: Engine.HEX,
-      cellSize: 15,
-      gridSize: 80
+    this.gridSpace = new Engine.HexGrid({
+      gridShape: Engine.GridShapes.FLAT_TOP_HEX,
+      cellRadius: 15,
+      gridRadius: 80,
     });
     this.map = new Engine.Map(this.gridSpace);
     this.scene = new Engine.View(this.map, {
-      element: document.getElementById('engine'),
-      cameraPosition: { x: 50, y: 52, z: 50 },
+      element: document.getElementById("engine"),
+      // cameraPosition: { x: 50, y: 52, z: 50 },
       cameraControlSettings: {
         controlled: cc.controlled,
         enableDamping: cc.enableDamping,
@@ -40,20 +41,19 @@ export default class Splash extends React.Component {
         maxDistance: cc.maxDistance,
         minDistance: cc.minDistance,
         enableZoom: cc.enableZoom,
-        zoomSpeed: cc.zoomSpeed,
-        hotEdges: cc.hotEdges,
+        zoomAmount: cc.zoomSpeed,
         autoRotate: cc.autoRotate,
         screenSpacePanning: cc.screenSpacePanning,
         minPolarAngle: cc.minPolarAngle,
         maxPolarAngle: cc.maxPolarAngle,
         maxAzimuthAngle: cc.maxAzimuthAngle,
         minAzimuthAngle: cc.minAzimuthAngle,
-        horizontalRotation: cc.horizontalRotation
-      }
+        // horizontalRotation: cc.horizontalRotation,
+      },
     });
     //this.map.generateOverlay(45);
 
-    this.scene.focusOn(this.map.getRandomTile());
+    this.scene.focusOn(new Vector3(0, 0, 0));
   }
   componentWillUnmount() {
     window.cancelAnimationFrame(this.animID);
@@ -67,17 +67,34 @@ export default class Splash extends React.Component {
   render() {
     return (
       <div className="App">
-        <div id='overlay'>
+        <div id="overlay">
           <h1>Tiles.js</h1>
           <hr></hr>
           <h3>A 3D Tile Engine</h3>
-          <Link to='/sandbox' style={{ backgroundColor: 'rgb(147,217,69)', color:'black'}}>Sandbox</Link>
-          <br/>
-          <Link to='/docs'>Docs</Link>
+          <Link
+            to="/sandbox"
+            style={{ backgroundColor: "rgb(147,217,69)", color: "black" }}
+          >
+            Sandbox
+          </Link>
           <br />
-          <a href='https://github.com/christophgomez/threejs-tilemap' target="_blank" rel="noopener noreferrer">Github</a>
+          {/* <Link to="/docs">Docs</Link>
+          <br /> */}
+          <a
+            href="https://github.com/christophgomez/threejs-tilemap"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github
+          </a>
         </div>
-        <div id='engine'></div>
+        <div
+          id="engine"
+          style={{
+            height: "100%",
+            width: "100%",
+          }}
+        ></div>
       </div>
     );
   }

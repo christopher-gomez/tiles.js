@@ -6,20 +6,19 @@ body {
     -moz-osx-font-smoothing: grayscale;
     height: 100%;
     width: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
 }
 
-#gui {
-    position: fixed !important;
-    right: 0;
-    bottom: 0;
-    margin-bottom: 2px;
-    z-index: 100 !important;
-}
+
 
 #overlay {
-    position: fixed;
+    position: absolute;
     /* Sit on top of the page content */
-    display: block;
+    display:block;
     /* Hidden by default */
     width: 100%;
     /* Full width (cover the whole page) */
@@ -29,7 +28,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0);
     /* Black background with opacity */
     z-index: 2;
     /* Specify a stack order in case you're using a different order for other elements */
@@ -89,25 +88,7 @@ hr {
     margin-top: -20px;
 }
 
-.fullScreenToggle {
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 2;
-    background: none;
-    border: none;
-    margin: 10px;
-}
-
-.fullScreenToggle:focus {
-    outline: 0;
-}
-
-.fullScreenToggle:active {
-    outline: none;
-    border: none;
-}
-
-.fullScreenToggle:hover {
-    cursor: pointer;
+#root {
+    height: 100%;
+    width: 100%;
 }

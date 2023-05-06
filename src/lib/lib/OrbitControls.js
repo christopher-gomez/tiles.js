@@ -15,7 +15,8 @@ import {
 	Spherical,
 	TOUCH,
 	Vector2,
-	Vector3
+	Vector3,
+	Box3
 } from 'three';
 
 // This set of controls performs orbiting, dollying (zooming), and panning.
@@ -137,12 +138,10 @@ const OrbitControls = function (object, domElement, view) {
 	};
 
 	this.setZoom = (bool) => {
-		console.log('set zoom');
 		scope.enableZoom = bool
 		if (scope.enableZoom) {
 			scope.domElement.addEventListener('wheel', onMouseWheel, false);
 		} else {
-			console.log(scope.domElement);
 			scope.domElement.removeEventListener('wheel', onMouseWheel, false);
 		}
 	}
@@ -206,13 +205,24 @@ const OrbitControls = function (object, domElement, view) {
 			// move target to panned location
 
 			if (scope.enableDamping === true) {
-
 				scope.target.addScaledVector(panOffset, scope.dampingFactor);
-
 			} else {
-
 				scope.target.add(panOffset);
 
+				var min_x = scope.view.map.boundingBox.min.x;
+				var max_x = scope.view.map.boundingBox.max.x;
+				var min_z = scope.view.map.boundingBox.min.z;
+				var max_z = scope.view.map.boundingBox.max.z;
+				var min_y = scope.view.map.boundingBox.min.y;
+				var max_y = scope.view.map.boundingBox.max.y;
+
+				if (scope.target.x < min_x) scope.target.setX(min_x);
+				if (scope.target.y < min_y) scope.target.setY(min_y);
+				if (scope.target.z < min_z) scope.target.setZ(min_z);
+
+				if (scope.target.x > max_x) scope.target.setX(max_x);
+				if (scope.target.y > max_y) scope.target.setY(max_y);
+				if (scope.target.z > max_z) scope.target.setZ(max_z);
 			}
 
 			offset.setFromSpherical(spherical);
@@ -495,6 +505,9 @@ const OrbitControls = function (object, domElement, view) {
 
 	function handleMouseDownPan(event) {
 
+		scope.view.animationManager.stopAnimation("zoom", true);
+		scope.view.animationManager.stopAnimation("pan", true);
+
 		panStart.set(event.clientX, event.clientY);
 
 	}
@@ -540,9 +553,9 @@ const OrbitControls = function (object, domElement, view) {
 	}
 
 	function handleMouseMovePan(event) {
-		while (scope.view.animationManager.animations.length >= 1) {
-			scope.view.animationManager.cancelAnimation();
-		}
+		// while (scope.view.animationManager.animations.length >= 1) {
+		// 	scope.view.animationManager.cancelAnimation();
+		// }
 
 		panEnd.set(event.clientX, event.clientY);
 
@@ -550,14 +563,13 @@ const OrbitControls = function (object, domElement, view) {
 
 		scope.pan(panDelta.x, panDelta.y);
 
-		const cell = scope.view.map.grid.pixelToCell(scope.object.position);
-		const t = scope.view.map.getTileAtCell(cell);
-		if (!t) scope.pan(-panDelta.x, -panDelta.y);
+		// const cell = scope.view.map.grid.pixelToCell(scope.object.position);
+		// const t = scope.view.map.getTileAtCell(cell);
+		// if (!t) scope.pan(-panDelta.x, -panDelta.y);
 
 		panStart.copy(panEnd);
 
 		scope.update();
-
 	}
 
 	function handleMouseUp( /*event*/) {
@@ -800,11 +812,11 @@ const OrbitControls = function (object, domElement, view) {
 						if (event.ctrlKey || event.metaKey || event.shiftKey) {
 
 							if (scope.enablePan === false) return;
-							if (scope.view._mouseCaster.pickedObject === null) return;
+							if (scope.view.controller.mouseCaster.pickedObject === null) return;
 
-							while (scope.view.animationManager.animations.length >= 1) {
-								scope.view.animationManager.cancelAnimation();
-							}
+							// while (scope.view.animationManager.animations.length >= 1) {
+							// 	scope.view.animationManager.cancelAnimation();
+							// }
 							handleMouseDownPan(event);
 
 							state = STATE.PAN;
@@ -832,9 +844,8 @@ const OrbitControls = function (object, domElement, view) {
 							state = STATE.ROTATE;
 
 						} else {
-
 							if (scope.enablePan === false) return;
-							if (scope.view._mouseCaster.pickedObject === null) return;
+							// if (scope.view.controller.mouseCaster.pickedObject === null) return;
 
 							handleMouseDownPan(event);
 
@@ -882,7 +893,7 @@ const OrbitControls = function (object, domElement, view) {
 
 					case MOUSE.ROTATE:
 
-						if (scope.enableRotate === false) return;
+						// if (scope.enableRotate === false) return;
 
 						handleMouseDownRotate(event);
 
@@ -893,7 +904,6 @@ const OrbitControls = function (object, domElement, view) {
 					case MOUSE.PAN:
 
 						if (scope.enablePan === false) return;
-						if (scope.view._mouseCaster.pickedObject === null) return;
 
 						handleMouseDownPan(event);
 
@@ -980,11 +990,11 @@ const OrbitControls = function (object, domElement, view) {
 		event.preventDefault();
 		//event.stopPropagation();
 
-		scope.dispatchEvent(startEvent);
+		scope.dispatchEvent({ type: event.deltaY < 0 ? 'zoom-in' : 'zoom-out', state: 'start', event });
 
 		handleMouseWheel(event);
 
-		scope.dispatchEvent(endEvent);
+		scope.dispatchEvent({ type: event.deltaY < 0 ? 'zoom-in' : 'zoom-out', state: 'end', event });
 
 	}
 
