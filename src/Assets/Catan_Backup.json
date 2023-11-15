@@ -1,0 +1,871 @@
+{
+  "viewData": {
+    "sceneName": "Catan",
+    "element": null,
+    "alpha": true,
+    "antialias": true,
+    "clearColor": 26514,
+    "sortObjects": false,
+    "cameraPosition": [
+      9.3519919703693e-16, 299.068911545766, -27.476079626799134
+    ],
+    "cameraFov": 45,
+    "cameraNear": 1,
+    "cameraFar": 10000,
+    "sceneMarginSize": 20,
+    "entities": {}
+  },
+  "controllerData": {
+    "target": [
+      -2.4296500997708063e-15, -5.77913320225776e-160, 4.360970957420292e-24
+    ],
+    "controlled": true,
+    "currentDistance": 300.32840159536596,
+    "minDistance": 100,
+    "maxDistance": 300,
+    "zoomDelta": 10,
+    "autoRotate": false,
+    "currentPolarAngle": 5.2491464603197135,
+    "minPolarAngle": 0,
+    "maxPolarAngle": 45,
+    "minAzimuthAngle": 180,
+    "currentAzimuthAngle": 180,
+    "maxAzimuthAngle": 180,
+    "userHorizontalRotation": false,
+    "userVerticalRotation": false,
+    "rotationDamping": false
+  },
+  "mapData": {
+    "gridData": {
+      "gridRadius": 2,
+      "cellRadius": 16,
+      "cells": {
+        "-2.0.2": {
+          "q": -2,
+          "r": 0,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Clay",
+              "color": "#bf7330",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "clay" }
+            },
+            "customData": { "resource": "clay" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 90,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "5",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-2.1.1": {
+          "q": -2,
+          "r": 1,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Wheat",
+              "color": "#f6c13c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "wheat" }
+            },
+            "customData": { "resource": "wheat" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 100,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "6",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-2.2.0": {
+          "q": -2,
+          "r": 2,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Plain",
+              "color": "#69a442",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "sheep" }
+            },
+            "customData": { "resource": "sheep" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 70,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "11",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-1.-1.2": {
+          "q": -1,
+          "r": -1,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Forest",
+              "color": "#213b1b",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "wood" }
+            },
+            "customData": { "resource": "wood" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 100,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#ffffff",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "8",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-1.0.1": {
+          "q": -1,
+          "r": 0,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Mountain",
+              "color": "#57535c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "stone" }
+            },
+            "customData": { "resource": "stone" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 70,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "3",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-1.1.0": {
+          "q": -1,
+          "r": 1,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Wheat",
+              "color": "#f6c13c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "wheat" }
+            },
+            "customData": { "resource": "wheat" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 80,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "4",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-1.2.-1": {
+          "q": -1,
+          "r": 2,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Plain",
+              "color": "#69a442",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "sheep" }
+            },
+            "customData": { "resource": "sheep" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 90,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "5",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "0.-2.2": {
+          "q": 0,
+          "r": -2,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Wheat",
+              "color": "#f6c13c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "wheat" }
+            },
+            "customData": { "resource": "wheat" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 90,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "9",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "0.-1.1": {
+          "q": 0,
+          "r": -1,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Forest",
+              "color": "#213b1b",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "wood" }
+            },
+            "customData": { "resource": "wood" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 70,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "11",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "0.0.0": {
+          "q": 0,
+          "r": 0,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Desert",
+              "color": "#c9a566",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.1.-1": {
+          "q": 0,
+          "r": 1,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Forest",
+              "color": "#213b1b",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "wood" }
+            },
+            "customData": { "resource": "wood" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 70,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "3",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "0.2.-2": {
+          "q": 0,
+          "r": 2,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Mountain",
+              "color": "#57535c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "stone" }
+            },
+            "customData": { "resource": "stone" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 100,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "8",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "1.-2.1": {
+          "q": 1,
+          "r": -2,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Wheat",
+              "color": "#f6c13c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "wheat" }
+            },
+            "customData": {},
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 60,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "12",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "1.-1.0": {
+          "q": 1,
+          "r": -1,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Clay",
+              "color": "#bf7330",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "clay" }
+            },
+            "customData": { "resource": "clay" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 100,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "6",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "1.0.-1": {
+          "q": 1,
+          "r": 0,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Plain",
+              "color": "#69a442",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "sheep" }
+            },
+            "customData": { "resource": "sheep" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 80,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "4",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "1.1.-2": {
+          "q": 1,
+          "r": 1,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Clay",
+              "color": "#bf7330",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "clay" }
+            },
+            "customData": { "resource": "clay" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 80,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "10",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "2.-2.0": {
+          "q": 2,
+          "r": -2,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Mountain",
+              "color": "#57535c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "stone" }
+            },
+            "customData": { "resource": "stone" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 80,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "10",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "2.-1.-1": {
+          "q": 2,
+          "r": -1,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Plain",
+              "color": "#69a442",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "sheep" }
+            },
+            "customData": { "resource": "sheep" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 60,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "2",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "2.0.-2": {
+          "q": 2,
+          "r": 0,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Forest",
+              "color": "#213b1b",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "wood" }
+            },
+            "customData": { "resource": "wood" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 90,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "9",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        }
+      },
+      "gridShape": 0,
+      "cellShape": 0
+    },
+    "settings": {
+      "entities": {},
+      "overlayColor": "rgb(5,110,153)",
+      "hasOverlay": true,
+      "overlayLineColor": 0,
+      "overlayLineOpacity": 0.9
+    }
+  }
+}

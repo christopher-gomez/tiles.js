@@ -8,16 +8,21 @@ export default abstract class EventEmitter {
 
     public addEventListener(name: string, callback: (args?: any) => void) {
         if (!this.registeredEvents.get(name)) this.registeredEvents.set(name, []);
+
         this.registeredEvents.get(name).push(callback);
     }
 
-    public removeEventListener(name: string, callback: (args?: any) => void) {
-        if (!this.registeredEvents.get(name)) {return }
+    public removeEventListener(name: string, callback?: (args?: any) => void) {
+        if (!this.registeredEvents.get(name)) { return }
 
-        let index = this.registeredEvents.get(name).map(f => f.name).indexOf(callback.name);
+        if (callback) {
+            const index = this.registeredEvents.get(name).map(f => f.name).indexOf(callback.name);
 
-        if (index !== -1)
-            this.registeredEvents.get(name).splice(index, 1);
+            if (index !== -1)
+                this.registeredEvents.get(name).splice(index, 1);
+        } else {
+            this.registeredEvents.delete(name);
+        }
     }
 
     protected triggerEvent(name: string, args?: any) {

@@ -1,15 +1,3 @@
-#fps {
-  position: absolute;
-  z-index: 2;
-  color: white;
-  font-size: 1.25em;
-  font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
-    DejaVu Sans Mono, Bitstr;
-  bottom: .5em;
-  letter-spacing: .05em;
-  left: .5em;
-}
-
 .App {
   overflow: hidden;
   height: 100%;

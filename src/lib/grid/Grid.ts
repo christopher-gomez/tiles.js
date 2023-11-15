@@ -1,5 +1,5 @@
 import Cell, { CellNeighborDirections } from "./Cell";
-import { GridSettings, GridJSONData, GridSettingsParams, MapSettingsParams, TileJSONData } from "../utils/Interfaces";
+import { GridSettings, GridJSONData, GridSettingsParams, MapSettingsParams, TileJSONData, TileType } from "../utils/Interfaces";
 import { Vector3, Object3D, Material } from "three";
 import Tile from "../map/Tile";
 import Engine, { EngineGridShapes, EngineTileShapes } from '../Engine';
@@ -90,7 +90,7 @@ export default abstract class Grid {
 
   abstract generateGrid(config: GridSettings): void;
 
-  add(cell: Cell): Cell {
+  protected add(cell: Cell): Cell {
     const h = this.cellToHash(cell);
     if (this.cells[h]) {
       // console.warn('A cell already exists there');
@@ -102,7 +102,11 @@ export default abstract class Grid {
     return cell;
   }
 
+  public abstract createCell(pos: Vector3, generateTile: boolean) : void | Tile
+
   remove(cell: Cell): Cell {
+    if(!this.cells) return;
+    
     const h = this.cellToHash(cell);
     if (this.cells[h]) {
       delete this.cells[h];
@@ -181,27 +185,28 @@ export default abstract class Grid {
   }
 
   dispose(): void {
-    this._cells = null;
+    this._cells = {};
     this._numCells = 0;
-    this._list = null;
-    this._vec3 = null;
+    this._list = [];
+    this._vec3 = new Vector3();
+    this._gridRadius = 0;
+    this._cellRadius = 0;
 
     HexCell.dispose();
     SqrCell.dispose();
   }
 
-  protected generateTile(cell: Cell, scale: number, data?: TileJSONData
+  public generateTile(cell: Cell, data?: TileType | TileJSONData, isPlayable = true
   ): Tile {
 
-    const tile = cell.createTile(scale, this);
+    const tile = cell.createTile(data, isPlayable);
 
-    if(data) tile.fromJSON(data);
+    // if(data) tile.fromJSON(data);
     
     return tile;
   }
 
-  generateTiles(map: Map, tilemapSettings?: MapSettingsParams): Tile[] {
-    tilemapSettings = tilemapSettings || {} as MapSettingsParams;
+  generateTiles(map: Map, onTileCreated?: (tile: Tile, index: number) => void): Tile[] {
     this._map = map;
     const tiles = [];
 
@@ -212,17 +217,17 @@ export default abstract class Grid {
     let index = 0;
     for (i in this.cells) {
       c = this.cells[i];
-      t = this.generateTile(c, tilemapSettings && tilemapSettings.tileScale !== undefined ? tilemapSettings.tileScale : 1);
+      t = this.generateTile(c, this.config.isLoad && this.config.gridJSON && i in this.config.gridJSON.cells ? this.config.gridJSON.cells[i].tileData : undefined);
       
       const p = this.cellToPixel(c);
       p.y = 0;
       t.setPosition(p)
 
-      if (this.config.isLoad && this.config.gridJSON && i in this.config.gridJSON.cells) {
-        t.fromJSON(this.config.gridJSON.cells[i].tileData);
-      }
+      // if (this.config.isLoad && this.config.gridJSON && i in this.config.gridJSON.cells) {
+      //   t.fromJSON(this.config.gridJSON.cells[i].tileData);
+      // }
 
-      if (tilemapSettings && tilemapSettings.onTileCreated) tilemapSettings.onTileCreated(t, index);
+      if (onTileCreated) onTileCreated(t, index);
       tiles.push(t);
       index++;
     }
@@ -231,6 +236,7 @@ export default abstract class Grid {
 
   abstract generateOverlay(size: number, overlayObj: Object3D, overlayMat: Material): void;
   abstract distance(cellA: Cell, cellB: Cell): number;
+  abstract generateNonPlayableTiles(size: number): Tile[];
 
   traverse(cb: (cell: Cell) => void): void {
     let i;
@@ -267,7 +273,7 @@ export default abstract class Grid {
     materials: [
       {
         cache_id: 0,
-        type: 'MeshLambertMaterial',
+        type: 'MeshPhongMaterial',
         color, ambient, emissive, reflectivity, refractionRatio, wrapAround,
         imgURL: url
       }

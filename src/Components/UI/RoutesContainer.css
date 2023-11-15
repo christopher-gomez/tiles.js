@@ -1,0 +1,271 @@
+.overlay {
+  position: absolute;
+  /* Hidden by default */
+  width: 100%;
+  /* Full width (cover the whole page) */
+  height: 100%;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  /* Black background with opacity */
+  z-index: 99999;
+  /* Specify a stack order in case you're using a different order for other elements */
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  flex-flow: column;
+  overflow: hidden; /* Hide overflow when content expands */
+  transition: all 0.25s !important;
+  color: white;
+  text-shadow: 1px 1px 0px #000;
+}
+
+.overlay h3 {
+  font-size: 1.2em;
+  font-weight: 100;
+  transition: all 0.25s;
+}
+
+.overlay hr {
+  border-color: white;
+  width: 30%;
+  margin-top: -20px;
+  transition: all 0.25s;
+}
+
+.overlay * {
+  font-weight: bolder !important;
+}
+
+.overlay.buttonInput,
+.overlay.buttonInput * {
+  cursor: none !important;
+}
+
+.overlay h1 {
+  font-size: 3em;
+  font-weight: 100;
+  transition: all 0.25s;
+}
+
+.route-menu-button {
+  text-decoration: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 15px 40px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  margin: 10px 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 200;
+  outline: 1px solid white;
+  position: relative;
+  background: rgba(185, 185, 185, 0.308);
+  color: black;
+  border-radius: 40px;
+  transition: all 0.25s, font-weight 0s, font-style 0s, border 0s !important;
+}
+
+.route-menu-button.disabled {
+  cursor: default !important;
+  outline: none !important;
+  color: gray !important;
+}
+
+*.buttonInput .route-menu-button.disabled {
+  cursor: inherit !important;
+}
+
+.route-menu-button:hover {
+  font-weight: bold !important;
+  cursor: pointer !important;
+  transform-style: preserve-3d;
+  transform: perspective(3000px) translateZ(150px) translateX(15px); /* Animate in from the right */
+  text-shadow: none !important;
+  outline: none !important;
+  background-color: rgba(147, 217, 69, 1) !important;
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s,
+    color 0s, text-shadow 0s, border 0s !important;
+  color: black;
+  border: none !important;
+}
+
+.route-menu-button.no-move:hover {
+  font-weight: bold !important;
+  cursor: pointer !important;
+  transform-style: preserve-3d;
+  transform: perspective(3000px) translateZ(150px); /* Animate in from the right */
+  text-shadow: none !important;
+  outline: none !important;
+  background-color: rgba(147, 217, 69, 1) !important;
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s,
+    color 0s, text-shadow 0s, border 0s !important;
+  color: black;
+  border: none !important;
+}
+
+.route-menu-button.right:hover {
+  transform: perspective(3000px) translateZ(150px) translateX(15px) !important; /* Animate in from the right */
+}
+
+.route-menu-button.right.no-move:hover {
+  transform: perspective(3000px) !important; /* Animate in from the right */
+}
+
+.route-menu-button.left:hover {
+  transform: perspective(3000px) translateZ(150px) translateX(-15px) !important; /* Animate in from the right */
+}
+
+.route-menu-button.left.no-move:hover {
+  transform: perspective(3000px) !important; /* Animate in from the right */
+}
+
+.route-menu-button.disabled:hover {
+  background: rgba(185, 185, 185, 0.308);
+  background-color: rgb(185, 185, 185, 0.308) !important;
+  font-weight: lighter !important;
+  cursor: default !important;
+  text-shadow: none !important;
+  outline: none !important;
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s,
+    color 0s text-shadow 0s !important;
+  transform: none !important;
+}
+
+.link-text {
+  /* Initial state hidden off-screen to the right */
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 0.25s, opacity 1s, transform 1s !important;
+  cursor: default !important;
+}
+
+div.link-text.visible {
+  opacity: 1;
+  transform: translateX(0); /* Animate in from the right */
+  transition: all 0.25s, opacity 1s, transform 1s !important;
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
+
+div.link-text > .route-menu-button {
+  color: white !important;
+}
+
+div.link-text > .route-menu-button.disabled {
+  color: rgb(255, 255, 255) !important;
+  opacity: 0.75;
+}
+
+div.link-text.mouseInput > .route-menu-button:hover {
+  font-weight: bolder !important;
+  /* font-size: 1.2em !important; */
+  cursor: pointer !important;
+  transform: perspective(3000px) translateZ(150px) translateX(15px); /* Animate in from the right */
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s,
+    text-shadow 0s, color 0s !important;
+  text-shadow: none !important;
+  outline-color: black !important;
+}
+
+div.link-text.buttonInput.active > .route-menu-button {
+  font-weight: bolder !important;
+  /* font-size: 1.2em !important; */
+  cursor: pointer !important;
+  transform: perspective(3000px) translateZ(150px) translateX(15px); /* Animate in from the right */
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s,
+    text-shadow 0s, color 0s !important;
+  text-shadow: none !important;
+  outline-color: black !important;
+  background-color: rgba(147, 217, 69, 1) !important;
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s,
+    color 0s, text-shadow 0s !important;
+  color: black !important;
+  transform: perspective(2000px) translateZ(150px) translateX(15px); /* Animate in from the right */
+}
+
+div.link-text.mouseInput > .route-menu-button.disabled:hover {
+  cursor: inherit !important;
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s,
+    text-shadow 0s, color 0s !important;
+  text-shadow: none !important;
+  outline: none !important;
+}
+
+div.link-text.active.mouseInput > .route-menu-button:hover {
+  background-color: rgba(147, 217, 69, 1) !important;
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s,
+    color 0s, text-shadow 0s !important;
+  color: black !important;
+  transform: perspective(2000px) translateZ(150px) translateX(15px); /* Animate in from the right */
+}
+
+div.link-text.buttonInput.not-active > .route-menu-button:hover {
+  font-weight: bold !important;
+  cursor: inherit !important;
+  transform: none !important; /* Animate in from the right */
+  background-color: rgba(185, 185, 185, 0.308) !important;
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s,
+    color 0s text-shadow 0s !important;
+  outline: 1px solid white !important;
+}
+
+div.link-text.buttonInput > .route-menu-button.disabled,
+div.link-text.buttonInput > .route-menu-button.disabled:hover {
+  outline: none !important;
+}
+
+div.link-text.not-active > .route-menu-button {
+  opacity: 0.5;
+  transition: all 0.25s, font-weight 0s, font-style 0s, background-color 0s !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+div.link-text.not-active.right {
+  transform: translateX(-25px) !important; /* Animate in from the right */
+  transition: all 0.25s, font-weight 0s, font-style 0s !important;
+}
+
+div.link-text.not-active.left {
+  transform: translateX(25px) !important; /* Animate in from the right */
+  transition: all 0.25s, font-weight 0s, font-style 0s !important;
+}
+
+.slide-fade-in {
+  opacity: 0; /* Start with opacity 0 (hidden) */
+  transform: translateY(-75%); /* Start position: move from the right */
+  transition: opacity 0s, transform 0s !important; /* Transition properties and duration */
+}
+
+.slide-fade-in.visible {
+  opacity: 1; /* End with opacity 1 (fully visible) */
+  transform: translateY(0); /* End position: move to the original position */
+  transition: opacity 0.25s, transform 0.5s !important; /* Transition properties and duration */
+}
+
+.routes-container {
+  transition: all 0.25s !important;
+  display: inline-flex;
+  flex-flow: column;
+  place-items: center;
+  justify-content: center;
+  padding: 0px 2em;
+  height: auto;
+}
+
+.routes-container.hidden {
+  /* height: 0 !important; */
+  transition: all 0.25s !important;
+}

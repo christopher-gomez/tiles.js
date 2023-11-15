@@ -33,7 +33,6 @@ export enum EngineGridShapes {
 	POINT_TOP_HEX,
 	SQUARE,
 	RECT,
-	ABSTRACT
 }
 
 export enum EngineTileShapes {
@@ -74,20 +73,20 @@ export const Engine = {
 	TileShapes: EngineTileShapes
 }
 
-export type EngineType = typeof Engine;
-export type CellType = typeof Cell;
-export type HexGridType = typeof HexGrid;
-export type SqrGridType = typeof SqrGrid;
-export type TileType = typeof Tile;
-export type LinkedListType = typeof LinkedList;
-export type SignalType = typeof Signal;
-export type AStarFinderType = typeof AStarFinder;
-export type PathUtilType = typeof PathUtil;
-export type LoaderType = typeof Loader;
-export type MouseCasterType = typeof MouseCaster;
-export type ViewType = typeof View;
-export type SelectionManagerType = typeof SelectionManager;
-export type ToolsType= typeof Tools;
-export type MapType = typeof Map;
+// export type EngineType = typeof Engine;
+// export type CellType = typeof Cell;
+// export type HexGridType = typeof HexGrid;
+// export type SqrGridType = typeof SqrGrid;
+// // export type TileType = typeof Tile;
+// export type LinkedListType = typeof LinkedList;
+// export type SignalType = typeof Signal;
+// export type AStarFinderType = typeof AStarFinder;
+// export type PathUtilType = typeof PathUtil;
+// export type LoaderType = typeof Loader;
+// export type MouseCasterType = typeof MouseCaster;
+// export type ViewType = typeof View;
+// export type SelectionManagerType = typeof SelectionManager;
+// export type ToolsType= typeof Tools;
+// export type MapType = typeof Map;
 
 export default Engine;

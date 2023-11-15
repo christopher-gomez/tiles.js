@@ -29,11 +29,12 @@ function stringToColor(string: string) {
 }
 
 function stringAvatar(name: string) {
+    const hasSpace = name.includes(' ');
     return {
         sx: {
             bgcolor: stringToColor(name),
         },
-        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+        children: hasSpace ? `${name.split(' ')[0][0]}${name.split(' ')[1][0]}` : name,
     };
 }
 
@@ -46,6 +47,12 @@ export function BackgroundLetterAvatars({ names }: AvatarProps) {
 
         </Stack>
     );
+}
+
+export const NameAvatar = ({ name }: { name: string }) => {
+    return (
+        <Avatar {...stringAvatar(name)} key={name} />
+    )
 }
 
 export default function AvatarTabs({ names }: AvatarProps) {

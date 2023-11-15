@@ -1,0 +1,19 @@
+.video-background {
+    position: relative;
+    background-color: black;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+  }

@@ -1,5 +1,6 @@
 import * as dat from "dat.gui";
 import View from "../lib/scene/View";
+import { ControllerEvent } from "../lib/scene/Controller";
 
 export default class GUI {
   /**
@@ -75,7 +76,7 @@ export default class GUI {
         scene.controller.currentDistance = val;
       });
 
-    scene.controller.addEventListener("zoom", (args) => {
+    scene.controller.addEventListener(ControllerEvent.ZOOM, (args) => {
       setCurrentDistance(args.currentDistance);
     });
 
@@ -120,7 +121,7 @@ export default class GUI {
       .step(1)
       .name("Zoom Amount")
       .onChange((val) => {
-        scene.updateControlSettings({ zoomAmount: val });
+        scene.updateControlSettings({ zoomDelta: val });
       });
 
     orbitControls
@@ -171,7 +172,7 @@ export default class GUI {
         scene.controller.currentPolarAngle = val;
       });
 
-    scene.controller.addEventListener("zoom", (args) => {
+    scene.controller.addEventListener(ControllerEvent.ZOOM, (args) => {
       setCurrentPolarAngle(args.currentPolarAngle);
     });
 

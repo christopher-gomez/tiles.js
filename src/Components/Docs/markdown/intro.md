@@ -48,5 +48,5 @@ const grid = new Engine.Grid({
 const map = new Engine.Map(grid);
 const scene = new Engine.View(map);
 
-scene.focusOn(map.group);
+scene.panCameraTo(map.group);
 ```

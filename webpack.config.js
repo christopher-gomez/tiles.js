@@ -18,13 +18,26 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|js)x?$/,
-        exclude: /(node_modules)/,
+        exclude: /node_modules\/(?!three)/,
         use: 'babel-loader',
       },
       {
         test: /\.md$/,
         use: 'raw-loader'
-      }
+      },
+      {
+        test: /\.(glb|gltf|fbx)$/,
+        use:
+          [
+            {
+              loader: 'file-loader',
+              options:
+              {
+                outputPath: 'assets/'
+              }
+            }
+          ]
+      },
     ],
   },
   externals: {

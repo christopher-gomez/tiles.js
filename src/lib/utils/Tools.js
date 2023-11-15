@@ -3,17 +3,31 @@
 import PM_PRNG from "prng-parkmiller-js";
 import SimplexNoise from "simplex-noise";
 import {
+  BackSide,
+  Box3,
   BoxBufferGeometry,
   BoxGeometry,
   Color,
+  CylinderBufferGeometry,
   Float32BufferAttribute,
+  Frustum,
   LineBasicMaterial,
+  Matrix4,
   Mesh,
   MeshBasicMaterial,
   MeshPhongMaterial,
+  Quaternion,
+  ShaderMaterial,
+  Sphere,
   SphereGeometry,
+  Vector3,
 } from "three";
-import Entity from "../env/Entity";
+import MeshEntity from "../env/MeshEntity";
+import Engine from "../Engine";
+// import Map from "../map/Map";
+// import Tile from "../map/Tile";
+
+const EPSILON = 1e-5;
 
 const rng1 = PM_PRNG.create(Date.now() * Math.random() * 100);
 const rng2 = PM_PRNG.create(Date.now() * Math.random() * 100);
@@ -22,7 +36,15 @@ const gen2 = new SimplexNoise(rng2.nextDouble.bind(rng2));
 
 const boxGeomCache = {};
 const sphereGeomCache = {};
+const cylinderGeomCache = {};
 // const phongMatCache = {};
+const frustum = new Frustum();
+const box = new Box3();
+const cameraViewProjectionMatrix = new Matrix4();
+const tmpQuaternion = new Quaternion();
+
+const _sizeVec1 = new Vector3();
+const _sizeVec2 = new Vector3();
 
 function componentToHex(c) {
   const hex = c.toString(16);
@@ -47,7 +69,7 @@ export const Tools = {
    * Else it returns a value between the range specified by min, max.
    */
   random: function (min, max) {
-    if (arguments.length === 1) {
+    if (max === undefined) {
       return Math.random() * min - min * 0.5;
     }
     return Math.random() * (max - min) + min;
@@ -73,6 +95,9 @@ export const Tools = {
 
   normalize: function (v, min, max) {
     return (v - min) / (max - min);
+  },
+  normalize: function (value, inMin, inMax, outMin, outMax) {
+    return ((value - inMin) / (inMax - inMin)) * (outMax - outMin) + outMin;
   },
 
   getShortRotation: function (angle) {
@@ -270,13 +295,91 @@ export const Tools = {
   lerp(from, to, pct) {
     return from + (to - from) * pct;
   },
+  lerpFactor(start, end, factor) {
+    return (1 - factor) * start + factor * end;
+  },
+  isMeshInView(mesh, camera, percentageThreshold = 1) {
+    cameraViewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+    frustum.setFromProjectionMatrix(cameraViewProjectionMatrix);
+
+    // Calculate the intersection between the mesh's bounding box and the frustum
+    const tileBoundingSphere = new Sphere();
+    const tileBoundingBox = new Box3().setFromObject(mesh);
+    tileBoundingBox.getBoundingSphere(tileBoundingSphere);
+    const intersection = frustum.intersectsSphere(tileBoundingSphere);
+
+    if (!intersection) {
+      return false; // Mesh is completely out of view
+    }
+
+    // Calculate the volume ratio of the intersection
+    const intersectionVolume = tileBoundingSphere.radius * tileBoundingSphere.radius * Math.PI * 4 / 3;
+    const size = tileBoundingBox.getSize(_sizeVec1);
+    const totalVolume = size.x * size.y * size.z;
+    const volumeRatio = intersectionVolume / totalVolume;
+
+    // Compare the volume ratio with the percentage threshold
+    return volumeRatio >= percentageThreshold;
+  },
+  getTileSceneWorldPosition(map, tile) {
+    const container = map.group;
+
+    const position = new Vector3();
+    container.getWorldPosition(position);
+    container.getWorldQuaternion(tmpQuaternion); // Get the world rotation of the container
+
+    // Apply the inverse rotation to the tree instance position to compensate for the container's rotation
+    const inverseRotation = tmpQuaternion.clone().inverse();
+    position.add(tile.mesh.position); // Add the position of the tile mesh within the container
+    position.applyQuaternion(inverseRotation);
+
+    return position;
+  },
+  /**
+ * A linear interpolator for hex colors.
+ *
+ * Based on:
+ * https://gist.github.com/rosszurowski/67f04465c424a9bc0dae
+ *
+ * @param {Number} a  (hex color start val)
+ * @param {Number} b  (hex color end val)
+ * @param {Number} amount  (the amount to fade from a to b)
+ *
+ * @example
+ * // returns 0x7f7f7f
+ * lerpHex(0x000000, 0xffffff, 0.5)
+ *
+ * @returns {Number}
+ */
+  lerpHex(a, b, amount) {
+    const ar = a >> 16,
+      ag = a >> 8 & 0xff,
+      ab = a & 0xff,
+
+      br = b >> 16,
+      bg = b >> 8 & 0xff,
+      bb = b & 0xff,
+
+      rr = ar + amount * (br - ar),
+      rg = ag + amount * (bg - ag),
+      rb = ab + amount * (bb - ab);
+
+    return (rr << 16) + (rg << 8) + (rb | 0);
+  },
   easeInOutQuad(from, to, delta, duration) {
     delta /= duration / 2;
     if (delta < 1) return (to / 2) * delta * delta + from;
     delta--;
     return (-to / 2) * (delta * (delta - 2) - 1) + from;
   },
-  createSphereEntity(radius = 4) {
+
+  /**
+   * 
+   * @param {number} radius 
+   * @param {import("../env/MeshEntity").EntityOptionParams} opts 
+   * @returns 
+   */
+  createSphereEntity(radius = 4, opts = { heightOffset: 1, baseColor: 0xffffff }) {
     let geomKey = radius.toString();
 
     if (!(geomKey in sphereGeomCache)) {
@@ -285,11 +388,18 @@ export const Tools = {
 
     const geometry = sphereGeomCache[geomKey];
 
-    const material =new MeshPhongMaterial({ color: color });
-    const sphereMesh = new Entity("sphere", geometry, material, { heightOffset: 1 });
+    const material = new MeshPhongMaterial({ color: opts.baseColor ?? 0xffffff });
+    const sphereMesh = new MeshEntity("sphere", geometry, material, opts);
     return sphereMesh;
   },
-  createCubeEntity(size = 2, color = "white") {
+
+  /**
+   * 
+   * @param {number} size 
+   * @param {import("../env/MeshEntity").EntityOptionParams} opts 
+   * @returns 
+   */
+  createCubeEntity(size = 2, opts = { baseColor: 0xffffff, heightOffset: 1 }) {
     let geomKey = size.toString();
 
     if (!(geomKey in boxGeomCache)) {
@@ -298,11 +408,19 @@ export const Tools = {
 
     const geometry = boxGeomCache[geomKey];
 
-    const material =new MeshPhongMaterial({ color: color });
-    const cubeMesh = new Entity("cube", geometry, material, { heightOffset: 1 });
+    const material = new MeshPhongMaterial({ color: opts.baseColor ?? 0xffffff });
+    const cubeMesh = new MeshEntity("cube", geometry, material, opts);
     return cubeMesh;
   },
-  createRectEntity(length = 4, width = 1, depth = 1, color = "white") {
+  /**
+   * 
+   * @param {number} length 
+   * @param {number} width 
+   * @param {number} depth 
+   * @param {import("../env/MeshEntity").EntityOptionParams} opts 
+   * @returns 
+   */
+  createRectEntity(length = 4, width = 1, depth = 1, opts = { baseColor: 0xffffff, heightOffset: 1 }) {
     let geomKey = length + "-" + width + "-" + depth;
 
     if (!(geomKey in boxGeomCache)) {
@@ -312,10 +430,37 @@ export const Tools = {
 
     const geometry = boxGeomCache[geomKey];
 
-    const material =new MeshPhongMaterial({ color: color });
+    const material = new MeshPhongMaterial({ color: opts.baseColor ?? 0xffffff });
 
-    const cubeMesh = new Entity("rect", geometry, material, { heightOffset: 1 });
+    const cubeMesh = new MeshEntity("rect", geometry, material, opts);
     cubeMesh.up.set(0, 1, 0);
+
+
+    return cubeMesh;
+  },
+  /**
+   * 
+   * @param {number} radiusTop 
+   * @param {number} radiusBottom 
+   * @param {number} height 
+   * @param {import("../env/MeshEntity").EntityOptionParams} opts 
+   * @returns 
+   */
+  createCylinderEntity(radiusTop, radiusBottom, height, opts = { baseColor: 0xffffff, heightOffset: 1 }) {
+    let geomKey = radiusTop + "-" + radiusBottom + "-" + height;
+
+    if (!(geomKey in cylinderGeomCache)) {
+      cylinderGeomCache[geomKey] = new CylinderBufferGeometry(radiusTop, radiusBottom, height, 32);
+      // cylinderGeomCache[geomKey].rotateX(Math.PI * .5);
+    }
+
+    const geometry = cylinderGeomCache[geomKey];
+
+    const material = new MeshPhongMaterial({ color: opts.baseColor ?? 0xffffff, reflectivity: 1, refractionRatio: 1, flatShading: false, shininess: 100 });
+
+    const cubeMesh = new MeshEntity("rect", geometry, material, opts);
+    cubeMesh.up.set(0, 1, 0);
+
 
     return cubeMesh;
   },
@@ -337,6 +482,171 @@ export const Tools = {
         window.URL.revokeObjectURL(url);
       }, 0);
     }
+  },
+  approxEquals(a, b, error = EPSILON) {
+    return approxZero(a - b, error);
+  },
+  approxZero(number, error = EPSILON) {
+    return Math.abs(number) < error;
+  },
+  smoothDamp(
+    current,
+    target,
+    currentVelocityRef,
+    smoothTime,
+    maxSpeed = Infinity,
+    deltaTime,
+  ) {
+
+    // Based on Game Programming Gems 4 Chapter 1.10
+    smoothTime = Math.max(0.0001, smoothTime);
+    const omega = 2 / smoothTime;
+
+    const x = omega * deltaTime;
+    const exp = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x);
+    let change = current - target;
+    const originalTo = target;
+
+    // Clamp maximum speed
+    const maxChange = maxSpeed * smoothTime;
+    change = this.clamp(change, - maxChange, maxChange);
+    target = current - change;
+
+    const temp = (currentVelocityRef.value + omega * change) * deltaTime;
+    currentVelocityRef.value = (currentVelocityRef.value - omega * temp) * exp;
+    let output = target + (change + temp) * exp;
+
+    // Prevent overshooting
+    if (originalTo - current > 0.0 === output > originalTo) {
+
+      output = originalTo;
+      currentVelocityRef.value = (output - originalTo) / deltaTime;
+
+    }
+
+    return output;
+  },
+  colorToSigned24Bit: (s) => {
+    return (parseInt(s.substr(1), 16) << 8) / 256;
+  },
+  hexColorToString: (num) => {
+    num >>>= 0;
+    var b = num & 0xFF,
+      g = (num & 0xFF00) >>> 8,
+      r = (num & 0xFF0000) >>> 16,
+      a = ((num & 0xFF000000) >>> 24) / 255;
+    return "rgba(" + [r, g, b, a].join(",") + ")";
+  },
+  removeDecimals(number, precision = 0) {
+    return parseFloat(number.toFixed(precision));
+  },
+  isEqualWithinThreshold(num1, num2, threshold) {
+    return Math.abs(num1 - num2) <= threshold;
+  },
+  areSequentialNumbers(numbers) {
+    return numbers.every((number, index, array) => index === 0 || number === array[index - 1] + 1);
+  },
+  createSeeThroughMaterial() {
+    // Create a ShaderMaterial with a custom fragment shader
+    const customMaterial = new ShaderMaterial({
+      uniforms: {
+        collisionOccurred: { type: 'i', value: 0 }, // Uniform to control transparency
+      },
+      vertexShader: `
+      // Vertex shader
+      varying vec3 vNormal;
+
+      void main() {
+        vNormal = normalize(normalMatrix * normal);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+      `,
+      fragmentShader: `
+      // Fragment shader
+      varying vec3 vNormal;
+      uniform int collisionOccurred; // Uniform to control transparency
+
+      void main() {
+        vec3 normal = normalize(vNormal);
+        float transparency = 1.0; // Initial transparency value
+
+        // Check if another mesh should make this one transparent
+        if (collisionOccurred) {
+            transparency = 0.5; // Set transparency when colliding
+        }
+
+        gl_FragColor = vec4(1.0, 1.0, 1.0, transparency);
+      }
+      `,
+      transparent: true,
+      depthWrite: false, // Disable writing to the depth buffer for an x-ray effect
+      side: BackSide, // Render the back side of the mesh for an x-ray effect
+    });
+
+    return customMaterial;
+  },
+  /**
+   * 
+   * @param {number} delay 
+   * @param {() => void | undefined} onBegin 
+   * @param {() => void | undefined} onEnd 
+   * @returns 
+   */
+  CreatePromiseRoutine(endDelay, beginDelay = 0, onBegin = undefined, onEnd = undefined) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        if (onBegin) onBegin();
+
+        setTimeout(() => {
+          if (onEnd) onEnd();
+
+          resolve();
+        }, endDelay);
+      }, beginDelay);
+    })
+  },
+  /**
+   * 
+   * @param {() => void | undefined} onUp 
+   * @param {() => void | undefined} onDown 
+   * @param {() => void | undefined} onLeft 
+   * @param {() => void | undefined} onRight 
+   * @param {{[keyboardKey: string]: () => void} | undefined} extras 
+   * @returns {(e: KeyboardEvent) => void}
+   */
+  createOnDirectionalInputDownListener(onUp = undefined, onDown = undefined, onLeft = undefined, onRight = undefined, extras = undefined) {
+    return (e) => {
+      if (e.key === "w" || e.key === "ArrowUp") {
+        if (onUp) onUp();
+      }
+
+      if (e.key === "s" || e.key === "ArrowDown") {
+        if (onDown) onDown();
+      }
+
+      if (e.key === "a" || e.key === "ArrowLeft") {
+        if (onLeft) onLeft();
+      }
+
+      if (e.key === "d" || e.key === "ArrowRight") {
+        if (onRight) onRight();
+      }
+
+      if (extras) {
+        for (const key in extras) {
+          if (e.key === key) extras[key]();
+        }
+      }
+    };
+  },
+  /**
+   * 
+   * @param {Array} arr 
+   * @returns {any}
+   */
+  randomElement(arr) {
+    const randomElement = arr[Math.floor(Math.random() * arr.length)];
+    return randomElement;
   }
 };
 

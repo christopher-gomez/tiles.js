@@ -1,0 +1,35 @@
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: white;
+}
+
+.carousel-content {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.text-item,
+.next-item {
+  font-size: 20px;
+  padding: 20px;
+  min-width: 200px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.next-item {
+  opacity: 0.5;
+}
+
+.carousel-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  background: linear-gradient(to left, white, transparent);
+}

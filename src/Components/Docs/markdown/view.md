@@ -61,7 +61,7 @@ viewConfig - (optional) An object with one or more properties describing the Vie
 
 `.dispose()`
 
-`.focusOn(pos: Tile | Vector3): void`
+`.panCameraTo(pos: Tile | Vector3): void`
 
 `.panCameraTo(tile: Tile | Cell, durationMs: number): void`
 

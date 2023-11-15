@@ -1,20 +1,23 @@
-import { BufferGeometry, Material, Shape, Vector3 } from "three";
-import Tile, { TileTerrain } from "./Tile";
+import { BufferGeometry, ExtrudeBufferGeometry, Material, Shape, Vector3 } from "three";
+import Tile from "./Tile";
 import SqrCell from "../grid/SqrCell";
+import { TileType } from "../utils/Interfaces";
 
 export default class SqrTile extends Tile {
     public static get baseTileShapePath(): Shape {
+        if (!SqrTile._baseTileShapePath) SqrTile._createBaseTileShape();
+
         return SqrTile._baseTileShapePath;
     }
 
     public get baseTileShapePath(): Shape {
-        if (!SqrTile._baseTileShapePath) this._createBaseTileShape();
+        if (!SqrTile._baseTileShapePath) SqrTile._createBaseTileShape();
 
         return SqrTile._baseTileShapePath;
     }
 
-    protected get geoCache(): Map<TileTerrain, BufferGeometry> {
-        if (!SqrTile._geoCache) SqrTile._geoCache = new Map<TileTerrain, BufferGeometry>();
+    protected get geoCache(): Map<TileType, ExtrudeBufferGeometry> {
+        if (!SqrTile._geoCache) SqrTile._geoCache = new Map<TileType, ExtrudeBufferGeometry>();
         return SqrTile._geoCache;
     }
 
@@ -23,7 +26,7 @@ export default class SqrTile extends Tile {
         return SqrTile._matCache;
     }
 
-    protected _createBaseTileShape() {
+    protected static _createBaseTileShape() {
         // create base shape used for building geometry
         const verts = [];
         verts.push(new Vector3());
@@ -46,5 +49,9 @@ export default class SqrTile extends Tile {
         this._geoCache = null;
         this._matCache = null;
         super.dispose();
+    }
+
+    protected addBorder() {
+        
     }
 }

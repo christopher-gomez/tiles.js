@@ -1,0 +1,59 @@
+.controls .inner-container {
+  padding: 1em 1em;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 1em;
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.controls input {
+  padding: 1.25em 1em;
+  background: rgba(0, 0, 0, 0.363);
+  border-radius: 2em 2em;
+  backdrop-filter: blur(10px);
+  color: white;
+  width: 100%; /* assuming you want it to take full width */
+  box-sizing: border-box;
+}
+
+.controls label {
+  position: absolute;
+  top: 50%;
+  left: 1em; /* same as input padding-left */
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.498);
+  pointer-events: none; /* makes the label unclickable so you can click on the input */
+}
+
+.controls input:focus + label,
+.controls input:not(:placeholder-shown) + label {
+  display: none;
+}
+.controls #controls-position-slider {
+  margin-bottom: 0.25em;
+  display: flex;
+  flex-flow: row;
+  color: white;
+  text-shadow: 1px 1px 0px #000;
+  font-weight: bolder !important;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+}
+
+#controls-position-slider:focus,
+#controls-position-slider *:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#controls-position-slider p {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}

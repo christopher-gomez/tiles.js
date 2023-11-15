@@ -7,32 +7,32 @@ import {
 	createBrowserRouter,
 	RouterProvider,
 } from "react-router-dom";
-import Splash from './Components/Splash';
-import Sandbox from './Components/Sandbox';
-import Docs from './Components/Docs/Docs';
+import router from './Router';
 
-const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <Splash />
-	},
-	{
-		path: "/sandbox",
-		element: <Sandbox />
-	},
-	{
-		path: '/docs',
-		element: <Docs />
+const App = () => {
 
+	const disconnectPlayer = () => {
+		//@ts-ignore 
+		if (window.spotifyPlayer) {
+			console.log('attempting disconnect');
+			//@ts-ignore
+			window.spotifyPlayer.disconnect();
+		}
 	}
-]);
 
-class App extends React.Component {
-	render() {
-		return (
-			<RouterProvider router={router} />
-		)
-	}
+	React.useEffect(() => {
+		window.addEventListener("loadstart", disconnectPlayer)
+		window.addEventListener("beforeunload", disconnectPlayer);
+
+		return () => {
+			window.removeEventListener("loadstart", disconnectPlayer)
+			window.removeEventListener("beforeunload", disconnectPlayer);
+		}
+	}, [])
+
+	return (
+		<RouterProvider router={router} />
+	)
 }
 
 export default App;

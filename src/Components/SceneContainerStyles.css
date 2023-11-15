@@ -1,0 +1,68 @@
+.fade-in-overlay {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.fade-out-overlay {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+  pointer-events: none; /* Disable pointer events while fading out */
+}
+
+@keyframes enlargeText {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes changeText {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    transform: scale(1);
+  }
+}
+
+.enlarge-text {
+  animation: enlargeText 2s infinite;
+}
+
+.change-text {
+  animation: changeText 1s ease-in-out;
+}
+
+@keyframes ellipsis {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+}
+
+.enlarge-text::after {
+    content: '';
+    display: inline-block;
+    width: 0.8em;
+    animation: ellipsis 2s infinite;
+  }

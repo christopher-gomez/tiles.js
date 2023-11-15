@@ -1,8 +1,8 @@
 import { BufferGeometry, Geometry, Material, Shape, ShapeBufferGeometry, Vector3 } from "three";
 import Cell from "./Cell";
-import Tile, { TileTerrain } from "../map/Tile";
-import Engine from "../Engine";
-import { TileJSONData, TileSettingsParams } from "../utils/Interfaces";
+import Tile, { } from "../map/Tile";
+import Engine, { EngineTileShapes } from "../Engine";
+import { TileJSONData, TileType } from "../utils/Interfaces";
 import Grid from "./Grid";
 import HexTile from "../map/HexTile";
 
@@ -20,8 +20,12 @@ export default class HexCell extends Cell {
         return HexCell._diagonals as HexCell[];
     }
 
+    public get shape() {
+        return EngineTileShapes.HEX;
+    }
+
     constructor(radius: number, q?: number, r?: number, s?: number, h?: number, public grid?: Grid) {
-        super(radius, q, r, s, h, grid)
+        super(radius, q, r, s, h, grid);
     }
 
     protected _setCellDirections() {
@@ -54,14 +58,8 @@ export default class HexCell extends Cell {
         this._cellPerimeter = (3 * (Math.sqrt(3 * (this.radius * 2)))) / 2
     }
 
-    protected _createTile(scale: number, grid: Grid): Tile {
-        const tile = new HexTile({
-            //size: this.cellSize,
-            scale: scale,
-            cell: this,
-            tileShape: Engine.TileShapes.HEX,
-            grid: grid
-        } as TileSettingsParams);
+    protected _createTile(data?: TileType | TileJSONData, isPlayable = true): Tile {
+        const tile = new HexTile(isPlayable ? this : null, data);
 
         return tile;
     }

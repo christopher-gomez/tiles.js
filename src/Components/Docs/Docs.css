@@ -25,19 +25,7 @@
    opacity: 0;
    display: none;
 }
-label {
-   cursor: pointer;
-}
-label:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  right: 0;
-  border-left: 8px solid black;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-}
+
 input[type=checkbox]:checked ~ p label:before {
   border-left: 8px solid transparent;
   border-top: 8px solid black;

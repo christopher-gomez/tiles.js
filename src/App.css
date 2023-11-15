@@ -1,94 +1,329 @@
 body {
-    text-align: center;
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
+  text-align: center;
+  margin: 0;
+  font-family: "Montserrat", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
 }
 
-
-
-#overlay {
-    position: absolute;
-    /* Sit on top of the page content */
-    display:block;
-    /* Hidden by default */
-    width: 100%;
-    /* Full width (cover the whole page) */
-    height: 100%;
-    /* Full height (cover the whole page) */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0);
-    /* Black background with opacity */
-    z-index: 2;
-    /* Specify a stack order in case you're using a different order for other elements */
-}
-
-#overlay h1 {
-    margin-top: 10%;
-    font-size: 3em;
-    font-weight: 100;
-}
-
-#overlay {
-    color: white;
-}
-
-#overlay a {
-    text-decoration: none;
-    border: none;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    background: none;
-    cursor: pointer;
-    padding: 15px 40px;
-    display: inline-block;
-    margin: 10px 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 200;
-    outline: none;
-    position: relative;
-    background: white;
-    color: black;
-    -webkit-transition: none;
-    -moz-transition: none;
-    transition: none;
-    border-radius: 40px;
-}
-
-#overlay a::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-}
-
-#overlay h3 {
-    font-size: 1.2em;
-    font-weight: 100;
-}
-
-hr {
-    border-color: white;
-    width: 30%;
-    margin-top: -20px;
+body * {
+  font-family: "Montserrat", sans-serif !important;
 }
 
 #root {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  background: radial-gradient(circle, #000040, #000020, #000010, black);
+  pointer-events: auto;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container input {
+  padding: 1.25em 1em;
+  background: rgba(255, 255, 255, 0.363);
+  border-radius: 2em 2em;
+  backdrop-filter: blur(10px);
+  color: black;
+  width: 100%; /* assuming you want it to take full width */
+  box-sizing: border-box;
+}
+
+.input-container label {
+  position: absolute;
+  left: 2em; /* same as input padding-left */
+  color: rgb(0, 0, 0);
+  pointer-events: none; /* makes the label unclickable so you can click on the input */
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  display: none;
+}
+
+*::-webkit-scrollbar {
+  width: .5em;
+  scrollbar-gutter: stable both-edges;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+/* Hide scroll bars in Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cloud-player {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 1s;
+}
+
+.cloud-player .track-info-text {
+  width: 100%;
+  text-align: left;
+  padding: 0 3em;
+  margin-top: 1em;
+  text-shadow: 1px 1px 0px #000;
+}
+
+.icon-button {
+  transition: all 0.25s, opacity 1s, transform 0.25s, background-color 0.25s;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white !important;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.icon-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.icon-button:hover {
+  transition: all 0.5s !important;
+  color: black !important;
+  border-color: transparent !important;
+  /* transform: translateY(-5px); */
+  background-color: rgb(147, 217, 69) !important;
+}
+
+.icon-button svg {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  display: flex;
+  flex-flow: row;
+}
+
+.one-line {
+  display: inline-block;
+  /* important */
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+
+  max-height: 100%;
+  /* when not hovering show ellipsis */
+  /* animate on either hover or focus */
+  /* define the animation */
+}
+
+.one-line:not(:hover) {
+  text-overflow: ellipsis;
+}
+
+/* .one-line:hover {
+text-overflow: initial;
+overflow: initial;
+} */
+.one-line.overflowed:hover span,
+.one-line.overflowed:focus span {
+  display: inline-block;
+  /* animation-name: scroll-text;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal; */
+  /* FYI this would be the shorthand: animation: scroll-text 5s ease 0s 2 normal;
+    */
+}
+
+@keyframes scroll-text {
+  0% {
+    transform: translateX(0%);
+  }
+
+  50% {
+    transform: translateX(-100%);
+  }
+
+  10%,
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.fade-in-overlay {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none !important;
+  /* Disable pointer events while fading out */
+  z-index: 900000;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.fade-out-overlay {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+  pointer-events: none !important;
+  /* Disable pointer events while fading out */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+@keyframes enlargeText {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes changeText {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(2);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    transform: scale(1);
+  }
+}
+
+.enlarge-text {
+  animation: enlargeText 2s infinite;
+}
+
+.change-text {
+  animation: changeText 1s ease-in-out;
+}
+
+@keyframes ellipsis {
+  0% {
+    content: "";
+  }
+
+  25% {
+    content: ".";
+  }
+
+  50% {
+    content: "..";
+  }
+
+  75% {
+    content: "...";
+  }
+}
+
+.enlarge-text::after {
+  content: "";
+  display: inline-block;
+  width: 0.8em;
+  animation: ellipsis 2s infinite;
+}
+
+#fps {
+  position: absolute;
+  z-index: 2;
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstr;
+  color: black;
+  min-width: unset !important;
+  max-width: none !important;
+  min-height: unset !important;
+  max-height: none !important;
+  height: auto !important;
+  width: auto !important;
+  background-color: rgba(0, 0, 0, 0.194);
+  border-radius: 1em;
+  padding: 0.25em 0.5em;
+  transition: background-color 0.3s ease;
+}
+
+#fps:hover {
+  background-color: rgba(0, 0, 0, 0.559);
+  cursor: default;
+}
+
+.shadow-dark {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 1) !important;
+}
+
+.shadow-light {
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 1) !important;
+}
+
+.shadow-none {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0) !important;
+}
+
+.border-dark {
+  border: 2px solid black;
+}
+
+.border-light {
+  border: 2px solid white;
+}
+
+.border-none {
+  border: 2px solid transparent;
+}
+
+/* CSS file */
+.draggable-cursor {
+  cursor: grab; /* 'move' can also be used */
+}
+
+/* Use 'grabbing' when actually dragging */
+.draggable-cursor:active {
+  cursor: grabbing;
+}
+
+.MuiSpeedDial-actions {
+  align-items: center;
 }

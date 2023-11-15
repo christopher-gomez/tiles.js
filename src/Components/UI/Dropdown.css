@@ -1,0 +1,279 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+  text-shadow: 1px 1px 0px #000;
+  border: 1px solid white;
+  border-bottom: 0px;
+  border-top: 0px;
+  cursor: pointer;
+  transition: border-width 0s 0.2s ease-in-out;
+  background: transparent !important;
+  border-radius: 0px !important;
+}
+
+.dropdown.black {
+  background: white;
+  color: black !important;
+  border: 1px solid black !important;
+}
+
+.dropdown.down.white {
+  border-top: 1px solid white;
+}
+
+.dropdown.down.closed.white {
+  border-bottom: 1px solid white;
+}
+
+.dropdown.up.white {
+  border-bottom: 1px solid white;
+}
+
+.dropdown.up.closed.black {
+  border-top: 1px solid black;
+}
+
+.dropdown.down.black {
+  border-top: 1px solid black;
+}
+
+.dropdown.down.closed.black {
+  border-bottom: 1px solid black;
+}
+
+.dropdown.up.black {
+  border-bottom: 1px solid black;
+}
+
+.dropdown.up.closed.black {
+  border-top: 1px solid black;
+}
+
+.dropdown.white * {
+  text-shadow: 1px 1px 0px #000;
+  color: white;
+}
+
+.dropdown.black * {
+  text-shadow: 1px 1px 0px #000;
+  color: black;
+}
+
+.dropdown-toggle.no-blur {
+  backdrop-filter: none !important;
+}
+
+.dropdown-toggle {
+  background: rgba(255, 255, 255, 0.087);
+  backdrop-filter: blur(10px);
+  border-radius: 0px !important;
+  color: white;
+  border: none;
+  height: 100%;
+  width: 100%;
+  min-width: 125px;
+  cursor: pointer;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-end;
+  justify-items: center;
+  transition: transform 0.3s ease-in-out; /* smooth transition for rotation */
+}
+
+.dropdown-toggle:focus {
+  border: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  width: 100%;
+  max-width: 100%;
+  min-width: 125px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border: 1px solid white;
+  border-top: none;
+  border-bottom: none;
+  transform: scaleY(0);
+  right: -1px;
+  transform-origin: top;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.dropdown-menu.black {
+  background: white;
+  border: 1px solid black;
+  border-top: none;
+  box-shadow: none !important;
+}
+
+.dropdown-menu.down.white.open {
+  border-bottom: 1px solid white;
+}
+
+.dropdown-menu.down.black.open {
+  border-bottom: 1px solid black;
+}
+
+.dropdown-menu.up.open {
+  border-top: 1px solid white;
+}
+
+.dropdown-menu.open {
+  transform: scaleY(1);
+}
+
+.dropdown-menu.closed {
+  transform: scaleY(0);
+}
+
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.087);
+  backdrop-filter: blur(10px);
+  z-index: 9999999;
+  position: absolute;
+}
+
+.dropdown-menu.no-blur {
+  backdrop-filter: none !important;
+}
+
+.dropdown-menu ul {
+  margin: 0 1em;
+  padding: 0;
+  text-align: right;
+  display: flex;
+  flex-flow: column;
+}
+
+.dropdown-menu li {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  text-align: right;
+  min-width: 100%;
+  padding: 0.5em 0; /* Reduced bottom padding */
+  list-style-type: none;
+  transition: all 0.2s;
+  border: none;
+  display: inline-block; /* Makes the li only as wide as its content */
+  width: fit-content; /* Ensures the li fits its content */
+}
+
+.dropdown-menu.white li::before {
+  content: "";
+  position: absolute;
+  bottom: 5px; /* Adjusted position to be closer to the text */
+  left: 0px; /* Start the line from the center */
+  right: 0px;
+  height: 1px; /* Thickness of the underline */
+  background-color: rgba(255, 255, 255, 0.8); /* Color of the underline */
+  transform: scaleX(0) translateX(-100%); /* Initially scaled to 0 width and centered */
+  transform-origin: right; /* Scale from left to right */
+  transition: transform 0s ease-out; /* Transition with a 0.5s delay */
+}
+
+.dropdown-menu.black li::before {
+  content: "";
+  position: absolute;
+  bottom: 5px; /* Adjusted position to be closer to the text */
+  left: 0px; /* Start the line from the center */
+  right: 0px;
+  height: 1px; /* Thickness of the underline */
+  background-color: rgba(0, 0, 0, 0.8); /* Color of the underline */
+  transform: scaleX(0) translateX(-100%); /* Initially scaled to 0 width and centered */
+  transform-origin: right; /* Scale from left to right */
+  transition: transform 0s ease-out; /* Transition with a 0.5s delay */
+}
+
+.dropdown-menu li:hover::before {
+  transform: scaleX(-1) translateX(50%); /* Full width on hover and centered */
+  transition: transform 0.3s ease-out; /* Transition with a 0.5s delay */
+}
+
+.dropdown-menu.down {
+  top: 100%;
+  transform-origin: top;
+}
+
+.dropdown-menu.up {
+  bottom: 100%;
+  transform-origin: bottom;
+}
+/* Default styling for icon */
+.icon {
+  transition: transform 0.3s ease-in-out; /* smooth transition for rotation */
+  margin: auto 4px;
+}
+
+/* Direction: down, State: closed */
+.icon.down.closed {
+  transform: rotate(0deg);
+}
+
+/* Direction: down, State: open */
+.icon.down.open {
+  transform: rotate(180deg);
+}
+
+/* Direction: up, State: closed */
+.icon.up.closed {
+  transform: rotate(180deg);
+}
+
+/* Direction: up, State: open */
+.icon.up.open {
+  transform: rotate(0deg);
+}
+
+/* Default styling for the text */
+.toggle-text {
+  display: inline-block; /* Required to position pseudo-elements and apply transforms */
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 2px; /* Spacing for the underline */
+  transition: color 0.3s ease, transform 0.3s ease; /* Optional: for a smoother color transition */
+}
+
+.toggle-text.open {
+  transform: translateX(-5px);
+}
+
+.toggle-text.closed {
+  transform: translateX(0px);
+}
+
+.toggle-text.white::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0; /* Initially hidden */
+  height: 1px; /* Thickness of the underline */
+  background: white; /* Color of the underline */
+  transition: width 0.3s ease;
+}
+
+.toggle-text.black::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0; /* Initially hidden */
+  height: 1px; /* Thickness of the underline */
+  background: black; /* Color of the underline */
+  transition: width 0.3s ease;
+}
+
+/* State: open */
+.toggle-text.open::before {
+  width: 100%; /* Full width when open */
+}
+
+/* State: closed */
+.toggle-text.closed::before {
+  width: 0; /* Hidden when closed */
+}

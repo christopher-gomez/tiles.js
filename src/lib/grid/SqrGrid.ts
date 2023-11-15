@@ -1,4 +1,4 @@
-import Engine from '../Engine';
+import Engine, { EngineTileShapes } from '../Engine';
 import { Vector3, Shape, BufferGeometry, ShapeGeometry, Geometry, MeshPhongMaterial, ExtrudeGeometry, Object3D, Line, ShapeBufferGeometry } from 'three';
 import Grid from './Grid';
 import { GridSettings, GridJSONData, MapSettings, heuristic, GridSettingsParams, MapSettingsParams } from '../utils/Interfaces';
@@ -38,6 +38,7 @@ export default class SqrGrid extends Grid {
 
     if (settings.gridShape === Engine.GridShapes.FLAT_TOP_HEX) settings.gridShape = Engine.GridShapes.SQUARE;
 
+    if (settings.cellShape !== Engine.TileShapes.SQUARE) settings.cellShape = EngineTileShapes.SQUARE;
 
     super(settings as GridSettingsParams);
   }
@@ -86,8 +87,7 @@ export default class SqrGrid extends Grid {
       const half = Math.ceil(this.gridRadius / 2);
       for (x = -half; x < this.gridRadius; x++) {
         for (y = -half; y < half; y++) {
-          c = new SqrCell(this.cellRadius, x, y + 1);
-          this.add(c);
+          this.createCell(new Vector3(x, y, 0));
         }
       }
     } else {
@@ -95,10 +95,24 @@ export default class SqrGrid extends Grid {
       const half = Math.ceil(this.gridRadius / 2);
       for (x = -half; x < half; x++) {
         for (y = -half; y < half; y++) {
-          c = new SqrCell(this.cellRadius, x, y + 1);
-          this.add(c);
+          this.createCell(new Vector3(x, y, 0));
         }
       }
+    }
+  }
+
+  public createCell(pos: Vector3, generateTile = false) {
+    let c = new SqrCell(this.cellRadius, pos.x, pos.y + 1, 0, 0, this);
+    this.add(c);
+
+    if (generateTile) {
+      const t = this.generateTile(c);
+
+      const p = this.cellToPixel(c);
+      p.y = 0;
+      t.setPosition(p)
+
+      return t;
     }
   }
 
@@ -115,5 +129,15 @@ export default class SqrGrid extends Grid {
         overlayObj.add(line);
       }
     }
+  }
+
+  generateNonPlayableTiles(size: number) {
+    const tiles: Tile[] = [];
+
+    return tiles;
+  }
+
+  dispose(): void {
+    super.dispose();
   }
 }

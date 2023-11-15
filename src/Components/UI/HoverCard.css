@@ -1,0 +1,87 @@
+/* CSS for the card flip animation */
+.card-flip {
+  perspective: 2000px;
+  /* Set the perspective for the 3D effect */
+  /* Add a transition for the transform property */
+  transform-style: preserve-3d;
+  /* Enable 3D transforms */
+  width: 200px;
+  /* Set the card width */
+  height: 275px;
+  /* Set the card height */
+  border-radius: 1em;
+  /* Add border-radius for rounded corners */
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  scrollbar-gutter: stable both-edges;
+  /* Front face background color */
+}
+
+.card-flip .card-content {
+  width: 100% !important;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 4px !important;
+  /* Hide the back face */
+}
+
+.card-content,
+.card-content * {
+  text-shadow: none !important;
+}
+
+.card-flip .card-front {
+  transform: rotateY(180deg);
+  /* Initial front face rotation */
+  transition: all 0.3s ease !important;
+  /* Add a transition for the transform property */
+  opacity: 0;
+}
+
+.card-flip.flipped .card-front {
+  opacity: 1;
+  transform: rotateY(0deg);
+  /* Initial front face rotation */
+  transition: all 0.3s ease !important;
+  /* Add a transition for the transform property */
+  /* Front face background color */
+}
+
+.card-flip .card-back {
+  transform: rotateY(0deg);
+  /* Rotate the back face */
+  background-color: rgba(0, 0, 0, 0);
+  /* Front face background color */
+  backface-visibility: hidden;
+  /* Hide the front face */
+  display: block;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-background-position: center;
+  background-position: center;
+  transition: all 0.3s ease !important;
+  /* Add a transition for the transform property */
+}
+
+.card-flip.flipped .card-back {
+  transform: rotateY(180deg);
+  /* Rotate the back face */
+  background-color: rgba(0, 0, 0, 0);
+  /* Front face background color */
+  display: block;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-background-position: center;
+  background-position: center;
+  transition: all 0.3s ease !important;
+  /* Add a transition for the transform property */
+}
+
+.card-flip .card-back > img {
+  min-height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+}

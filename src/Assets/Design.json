@@ -1,0 +1,2234 @@
+{
+  "viewData": {
+    "sceneName": "design",
+    "alpha": true,
+    "antialias": true,
+    "clearColor": 290200,
+    "sortObjects": false,
+    "cameraPosition": [
+      3.675875407519252e-20, 300.15800556350734, -0.0003001580055636074
+    ],
+    "cameraFov": 25,
+    "cameraNear": 1,
+    "cameraFar": 1000,
+    "sceneMarginSize": 20,
+    "entities": {}
+  },
+  "controllerData": {
+    "target": [0, 0, 0],
+    "controlled": true,
+    "rotationDamping": false,
+    "currentDistance": 300.1580055636574,
+    "minDistance": 100,
+    "maxDistance": 300,
+    "zoomDelta": 10,
+    "autoRotate": false,
+    "currentPolarAngle": 0.00005729577951308232,
+    "minPolarAngle": 0,
+    "maxPolarAngle": 45,
+    "minAzimuthAngle": 180,
+    "maxAzimuthAngle": 180,
+    "currentAzimuthAngle": 180,
+    "userHorizontalRotation": false,
+    "userVerticalRotation": false
+  },
+  "mapData": {
+    "gridData": {
+      "gridRadius": 5,
+      "cellRadius": 6,
+      "cells": {
+        "-5.0.5": {
+          "q": -5,
+          "r": 0,
+          "s": 5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-5.1.4": {
+          "q": -5,
+          "r": 1,
+          "s": 4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(2,2,2)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-5.2.3": {
+          "q": -5,
+          "r": 2,
+          "s": 3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-5.3.2": {
+          "q": -5,
+          "r": 3,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-5.4.1": {
+          "q": -5,
+          "r": 4,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(4,4,4)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-5.5.0": {
+          "q": -5,
+          "r": 5,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-4.-1.5": {
+          "q": -4,
+          "r": -1,
+          "s": 5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-4.0.4": {
+          "q": -4,
+          "r": 0,
+          "s": 4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-4.1.3": {
+          "q": -4,
+          "r": 1,
+          "s": 3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-4.2.2": {
+          "q": -4,
+          "r": 2,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-4.3.1": {
+          "q": -4,
+          "r": 3,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-4.4.0": {
+          "q": -4,
+          "r": 4,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-4.5.-1": {
+          "q": -4,
+          "r": 5,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-3.-2.5": {
+          "q": -3,
+          "r": -2,
+          "s": 5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-3.-1.4": {
+          "q": -3,
+          "r": -1,
+          "s": 4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-3.0.3": {
+          "q": -3,
+          "r": 0,
+          "s": 3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(2,2,2)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-3.1.2": {
+          "q": -3,
+          "r": 1,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-3.2.1": {
+          "q": -3,
+          "r": 2,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(1,1,1)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-3.3.0": {
+          "q": -3,
+          "r": 3,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-3.4.-1": {
+          "q": -3,
+          "r": 4,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-3.5.-2": {
+          "q": -3,
+          "r": 5,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(4,4,4)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-2.-3.5": {
+          "q": -2,
+          "r": -3,
+          "s": 5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-2.-2.4": {
+          "q": -2,
+          "r": -2,
+          "s": 4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-2.-1.3": {
+          "q": -2,
+          "r": -1,
+          "s": 3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(1,1,1)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-2.0.2": {
+          "q": -2,
+          "r": 0,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(6,6,6)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-2.1.1": {
+          "q": -2,
+          "r": 1,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-2.2.0": {
+          "q": -2,
+          "r": 2,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-2.3.-1": {
+          "q": -2,
+          "r": 3,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(4,4,4)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-2.4.-2": {
+          "q": -2,
+          "r": 4,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-2.5.-3": {
+          "q": -2,
+          "r": 5,
+          "s": -3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.-4.5": {
+          "q": -1,
+          "r": -4,
+          "s": 5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.-3.4": {
+          "q": -1,
+          "r": -3,
+          "s": 4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.-2.3": {
+          "q": -1,
+          "r": -2,
+          "s": 3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.-1.2": {
+          "q": -1,
+          "r": -1,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.0.1": {
+          "q": -1,
+          "r": 0,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.1.0": {
+          "q": -1,
+          "r": 1,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.2.-1": {
+          "q": -1,
+          "r": 2,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.3.-2": {
+          "q": -1,
+          "r": 3,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(4,4,4)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.4.-3": {
+          "q": -1,
+          "r": 4,
+          "s": -3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(1,1,1)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "-1.5.-4": {
+          "q": -1,
+          "r": 5,
+          "s": -4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.-5.5": {
+          "q": 0,
+          "r": -5,
+          "s": 5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(5,5,5)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.-4.4": {
+          "q": 0,
+          "r": -4,
+          "s": 4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.-3.3": {
+          "q": 0,
+          "r": -3,
+          "s": 3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(4,4,4)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.-2.2": {
+          "q": 0,
+          "r": -2,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.-1.1": {
+          "q": 0,
+          "r": -1,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.0.0": {
+          "q": 0,
+          "r": 0,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.1.-1": {
+          "q": 0,
+          "r": 1,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.2.-2": {
+          "q": 0,
+          "r": 2,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(4,4,4)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.3.-3": {
+          "q": 0,
+          "r": 3,
+          "s": -3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.4.-4": {
+          "q": 0,
+          "r": 4,
+          "s": -4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "0.5.-5": {
+          "q": 0,
+          "r": 5,
+          "s": -5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.-5.4": {
+          "q": 1,
+          "r": -5,
+          "s": 4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.-4.3": {
+          "q": 1,
+          "r": -4,
+          "s": 3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(5,5,5)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.-3.2": {
+          "q": 1,
+          "r": -3,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.-2.1": {
+          "q": 1,
+          "r": -2,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.-1.0": {
+          "q": 1,
+          "r": -1,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.0.-1": {
+          "q": 1,
+          "r": 0,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.1.-2": {
+          "q": 1,
+          "r": 1,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.2.-3": {
+          "q": 1,
+          "r": 2,
+          "s": -3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.3.-4": {
+          "q": 1,
+          "r": 3,
+          "s": -4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "1.4.-5": {
+          "q": 1,
+          "r": 4,
+          "s": -5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "2.-5.3": {
+          "q": 2,
+          "r": -5,
+          "s": 3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "2.-4.2": {
+          "q": 2,
+          "r": -4,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "2.-3.1": {
+          "q": 2,
+          "r": -3,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "2.-2.0": {
+          "q": 2,
+          "r": -2,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "2.-1.-1": {
+          "q": 2,
+          "r": -1,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "2.0.-2": {
+          "q": 2,
+          "r": 0,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "2.1.-3": {
+          "q": 2,
+          "r": 1,
+          "s": -3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "2.2.-4": {
+          "q": 2,
+          "r": 2,
+          "s": -4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "2.3.-5": {
+          "q": 2,
+          "r": 3,
+          "s": -5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "3.-5.2": {
+          "q": 3,
+          "r": -5,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "3.-4.1": {
+          "q": 3,
+          "r": -4,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "3.-3.0": {
+          "q": 3,
+          "r": -3,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "3.-2.-1": {
+          "q": 3,
+          "r": -2,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "3.-1.-2": {
+          "q": 3,
+          "r": -1,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "3.0.-3": {
+          "q": 3,
+          "r": 0,
+          "s": -3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "3.1.-4": {
+          "q": 3,
+          "r": 1,
+          "s": -4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "3.2.-5": {
+          "q": 3,
+          "r": 2,
+          "s": -5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(1,1,1)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "4.-5.1": {
+          "q": 4,
+          "r": -5,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "4.-4.0": {
+          "q": 4,
+          "r": -4,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "4.-3.-1": {
+          "q": 4,
+          "r": -3,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "4.-2.-2": {
+          "q": 4,
+          "r": -2,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(1,1,1)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "4.-1.-3": {
+          "q": 4,
+          "r": -1,
+          "s": -3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "4.0.-4": {
+          "q": 4,
+          "r": 0,
+          "s": -4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "4.1.-5": {
+          "q": 4,
+          "r": 1,
+          "s": -5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(2,2,2)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "5.-5.0": {
+          "q": 5,
+          "r": -5,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "5.-4.-1": {
+          "q": 5,
+          "r": -4,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(6,6,6)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "5.-3.-2": {
+          "q": 5,
+          "r": -3,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(2,2,2)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "5.-2.-3": {
+          "q": 5,
+          "r": -2,
+          "s": -3,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(5,5,5)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "5.-1.-4": {
+          "q": 5,
+          "r": -1,
+          "s": -4,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(0,0,0)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        },
+        "5.0.-5": {
+          "q": 5,
+          "r": 0,
+          "s": -5,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Default",
+              "color": "rgb(3,3,3)",
+              "scale": 0.925,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": {}
+          }
+        }
+      },
+      "gridShape": 0,
+      "cellShape": 0
+    },
+    "settings": {
+      "entities": {},
+      "overlayColor": "rgb(5,110,153)",
+      "hasOverlay": true
+    }
+  }
+}

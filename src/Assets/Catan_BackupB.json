@@ -1,0 +1,2137 @@
+{
+  "viewData": {
+    "sceneName": "Catan",
+    "alpha": true,
+    "antialias": true,
+    "clearColor": 26514,
+    "sortObjects": false,
+    "cameraPosition": [
+      3.6741037015326335e-20, 299.99999999985, -0.00030001333479095257
+    ],
+    "cameraFov": 25,
+    "cameraNear": 1,
+    "cameraFar": 1000,
+    "sceneMarginSize": 20,
+    "entities": {},
+    "element": null
+  },
+  "controllerData": {
+    "target": [0, 0, 0],
+    "controlled": true,
+    "rotationDamping": false,
+    "currentDistance": 300,
+    "minDistance": 100,
+    "maxDistance": 300,
+    "zoomDelta": 10,
+    "autoRotate": false,
+    "currentPolarAngle": 0.00005729832627056611,
+    "minPolarAngle": 0,
+    "maxPolarAngle": 45,
+    "minAzimuthAngle": 180,
+    "maxAzimuthAngle": 180,
+    "currentAzimuthAngle": 180,
+    "userHorizontalRotation": false,
+    "userVerticalRotation": false,
+    "documentRaycast": false
+  },
+  "mapData": {
+    "gridData": {
+      "gridRadius": 2,
+      "cellRadius": 16,
+      "cells": {
+        "-2.0.2": {
+          "q": -2,
+          "r": 0,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Hill",
+              "color": "#bf7330",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Brick" }
+            },
+            "customData": { "resource": "Brick", "diceValue": "5" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 90,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "5",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-2.1.1": {
+          "q": -2,
+          "r": 1,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Field",
+              "color": "#f6c13c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Grain" }
+            },
+            "customData": { "resource": "Grain", "diceValue": "6" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 100,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "6",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-2.2.0": {
+          "q": -2,
+          "r": 2,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Pasture",
+              "color": "#69a442",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Wool" }
+            },
+            "customData": { "resource": "Wool", "diceValue": "11" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 70,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "11",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-1.-1.2": {
+          "q": -1,
+          "r": -1,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Forest",
+              "color": "#213b1b",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Lumber" }
+            },
+            "customData": { "resource": "Lumber", "diceValue": "8" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 100,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#ffffff",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "8",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-1.0.1": {
+          "q": -1,
+          "r": 0,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Mountain",
+              "color": "#57535c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Ore" }
+            },
+            "customData": { "resource": "Ore", "diceValue": "3" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 70,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "3",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-1.1.0": {
+          "q": -1,
+          "r": 1,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Field",
+              "color": "#f6c13c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Grain" }
+            },
+            "customData": { "resource": "Grain", "diceValue": "4" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 80,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "4",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "-1.2.-1": {
+          "q": -1,
+          "r": 2,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Pasture",
+              "color": "#69a442",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Wool" }
+            },
+            "customData": { "resource": "Wool", "diceValue": "5" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 90,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "5",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "0.-2.2": {
+          "q": 0,
+          "r": -2,
+          "s": 2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Field",
+              "color": "#f6c13c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Grain" }
+            },
+            "customData": { "resource": "Grain", "diceValue": "9" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 90,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "9",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "0.-1.1": {
+          "q": 0,
+          "r": -1,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Forest",
+              "color": "#213b1b",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Lumber" }
+            },
+            "customData": { "resource": "Lumber", "diceValue": "11" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 70,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "11",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "0.0.0": {
+          "q": 0,
+          "r": 0,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Desert",
+              "color": "#c9a566",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              }
+            },
+            "customData": { "diceValue": "7" }
+          }
+        },
+        "0.1.-1": {
+          "q": 0,
+          "r": 1,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Forest",
+              "color": "#213b1b",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Lumber" }
+            },
+            "customData": { "resource": "Lumber", "diceValue": "3" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 70,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "3",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "0.2.-2": {
+          "q": 0,
+          "r": 2,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Mountain",
+              "color": "#57535c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Ore" }
+            },
+            "customData": { "resource": "Ore", "diceValue": "8" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 100,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "8",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "1.-2.1": {
+          "q": 1,
+          "r": -2,
+          "s": 1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Field",
+              "color": "#f6c13c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Grain" }
+            },
+            "customData": { "resource": "Grain", "diceValue": "12" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 60,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "12",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "1.-1.0": {
+          "q": 1,
+          "r": -1,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Hill",
+              "color": "#bf7330",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Brick" }
+            },
+            "customData": { "resource": "Brick", "diceValue": "6" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 100,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "6",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "1.0.-1": {
+          "q": 1,
+          "r": 0,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Pasture",
+              "color": "#69a442",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Wool" }
+            },
+            "customData": { "resource": "Wool", "diceValue": "4" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 80,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "4",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "1.1.-2": {
+          "q": 1,
+          "r": 1,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Hill",
+              "color": "#bf7330",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Brick" }
+            },
+            "customData": { "resource": "Brick", "diceValue": "10" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 80,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "10",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "2.-2.0": {
+          "q": 2,
+          "r": -2,
+          "s": 0,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Mountain",
+              "color": "#57535c",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Ore" }
+            },
+            "customData": { "resource": "Ore", "diceValue": "10" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 80,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "10",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "2.-1.-1": {
+          "q": 2,
+          "r": -1,
+          "s": -1,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Pasture",
+              "color": "#69a442",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Wool" }
+            },
+            "customData": { "resource": "Wool", "diceValue": "2" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 60,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "2",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        },
+        "2.0.-2": {
+          "q": 2,
+          "r": 0,
+          "s": -2,
+          "h": 1,
+          "userData": {},
+          "walkable": true,
+          "tileData": {
+            "type": {
+              "name": "Forest",
+              "color": "#213b1b",
+              "scale": 0.97,
+              "geomOpts": {
+                "steps": 1,
+                "depth": 0.1,
+                "bevelEnabled": true,
+                "bevelThickness": 0.1,
+                "bevelSize": 0.5,
+                "bevelSegments": 2
+              },
+              "customData": { "resource": "Lumber" }
+            },
+            "customData": { "resource": "Lumber", "diceValue": "9" },
+            "text": {
+              "settings": {
+                "font": 1,
+                "fontWeight": 1,
+                "mirror": false,
+                "height": 10,
+                "size": 90,
+                "hover": 0,
+                "curveSegments": 4,
+                "bevelEnabled": true,
+                "bevelThickness": 2,
+                "bevelSize": 1.5,
+                "faceColor": "#f0f0f0",
+                "outlineColor": "#000000",
+                "scale": [1, 1, 1]
+              },
+              "text": "9",
+              "groupScale": [0.060625, 0.060625, 0.0625]
+            }
+          }
+        }
+      },
+      "gridShape": 0,
+      "cellShape": 0
+    },
+    "settings": {
+      "entities": {},
+      "overlayColor": "rgb(5,110,153)",
+      "hasOverlay": true,
+      "overlayLineColor": "rgba(0,0,0,0)",
+      "overlayLineOpacity": 0.9
+    }
+  },
+  "sprites": [
+    {
+      "spritePath": "/static/media/ship.3ffe06f146f71c1055e5.png",
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "0487FD50-6399-4A42-A076-BA427F6C3F3F",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, -0.5, -0.5, 0, -0.5, 0, 1,
+                0, 0.5, 0.5
+              ],
+              "normalized": false
+            },
+            "uv": {
+              "itemSize": 2,
+              "type": "Float32Array",
+              "array": [-0.5, -0.5, 0, 0, 0, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0],
+              "normalized": false
+            }
+          }
+        }
+      },
+      "position": [42.11866387021049, 2, 72.53676659267614],
+      "rotation": [0, 0, 0, "XYZ"],
+      "scale": [10, 10, 10]
+    },
+    {
+      "spritePath": "/static/media/ship.3ffe06f146f71c1055e5.png",
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "72EF08C4-6342-45CA-8AA4-B24BD290DBE8",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, -0.5, -0.5, 0, -0.5, 0, 1,
+                0, 0.5, 0.5
+              ],
+              "normalized": false
+            },
+            "uv": {
+              "itemSize": 2,
+              "type": "Float32Array",
+              "array": [-0.5, -0.5, 0, 0, 0, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0],
+              "normalized": false
+            }
+          }
+        }
+      },
+      "position": [-11.0410554745995, 2, -67.3324606093005],
+      "rotation": [0, 0, 0, "XYZ"],
+      "scale": [10, 10, 10]
+    },
+    {
+      "spritePath": "/static/media/ship.3ffe06f146f71c1055e5.png",
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "581A0E8F-B623-43BC-AF7C-6D4B96B92C3C",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, -0.5, -0.5, 0, -0.5, 0, 1,
+                0, 0.5, 0.5
+              ],
+              "normalized": false
+            },
+            "uv": {
+              "itemSize": 2,
+              "type": "Float32Array",
+              "array": [-0.5, -0.5, 0, 0, 0, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0],
+              "normalized": false
+            }
+          }
+        }
+      },
+      "position": [-76.96043809887072, 2, -0.670675039132726],
+      "rotation": [0, 0, 0, "XYZ"],
+      "scale": [10, 10, 10]
+    },
+    {
+      "spritePath": "/static/media/ship.3ffe06f146f71c1055e5.png",
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "555AA15D-299F-4C58-8A1D-F64031332981",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, -0.5, -0.5, 0, -0.5, 0, 1,
+                0, 0.5, 0.5
+              ],
+              "normalized": false
+            },
+            "uv": {
+              "itemSize": 2,
+              "type": "Float32Array",
+              "array": [-0.5, -0.5, 0, 0, 0, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0],
+              "normalized": false
+            }
+          }
+        }
+      },
+      "position": [-52.04470455279019, 2, -45.98809945167613],
+      "rotation": [0, 0, 0, "XYZ"],
+      "scale": [10, 10, 10]
+    },
+    {
+      "spritePath": "/static/media/ship.3ffe06f146f71c1055e5.png",
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "7667787A-5A4D-4356-BA1B-AAD11047EC0F",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, -0.5, -0.5, 0, -0.5, 0, 1,
+                0, 0.5, 0.5
+              ],
+              "normalized": false
+            },
+            "uv": {
+              "itemSize": 2,
+              "type": "Float32Array",
+              "array": [-0.5, -0.5, 0, 0, 0, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0],
+              "normalized": false
+            }
+          }
+        }
+      },
+      "position": [-14.050732888749975, 2, 72.72399792978858],
+      "rotation": [0, 0, 0, "XYZ"],
+      "scale": [10, 10, 10]
+    },
+    {
+      "spritePath": "/static/media/ship.3ffe06f146f71c1055e5.png",
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "737C65E4-A45A-41B9-9AE3-41B0E6CA4E7A",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, -0.5, -0.5, 0, -0.5, 0, 1,
+                0, 0.5, 0.5
+              ],
+              "normalized": false
+            },
+            "uv": {
+              "itemSize": 2,
+              "type": "Float32Array",
+              "array": [-0.5, -0.5, 0, 0, 0, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0],
+              "normalized": false
+            }
+          }
+        }
+      },
+      "position": [67.5960936242775, 2, 23.661942174033236],
+      "rotation": [0, 0, 0, "XYZ"],
+      "scale": [10, 10, 10]
+    },
+    {
+      "spritePath": "/static/media/ship.3ffe06f146f71c1055e5.png",
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "A380E49B-B93C-4FBC-8724-D104589FE714",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, -0.5, -0.5, 0, -0.5, 0, 1,
+                0, 0.5, 0.5
+              ],
+              "normalized": false
+            },
+            "uv": {
+              "itemSize": 2,
+              "type": "Float32Array",
+              "array": [-0.5, -0.5, 0, 0, 0, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0],
+              "normalized": false
+            }
+          }
+        }
+      },
+      "position": [39.69861556165636, 2, -66.3963044976661],
+      "rotation": [0, 0, 0, "XYZ"],
+      "scale": [10, 10, 10]
+    },
+    {
+      "spritePath": "/static/media/ship.3ffe06f146f71c1055e5.png",
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "BC10594E-D212-4B33-80A7-EA9DA814BFFA",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, -0.5, -0.5, 0, -0.5, 0, 1,
+                0, 0.5, 0.5
+              ],
+              "normalized": false
+            },
+            "uv": {
+              "itemSize": 2,
+              "type": "Float32Array",
+              "array": [-0.5, -0.5, 0, 0, 0, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0],
+              "normalized": false
+            }
+          }
+        }
+      },
+      "position": [66.65992686517905, 2, -21.64803481432043],
+      "rotation": [0, 0, 0, "XYZ"],
+      "scale": [10, 10, 10]
+    },
+    {
+      "spritePath": "/static/media/ship.3ffe06f146f71c1055e5.png",
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "E730B914-FAE1-4D13-8D1C-63411E1FACDD",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, -0.5, -0.5, 0, -0.5, 0, 1,
+                0, 0.5, 0.5
+              ],
+              "normalized": false
+            },
+            "uv": {
+              "itemSize": 2,
+              "type": "Float32Array",
+              "array": [-0.5, -0.5, 0, 0, 0, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0],
+              "normalized": false
+            }
+          }
+        }
+      },
+      "position": [-54.30546222124423, 2, 45.762685330993094],
+      "rotation": [0, 0, 0, "XYZ"],
+      "scale": [10, 10, 10]
+    }
+  ],
+  "miscObjs": [
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "66762BEC-834D-4067-9B7F-1426D2F36EA8",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                39.1186637878418, -1, 69.5367660522461, 41.569217681884766,
+                2.4870816517363892e-8, 56
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              40.34394073486328, -0.49999998756459174, 62.76838302612305
+            ],
+            "radius": 6.896543510893575
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "8CD1B20C-F1A2-4881-A723-B4796B3D0F4D",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "211A0C19-6201-4450-9B65-D187BB8EC18A",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                39.1186637878418, -1, 69.5367660522461, 27.712812423706055, 0,
+                64
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [33.415738105773926, -0.5, 66.76838302612305],
+            "radius": 6.359033410394656
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "F9F07FE1-8076-4613-915D-B07ABB7953B4",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "F3926258-51C4-40F1-B825-3E15BE3A95BB",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -17.05073356628418, -1, 69.7239990234375, 1.1487338014148918e-7,
+                0, 64
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [-8.5253667257054, -0.5, 66.86199951171875],
+            "radius": 9.00682635402274
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "76325B04-02A3-45D2-8F34-83FE008725AC",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "92DF261D-F6E6-463F-9A83-5D8FFA1627CD",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -17.05073356628418, -1, 69.7239990234375, -13.856406211853027,
+                -2.4870816517363892e-8, 56
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              -15.453569889068604, -0.5000000124354083, 62.86199951171875
+            ],
+            "radius": 7.063141588430019
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "EF58F217-8520-45D7-BBA2-8DBDEE8FC39D",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "11A5DAF9-FB32-4522-8AD7-267E4C120B7A",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -17.05073356628418, -1, 69.7239990234375, -13.856406211853027,
+                2.4870816517363892e-8, 56
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              -15.453569889068604, -0.49999998756459174, 62.86199951171875
+            ],
+            "radius": 7.063141590190625
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "DA96F357-8891-45D3-921F-970D250EB8CD",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "31070243-089A-4440-9B7C-9AF97806A9D0",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -57.30546188354492, -1, 42.7626838684082, -41.569217681884766,
+                0, 40
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [-49.437339782714844, -0.5, 41.3813419342041],
+            "radius": 8.004089637976417
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "BB6738A7-4117-4575-93FD-871BAE83C8B9",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "EF501A21-3681-4C2F-862B-228D4C5C1C84",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -57.30546188354492, -1, 42.7626838684082, -55.42562484741211,
+                -2.4870816517363892e-8, 32
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              -56.365543365478516, -0.5000000124354083, 37.3813419342041
+            ],
+            "radius": 5.4856437927550745
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "3603ADA6-8501-4B72-B37D-EE6DA64C6D4C",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "8577CBB3-A43C-4F0B-ABBB-EA6D5DB8D848",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -79.96044158935547, -1, -3.670675039291382, -69.28203582763672,
+                -2.4870816517363892e-8, 8
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              -74.6212387084961, -0.5000000124354083, 2.164662480354309
+            ],
+            "radius": 7.925165699133764
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "2A97BD57-8B8D-4534-9006-C00B95AAF174",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "9036AD5B-8796-4097-8F36-4284D650D278",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -79.96044158935547, -1, -3.670675039291382, -69.28203582763672,
+                -2.4870816517363892e-8, -8
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              -74.6212387084961, -0.5000000124354083, -5.835337519645691
+            ],
+            "radius": 5.782979426246934
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "92589D04-34F5-457A-AED8-2749D23A9D5A",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "2A159FF9-0BC6-4831-A35E-B9FAB9AB7517",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -55.04470443725586, -1, -48.98809814453125, -55.42562484741211,
+                -2.4870816517363892e-8, -32
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              -55.235164642333984, -0.5000000124354083, -40.494049072265625
+            ],
+            "radius": 8.510883897653612
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "B6CF485D-917E-4F7A-ACAF-CAF16E9E79BC",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "5BF0EDDC-0447-4846-B9C1-BA0692A57B89",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -55.04470443725586, -1, -48.98809814453125, -41.569217681884766,
+                3.516982912481816e-24, -40
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [-48.30696105957031, -0.5, -44.494049072265625],
+            "radius": 8.114410815794143
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "BA2C453B-C14F-4840-919B-799274E48DE8",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "A3977F86-A9DA-4956-81A8-FFB1133050ED",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -14.041055679321289, -1, -70.33245849609375,
+                -13.856406211853027, -2.4870816517363892e-8, -56
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              -13.948730945587158, -0.5000000124354083, -63.166229248046875
+            ],
+            "radius": 7.184244252500478
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "3540FC3A-548F-4E20-BCA9-13E4CB17EF21",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "C58931A6-EA32-40DD-8B24-005EDCD1786D",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                -14.041055679321289, -1, -70.33245849609375,
+                -1.1487338014148918e-7, 3.516982912481816e-24, -64
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [-7.020527897097335, -0.5, -67.16622924804688],
+            "radius": 7.717695121742364
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "CB0C50AD-A4B0-4424-B45C-CFB3DC9B0679",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "FDEA721E-B746-4F92-94BC-24C6662B42E7",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                36.69861602783203, -1, -69.39630126953125, 41.569217681884766,
+                2.4870816517363892e-8, -56
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              39.1339168548584, -0.49999998756459174, -62.698150634765625
+            ],
+            "radius": 7.144642192339786
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "708D5483-E4C9-4A6F-85E0-83AE33E1935B",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "5ED441D0-3953-4386-8321-8FF4670709C6",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                36.69861602783203, -1, -69.39630126953125, 27.712812423706055,
+                3.516982912481816e-24, -64
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [32.20571422576904, -0.5, -66.69815063476562],
+            "radius": 5.264616173176065
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "6BF13A88-C706-4FC9-8F74-0C0610E4D0C7",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "C6F4DEA4-7A74-418F-BD4D-D4944B61F4BD",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                63.65992736816406, -1, -24.648035049438477, 55.42562484741211,
+                2.4870816517363892e-8, -16
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              59.542776107788086, -0.49999998756459174, -20.32401752471924
+            ],
+            "radius": 5.991499150240279
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "DBD980E5-5890-4749-A881-39385B0DA3DF",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "2A44A6F8-80DB-4A8C-808D-F2944BBC663D",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                63.65992736816406, -1, -24.648035049438477, 55.42562484741211,
+                2.4870816517363892e-8, -32
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              59.542776107788086, -0.49999998756459174, -28.32401752471924
+            ],
+            "radius": 5.542001594353991
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "C63721A2-BF19-4729-99EA-3E8785F3196C",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "82ACD6D8-B1D3-44DF-9A72-102A8B5EB7B3",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                64.5960922241211, -1, 20.661941528320312, 55.42562484741211,
+                2.4870816517363892e-8, 32
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              60.0108585357666, -0.49999998756459174, 26.330970764160156
+            ],
+            "radius": 7.308369207016243
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "640A988D-4567-4DFF-A8FA-464612CDDA30",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    },
+    {
+      "geometryJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "BufferGeometry",
+          "generator": "BufferGeometry.toJSON"
+        },
+        "uuid": "BE43D3F8-5E9C-4817-AC1E-C9D9E4F6C5BC",
+        "type": "BufferGeometry",
+        "data": {
+          "attributes": {
+            "position": {
+              "itemSize": 3,
+              "type": "Float32Array",
+              "array": [
+                64.5960922241211, -1, 20.661941528320312, 55.42562484741211,
+                2.4870816517363892e-8, 16
+              ],
+              "normalized": false
+            }
+          },
+          "boundingSphere": {
+            "center": [
+              60.0108585357666, -0.49999998756459174, 18.330970764160156
+            ],
+            "radius": 5.1679582711769
+          }
+        }
+      },
+      "materialJSON": {
+        "metadata": {
+          "version": 4.5,
+          "type": "Material",
+          "generator": "Material.toJSON"
+        },
+        "uuid": "5B9C82AA-EC92-4CBE-9213-439D0CDB6CA5",
+        "type": "LineBasicMaterial",
+        "color": 16777215,
+        "depthFunc": 3,
+        "depthTest": true,
+        "depthWrite": true,
+        "stencilWrite": false,
+        "stencilFunc": 519,
+        "stencilRef": 0,
+        "stencilMask": 255,
+        "stencilFail": 7680,
+        "stencilZFail": 7680,
+        "stencilZPass": 7680
+      },
+      "type": "Line"
+    }
+  ]
+}

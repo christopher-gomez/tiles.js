@@ -1,129 +1,59 @@
-import { BufferGeometry, Geometry, Material, Mesh, MeshPhongMaterial, Object3D } from "three";
-import Tile from "../map/Tile";
+import { BufferGeometry, Geometry, Material } from "three";
+import { EntityPlacementType } from "./MeshEntity";
 import { EntityJSONData } from "../utils/Interfaces";
-import Tools from "../utils/Tools";
+import Tile from "../map/Tile";
 
+// Define a base interface for MeshEntity
+export interface IEntity {
+  get ignoreRay(): boolean;
+  entityName: string;
+  heightOffset: number;
+  placementType: EntityPlacementType;
+  placementVertex: number;
+  placementEdge: number;
+  highlightColor: number;
+  baseColor: number;
+  getCustomData(): { [key: string]: any };
+  setCustomData(key: string, val: any): void;
+  toJSON(): EntityJSONData;
+  fromJSON(data: EntityJSONData): void;
+  setColor(color: string | number): void;
+  toggleWireframe(active: boolean): void;
+  canInteract: boolean;
+  highlight(
+    isHighlighted: boolean,
+    durationMs?: number,
+    color?: number,
+    onStart?: () => void,
+    onComplete?: () => void,
+    force?: boolean
+  ): void;
+  setPlacementType(placement: EntityPlacementType, vertexOrEdge?: number): void;
+  setPlacementIndex(vertexOrEdge: number): void;
+  setTile(tile: Tile): void;
+  dispose(): void;
 
-export enum EntityPlacementType {
-    EDGE = "EDGE",
-    VERTEX = "VERTEX",
-    CENTER = "CENTER"
+  addHighlightEvent(func: () => void): void;
+  removeHighlightEvent(func: () => void): void;
+  clearHighlightEvents(): void;
+
+  onHighlight(): void;
+
+  addUnhighlightEvent(func: () => void): void;
+  removeUnhighlightEvent(func: () => void): void;
+  clearUnhighlightEvents(): void;
+
+  onUnhighlight(): void;
+
+  onClick(): void;
+
+  addOnClickEvent(func: () => void): void;
+  removeOnClickEvent(func: () => void): void;
+  clearOnClickEvents(func: () => void): void;
+
+  isEntity(): true;
 }
 
-export interface EntityOptionParams {
-    heightOffset?: number;
-    placementType?: EntityPlacementType;
-}
-
-export default class Entity extends Mesh {
-
-    public ignoreRay = true;
-
-    private _tile: Tile;
-    public get parentTile(): Tile {
-        return this._tile;
-    }
-
-    public heightOffset = 0;
-
-    private _placementType = EntityPlacementType.CENTER;
-    public get placementType() {
-        return this._placementType;
-    }
-
-    private _placementVert = -1;
-    public get placementVertex() {
-        return this._placementVert;
-    }
-
-    private _placementEdge = 1;
-    public get placementEdge() {
-        return this._placementEdge;
-    }
-
-    private _highlightColor = 0x0084cc;
-    private _emissiveBaseColor;
-
-    constructor(public entityName: string, geometry?: Geometry | BufferGeometry, material?: Material | Material[], opts?: EntityOptionParams) {
-
-        super(geometry, material);
-
-        this.geometry.computeBoundingBox();
-
-        let defaults = {
-            heightOffset: 0,
-            placementType: EntityPlacementType.CENTER
-        } as EntityOptionParams;
-
-        defaults = Tools.merge(defaults, opts ?? {});
-
-        this.heightOffset = defaults.heightOffset;
-        this._placementType = defaults.placementType;
-
-        if ((this.material as MeshPhongMaterial).emissive) {
-            this._emissiveBaseColor = (this.material as MeshPhongMaterial).emissive.getHex();
-        }
-        else {
-            this._emissiveBaseColor = null;
-        }
-
-        this.userData.structure = this;
-    }
-
-    setPlacementType(placement: EntityPlacementType, vertexOrEdge?: number) {
-        this._placementType = placement;
-        this._placementVert = placement === EntityPlacementType.VERTEX && vertexOrEdge !== undefined ? vertexOrEdge : -1;
-        this._placementEdge = placement === EntityPlacementType.EDGE && vertexOrEdge !== undefined ? vertexOrEdge : -1;
-    }
-
-    setTile(tile: Tile): void {
-        this._tile = tile;
-    }
-
-    dispose() {
-        this.geometry.dispose();
-        this.geometry = null;
-        this.material = null;
-    }
-
-    override toJSON(): EntityJSONData {
-        return {
-            entityName: this.entityName,
-            heightOffset: this.heightOffset,
-            placementType: this.placementType,
-            placementVert: this.placementVertex,
-            placementEdge: this.placementEdge,
-            position: this.position.toArray(),
-            rotation: this.rotation.toArray()
-        } as EntityJSONData
-    }
-
-    fromJSON(data: EntityJSONData) {
-        this.entityName = data.entityName;
-        this.heightOffset = data.heightOffset;
-        this._placementType = data.placementType;
-        this._placementVert = data.placementVert;
-        this._placementEdge = data.placementEdge;
-        this.position.set(data.position[0], data.position[1], data.position[2]);
-    }
-
-    public setMaterialEmmisiveColor(color: string) {
-        if (!this.material) return;
-
-        (this.material as MeshPhongMaterial).emissive.set(color);
-    }
-
-    public setMaterialTransparent(transparent: boolean) {
-        if (!this.material) return;
-
-        (this.material as MeshPhongMaterial).wireframe = transparent;
-    }
-
-    public highlight(isHighlighted: boolean) {
-        if (isHighlighted) {
-            (this.material as MeshPhongMaterial)?.emissive.setHex(this._highlightColor);
-        } else {
-            (this.material as MeshPhongMaterial)?.emissive.setHex(this._emissiveBaseColor);
-        }
-    }
+export function isEntity(obj: any): obj is IEntity {
+  return typeof obj.isEntity === "function";
 }

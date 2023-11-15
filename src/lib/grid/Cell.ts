@@ -1,8 +1,8 @@
 import { BufferGeometry, ExtrudeBufferGeometry, ExtrudeGeometryOptions, Material, Shape, ShapeBufferGeometry, Vector3 } from 'three';
-import Engine from '../Engine';
+import Engine, { EngineTileShapes } from '../Engine';
 import Tile from '../map/Tile';
 import Grid from './Grid';
-import { CellJSONData, TileJSONData } from '../utils/Interfaces';
+import { CellJSONData, TileJSONData, TileType } from '../utils/Interfaces';
 import HexCell from './HexCell';
 import SqrCell from './SqrCell';
 // import { ExtrudeSettings } from '../utils/Interfaces';
@@ -28,7 +28,7 @@ export default abstract class Cell {
   public get q(): number {
     return this._q;
   }
-  
+
   public get r(): number {
     return this._r;
   }
@@ -38,8 +38,9 @@ export default abstract class Cell {
   }
 
   public get h(): number {
-    if(this.tile) return this.tile.terrainInfo.elevation;
-    else return 1;
+    // if(this.tile) return this.tile.terrainInfo.elevation;
+    // else 
+    return 1;
   }
 
   public tile: Tile;
@@ -71,7 +72,7 @@ export default abstract class Cell {
     return this._neighborDirToGridDir;
   }
 
-  
+
   private static _radius;
   public static get radius() {
     return Cell._radius;
@@ -107,6 +108,8 @@ export default abstract class Cell {
     if (!this.grid) return this._vec.set(0, 0, 0);
     else return this.grid.cellToPixel(this);
   }
+
+  public abstract get shape(): EngineTileShapes;
 
   constructor(radius: number, q?: number, r?: number, s?: number, h?: number, public grid?: Grid) {
     this._q = q || 0; // x grid coordinate (using different letters so that it won't be confused with pixel/world coordinates)
@@ -166,27 +169,18 @@ export default abstract class Cell {
     this._visited = false;
   }
 
-  public createTile(scale: number, grid: Grid, data?: TileJSONData): Tile {
+  public createTile(data?: TileType | TileJSONData, isPlayable = true): Tile {
     if (!this.directions)
       this._setCellDirections();
 
+    const tile = this._createTile(data, isPlayable);
 
-    /*mat = this._matCache[c.matConfig.mat_cache_id];
-if (!mat) { // MaterialLoader? we currently only support basic stuff though. maybe later
-  mat.map = Loader.loadTexture(c.matConfig.imgURL);
-  delete c.matConfig.imgURL;
-  mat = new THREE[c.matConfig.type](c.matConfig);
-  this._matCache[c.matConfig.mat_cache_id] = mat;
-}*/
-
-    const tile = this._createTile(scale, grid);
-
-    if (data) tile.fromJSON(data);
+    // if (data) tile.fromJSON(data);
 
     return tile;
   }
 
-  protected abstract _createTile(scale, grid): Tile;
+  protected abstract _createTile(data?: TileType | TileJSONData, isPlayable?: boolean): Tile;
 
   protected abstract _setCellDirections();
 
@@ -207,6 +201,10 @@ if (!mat) { // MaterialLoader? we currently only support basic stuff though. may
     }
 
     return data;
+  }
+
+  public toString() {
+    return '(' + this.q + ',' + this.r + ',' + this.s + ')';
   }
 
   public static dispose() {
