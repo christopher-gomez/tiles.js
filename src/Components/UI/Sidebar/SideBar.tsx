@@ -26,8 +26,8 @@ const openedMixin = (theme: Theme): CSSObject => ({
         duration: theme.transitions.duration.enteringScreen,
     }),
     overflowX: 'hidden',
-    backgroundColor: 'transparent !important',
-    background: 'transparent',
+    // backgroundColor: 'transparent !important',
+    // background: 'transparent',
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -35,8 +35,8 @@ const closedMixin = (theme: Theme): CSSObject => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: 'transparent !important',
-    background: 'transparent',
+    // backgroundColor: 'transparent !important',
+    // background: 'transparent',
     overflowX: 'hidden',
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
@@ -105,7 +105,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
         flexShrink: 0,
         whiteSpace: 'nowrap',
         boxSizing: 'border-box',
-        backgroundColor: 'transparent !important',
+        // backgroundColor: 'transparent !important',
         scrollbarWidth: 'none',
         '*::-webkit-scrollbar': {
             width: '0 !important'

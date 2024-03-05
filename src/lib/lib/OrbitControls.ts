@@ -424,8 +424,9 @@ class OrbitControls extends EventEmitter {
         } else {
             this.target.add(this.panOffset);
 
-            if(!this.bounds) this.bounds = new Box3().setFromObject(this.view.map.tileGroup);
+            if(!this.bounds && this.view && this.view.map && this.view.map.tileGroup) this.bounds = new Box3().setFromObject(this.view.map.tileGroup);
 
+            if(this.bounds) {
             var min_x = this.bounds.min.x;
             var max_x = this.bounds.max.x;
             var min_z = this.bounds.min.z;
@@ -440,6 +441,7 @@ class OrbitControls extends EventEmitter {
             if (this.target.x > max_x) this.target.setX(max_x);
             if (this.target.y > max_y) this.target.setY(max_y);
             if (this.target.z > max_z) this.target.setZ(max_z);
+            }
         }
 
         this.offset.setFromSpherical(this.spherical);

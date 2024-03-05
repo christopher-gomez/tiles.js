@@ -9,13 +9,14 @@ import {
 } from "../lib/utils/Interfaces";
 import View from "../lib/scene/View";
 import Controller from "../lib/scene/Controller";
-import Engine, { EngineGridShapes } from "../lib/Engine";
+import Engine, { EngineGridShapes, EngineTileShapes } from "../lib/Engine";
 import HexGrid from "../lib/grid/HexGrid";
 import "./SceneContainerStyles.css";
 import LoadSpinner from "./UI/LoadSpinner";
 import AnimationManager from "../lib/utils/AnimationManager";
 import FPSCounter from "./UI/FPSCounter";
 import { Scene } from "three";
+import SqrGrid from "../lib/grid/SqrGrid";
 
 function instanceOfSceneJSONData(object: any): object is SceneJSONData {
   return "viewData" in object;
@@ -120,7 +121,7 @@ export default ({
         if (_scene !== undefined && _scene instanceof Map) {
           map = _scene;
         } else {
-          // map = new Map(new HexGrid({ cellRadius: 6, gridRadius: 5, gridShape: EngineGridShapes.FLAT_TOP_HEX }));
+          map = new Map(new HexGrid({ cellRadius: 6, gridRadius: 10, gridShape: EngineGridShapes.RECT }));
         }
 
         sceneRef.current = new Engine.View(map, params, controllerParams);

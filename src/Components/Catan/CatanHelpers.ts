@@ -4,7 +4,7 @@ import Tile from "../../lib/map/Tile";
 import View from "../../lib/scene/View";
 import { Node, Tree } from "../../lib/utils/UnstructuredTree";
 import Controller, { ZoomDirection } from "../../lib/scene/Controller";
-import RedCircle from '../../Assets/red-circle-frame.svg';
+// import RedCircle from '../../Assets/red-circle-frame.svg';
 import Engine from "../../lib/Engine";
 // import { TransformControls } from 'three-addons';
 // import TransformControls from 'threejs-transformcontrols';
@@ -655,23 +655,23 @@ export const zoomInAndOut = async (scene: View, positions: Vector3[], holdTime =
 }
 
 let material;
-let circleSprite: Sprite;
-new TextureLoader().load(RedCircle, (map) => {
-    material = new SpriteMaterial({ map: map });
-    circleSprite = new Sprite(material);
-});
+// let circleSprite: Sprite;
+// new TextureLoader().load(RedCircle, (map) => {
+//     material = new SpriteMaterial({ map: map });
+//     circleSprite = new Sprite(material);
+// });
 
 
 export const highlightClosestVertex = (scene: View, controller: Controller, tile: Tile, pos: Vector3) => {
     let v = controller.getClosestVertex(tile, pos);
-    scene.container.remove(circleSprite);
-    scene.container.add(circleSprite);
-    circleSprite.scale.set(10, 10, 10)
-    circleSprite.position.copy(tile.getEdgeWorldPosition(v)).setY(1);
-    circleSprite.rotation.x = 180 * Engine.DEG_TO_RAD;
-    circleSprite.rotation.y = 180 * Engine.DEG_TO_RAD;
-    circleSprite.rotation.z = 90 * Engine.DEG_TO_RAD;
-    circleSprite.userData['ignoreRay'] = true
+    // scene.container.remove(circleSprite);
+    // scene.container.add(circleSprite);
+    // circleSprite.scale.set(10, 10, 10)
+    // circleSprite.position.copy(tile.getEdgeWorldPosition(v)).setY(1);
+    // circleSprite.rotation.x = 180 * Engine.DEG_TO_RAD;
+    // circleSprite.rotation.y = 180 * Engine.DEG_TO_RAD;
+    // circleSprite.rotation.z = 90 * Engine.DEG_TO_RAD;
+    // circleSprite.userData['ignoreRay'] = true
 }
 
 export const hasPorts = (tile: Tile): boolean => {
@@ -696,7 +696,7 @@ export const getHighlightedPort = (tile: Tile, mousePos: Vector3, controller: Co
 }
 
 export const unHighlightVertex = (scene: View) => {
-    scene.container.remove(circleSprite);
+    // scene.container.remove(circleSprite);
 }
 
 const _placementTargetQuat = new Quaternion();
