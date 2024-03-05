@@ -76,9 +76,9 @@ export default async (
 
   const cubeBounds = new THREE.BoxGeometry(1000, 50, 600);
   cubeBounds.computeBoundingBox();
-  const boundMat = new THREE.MeshBasicMaterial({ wireframe: true });
+  const boundMat = new THREE.MeshBasicMaterial({ wireframe: false });
   const boundCube = new THREE.Mesh(cubeBounds, boundMat);
-  scene.add(boundCube);
+  // scene.add(boundCube);
 
   const { group: eastGroup, update: eastUpdate } = Cloud({
     maxY: -200,
