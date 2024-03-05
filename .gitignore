@@ -1,3 +1,6 @@
 node_modules/
 build/
 dist/
+.firebaserc
+firebase.json
+.firebase/

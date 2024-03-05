@@ -6,6 +6,7 @@ A 3D tile map JavaScript engine created with [Three.js](https://threejs.org/).
 ## Still Very Much in Development !
 
 Keep an eye on it's progress and updates by checking the [sandbox](https://christophgomez.github.io/tiles.js/) every now and then.
+[V2](https://tiles-416322.web.app)
 
 Or run it locally by downloading, installing the dependncies, and running it on localhost: 
 ```bash
