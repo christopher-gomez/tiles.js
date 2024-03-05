@@ -307,7 +307,7 @@ export const hillsNoiseOpts = {
 }
 
 export const createHills = (width: number, height: number, resolution: number, boundary: Vector2[], container: Tile, map?: Texture) => {
-    let ground = Ground(width, height, resolution, boundary, container, map ? 0xffffff : "rgb(10%,25%,2%)", container.geometry.boundingBox.max.z + .1, 12, hillsNoiseOpts, map);
+    let ground = Ground(width, height, resolution, boundary, container, map ? 0xffffff : "rgb(10%,25%,2%)", container.geometry.boundingBox.max.z + .25, 12, hillsNoiseOpts, map);
 
     var deltaX = width / resolution;
     var deltaY = height / resolution;
@@ -509,7 +509,7 @@ export const mountainsNoiseOpts = {
 }
 
 export const createMountains = (width: number, height: number, resolution: number, boundary: Vector2[], container: Tile, map?: Texture) => {
-    const ground = Ground(width, height, resolution, boundary, container, map ? 0xffffff : 'gray', container.geometry.boundingBox.max.z + .1, 12, mountainsNoiseOpts, map);
+    const ground = Ground(width, height, resolution, boundary, container, map ? 0xffffff : 'gray', container.geometry.boundingBox.max.z + .25, 12, mountainsNoiseOpts, map);
     var deltaX = width / resolution;
     var deltaY = height / resolution;
 
@@ -743,7 +743,7 @@ export const dirtNoiseOpts: HexNoiseOptions = {
 };
 
 export const createFarmland = (width: number, height: number, resolution: number, boundary: Vector2[], container: Tile, map?: Texture) => {
-    const ground = Ground(width, height, resolution, boundary, container, map ? 0xffffff : 0x9e723a, container.geometry.boundingBox.max.z + .1, 2, dirtNoiseOpts, map, true);
+    const ground = Ground(width, height, resolution, boundary, container, map ? 0xffffff : 0x9e723a, container.geometry.boundingBox.max.z + .25, 2, dirtNoiseOpts, map, true);
     var deltaX = width / resolution;
     var deltaY = height / resolution;
 
@@ -950,7 +950,7 @@ export const clayNoiseOpts = {
 }
 
 export const createClayLand = (width: number, height: number, resolution: number, boundary: Vector2[], container: Tile, map?: Texture) => {
-    const ground = Ground(width, height, resolution, boundary, container, map ? 0xffffff : 0x964B00, container.geometry.boundingBox.max.z + .1, 7, clayNoiseOpts, map, true);
+    const ground = Ground(width, height, resolution, boundary, container, map ? 0xffffff : 0x964B00, container.geometry.boundingBox.max.z + .25, 7, clayNoiseOpts, map, true);
     var deltaX = width / resolution;
     var deltaY = height / resolution;
 

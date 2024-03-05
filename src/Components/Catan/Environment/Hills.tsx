@@ -89,7 +89,7 @@ export default async (containers: Tile[], boundary: Vector2[], view: View) => {
         for (let i = 0; i < grasses.length; i++) {
             const grass = grasses[i];
             grass.material.uniforms.time.value = time;
-            grass.material.uniforms.cameraPosition = { value: cameraPositionInTileSpace };
+            // grass.material.uniforms.cameraPosition = { value: cameraPositionInTileSpace };
             // const tilePositionInCameraSpace = containers[i].mesh.position.clone().applyMatrix4(rotationMatrix);
 
             // // The distance calculation in the tile's coordinate space
